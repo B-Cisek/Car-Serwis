@@ -1,0 +1,137 @@
+.borderPane{
+   -fx-pref-height: 900;
+    -fx-pref-width: 1600;
+}
+
+.topAnchorPane{
+    -fx-background-color: -fx-primary-blue;
+}
+
+.tab {
+    -fx-pref-height: 40;
+    -fx-background-color: -fx-primary-blue;
+    -fx-padding: 4 40 4 40 ;
+    -fx-padding: 20;
+}
+
+.tab:hover {
+    -fx-border-color: -fx-primary-white;
+    -fx-border-width: 0 0 3 0;
+}
+
+.tab:selected{
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: -fx-primary-white;
+}
+
+.tab-header-background {
+    -fx-background-color: -fx-primary-blue;
+}
+
+.tab-label {
+    -fx-text-fill: -fx-primary-white;
+    -fx-font-weight: bold;
+    -fx-font-size: 18;
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {-fx-border-color: transparent}
+
+.tab-anchore-pane{
+    -fx-background-color: #F5F5F5;
+}
+
+.vbox1{
+    -fx-background-color: #41A5F5;
+    -fx-background-radius: 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+}
+
+.pane1{
+    -fx-background-color: #3B97E2;
+    -fx-pref-height: 140;
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 1;
+    -fx-border-radius: 0 0 5 5;
+}
+
+.vbox2{
+    -fx-background-color: #25C6DA;
+    -fx-background-radius: 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+}
+
+.pane2{
+    -fx-background-color: #20B7C8;
+    -fx-pref-height: 140;
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 1;
+    -fx-border-radius: 0 0 5 5;
+}
+
+.vbox3{
+    -fx-background-color: #26A69A;
+    -fx-background-radius: 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+}
+
+.pane3{
+    -fx-background-color: #23988E;
+    -fx-pref-height: 140;
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 1;
+    -fx-border-radius: 0 0 5 5;
+}
+
+.vbox4{
+    -fx-background-color: #9CCC65;
+    -fx-background-radius: 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+
+}
+
+.pane4{
+    -fx-background-color: #90BC5C;
+    -fx-pref-height: 140;
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 1;
+    -fx-border-radius: 0 0 5 5;
+}
+
+.hbox-bottom{
+    -fx-background-color: #fff;
+    -fx-background-radius: 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+}
+
+.button-add{
+    -fx-background-color: #00796A;
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 50;
+    -fx-padding: 0;
+    -fx-pref-height: 50;
+    -fx-pref-width: 50;
+}
