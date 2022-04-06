@@ -1,0 +1,87 @@
+/*@font-face {*/
+/*    font-family: Inter;*/
+/*    src: url('font/Inter-Regular.ttf');*/
+/*}*/
+
+/*@font-face {*/
+/*    font-family: Inter_Bold;*/
+/*    src: url('font/Inter-Bold.ttf');*/
+/*}*/
+
+
+.anchor_pane{
+    -fx-background-color: -fx-primary-blue;
+    -fx-pref-width: 600;
+    -fx-min-width: 600;
+    -fx-max-width: 600;
+    -fx-pref-height: 550;
+    -fx-min-height: 550;
+    -fx-max-height: 550;
+    /*-fx-font-family: 'Inter', Arial, sans-serif;*/
+    -fx-background-radius: 5;
+}
+
+.h1{
+
+    -fx-font-weight: bold;
+    -fx-font-size: 36;
+    -fx-fill: -fx-primary-white;
+}
+.h2{
+    -fx-fill: -fx-primary-white;
+    -fx-font-size: 16;
+}
+
+.login_field{
+    -fx-background-color: -fx-primary-white;
+    -fx-background-radius: 3px;
+    -fx-pref-height: 30;
+    -fx-pref-width: 230;
+}
+
+.password-field{
+    -fx-background-color: -fx-primary-white;
+    -fx-background-radius: 3px;
+    -fx-pref-height: 30;
+    -fx-pref-width: 230;
+}
+
+.login_text{
+    -fx-fill: -fx-primary-white;
+    -fx-font-size: 13;
+}
+
+.password_text{
+    -fx-fill: -fx-primary-white;
+    -fx-font-size: 13;
+}
+
+.login_button{
+    -fx-background-color: -fx-primary-green;
+    -fx-text-fill: -fx-primary-white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 3px;
+    -fx-pref-height: 30;
+}
+
+.login_button:hover{
+    -fx-opacity: 0.7;
+}
+
+.exit_button{
+    -fx-background-image: url(img/close_window.png);
+    -fx-background-color: transparent;
+    -fx-background-size: 35px 35px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-padding: 0;
+}
+
+.exit_button:hover{
+    -fx-opacity: 0.7;
+}
+
+
+
+
+
