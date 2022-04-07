@@ -20,6 +20,8 @@ public class LoginController implements Initializable {
     private static final String APP_FXML = "/fxml/app.fxml";
     private static final String APP_TITLE = "Car Serwis";
 
+    private PopupController popupController;
+
     @FXML
     private Button exitButton;
 
@@ -34,6 +36,11 @@ public class LoginController implements Initializable {
 
     @FXML
     private TextField loginTextField;
+
+
+    public LoginController(){
+        popupController = new PopupController();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -81,7 +88,8 @@ public class LoginController implements Initializable {
         if (login.equals("admin") && haslo.equals("admin")){
             openAppAndCloseLoginStage();
         }else {
-            System.out.println("false");
+            Stage errorPopup = popupController.createErrorPopup("Błędne dane");
+            errorPopup.show();
         }
     }
 
