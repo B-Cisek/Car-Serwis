@@ -1,4 +1,4 @@
-package car.serwis.carserwis.controller;
+package car.serwis.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
