@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="900.0" minWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" styleClass="borderPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="900.0" minWidth="1600.0" prefHeight="900.0" prefWidth="1600.0" styleClass="borderPane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.AppController">
    <top>
       <AnchorPane prefHeight="100.0" prefWidth="1600.0" styleClass="topAnchorPane" BorderPane.alignment="CENTER">
          <children>
@@ -331,9 +331,33 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Text layoutX="671.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="USTAWIENIA">
+                        <Text layoutX="262.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista pracowników">
                            <font>
-                              <Font size="44.0" />
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <TableView layoutX="63.0" layoutY="116.0" prefHeight="564.0" prefWidth="571.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="ID" />
+                            <TableColumn prefWidth="75.0" text="IMIE" />
+                              <TableColumn prefWidth="83.0" text="NAZWISKO" />
+                              <TableColumn prefWidth="67.0" text="LOGIN" />
+                              <TableColumn prefWidth="75.0" text="HASŁO" />
+                              <TableColumn prefWidth="85.66665649414062" text="PRACUJE OD" />
+                              <TableColumn prefWidth="96.6666259765625" text="STANOWISKO" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="openSceneNewPracownik" layoutX="686.0" layoutY="320.0" mnemonicParsing="false" prefHeight="118.0" prefWidth="145.0" text="Dodaj nowego pracownika" textAlignment="CENTER" wrapText="true" />
+                        <Button fx:id="openSceneNewStanowisko" layoutX="1004.0" layoutY="321.0" mnemonicParsing="false" prefHeight="118.0" prefWidth="136.0" text="Dodaj nowe stanowisko" textAlignment="CENTER" wrapText="true" />
+                        <TableView fx:id="StanowiskoTable" layoutX="1219.0" layoutY="124.0" prefHeight="556.0" prefWidth="269.0">
+                          <columns>
+                            <TableColumn fx:id="idStanowiskoColumn" prefWidth="61.6666259765625" text="ID" />
+                            <TableColumn fx:id="nazwaColumn" prefWidth="206.3333740234375" text="NAZWA" />
+                          </columns>
+                        </TableView>
+                        <Text layoutX="1280.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lista stanowisk">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Text>
                      </children>
