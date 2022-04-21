@@ -1,6 +1,8 @@
 package car.serwis;
 
+import car.serwis.controller.SceneController;
 import car.serwis.database.util.HibernateUtil;
+import car.serwis.helpers.ScenePath;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,14 +22,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setScene(scene);
-        scene.setFill(Color.TRANSPARENT);
-        stage.setTitle(TITLE);
-        stage.setScene(scene);
-        stage.show();
+//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ScenePath.LOGIN.getPath()));
+//        Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
+//        stage.initStyle(StageStyle.TRANSPARENT);
+//        stage.setScene(scene);
+//        scene.setFill(Color.TRANSPARENT);
+//        stage.setTitle(TITLE);
+//        stage.setScene(scene);
+//        stage.show();
+        SceneController.getInitialScene(stage);
     }
 
     @Override

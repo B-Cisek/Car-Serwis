@@ -27,5 +27,7 @@ public class Stanowisko {
     private List<Pracownik> pracownicy;
 
 
-
+    public Stanowisko(String nazwa) {
+        this.nazwa = nazwa;
+    }
 }

@@ -37,4 +37,13 @@ public class Pracownik {
     @ManyToOne
     @JoinColumn(name="id_stanowisko", nullable=false)
     private Stanowisko stanowisko;
+
+    public Pracownik(String imie, String nazwisko, Date pracujeOd, String login, String haslo, Stanowisko stanowisko) {
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.pracujeOd = pracujeOd;
+        this.login = login;
+        this.haslo = haslo;
+        this.stanowisko = stanowisko;
+    }
 }

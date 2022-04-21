@@ -1,0 +1,57 @@
+.header{
+    -fx-background-color: #273146;
+    -fx-min-height: 150;
+}
+
+
+.hbox{
+    -fx-min-width: 1600;
+    -fx-pref-height: 50;
+    -fx-min-height: 50;
+    -fx-max-height: 50;
+}
+
+
+.buttons {
+    -fx-background-color: #273146;
+    -fx-background-radius: 0;
+    -fx-text-fill: #ffffff;
+    -fx-font: 20px 'Open Sans';
+    -fx-font-weight: bold;
+    -fx-min-height: 50;
+}
+
+.buttons:hover {
+    -fx-background-color: #16243b;
+    -fx-border-color: white;
+    -fx-border-width: 0 0 3 0;
+    -fx-background-insets: 0;
+}
+
+
+.buttons:default {
+    -fx-background-color: -fx-focus-color;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: white;
+    -fx-border-width: 0 0 3 0;
+    -fx-background-insets: 0;
+}
+
+.main-pulpit{
+    -fx-background-color: #FFFFFA;
+}
+
+
+.exit_button{
+    -fx-background-image: url(img/close_window.png);
+    -fx-background-color: transparent;
+    -fx-background-size: 35px 35px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-padding: 0;
+}
+
+.exit_button:hover{
+    -fx-opacity: 0.7;
+}
+
