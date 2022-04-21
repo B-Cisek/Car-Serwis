@@ -5,26 +5,44 @@ import car.serwis.database.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StanowiskoDao {
 
+//    public boolean createStanowisko(Stanowisko stanowisko) {
+//        Transaction transaction = null;
+//        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+//
+//            transaction = session.beginTransaction();
+//
+//            session.persist(stanowisko);
+//
+//            transaction.commit();
+//        } catch (Exception e) {
+//            if (transaction != null) {
+//                transaction.rollback();
+//            }
+//            e.printStackTrace();
+//        }
+//        return true;
+//    }
+
+
     public boolean createStanowisko(Stanowisko stanowisko) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // start a transaction
             transaction = session.beginTransaction();
-            // save the student object
             session.persist(stanowisko);
-            // commit transaction
             transaction.commit();
-        } catch (Exception e) {
+            return transaction.getStatus() == TransactionStatus.COMMITTED;
+        } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            ex.printStackTrace();
         }
         return false;
     }
@@ -74,6 +92,7 @@ public class StanowiskoDao {
             return new ArrayList<>();
         }
     }
+
 
     public Long getStanowiskoCount() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../css/pulpit-style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.KsiegowoscController">
+   <top>
+      <VBox prefHeight="150.0" prefWidth="1600.0" styleClass="header" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="100.0" prefWidth="1600.0">
+               <children>
+                  <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="24.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgTop" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="16.0">
+                     <image>
+                        <Image url="@../css/img/wrench.png" />
+                     </image>
+                  </ImageView>
+                  <Text fill="WHITE" layoutX="109.0" layoutY="65.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="CAR SERWIS" AnchorPane.bottomAnchor="26.2158203125" AnchorPane.leftAnchor="109.0" AnchorPane.topAnchor="27.2314453125">
+                     <font>
+                        <Font name="System Bold" size="35.0" />
+                     </font>
+                  </Text>
+                  <Text fill="WHITE" layoutX="1420.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator" AnchorPane.bottomAnchor="38.2314453125" AnchorPane.rightAnchor="55.0712890625" AnchorPane.topAnchor="36.4970703125">
+                     <font>
+                        <Font name="System Bold" size="19.0" />
+                     </font>
+                  </Text>
+               </children>
+            </AnchorPane>
+            <HBox prefHeight="78.0" prefWidth="1600.0" styleClass="hbox">
+               <children>
+                  <Button alignment="CENTER" graphicTextGap="10.0" mnemonicParsing="false" onAction="#showPulpitScreen" prefHeight="130.0" prefWidth="204.0" styleClass="buttons" text="PULPIT" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img">
+                           <image>
+                              <Image url="@../css/img/puplit.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showZleceniaScreen" prefHeight="58.0" prefWidth="203.0" styleClass="buttons" text="ZLECENIA ">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="214.0" layoutY="10.0" mnemonicParsing="false" onAction="#showWarsztatScreen" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="WARSZTAT">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Button>
+                  <Button defaultButton="true" layoutX="426.0" layoutY="10.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="212.0" styleClass="buttons" text="KSIĘGOWOŚĆ">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="638.0" layoutY="10.0" mnemonicParsing="false" onAction="#showMagazynScreen" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="MAGAZYN">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="841.0" layoutY="10.0" mnemonicParsing="false" onAction="#showUstawieniaScreen" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="USTAWIENIA">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="1053.0" layoutY="10.0" mnemonicParsing="false" onAction="#showPomocScreen" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="POMOC">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="1600.0" styleClass="main-pulpit" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="578.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KSIEGOWOSC" wrappingWidth="212.97265625">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Text>
+         </children></AnchorPane>
+   </center>
+</BorderPane>
