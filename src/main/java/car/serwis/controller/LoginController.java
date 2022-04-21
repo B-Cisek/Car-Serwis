@@ -1,5 +1,8 @@
-package car.serwis.carserwis.controller;
+package car.serwis.controller;
 
+import car.serwis.helpers.ScenePath;
+import javafx.animation.PauseTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -10,6 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,8 +21,9 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
 
-    private static final String APP_FXML = "/fxml/app.fxml";
     private static final String APP_TITLE = "Car Serwis";
+
+    private PopupController popupController;
 
     @FXML
     private Button exitButton;
@@ -34,6 +39,11 @@ public class LoginController implements Initializable {
 
     @FXML
     private TextField loginTextField;
+
+
+    public LoginController(){
+        popupController = new PopupController();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -58,12 +68,16 @@ public class LoginController implements Initializable {
         return (Stage) loginAnchorPane.getScene().getWindow();
     }
 
+
+
+
     private void openAppAndCloseLoginStage(){
         Stage appStage = new Stage();
         Parent appRoot = null;
 
         try {
-            appRoot = FXMLLoader.load(getClass().getResource(APP_FXML));
+
+            appRoot = FXMLLoader.load(getClass().getResource(ScenePath.APP.getPath()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,7 +95,8 @@ public class LoginController implements Initializable {
         if (login.equals("admin") && haslo.equals("admin")){
             openAppAndCloseLoginStage();
         }else {
-            System.out.println("false");
+            Stage errorPopup = popupController.createErrorPopup("Błędne dane");
+            errorPopup.show();
         }
     }
 

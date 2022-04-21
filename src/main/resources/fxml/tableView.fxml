@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/table_style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.TableView">
+   <children>
+      <TableView layoutX="159.0" layoutY="29.0" prefHeight="343.0" prefWidth="283.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="ID" />
+          <TableColumn prefWidth="207.0" text="STANOWISKO" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
