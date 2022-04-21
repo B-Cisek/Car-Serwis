@@ -15,24 +15,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PracownikDao {
-//    public Pracownik getConnectedPracownik(String login, String haslo) {
-//        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-//            TypedQuery<Pracownik> query = session.createQuery("SELECT u FROM Pracownik u WHERE login = :login AND haslo = :password", Pracownik.class );
-//            query.setParameter("login", login);
-//            query.setParameter("password", haslo);
-//            return query.getSingleResult();
-//        } catch (NoResultException ex) {
-//            System.err.println("User not found");
-//            return null;
-//        }
-//    }
 
     public Pracownik getConnectedPracownik(String login, String haslo) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Query<Pracownik> typedQuery = session.createQuery("SELECT u FROM Pracownik u WHERE u.login=:login AND u.haslo=:haslo", Pracownik.class);
-        typedQuery.setParameter("login", login);
-        typedQuery.setParameter("haslo", haslo);
-        return typedQuery.getSingleResult();
+       try {
+           Session session = HibernateUtil.getSessionFactory().openSession();
+           Query<Pracownik> typedQuery = session.createQuery("SELECT u FROM Pracownik u WHERE u.login=:login AND u.haslo=:haslo", Pracownik.class);
+           typedQuery.setParameter("login", login);
+           typedQuery.setParameter("haslo", haslo);
+           System.out.println(typedQuery.getSingleResult());
+           return typedQuery.getSingleResult();
+       }catch (Exception ex){
+           System.err.println("User not found");
+           return null;
+       }
     }
 
     public List<Pracownik> getPracownikStanowisko() {

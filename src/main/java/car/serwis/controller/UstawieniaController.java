@@ -114,7 +114,7 @@ public class UstawieniaController implements Initializable {
         loginPracownikColumn.setCellValueFactory(new PropertyValueFactory<>("login"));
         hasloPracownikColumn.setCellValueFactory(new PropertyValueFactory<>("haslo"));
         pracijeOdPracownikColumn.setCellValueFactory(new PropertyValueFactory<>("pracujeOd"));
-
+        stanowiskoPracownikColumn.setCellValueFactory(new PropertyValueFactory<>("stanowisko"));
 
         imiePracownikColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         nazwiskoPracownikColumn.setCellFactory(TextFieldTableCell.forTableColumn());
