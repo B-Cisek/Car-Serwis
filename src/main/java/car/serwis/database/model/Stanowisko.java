@@ -23,11 +23,16 @@ public class Stanowisko {
     @Column
     private String nazwa;
 
-    @OneToMany(mappedBy="stanowisko")
+    @OneToMany(mappedBy="stanowisko", fetch = FetchType.EAGER)
     private List<Pracownik> pracownicy;
 
 
     public Stanowisko(String nazwa) {
         this.nazwa = nazwa;
+    }
+
+    @Override
+    public String toString() {
+        return nazwa;
     }
 }

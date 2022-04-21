@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -26,7 +26,7 @@ public class Pracownik {
     private String nazwisko;
 
     @Column(name = "pracuje_od")
-    private Date pracujeOd;
+    private LocalDate pracujeOd;
 
     @Column
     private String login;
@@ -38,7 +38,7 @@ public class Pracownik {
     @JoinColumn(name="id_stanowisko", nullable=false)
     private Stanowisko stanowisko;
 
-    public Pracownik(String imie, String nazwisko, Date pracujeOd, String login, String haslo, Stanowisko stanowisko) {
+    public Pracownik(String imie, String nazwisko, LocalDate pracujeOd, String login, String haslo, Stanowisko stanowisko) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.pracujeOd = pracujeOd;

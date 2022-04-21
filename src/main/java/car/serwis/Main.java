@@ -15,21 +15,8 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    private static final String TITLE = "Car Serwis";
-    private static final int WIDTH = 600;
-    private static final int HEIGHT = 550;
-
-
     @Override
     public void start(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(ScenePath.LOGIN.getPath()));
-//        Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);
-//        stage.initStyle(StageStyle.TRANSPARENT);
-//        stage.setScene(scene);
-//        scene.setFill(Color.TRANSPARENT);
-//        stage.setTitle(TITLE);
-//        stage.setScene(scene);
-//        stage.show();
         SceneController.getInitialScene(stage);
     }
 

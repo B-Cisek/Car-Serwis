@@ -12,24 +12,6 @@ import java.util.List;
 
 public class StanowiskoDao {
 
-//    public boolean createStanowisko(Stanowisko stanowisko) {
-//        Transaction transaction = null;
-//        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-//
-//            transaction = session.beginTransaction();
-//
-//            session.persist(stanowisko);
-//
-//            transaction.commit();
-//        } catch (Exception e) {
-//            if (transaction != null) {
-//                transaction.rollback();
-//            }
-//            e.printStackTrace();
-//        }
-//        return true;
-//    }
-
 
     public boolean createStanowisko(Stanowisko stanowisko) {
         Transaction transaction = null;

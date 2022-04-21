@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.AddPracownikController">
+<AnchorPane fx:id="addPracownikAnchorePane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.AddPracownikController">
    <children>
       <Text layoutX="213.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dodawanie pracownika">
          <font>
@@ -20,7 +20,9 @@
       <DatePicker fx:id="pracujeOdDatePicker" layoutX="139.0" layoutY="200.0" prefHeight="25.0" prefWidth="149.0" promptText="Rozpoczecie pracy" />
       <TextField fx:id="loginTextField" layoutX="330.0" layoutY="107.0" promptText="login" />
       <TextField fx:id="hasloTextField" layoutX="330.0" layoutY="150.0" promptText="hasło" />
-      <ComboBox fx:id="stanowiksoComboBox" layoutX="330.0" layoutY="200.0" prefWidth="150.0" promptText="stanowisko" />
-      <Button fx:id="addPracownikButton" layoutX="251.0" layoutY="274.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="99.0" text="Dodaj" />
+      <ComboBox fx:id="stanowiskaComboBox" layoutX="330.0" layoutY="200.0" prefWidth="150.0" promptText="stanowisko" />
+      <Button fx:id="addPracownikButton" layoutX="182.0" layoutY="274.0" mnemonicParsing="false" onAction="#createPracownik" prefHeight="25.0" prefWidth="99.0" text="Dodaj" />
+      <Button fx:id="anulujButton" layoutX="348.0" layoutY="274.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Anuluj" />
+      <Text fx:id="errorText" layoutX="289.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>
