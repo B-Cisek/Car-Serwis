@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="loginAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" styleClass="anchor_pane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.NewLoginController">
+<AnchorPane fx:id="loginAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" styleClass="anchor_pane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.LoginController">
    <children>
       <Text layoutX="125.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Witaj w CAR SERWIS" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="124.59765625" AnchorPane.topAnchor="30.15234375">
          <font>
@@ -29,8 +29,13 @@
       <PasswordField fx:id="hasloTextField" layoutX="186.0" layoutY="409.0" prefHeight="25.0" prefWidth="230.0" styleClass="password_field" />
       <Text fill="WHITE" layoutX="186.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="login_text" text="Login" />
       <Text layoutX="185.0" layoutY="403.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="password_text" text="Hasło" />
-      <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" layoutX="342.0" layoutY="454.0" mnemonicParsing="false" onAction="#loginUser" prefHeight="30.0" prefWidth="74.0" styleClass="login_button" text="Zaloguj" textAlignment="CENTER" />
+      <Button fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" layoutX="342.0" layoutY="454.0" mnemonicParsing="false" onAction="#loginPracownik" prefHeight="30.0" prefWidth="74.0" styleClass="login_button" text="Zaloguj" textAlignment="CENTER" />
       <Button fx:id="exitButton" layoutX="554.0" layoutY="15.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="32.0" styleClass="exit_button" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <Text fx:id="infoLine" fill="#e40c0c" layoutX="283.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
    </children>
    <stylesheets>
       <URL value="@../css/login_style.css" />

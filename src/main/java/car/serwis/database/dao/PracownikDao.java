@@ -5,25 +5,34 @@ import car.serwis.database.model.Stanowisko;
 import car.serwis.database.util.HibernateUtil;
 import org.hibernate.Session;
 
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.TypedQuery;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PracownikDao {
+//    public Pracownik getConnectedPracownik(String login, String haslo) {
+//        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+//            TypedQuery<Pracownik> query = session.createQuery("SELECT u FROM Pracownik u WHERE login = :login AND haslo = :password", Pracownik.class );
+//            query.setParameter("login", login);
+//            query.setParameter("password", haslo);
+//            return query.getSingleResult();
+//        } catch (NoResultException ex) {
+//            System.err.println("User not found");
+//            return null;
+//        }
+//    }
+
     public Pracownik getConnectedPracownik(String login, String haslo) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            TypedQuery<Pracownik> query = session.createQuery("SELECT u FROM Pracownik u WHERE login = :name AND haslo = :pass", Pracownik.class );
-            query.setParameter("name", login);
-            query.setParameter("pass", haslo);
-            return query.getSingleResult();
-        } catch (NoResultException ex) {
-            System.err.println("Pracownik not found");
-            return null;
-        }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query<Pracownik> typedQuery = session.createQuery("SELECT u FROM Pracownik u WHERE u.login=:login AND u.haslo=:haslo", Pracownik.class);
+        typedQuery.setParameter("login", login);
+        typedQuery.setParameter("haslo", haslo);
+        return typedQuery.getSingleResult();
     }
 
     public List<Pracownik> getPracownikStanowisko() {

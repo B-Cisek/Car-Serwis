@@ -1,10 +1,12 @@
 package car.serwis.controller;
 
+import car.serwis.helpers.CurrentPracownik;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +19,9 @@ public class PulpitController implements Initializable {
 
     @FXML
     private BorderPane pulpitBorderPane;
+
+    @FXML
+    private Text pracownikInfo;
 
 
 
@@ -31,6 +36,10 @@ public class PulpitController implements Initializable {
     }
 
 
+
+    private void setUserInfo() {
+        pracownikInfo.setText(String.format("Pracownik: %s", CurrentPracownik.getCurrentPracownik().getLogin()));
+    }
 
 
 
@@ -67,5 +76,6 @@ public class PulpitController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeExitButton();
+        setUserInfo();
     }
 }
