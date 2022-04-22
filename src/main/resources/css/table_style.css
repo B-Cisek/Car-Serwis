@@ -7,7 +7,7 @@
     -fx-alignment: CENTER_LEFT;
     -fx-text-fill: #253b5f;
     -fx-padding: 10 0 10 10;
-    -fx-font: 12px 'Open Sans';
+    -fx-font: 12px 'Inter';
     -fx-font-weight: bold;
 
 }
@@ -20,7 +20,7 @@
 
 .table-row-cell{
     -fx-background-color: #fdfdfd;
-    -fx-border-width:0 0 10 0;
+    -fx-border-width:0 0 5 0;
     -fx-border-color:#e9e7ec;
 }
 

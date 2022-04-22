@@ -17,17 +17,18 @@
          <children>
             <AnchorPane prefHeight="100.0" prefWidth="1600.0">
                <children>
-                  <ImageView fitHeight="68.0" fitWidth="68.0" layoutX="24.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgTop" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="16.0">
+                  <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="24.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" styleClass="imgTop" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="16.0">
                      <image>
                         <Image url="@../css/img/wrench.png" />
                      </image>
                   </ImageView>
-                  <Text fill="WHITE" layoutX="109.0" layoutY="65.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="CAR SERWIS" AnchorPane.bottomAnchor="26.2158203125" AnchorPane.leftAnchor="109.0" AnchorPane.topAnchor="27.2314453125">
+                  <Text fill="WHITE" layoutX="109.0" layoutY="65.0" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="CAR SERWIS" AnchorPane.bottomAnchor="26.2158203125" AnchorPane.leftAnchor="105.0" AnchorPane.topAnchor="23.0">
                      <font>
                         <Font name="System Bold" size="35.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="1420.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Administrator" AnchorPane.bottomAnchor="38.2314453125" AnchorPane.rightAnchor="55.0712890625" AnchorPane.topAnchor="36.4970703125">
+                  <Button fx:id="exitButton" layoutX="1551.0" layoutY="6.0" minHeight="41.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="42.0" styleClass="exit_button" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
+                  <Text fx:id="pracownikInfo" fill="WHITE" layoutX="1537.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
@@ -41,7 +42,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" styleClass="img">
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" styleClass="img">
                            <image>
                               <Image url="@../css/img/puplit.png" />
                            </image>
@@ -54,35 +55,77 @@
                         <Insets />
                      </HBox.margin>
                   </Button>
-                  <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showZleceniaScreen" prefHeight="58.0" prefWidth="203.0" styleClass="buttons" text="ZLECENIA ">
+                  <Button graphicTextGap="10.0" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#showZleceniaScreen" prefHeight="58.0" prefWidth="203.0" styleClass="buttons" text="ZLECENIA ">
                      <font>
                         <Font name="System Bold" size="27.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../css/img/zlecenia.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button layoutX="214.0" layoutY="10.0" mnemonicParsing="false" onAction="#showWarsztatScreen" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="WARSZTAT">
+                  <Button graphicTextGap="10.0" layoutX="214.0" layoutY="10.0" mnemonicParsing="false" onAction="#showWarsztatScreen" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="WARSZTAT">
                      <font>
                         <Font name="System Bold" size="27.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../css/img/warsztat.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button layoutX="426.0" layoutY="10.0" mnemonicParsing="false" onAction="#showKsiegowoscScreen" prefHeight="58.0" prefWidth="212.0" styleClass="buttons" text="KSIĘGOWOŚĆ">
+                  <Button graphicTextGap="10.0" layoutX="426.0" layoutY="10.0" mnemonicParsing="false" onAction="#showKsiegowoscScreen" prefHeight="58.0" prefWidth="212.0" styleClass="buttons" text="KSIĘGOWOŚĆ">
                      <font>
                         <Font name="System Bold" size="27.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../css/img/ksiegowosc.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button layoutX="638.0" layoutY="10.0" mnemonicParsing="false" onAction="#showMagazynScreen" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="MAGAZYN">
+                  <Button graphicTextGap="10.0" layoutX="638.0" layoutY="10.0" mnemonicParsing="false" onAction="#showMagazynScreen" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="MAGAZYN">
                      <font>
                         <Font name="System Bold" size="27.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../css/img/magazyn.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button layoutX="841.0" layoutY="10.0" mnemonicParsing="false" onAction="#showUstawieniaScreen" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="USTAWIENIA">
+                  <Button graphicTextGap="10.0" layoutX="841.0" layoutY="10.0" mnemonicParsing="false" onAction="#showUstawieniaScreen" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="USTAWIENIA">
                      <font>
                         <Font name="System Bold" size="27.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../css/img/ustawienia.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button defaultButton="true" layoutX="1053.0" layoutY="10.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="POMOC">
+                  <Button defaultButton="true" graphicTextGap="10.0" layoutX="1053.0" layoutY="10.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="POMOC">
                      <font>
                         <Font name="System Bold" size="27.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../css/img/pomoc.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
                </children>
             </HBox>

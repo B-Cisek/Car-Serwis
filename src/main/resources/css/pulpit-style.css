@@ -1,0 +1,110 @@
+.panes-hbox{
+    -fx-min-width: 1600;
+    -fx-min-height: 340;
+}
+
+.vbox1{
+    -fx-background-color: #41A5F5;
+    -fx-background-radius: 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+}
+
+.pane1{
+    -fx-background-color: #3B97E2;
+    -fx-pref-height: 140;
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 1;
+    -fx-border-radius: 0 0 5 5;
+}
+
+.vbox2{
+    -fx-background-color: #25C6DA;
+    -fx-background-radius: 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+}
+
+.pane2{
+    -fx-background-color: #20B7C8;
+    -fx-pref-height: 140;
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 1;
+    -fx-border-radius: 0 0 5 5;
+}
+
+.vbox3{
+    -fx-background-color: #26A69A;
+    -fx-background-radius: 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+}
+
+.pane3{
+    -fx-background-color: #23988E;
+    -fx-pref-height: 140;
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 1;
+    -fx-border-radius: 0 0 5 5;
+}
+
+.vbox4{
+    -fx-background-color: #9CCC65;
+    -fx-background-radius: 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5;
+
+}
+
+.pane4{
+    -fx-background-color: #90BC5C;
+    -fx-pref-height: 140;
+    -fx-background-radius: 0 0 5 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+    -fx-border-style: solid;
+    -fx-border-width: 0 0 1 1;
+    -fx-border-radius: 0 0 5 5;
+}
+
+.bottom-hbox{
+    -fx-min-width: 1600;
+    -fx-min-height: 260;
+    -fx-background-color: #F5F5F5;
+}
+
+.vbox-left{
+    -fx-background-color: #fff;
+    -fx-pref-width: 736;
+    -fx-pref-height: 260;
+    -fx-border-radius: 5 5 5 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+}
+.vbox-right{
+    -fx-background-color: #fff;
+    -fx-pref-width: 736;
+    -fx-pref-height: 260;
+    -fx-border-radius: 5 5 5 5;
+    -fx-border-color: rgba(0, 0, 0, 0.1);
+}
+
+.h1-left{
+    -fx-font-size: 20;
+}
+
+.h1-right{
+    -fx-font-size: 20;
+}

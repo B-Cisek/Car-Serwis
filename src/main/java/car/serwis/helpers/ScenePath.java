@@ -2,7 +2,6 @@ package car.serwis.helpers;
 
 public enum ScenePath {
 
-    APP("/fxml/app.fxml"),
     PULPIT("/fxml/pulpit.fxml"),
     ZLECENIA("/fxml/zlecenia.fxml"),
     WARSZTAT("/fxml/warsztat.fxml"),

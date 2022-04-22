@@ -38,9 +38,8 @@
 }
 
 .main-pulpit{
-    -fx-background-color: #FFFFFA;
+    -fx-background-color: #F5F5F5;
 }
-
 
 .exit_button{
     -fx-background-image: url(img/close_window.png);
@@ -54,4 +53,19 @@
 .exit_button:hover{
     -fx-opacity: 0.7;
 }
+
+
+.minimalize_button{
+    -fx-background-image: url(img/minimize.png);
+    -fx-background-color: transparent;
+    -fx-background-size: 35px 35px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-padding: 0;
+}
+
+.minimalize_button:hover{
+    -fx-opacity: 0.7;
+}
+
 

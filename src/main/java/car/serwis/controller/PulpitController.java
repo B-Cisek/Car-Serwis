@@ -23,6 +23,9 @@ public class PulpitController implements Initializable {
     @FXML
     private Text pracownikInfo;
 
+    @FXML
+    private Button minimalizeButton;
+
 
 
     private void initializeExitButton(){
@@ -30,6 +33,14 @@ public class PulpitController implements Initializable {
             getStage().close();
         });
     }
+
+    private void initializeMinimalizeButton(){
+        minimalizeButton.setOnAction((x) -> {
+            getStage().setIconified(true);
+        });
+    }
+
+
 
     private Stage getStage(){
         return (Stage) pulpitBorderPane.getScene().getWindow();
@@ -77,5 +88,7 @@ public class PulpitController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeExitButton();
         setUserInfo();
+        initializeMinimalizeButton();
+
     }
 }

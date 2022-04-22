@@ -87,6 +87,8 @@ public class UstawieniaController implements Initializable {
         fillTablePracownicy();
         addTableSettingsStanowisko();
         addTableSettingsPracownik();
+        pracownicyTable.setPlaceholder(new Label("Brak danych!"));
+        stanowiskaTable.setPlaceholder(new Label("Brak danych!"));
     }
 
 

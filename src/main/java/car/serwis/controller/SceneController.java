@@ -4,11 +4,13 @@ import car.serwis.helpers.ScenePath;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -74,8 +76,16 @@ public class SceneController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         controlDrag(window);
         window.setScene(visitScene);
+        //TODO zmiana centrowania
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        //window.setX((primScreenBounds.getWidth() - window.getWidth()) / 2);
+        //window.setY((primScreenBounds.getHeight() - window.getHeight()) / 2);
+        window.centerOnScreen();
+
         window.show();
+
     }
+
 
     public static void controlDrag(Stage stage) {
         main.setOnMousePressed(new EventHandler<MouseEvent>() {

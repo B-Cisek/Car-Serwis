@@ -22,10 +22,9 @@ public class PracownikDao {
            Query<Pracownik> typedQuery = session.createQuery("SELECT u FROM Pracownik u WHERE u.login=:login AND u.haslo=:haslo", Pracownik.class);
            typedQuery.setParameter("login", login);
            typedQuery.setParameter("haslo", haslo);
-           System.out.println(typedQuery.getSingleResult());
            return typedQuery.getSingleResult();
        }catch (Exception ex){
-           System.err.println("User not found");
+           System.err.println("Pracownik not found");
            return null;
        }
     }
