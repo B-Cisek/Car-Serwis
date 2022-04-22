@@ -34,9 +34,12 @@ public class Pracownik {
     @Column
     private String haslo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_stanowisko", nullable=false)
     private Stanowisko stanowisko;
+
+    @OneToOne(mappedBy = "pracownik")
+    private Zlecenie zlecenia;
 
     public Pracownik(String imie, String nazwisko, LocalDate pracujeOd, String login, String haslo, Stanowisko stanowisko) {
         this.imie = imie;

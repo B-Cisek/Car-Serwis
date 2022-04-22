@@ -1,7 +1,6 @@
 package car.serwis.database.util;
 
-import car.serwis.database.model.Pracownik;
-import car.serwis.database.model.Stanowisko;
+import car.serwis.database.model.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -31,6 +30,12 @@ public class HibernateUtil {
                 configuration.setProperties(settings);
                 configuration.addAnnotatedClass(Pracownik.class);
                 configuration.addAnnotatedClass(Stanowisko.class);
+                configuration.addAnnotatedClass(Czesc.class);
+                configuration.addAnnotatedClass(Jednostka.class);
+                configuration.addAnnotatedClass(Kategoria.class);
+                configuration.addAnnotatedClass(Kontrahent.class);
+                configuration.addAnnotatedClass(Samochod.class);
+                configuration.addAnnotatedClass(Zlecenie.class);
 
 
 
