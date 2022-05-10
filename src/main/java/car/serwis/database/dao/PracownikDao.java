@@ -55,9 +55,9 @@ public class PracownikDao {
         return false;
     }
 
-    public Pracownik getPracownik(Long id) {
+    public Pracownik getPracownik(String login) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.find(Pracownik.class, id);
+            return session.find(Pracownik.class, login);
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;

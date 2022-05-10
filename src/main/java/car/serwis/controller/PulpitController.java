@@ -4,12 +4,15 @@ import car.serwis.helpers.CurrentPracownik;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class PulpitController implements Initializable {
@@ -27,16 +30,29 @@ public class PulpitController implements Initializable {
     private Button minimalizeButton;
 
 
-
     private void initializeExitButton(){
         exitButton.setOnAction((x) -> {
-            getStage().close();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Optional<ButtonType> result = alert.showAndWait();
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Look, a Confirmation Dialog");
+            alert.setContentText("Are you ok with this?");
+
+            if (result.get() == ButtonType.OK){
+                getStage().close();
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
         });
     }
+
+
+
 
     private void initializeMinimalizeButton(){
         minimalizeButton.setOnAction((x) -> {
             getStage().setIconified(true);
+
         });
     }
 

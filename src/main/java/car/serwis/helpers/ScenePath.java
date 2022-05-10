@@ -11,7 +11,11 @@ public enum ScenePath {
     POMOC("/fxml/pomoc.fxml"),
     LOGIN("/fxml/login.fxml"),
     ADD_STANOWISKO("/fxml/addStanowisko.fxml"),
-    ADD_PRACOWNIK("/fxml/addPracownik.fxml");
+    ADD_PRACOWNIK("/fxml/addPracownik.fxml"),
+    ADD_ZLECENIE("/fxml/addZlecenie.fxml"),
+    ADD_SAMOCHOD("/fxml/addSamochod.fxml"),
+    ADD_KATEGORIA("/fxml/addKategoria.fxml"),
+    ADD_JEDNOSTKA("/fxml/addJednostka.fxml");
 
     private final String path;
 

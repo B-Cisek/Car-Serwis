@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 
 
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class SceneController {
     private static final int HEIGHT = 550;
 
     private static Parent main;
+
 
     public static void getInitialScene(Stage stage) throws IOException {
         main = FXMLLoader.load((SceneController.class.getResource(ScenePath.LOGIN.getPath())));
@@ -72,35 +74,30 @@ public class SceneController {
 
     private static void changeScreen(ActionEvent event, String path) throws IOException {
         main = FXMLLoader.load(SceneController.class.getResource(path));
-        Scene visitScene = new Scene(main);
+        Scene pilpitScene = new Scene(main);
+
+        double prevWidth = pilpitScene.getWidth();
+        double prevHeight = pilpitScene.getHeight();
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
         controlDrag(window);
-        window.setScene(visitScene);
+        window.setScene(pilpitScene);
+        window.setHeight(prevHeight);
+        window.setWidth(prevWidth);
+        //window.setMaximized(true);
         //TODO zmiana centrowania
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        //window.setX((primScreenBounds.getWidth() - window.getWidth()) / 2);
-        //window.setY((primScreenBounds.getHeight() - window.getHeight()) / 2);
-        window.centerOnScreen();
-
         window.show();
-
     }
 
 
     public static void controlDrag(Stage stage) {
-        main.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                x = stage.getX() - event.getScreenX();
-                y = stage.getY() - event.getScreenY();
-            }
+        main.setOnMousePressed(event -> {
+            x = stage.getX() - event.getScreenX();
+            y = stage.getY() - event.getScreenY();
         });
-        main.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                stage.setX(event.getScreenX() + x);
-                stage.setY(event.getScreenY() + y);
-            }
+        main.setOnMouseDragged(event -> {
+            stage.setX(event.getScreenX() + x);
+            stage.setY(event.getScreenY() + y);
         });
     }
 

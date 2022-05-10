@@ -25,7 +25,11 @@ public class Jednostka {
     @Column
     private String skrot;
 
-    @OneToMany(mappedBy="jednostka", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="jednostka", fetch = FetchType.LAZY)
     private List<Czesc> czesci;
 
+    public Jednostka(String nazwaJednostki, String skrot) {
+        this.nazwaJednostki = nazwaJednostki;
+        this.skrot = skrot;
+    }
 }

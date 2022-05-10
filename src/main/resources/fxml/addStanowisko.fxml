@@ -7,17 +7,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="addStanowiskoAnchorePane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.AddStanowiskoController">
+<AnchorPane fx:id="stanowiskoAnchorePane" prefHeight="300.0" prefWidth="500.0" styleClass="mainAnchorePane" stylesheets="@../css/popUpWindows.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.AddStanowiskoController">
    <children>
-      <Text layoutX="219.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dodaj stanowisko">
+      <Text layoutX="162.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dodaj stanowisko">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <TextField fx:id="nazwaTextField" layoutX="211.0" layoutY="124.0" prefHeight="25.0" prefWidth="165.0" />
-      <Label layoutX="211.0" layoutY="100.0" text="Nazwa" />
-      <Button fx:id="addStanowiskoButton" layoutX="211.0" layoutY="188.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Dodaj" />
-      <Text fx:id="errorText" layoutX="271.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Button fx:id="anulujButton" layoutX="317.0" layoutY="188.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Anuluj" />
+      <TextField fx:id="nazwaTextField" layoutX="154.0" layoutY="108.0" prefHeight="25.0" prefWidth="165.0" />
+      <Label layoutX="154.0" layoutY="85.0" text="Nazwa" />
+      <Button fx:id="addStanowiskoButton" layoutX="319.0" layoutY="251.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" styleClass="add-button" text="Dodaj" />
+      <Text fx:id="errorText" layoutX="159.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" />
+      <Button fx:id="anulujButton" layoutX="411.0" layoutY="251.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="75.0" styleClass="delete-button" text="Anuluj" />
    </children>
 </AnchorPane>

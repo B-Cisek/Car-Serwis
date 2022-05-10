@@ -1,7 +1,9 @@
 package car.serwis.controller;
 
-import car.serwis.database.dao.StanowiskoDao;
-import car.serwis.database.model.Stanowisko;
+import car.serwis.database.dao.JednostkaDao;
+import car.serwis.database.dao.KategoriaDao;
+import car.serwis.database.model.Jednostka;
+import car.serwis.database.model.Kategoria;
 import car.serwis.helpers.UpdateStatus;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -18,41 +20,40 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddStanowiskoController implements Initializable {
+public class AddJednostkaController implements Initializable {
+    @FXML
+    private AnchorPane JednostkaAnchorePane;
 
     @FXML
-    private Button addStanowiskoButton;
-
-    @FXML
-    private Text errorText;
-
-    @FXML
-    private TextField nazwaTextField;
+    private Button addJednostkaButton;
 
     @FXML
     private Button anulujButton;
 
     @FXML
-    private AnchorPane stanowiskoAnchorePane;
+    private Text errorText;
 
+    @FXML
+    private TextField nazwaJednostkiTextField;
+
+    @FXML
+    private TextField skrotTextField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        saveNewStanowisko();
         initializeExitButton();
+        saveNewJednostka();
     }
 
-
-    @FXML
-    private void saveNewStanowisko() {
-        addStanowiskoButton.setOnAction((event) -> {
+    private void saveNewJednostka() {
+        addJednostkaButton.setOnAction((event) -> {
             if (validateInputs()) {
-                Stanowisko stanowisko = createStanowiskoFromInput();
-                boolean isSaved = new StanowiskoDao().createStanowisko(stanowisko);
+                Jednostka jednostka = createJednostkaFromInput();
+                boolean isSaved = new JednostkaDao().createJednostka(jednostka);
 
                 if (isSaved) {
-                    UpdateStatus.setIsStanowiskoAdded(true);
-                    errorText.setText("Stanowisko dodane!");
+                    UpdateStatus.setIsJednostkaAdded(true);
+                    errorText.setText("Jednostka dodana!");
                     errorText.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
                     delayWindowClose(event);
                 }
@@ -61,20 +62,26 @@ public class AddStanowiskoController implements Initializable {
     }
 
     private boolean validateInputs() {
-        if (nazwaTextField.getText().equals("")) {
+        if (nazwaJednostkiTextField.getText().equals("")) {
             errorText.setText("*Pole nazwa nie może być puste!");
+            return false;
+        }
+
+        if (skrotTextField.getText().equals("")){
+            errorText.setText("*Pole skrót nie może być puste!");
             return false;
         }
 
         return true;
     }
 
-    private Stanowisko createStanowiskoFromInput() {
-        Stanowisko stanowisko = new Stanowisko();
+    private Jednostka createJednostkaFromInput() {
+        Jednostka jednostka = new Jednostka();
 
-        stanowisko.setNazwa(nazwaTextField.getText());
+        jednostka.setNazwaJednostki(nazwaJednostkiTextField.getText());
+        jednostka.setSkrot(skrotTextField.getText());
 
-        return stanowisko;
+        return jednostka;
     }
 
     private void delayWindowClose(ActionEvent event) {
@@ -90,14 +97,14 @@ public class AddStanowiskoController implements Initializable {
         stage.close();
     }
 
+    private Stage getStage(){
+        return (Stage) JednostkaAnchorePane.getScene().getWindow();
+    }
+
     private void initializeExitButton(){
         anulujButton.setOnAction((x) -> {
             getStage().close();
         });
-    }
-
-    private Stage getStage(){
-        return (Stage) stanowiskoAnchorePane.getScene().getWindow();
     }
 
 }

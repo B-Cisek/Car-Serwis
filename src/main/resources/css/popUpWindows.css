@@ -1,13 +1,14 @@
-.h1{
-    -fx-font-size: 30px;
+.mainAnchorePane{
+    -fx-border-width: 3px;
+    -fx-border-style: solid;
+    -fx-border-color: #283146;
 }
+
 
 .add-button{
     -fx-background-color: #2CC97E;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
-    -fx-pref-width: 160px;
-    -fx-pref-height: 40px;
 }
 
 .add-button:hover{
@@ -18,11 +19,13 @@
     -fx-background-color: #e63946;
     -fx-font-weight: bold;
     -fx-font-size: 16px;
-    -fx-pref-width: 160px;
-    -fx-pref-height: 40px;
 }
 
 .delete-button:hover{
     fx-opacity: 0.7;
 }
 
+.errorText{
+    -fx-fill: #e63946;
+    -fx-font-weight: bold;
+}

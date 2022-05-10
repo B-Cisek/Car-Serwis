@@ -53,7 +53,7 @@ public class AddPracownikController implements Initializable {
     @FXML
     private AnchorPane addPracownikAnchorePane;
 
-
+    PracownikDao pracownikDao = new PracownikDao();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -82,34 +82,34 @@ public class AddPracownikController implements Initializable {
 
     private boolean validateInputs() {
 
-        if (pracujeOdDatePicker.getValue() == null) {
-            errorText.setText("*Date must be selected from calendar!");
+        if (stanowiskaComboBox.getValue() == null) {
+            errorText.setText("*Pole stanowisko nie może być puste!");
             return false;
         }
 
         if(pracujeOdDatePicker.getValue() == null) {
-            errorText.setText("*You must select pet!");
+            errorText.setText("*Pole data nie może być puste!");
             return false;
         }
 
 
         if (imieTextField.getText().equals("")) {
-            errorText.setText("*You must add visit description!");
+            errorText.setText("*Pole imie nie może być puste!");
             return false;
         }
 
         if (nazwiskoTextField.getText().equals("")) {
-            errorText.setText("*You must add visit description!");
+            errorText.setText("*Pole nazwisko nie może być puste!");
             return false;
         }
 
-        if (loginTextField.getText().equals("")) {
-            errorText.setText("*You must add visit description!");
+        if (loginTextField.getText().equals("")){
+            errorText.setText("*Pole login nie może być puste!");
             return false;
         }
 
         if (hasloTextField.getText().equals("")) {
-            errorText.setText("*You must add visit description!");
+            errorText.setText("*Pole hasło nie może być puste!");
             return false;
         }
 
@@ -123,7 +123,8 @@ public class AddPracownikController implements Initializable {
             boolean isSaved = new PracownikDao().createPracownik(pracownik);
             if (isSaved) {
                 UpdateStatus.setIsPracownikAdded(true);
-                errorText.setText("Visit is added!");
+                errorText.setText("Dodano pracownika!");
+                errorText.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
                 delayWindowClose(event);
             }
         }

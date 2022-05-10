@@ -23,18 +23,6 @@ import java.util.ResourceBundle;
 
 public class UstawieniaController implements Initializable {
     @FXML
-    private Button addPracownikButton;
-
-    @FXML
-    private Button addStanowiskoButton;
-
-    @FXML
-    private Button deletePracownikButton;
-
-    @FXML
-    private Button deleteStanowiskoButton;
-
-    @FXML
     private TableColumn<Pracownik, String> hasloPracownikColumn;
 
     @FXML

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane fx:id="JednostkaAnchorePane" prefHeight="400.0" prefWidth="509.0" stylesheets="@../css/popUpWindows.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.AddJednostkaController">
+   <children>
+      <Text layoutX="182.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dodaj jednostke">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Text>
+      <Button fx:id="addJednostkaButton" layoutX="341.0" layoutY="351.0" mnemonicParsing="false" styleClass="add-button" text="Dodaj" />
+      <Button fx:id="anulujButton" layoutX="423.0" layoutY="351.0" mnemonicParsing="false" styleClass="delete-button" text="Anuluj" />
+      <TextField fx:id="nazwaJednostkiTextField" layoutX="180.0" layoutY="139.0" />
+      <TextField fx:id="skrotTextField" layoutX="180.0" layoutY="190.0" />
+      <Label layoutX="180.0" layoutY="116.0" text="Nazwa Jednostki" />
+      <Label layoutX="180.0" layoutY="173.0" text="Skrót" />
+      <Text fx:id="errorText" layoutX="243.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+   </children>
+</AnchorPane>

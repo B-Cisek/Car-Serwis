@@ -8,21 +8,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="addPracownikAnchorePane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.AddPracownikController">
+<AnchorPane fx:id="addPracownikAnchorePane" prefHeight="350.0" prefWidth="600.0" styleClass="mainAnchorePane" stylesheets="@../css/popUpWindows.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.AddPracownikController">
    <children>
       <Text layoutX="213.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dodawanie pracownika">
          <font>
             <Font size="17.0" />
          </font>
       </Text>
-      <TextField fx:id="imieTextField" layoutX="139.0" layoutY="107.0" promptText="imie" />
-      <TextField fx:id="nazwiskoTextField" layoutX="139.0" layoutY="150.0" promptText="nazwisko" />
-      <DatePicker fx:id="pracujeOdDatePicker" layoutX="139.0" layoutY="200.0" prefHeight="25.0" prefWidth="149.0" promptText="Rozpoczecie pracy" />
-      <TextField fx:id="loginTextField" layoutX="330.0" layoutY="107.0" promptText="login" />
-      <TextField fx:id="hasloTextField" layoutX="330.0" layoutY="150.0" promptText="hasło" />
-      <ComboBox fx:id="stanowiskaComboBox" layoutX="330.0" layoutY="200.0" prefWidth="150.0" promptText="stanowisko" />
-      <Button fx:id="addPracownikButton" layoutX="182.0" layoutY="274.0" mnemonicParsing="false" onAction="#createPracownik" prefHeight="25.0" prefWidth="99.0" text="Dodaj" />
-      <Button fx:id="anulujButton" layoutX="348.0" layoutY="274.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" text="Anuluj" />
-      <Text fx:id="errorText" layoutX="289.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <TextField fx:id="imieTextField" layoutX="130.0" layoutY="96.0" promptText="imie" />
+      <TextField fx:id="nazwiskoTextField" layoutX="130.0" layoutY="139.0" promptText="nazwisko" />
+      <DatePicker fx:id="pracujeOdDatePicker" layoutX="130.0" layoutY="189.0" prefHeight="25.0" prefWidth="149.0" promptText="Rozpoczecie pracy" />
+      <TextField fx:id="loginTextField" layoutX="321.0" layoutY="96.0" promptText="login" />
+      <TextField fx:id="hasloTextField" layoutX="321.0" layoutY="139.0" promptText="hasło" />
+      <ComboBox fx:id="stanowiskaComboBox" layoutX="321.0" layoutY="189.0" prefWidth="150.0" promptText="stanowisko" />
+      <Button fx:id="addPracownikButton" layoutX="396.0" layoutY="301.0" mnemonicParsing="false" onAction="#createPracownik" prefHeight="25.0" prefWidth="99.0" styleClass="add-button" text="Dodaj" />
+      <Button fx:id="anulujButton" layoutX="510.0" layoutY="301.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="76.0" styleClass="delete-button" text="Anuluj" />
+      <Text fx:id="errorText" layoutX="124.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" />
    </children>
 </AnchorPane>

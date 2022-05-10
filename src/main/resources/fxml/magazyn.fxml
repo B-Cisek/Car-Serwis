@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,7 +17,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../css/main-style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.MagazynController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.MagazynController">
    <top>
       <VBox prefHeight="150.0" prefWidth="1600.0" styleClass="header" BorderPane.alignment="CENTER">
          <children>
@@ -133,13 +139,67 @@
       </VBox>
    </top>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="1600.0" styleClass="main-pulpit" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="578.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MAGAZYN" wrappingWidth="212.97265625">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Text>
-         </children></AnchorPane>
+            <TabPane layoutX="19.0" layoutY="21.0" prefHeight="716.0" prefWidth="382.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Kategorie">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: gray;">
+                           <children>
+                              <Text layoutX="113.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KATEGORIE" textAlignment="CENTER" wrappingWidth="150.01858520507812">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                              </Text>
+                              <TableView fx:id="kategorieTableView" fixedCellSize="50.0" layoutX="4.0" layoutY="170.0" prefHeight="511.0" prefWidth="372.0">
+                                <columns>
+                                  <TableColumn fx:id="idKategoriaTableColumn" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" resizable="false" text="ID" />
+                                  <TableColumn fx:id="nazwaKategoriTableColumn" maxWidth="315.0" minWidth="315.0" prefWidth="315.0" resizable="false" text="NAZWA" />
+                                </columns>
+                              </TableView>
+                              <Button layoutX="75.0" layoutY="65.0" mnemonicParsing="false" onAction="#addKategoriaWindow" prefHeight="35.0" prefWidth="75.0" styleClass="add-button" text="Dodaj" />
+                              <Button layoutX="213.0" layoutY="62.0" mnemonicParsing="false" onAction="#deleteKategoria" prefHeight="38.0" prefWidth="80.0" styleClass="delete-button" text="Usuń" />
+                              <TextField fx:id="searchKategoriaBar" layoutX="47.0" layoutY="128.0" prefHeight="25.0" prefWidth="299.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Jednostki">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: gray;">
+                           <children>
+                              <Text layoutX="111.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JEDNOSTKI" textAlignment="CENTER" wrappingWidth="150.01858520507812">
+                                 <font>
+                                    <Font name="System Bold" size="21.0" />
+                                 </font>
+                              </Text>
+                              <Button layoutX="76.0" layoutY="73.0" mnemonicParsing="false" onAction="#addJednostkaWindow" prefHeight="35.0" prefWidth="79.0" styleClass="add-button" text="Dodaj" />
+                              <Button layoutX="195.0" layoutY="74.0" mnemonicParsing="false" onAction="#deleteJednostka" prefHeight="35.0" prefWidth="81.0" styleClass="delete-button" text="Usuń" />
+                              <TextField fx:id="searchJednostkaBar" layoutX="34.0" layoutY="128.0" prefHeight="25.0" prefWidth="316.0" />
+                              <TableView fx:id="jednostkiTableView" fixedCellSize="50.0" layoutX="11.0" layoutY="168.0" prefHeight="511.0" prefWidth="365.0">
+                                <columns>
+                                  <TableColumn fx:id="idJednostkaTableColumn" prefWidth="75.0" text="ID" />
+                                  <TableColumn fx:id="nazwaJednostkaTableColumn" prefWidth="153.0" text="NAZWA JEDNOSTKI" />
+                                    <TableColumn fx:id="skrotJednostkaTableColumn" prefWidth="128.0" text="SKRÓT" />
+                                </columns>
+                              </TableView>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Samochody">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                     </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
    </center>
+   <stylesheets>
+      <URL value="@../css/main-style.css" />
+      <URL value="@../css/table_style.css" />
+      <URL value="@../css/popUpWindows.css" />
+   </stylesheets>
 </BorderPane>

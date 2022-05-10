@@ -1,6 +1,8 @@
 package car.serwis.controller;
 
+import car.serwis.database.dao.SamochodDao;
 import car.serwis.database.dao.StanowiskoDao;
+import car.serwis.database.model.Samochod;
 import car.serwis.database.model.Stanowisko;
 import car.serwis.helpers.UpdateStatus;
 import javafx.animation.PauseTransition;
@@ -18,41 +20,36 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddStanowiskoController implements Initializable {
+public class AddSamochodController implements Initializable {
 
     @FXML
-    private Button addStanowiskoButton;
-
-    @FXML
-    private Text errorText;
-
-    @FXML
-    private TextField nazwaTextField;
+    private Button addSamochodButton;
 
     @FXML
     private Button anulujButton;
 
     @FXML
-    private AnchorPane stanowiskoAnchorePane;
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        saveNewStanowisko();
-        initializeExitButton();
-    }
-
+    private TextField markaTextField;
 
     @FXML
-    private void saveNewStanowisko() {
-        addStanowiskoButton.setOnAction((event) -> {
+    private TextField modelTextField;
+
+    @FXML
+    private AnchorPane addSamochodAnchorePane;
+
+    @FXML
+    private Text errorText;
+
+
+    private void saveNewSamochod() {
+        addSamochodButton.setOnAction((event) -> {
             if (validateInputs()) {
-                Stanowisko stanowisko = createStanowiskoFromInput();
-                boolean isSaved = new StanowiskoDao().createStanowisko(stanowisko);
+                Samochod samochod = createSamochodFromInput();
+                boolean isSaved = new SamochodDao().createSamochod(samochod);
 
                 if (isSaved) {
-                    UpdateStatus.setIsStanowiskoAdded(true);
-                    errorText.setText("Stanowisko dodane!");
+                    UpdateStatus.setIsSamochodAdded(true);
+                    errorText.setText("Samochód dodany!");
                     errorText.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
                     delayWindowClose(event);
                 }
@@ -61,7 +58,12 @@ public class AddStanowiskoController implements Initializable {
     }
 
     private boolean validateInputs() {
-        if (nazwaTextField.getText().equals("")) {
+        if (markaTextField.getText().equals("")) {
+            errorText.setText("*Pole nazwa nie może być puste!");
+            return false;
+        }
+
+        if (modelTextField.getText().equals("")) {
             errorText.setText("*Pole nazwa nie może być puste!");
             return false;
         }
@@ -69,13 +71,19 @@ public class AddStanowiskoController implements Initializable {
         return true;
     }
 
-    private Stanowisko createStanowiskoFromInput() {
-        Stanowisko stanowisko = new Stanowisko();
+    private Samochod createSamochodFromInput() {
+        Samochod samochod = new Samochod();
 
-        stanowisko.setNazwa(nazwaTextField.getText());
+        samochod.setMarka(markaTextField.getText());
+        samochod.setModel(modelTextField.getText());
 
-        return stanowisko;
+        return samochod;
     }
+
+
+
+
+
 
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
@@ -90,6 +98,7 @@ public class AddStanowiskoController implements Initializable {
         stage.close();
     }
 
+
     private void initializeExitButton(){
         anulujButton.setOnAction((x) -> {
             getStage().close();
@@ -97,7 +106,12 @@ public class AddStanowiskoController implements Initializable {
     }
 
     private Stage getStage(){
-        return (Stage) stanowiskoAnchorePane.getScene().getWindow();
+        return (Stage) addSamochodAnchorePane.getScene().getWindow();
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initializeExitButton();
+        saveNewSamochod();
+    }
 }

@@ -31,4 +31,20 @@ public class NewWindowController {
         getPopUpWindow(ScenePath.ADD_PRACOWNIK.getPath());
     }
 
+    public static void getNewZlecenieWindow() throws IOException {
+        getPopUpWindow(ScenePath.ADD_ZLECENIE.getPath());
+    }
+
+    public static void getNewSamochodWindow() throws IOException {
+        getPopUpWindow(ScenePath.ADD_SAMOCHOD.getPath());
+    }
+
+    public static void getNewKategoriaWindow() throws IOException {
+        getPopUpWindow(ScenePath.ADD_KATEGORIA.getPath());
+    }
+
+    public static void getNewJednostkaWindow() throws IOException {
+        getPopUpWindow(ScenePath.ADD_JEDNOSTKA.getPath());
+    }
+
 }

@@ -26,7 +26,7 @@ public class Samochod {
     private String model;
 
 
-    @OneToMany(mappedBy="samochod", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="samochod", fetch = FetchType.LAZY)
     private List<Czesc> czesci;
 
     @OneToOne(mappedBy = "samochod")

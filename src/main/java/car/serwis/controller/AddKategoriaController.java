@@ -1,7 +1,9 @@
 package car.serwis.controller;
 
-import car.serwis.database.dao.StanowiskoDao;
-import car.serwis.database.model.Stanowisko;
+import car.serwis.database.dao.KategoriaDao;
+import car.serwis.database.dao.SamochodDao;
+import car.serwis.database.model.Kategoria;
+import car.serwis.database.model.Samochod;
 import car.serwis.helpers.UpdateStatus;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -18,10 +20,16 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddStanowiskoController implements Initializable {
+public class AddKategoriaController implements Initializable {
+    @FXML
+    private Button addKategoriaButton;
 
     @FXML
-    private Button addStanowiskoButton;
+    private Button anulujButton;
+
+
+    @FXML
+    private AnchorPane kategoriaAnchorePane;
 
     @FXML
     private Text errorText;
@@ -29,30 +37,23 @@ public class AddStanowiskoController implements Initializable {
     @FXML
     private TextField nazwaTextField;
 
-    @FXML
-    private Button anulujButton;
-
-    @FXML
-    private AnchorPane stanowiskoAnchorePane;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        saveNewStanowisko();
         initializeExitButton();
+        saveNewKategoria();
     }
 
 
-    @FXML
-    private void saveNewStanowisko() {
-        addStanowiskoButton.setOnAction((event) -> {
+    private void saveNewKategoria() {
+        addKategoriaButton.setOnAction((event) -> {
             if (validateInputs()) {
-                Stanowisko stanowisko = createStanowiskoFromInput();
-                boolean isSaved = new StanowiskoDao().createStanowisko(stanowisko);
+                Kategoria kategoria = createKategoriaFromInput();
+                boolean isSaved = new KategoriaDao().createKategoria(kategoria);
 
                 if (isSaved) {
-                    UpdateStatus.setIsStanowiskoAdded(true);
-                    errorText.setText("Stanowisko dodane!");
+                    UpdateStatus.setIsKategoriaAdded(true);
+                    errorText.setText("Kategoira dodana!");
                     errorText.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
                     delayWindowClose(event);
                 }
@@ -69,19 +70,23 @@ public class AddStanowiskoController implements Initializable {
         return true;
     }
 
-    private Stanowisko createStanowiskoFromInput() {
-        Stanowisko stanowisko = new Stanowisko();
+    private Kategoria createKategoriaFromInput() {
+        Kategoria kategoria = new Kategoria();
 
-        stanowisko.setNazwa(nazwaTextField.getText());
+        kategoria.setNazwaKategori(nazwaTextField.getText());
 
-        return stanowisko;
+        return kategoria;
     }
+
+
+
 
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
         delay.setOnFinished(event2 -> closeWindow(event));
         delay.play();
     }
+
 
     @FXML
     private void closeWindow(ActionEvent event) {
@@ -90,6 +95,7 @@ public class AddStanowiskoController implements Initializable {
         stage.close();
     }
 
+
     private void initializeExitButton(){
         anulujButton.setOnAction((x) -> {
             getStage().close();
@@ -97,7 +103,6 @@ public class AddStanowiskoController implements Initializable {
     }
 
     private Stage getStage(){
-        return (Stage) stanowiskoAnchorePane.getScene().getWindow();
+        return (Stage) kategoriaAnchorePane.getScene().getWindow();
     }
-
 }

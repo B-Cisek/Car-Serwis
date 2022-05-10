@@ -22,6 +22,6 @@ public class Kategoria {
     @Column
     private String nazwaKategori;
 
-    @OneToMany(mappedBy="kategoria", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="kategoria", fetch = FetchType.LAZY)
     private List<Czesc> czesci;
 }

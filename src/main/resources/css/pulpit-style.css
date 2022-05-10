@@ -1,3 +1,4 @@
+
 .panes-hbox{
     -fx-min-width: 1600;
     -fx-min-height: 340;
@@ -103,8 +104,12 @@
 
 .h1-left{
     -fx-font-size: 20;
+
 }
 
 .h1-right{
     -fx-font-size: 20;
+
 }
+
+

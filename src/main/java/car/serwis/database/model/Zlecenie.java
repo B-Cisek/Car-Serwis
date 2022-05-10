@@ -44,7 +44,7 @@ public class Zlecenie {
     @JoinColumn(name = "idKontrahent")
     private  Kontrahent kontrahent;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(
             name = "Zlecenie_Czesc",
             joinColumns = { @JoinColumn(name = "idZlecenie") },
