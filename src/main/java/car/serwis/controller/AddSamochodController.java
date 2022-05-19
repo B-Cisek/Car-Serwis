@@ -1,10 +1,13 @@
 package car.serwis.controller;
 
 import car.serwis.database.dao.SamochodDao;
+import car.serwis.database.dao.SamochodRepository;
 import car.serwis.database.dao.StanowiskoDao;
 import car.serwis.database.model.Samochod;
 import car.serwis.database.model.Stanowisko;
 import car.serwis.helpers.UpdateStatus;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,6 +48,7 @@ public class AddSamochodController implements Initializable {
         addSamochodButton.setOnAction((event) -> {
             if (validateInputs()) {
                 Samochod samochod = createSamochodFromInput();
+
                 boolean isSaved = new SamochodDao().createSamochod(samochod);
 
                 if (isSaved) {
@@ -113,5 +117,6 @@ public class AddSamochodController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeExitButton();
         saveNewSamochod();
+
     }
 }

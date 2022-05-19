@@ -32,4 +32,13 @@ public class Jednostka {
         this.nazwaJednostki = nazwaJednostki;
         this.skrot = skrot;
     }
+
+    @Override
+    public String toString() {
+        return "Jednostka{" +
+                "idJednostka=" + idJednostka +
+                ", nazwaJednostki='" + nazwaJednostki + '\'' +
+                ", skrot='" + skrot + '\'' +
+                '}';
+    }
 }

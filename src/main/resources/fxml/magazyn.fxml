@@ -152,7 +152,7 @@
                                     <Font name="System Bold" size="21.0" />
                                  </font>
                               </Text>
-                              <TableView fx:id="kategorieTableView" fixedCellSize="50.0" layoutX="4.0" layoutY="170.0" prefHeight="511.0" prefWidth="372.0">
+                              <TableView fx:id="kategorieTableView" editable="true" fixedCellSize="50.0" layoutX="4.0" layoutY="170.0" prefHeight="511.0" prefWidth="372.0">
                                 <columns>
                                   <TableColumn fx:id="idKategoriaTableColumn" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" resizable="false" text="ID" />
                                   <TableColumn fx:id="nazwaKategoriTableColumn" maxWidth="315.0" minWidth="315.0" prefWidth="315.0" resizable="false" text="NAZWA" />
@@ -174,16 +174,16 @@
                                     <Font name="System Bold" size="21.0" />
                                  </font>
                               </Text>
-                              <Button layoutX="76.0" layoutY="73.0" mnemonicParsing="false" onAction="#addJednostkaWindow" prefHeight="35.0" prefWidth="79.0" styleClass="add-button" text="Dodaj" />
-                              <Button layoutX="195.0" layoutY="74.0" mnemonicParsing="false" onAction="#deleteJednostka" prefHeight="35.0" prefWidth="81.0" styleClass="delete-button" text="Usuń" />
-                              <TextField fx:id="searchJednostkaBar" layoutX="34.0" layoutY="128.0" prefHeight="25.0" prefWidth="316.0" />
-                              <TableView fx:id="jednostkiTableView" fixedCellSize="50.0" layoutX="11.0" layoutY="168.0" prefHeight="511.0" prefWidth="365.0">
+                              <TableView fx:id="jednostkiTableView" editable="true" fixedCellSize="50.0" layoutX="14.0" layoutY="162.0" prefHeight="511.0" prefWidth="365.0">
                                 <columns>
                                   <TableColumn fx:id="idJednostkaTableColumn" prefWidth="75.0" text="ID" />
                                   <TableColumn fx:id="nazwaJednostkaTableColumn" prefWidth="153.0" text="NAZWA JEDNOSTKI" />
-                                    <TableColumn fx:id="skrotJednostkaTableColumn" prefWidth="128.0" text="SKRÓT" />
+                                    <TableColumn fx:id="skrotJednostkaTableColumn" onEditCommit="#changeSkrotCell" prefWidth="128.0" text="SKRÓT" />
                                 </columns>
                               </TableView>
+                              <Button layoutX="71.0" layoutY="68.0" mnemonicParsing="false" onAction="#addJednostkaWindow" prefHeight="35.0" prefWidth="79.0" styleClass="add-button" text="Dodaj" />
+                              <Button layoutX="234.0" layoutY="62.0" mnemonicParsing="false" onAction="#deleteJednostka" prefHeight="35.0" prefWidth="81.0" styleClass="delete-button" text="Usuń" />
+                              <TextField fx:id="searchJednostkaBar" layoutX="26.0" layoutY="127.0" prefHeight="25.0" prefWidth="316.0" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
@@ -194,6 +194,20 @@
                   </Tab>
               </tabs>
             </TabPane>
+            <TableView fx:id="samochodyTableView" editable="true" fixedCellSize="50.0" layoutX="666.0" layoutY="238.0" prefHeight="353.0" prefWidth="402.0">
+              <columns>
+                <TableColumn fx:id="idSamochodTableColumn" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="markaSamochodTableColumn" prefWidth="75.0" text="MARKA" />
+                  <TableColumn fx:id="modelSamochodTableColumn" prefWidth="75.0" text="MODEL" />
+              </columns>
+            </TableView>
+            <Button layoutX="748.0" layoutY="144.0" mnemonicParsing="false" onAction="#addSamochodWindow" styleClass="add-button" text="+">
+               <font>
+                  <Font name="System Bold" size="42.0" />
+               </font>
+            </Button>
+            <Button layoutX="841.0" layoutY="144.0" mnemonicParsing="false" onAction="#deleteSamochod" prefHeight="35.0" prefWidth="42.0" styleClass="delete-button" text="-" />
+            <TextField fx:id="searchSamochodBar" layoutX="675.0" layoutY="205.0" prefHeight="25.0" prefWidth="392.0" />
          </children>
       </AnchorPane>
    </center>

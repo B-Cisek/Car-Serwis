@@ -7,33 +7,33 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="addKontrahentAnchorePane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.AddKontrahentController">
+<AnchorPane fx:id="addKontrahentAnchorePane" prefHeight="562.0" prefWidth="875.0" stylesheets="@../css/popUpWindows.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.AddKontrahentController">
    <children>
-      <Button fx:id="addKontrahentButton" layoutX="411.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Dodaj" />
-      <Text fx:id="errorText" layoutX="443.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="25.0" />
-      <Button fx:id="anulujButton" layoutX="503.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" text="Anuluj" />
-      <Text layoutX="229.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dodaj kontrahentu">
+      <Button fx:id="addKontrahentButton" layoutX="693.0" layoutY="513.0" mnemonicParsing="false" onAction="#createKontrahent" prefHeight="25.0" prefWidth="75.0" styleClass="add-button" text="Dodaj" />
+      <Text fx:id="errorText" layoutX="430.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="25.0" />
+      <Button fx:id="anulujButton" layoutX="778.0" layoutY="513.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="75.0" styleClass="delete-button" text="Anuluj" />
+      <Text layoutX="372.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dodaj kontrahentu">
          <font>
             <Font size="17.0" />
          </font>
       </Text>
-      <Label layoutX="44.0" layoutY="64.0" text="Imie" />
-      <Label layoutX="42.0" layoutY="97.0" text="Nazwisko" />
-      <Label layoutX="41.0" layoutY="127.0" text="Telefon" />
-      <Label layoutX="23.0" layoutY="229.0" text="nazwa firmy" />
-      <Label layoutX="52.0" layoutY="165.0" text="NIP" />
-      <Label layoutX="42.0" layoutY="200.0" prefHeight="17.0" prefWidth="40.0" text="PESEL" />
-      <Label layoutX="20.0" layoutY="258.0" text="Kod pocztowy" />
-      <Label layoutX="24.0" layoutY="288.0" text="Miejscowosc" />
-      <Label layoutX="39.0" layoutY="321.0" text="Ulica" />
-      <TextField fx:id="imieTextField" layoutX="95.0" layoutY="60.0" />
-      <TextField fx:id="nazwiskoTextField" layoutX="95.0" layoutY="93.0" />
-      <TextField fx:id="telefonTextField" layoutX="95.0" layoutY="123.0" />
-      <TextField fx:id="nipTextField" layoutX="95.0" layoutY="161.0" />
-      <TextField fx:id="peselTextField" layoutX="95.0" layoutY="196.0" />
-      <TextField fx:id="nazwaFirmyTextField" layoutX="95.0" layoutY="225.0" />
-      <TextField fx:id="kodPocztowyTextField" layoutX="95.0" layoutY="254.0" />
-      <TextField fx:id="miejscowoscTextField" layoutX="95.0" layoutY="284.0" />
-      <TextField fx:id="ulicaTextField" layoutX="95.0" layoutY="317.0" />
+      <Label layoutX="158.0" layoutY="64.0" text="Imie" />
+      <Label layoutX="488.0" layoutY="64.0" text="Nazwisko" />
+      <Label layoutX="150.0" layoutY="119.0" text="Telefon" />
+      <Label layoutX="129.0" layoutY="208.0" text="nazwa firmy" />
+      <Label layoutX="161.0" layoutY="165.0" text="NIP" />
+      <Label layoutX="493.0" layoutY="119.0" prefHeight="17.0" prefWidth="40.0" text="PESEL" />
+      <Label layoutX="456.0" layoutY="165.0" text="Kod pocztowy" />
+      <Label layoutX="117.0" layoutY="260.0" text="Miejscowosc" />
+      <Label layoutX="501.0" layoutY="221.0" text="Ulica" />
+      <TextField fx:id="imieTextField" layoutX="215.0" layoutY="60.0" />
+      <TextField fx:id="nazwiskoTextField" layoutX="558.0" layoutY="60.0" />
+      <TextField fx:id="telefonTextField" layoutX="215.0" layoutY="115.0" />
+      <TextField fx:id="nipTextField" layoutX="215.0" layoutY="161.0" />
+      <TextField fx:id="peselTextField" layoutX="558.0" layoutY="115.0" />
+      <TextField fx:id="nazwaFirmyTextField" layoutX="215.0" layoutY="204.0" />
+      <TextField fx:id="kodPocztowyTextField" layoutX="558.0" layoutY="161.0" />
+      <TextField fx:id="miejscowoscTextField" layoutX="215.0" layoutY="256.0" />
+      <TextField fx:id="ulicaTextField" layoutX="558.0" layoutY="213.0" />
    </children>
 </AnchorPane>

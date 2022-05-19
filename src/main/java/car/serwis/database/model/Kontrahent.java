@@ -25,16 +25,16 @@ public class Kontrahent {
     private String nazwisko;
 
     @Column
-    private Integer telefon;
+    private String telefon;
 
     @Column
     private String nazwaFirmy;
 
     @Column
-    private Integer nip;
+    private String nip;
 
     @Column
-    private Integer pesel;
+    private String pesel;
 
     @Column
     private String kodPocztowy;
@@ -48,12 +48,15 @@ public class Kontrahent {
     @OneToMany
     private List<Zlecenie> zlecenia;
 
-
-
-
-
-
-
-
-
+    public Kontrahent(String imie, String nazwisko, String telefon, String nazwaFirmy, String nip, String pesel, String kodPocztowy, String miejscowosc, String ulica) {
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.telefon = telefon;
+        this.nazwaFirmy = nazwaFirmy;
+        this.nip = nip;
+        this.pesel = pesel;
+        this.kodPocztowy = kodPocztowy;
+        this.miejscowosc = miejscowosc;
+        this.ulica = ulica;
+    }
 }

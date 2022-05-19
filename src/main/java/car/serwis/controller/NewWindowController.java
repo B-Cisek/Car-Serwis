@@ -47,4 +47,9 @@ public class NewWindowController {
         getPopUpWindow(ScenePath.ADD_JEDNOSTKA.getPath());
     }
 
+    public static void getNewKontrahentWindow() throws IOException {
+        getPopUpWindow(ScenePath.ADD_KONTRAHENT.getPath());
+    }
+
+
 }

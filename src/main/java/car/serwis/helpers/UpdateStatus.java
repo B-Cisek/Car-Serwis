@@ -11,6 +11,8 @@ public final class UpdateStatus {
     private static boolean isSamochodAdded;
     private static boolean isKategoriaAdded;
     private static boolean isJednostkaAdded;
+    private static boolean isKontrahentAdded;
+    private static boolean isZlecenieAdded;
 
     public static boolean isStanowiskoAdded() {
         return isStanowiskoAdded;
@@ -58,6 +60,22 @@ public final class UpdateStatus {
 
     public static void setIsJednostkaAdded(boolean isJednostkaAdded) {
         UpdateStatus.isJednostkaAdded = isJednostkaAdded;
+    }
+
+    public static boolean isKontrahentAdded() {
+        return isKontrahentAdded;
+    }
+
+    public static void setIsKontrahentAdded(boolean isKontrahentAdded) {
+        UpdateStatus.isKontrahentAdded = isKontrahentAdded;
+    }
+
+    public static boolean isZlecenieAdded() {
+        return isZlecenieAdded;
+    }
+
+    public static void setIsZlecenieAdded(boolean isZlecenieAdded) {
+        UpdateStatus.isZlecenieAdded = isZlecenieAdded;
     }
 
 

@@ -5,6 +5,7 @@ import car.serwis.database.model.Samochod;
 import car.serwis.database.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import java.util.ArrayList;
@@ -39,6 +40,18 @@ public class SamochodDao {
                 transaction.rollback();
             }
             ex.printStackTrace();
+        }
+    }
+
+    public Samochod delSamochod(Samochod samochod) {
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Query<Samochod> typedQuery = session.createQuery("DELETE FROM Samochod s WHERE s.idSamochod=:idSamochod", Samochod.class);
+            typedQuery.setParameter("idSamochod", samochod.getIdSamochod());
+            return typedQuery.getSingleResult();
+        }catch (Exception ex){
+            System.err.println("Pracownik not found");
+            return null;
         }
     }
 

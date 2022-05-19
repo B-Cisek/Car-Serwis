@@ -56,6 +56,21 @@ public class MagazynController implements Initializable {
     @FXML
     private TableColumn<Jednostka, String> skrotJednostkaTableColumn;
 
+    @FXML
+    private TableView<Samochod> samochodyTableView;
+
+    @FXML
+    private TextField searchSamochodBar;
+
+    @FXML
+    private TableColumn<Samochod, String> markaSamochodTableColumn;
+
+    @FXML
+    private TableColumn<Samochod, String> modelSamochodTableColumn;
+
+    @FXML
+    private TableColumn<Samochod, Long> idSamochodTableColumn;
+
 
 
     // ################ KATEGORIA ################
@@ -78,6 +93,9 @@ public class MagazynController implements Initializable {
 
         jednostkaObservableList.clear();
         jednostkaObservableList.addAll(jednostkaDao.getJednostki());
+
+        samochodObservableList.clear();
+        samochodObservableList.addAll(samochodDao.getSamochody());
     }
 
     private void fillTables() {
@@ -92,6 +110,14 @@ public class MagazynController implements Initializable {
 
         nazwaKategoriTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         skrotJednostkaTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+
+        idSamochodTableColumn.setCellValueFactory(new PropertyValueFactory<>("idSamochod"));
+        markaSamochodTableColumn.setCellValueFactory(new PropertyValueFactory<>("marka"));
+        modelSamochodTableColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
+
+        markaSamochodTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        modelSamochodTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
     private void addTableSettings() {
@@ -102,6 +128,10 @@ public class MagazynController implements Initializable {
         jednostkiTableView.setEditable(true);
         jednostkiTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         jednostkiTableView.setItems(getSortedListJednostka());
+
+        samochodyTableView.setEditable(true);
+        samochodyTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        samochodyTableView.setItems(getSortedListSamochod());
     }
 
     private SortedList<Kategoria> getSortedListKategoria() {
@@ -186,6 +216,66 @@ public class MagazynController implements Initializable {
         ObservableList<Jednostka> selectedRows = jednostkiTableView.getSelectionModel().getSelectedItems();
         for (Jednostka jednostka : selectedRows) {
             jednostkaDao.deleteJednostka(jednostka);
+        }
+        refreshScreen(event);
+    }
+
+    @FXML
+    private void changeSkrotCell(TableColumn.CellEditEvent<Jednostka, String> editEvent) {
+        Jednostka selectedJednostka = jednostkiTableView.getSelectionModel().getSelectedItem();
+        selectedJednostka.setSkrot(editEvent.getNewValue());
+        jednostkaDao.updateJednostka(selectedJednostka);
+    }
+
+
+    // ################ SAMOCHOD ################
+
+    ObservableList<Samochod> samochodObservableList = FXCollections.observableArrayList();
+    SamochodDao samochodDao = new SamochodDao();
+
+
+    @FXML
+    private void addSamochodWindow(ActionEvent event) throws IOException {
+        NewWindowController.getNewSamochodWindow();
+        if(UpdateStatus.isSamochodAdded()) {
+            refreshScreen(event);
+            UpdateStatus.setIsSamochodAdded(false);
+        }
+    }
+
+    private SortedList<Samochod> getSortedListSamochod() {
+        SortedList<Samochod> sortedList = new SortedList<>(getFilteredListSamochod());
+        sortedList.comparatorProperty().bind(samochodyTableView.comparatorProperty());
+        return sortedList;
+    }
+
+    private FilteredList<Samochod> getFilteredListSamochod() {
+        FilteredList<Samochod> filteredList = new FilteredList<>(samochodObservableList, b -> true);
+        searchSamochodBar.textProperty().addListener((observable, oldValue, newValue) ->
+                filteredList.setPredicate(samochod -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCaseFilter = newValue.toLowerCase();
+
+                    if (samochod.getMarka().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (samochod.getModel().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    }  else {
+                        return samochod.getIdSamochod().toString().contains(lowerCaseFilter);
+                    }
+                }));
+        return filteredList;
+    }
+
+    @FXML
+    void deleteSamochod(ActionEvent event) throws IOException {
+        ObservableList<Samochod> selectedRows = samochodyTableView.getSelectionModel().getSelectedItems();
+        for (Samochod samochod : selectedRows) {
+            samochodDao.deleteSamochod(samochod);
+            System.out.println(samochod.getIdSamochod());
         }
         refreshScreen(event);
     }

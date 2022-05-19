@@ -3,6 +3,7 @@ package car.serwis.controller;
 import car.serwis.database.dao.PracownikDao;
 import car.serwis.database.dao.StanowiskoDao;
 import car.serwis.database.model.Pracownik;
+import car.serwis.database.model.Samochod;
 import car.serwis.database.model.Stanowisko;
 import car.serwis.helpers.UpdateStatus;
 import javafx.collections.FXCollections;
@@ -60,6 +61,7 @@ public class UstawieniaController implements Initializable {
 
     @FXML
     private TableColumn<Pracownik, String> stanowiskoPracownikColumn;
+
 
     PracownikDao pracownikDao = new PracownikDao();
     StanowiskoDao stanowiskoDao = new StanowiskoDao();

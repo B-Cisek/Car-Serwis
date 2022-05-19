@@ -21,7 +21,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void init() throws Exception {
+    public void init() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.close();
     }
