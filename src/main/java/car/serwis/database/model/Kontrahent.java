@@ -1,62 +1,81 @@
 package car.serwis.database.model;
 
-
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Kontrahent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_kontrahent")
+    @Column(
+            name = "id_kontrahent",
+            updatable = false
+    )
     private Long idKontrahent;
 
-    @Column
+    @Column(
+            name = "imie",
+            nullable = false
+    )
     private String imie;
 
-    @Column
+    @Column(
+            name = "nazwisko",
+            nullable = false
+    )
     private String nazwisko;
 
-    @Column
-    private String telefon;
-
-    @Column
+    @Column(
+            name = "nazwa_firmy",
+            nullable = false
+    )
     private String nazwaFirmy;
 
-    @Column
+    @Column(
+            name = "nip",
+            nullable = false
+    )
     private String nip;
 
-    @Column
+    @Column(
+            name = "pesel",
+            nullable = false
+    )
     private String pesel;
 
-    @Column
+    @Column(
+            name = "telefon",
+            nullable = false
+    )
+    private String telefon;
+
+    @Column(
+            name = "kod_pocztowy",
+            nullable = false
+    )
     private String kodPocztowy;
 
-    @Column
+    @Column(
+            name = "miejscowosc",
+            nullable = false
+    )
     private String miejscowosc;
 
-    @Column
+    @Column(
+            name = "ulica",
+            nullable = false
+    )
     private String ulica;
 
-    @OneToMany
-    private List<Zlecenie> zlecenia;
+    @OneToMany(mappedBy = "kontrahent", fetch = FetchType.LAZY)
+    private Set<Zlecenie> zlecenia = new HashSet<>();
 
-    public Kontrahent(String imie, String nazwisko, String telefon, String nazwaFirmy, String nip, String pesel, String kodPocztowy, String miejscowosc, String ulica) {
-        this.imie = imie;
-        this.nazwisko = nazwisko;
-        this.telefon = telefon;
-        this.nazwaFirmy = nazwaFirmy;
-        this.nip = nip;
-        this.pesel = pesel;
-        this.kodPocztowy = kodPocztowy;
-        this.miejscowosc = miejscowosc;
-        this.ulica = ulica;
-    }
 }

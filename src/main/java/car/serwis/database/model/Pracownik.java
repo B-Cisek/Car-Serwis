@@ -1,52 +1,63 @@
 package car.serwis.database.model;
 
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Pracownik {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_pracownik")
+    @Column(
+            name = "id_pracownik",
+            updatable = false
+    )
     private Long idPracownik;
 
-    @Column
+    @Column(
+            name = "imie",
+            nullable = false
+    )
     private String imie;
 
-    @Column
+    @Column(
+            name = "nazwisko",
+            nullable = false
+    )
     private String nazwisko;
 
-    @Column(name = "pracuje_od")
+    @Column(
+            name = "pracuje_od",
+            nullable = false
+    )
     private LocalDate pracujeOd;
 
-    @Column
+    @Column(
+            name = "login",
+            nullable = false
+    )
     private String login;
 
-    @Column
+    @Column(
+            name = "haslo",
+            nullable = false
+    )
     private String haslo;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="id_stanowisko", nullable=false)
+    @ManyToOne
+    @JoinColumn(name = "id_stanowisko", referencedColumnName = "id_stanowisko")
     private Stanowisko stanowisko;
 
-    @OneToOne(mappedBy = "pracownik")
-    private Zlecenie zlecenia;
+    @OneToMany(mappedBy = "pracownik", fetch = FetchType.LAZY)
+    private Set<Zlecenie> zlecenia = new HashSet<>();
 
-    public Pracownik(String imie, String nazwisko, LocalDate pracujeOd, String login, String haslo, Stanowisko stanowisko) {
-        this.imie = imie;
-        this.nazwisko = nazwisko;
-        this.pracujeOd = pracujeOd;
-        this.login = login;
-        this.haslo = haslo;
-        this.stanowisko = stanowisko;
-    }
 }

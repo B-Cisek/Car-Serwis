@@ -1,27 +1,33 @@
 package car.serwis.database.model;
 
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Kategoria {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_kategoria")
+    @Column(
+            name = "id_kategoria",
+            updatable = false
+    )
     private Long idKategoria;
 
-    @Column
+
+    @Column(
+            name = "nazwa_kategori",
+            nullable = false
+    )
     private String nazwaKategori;
 
-    @OneToMany(mappedBy="kategoria", fetch = FetchType.LAZY)
-    private List<Czesc> czesci;
+    @OneToMany(mappedBy = "kategoria", fetch = FetchType.LAZY)
+    private Set<Czesc> czesci = new HashSet<>();
 }

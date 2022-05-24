@@ -1,40 +1,41 @@
 package car.serwis.database.model;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Samochod {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_samochod")
+    @Column(
+            name = "id_samochod",
+            updatable = false
+    )
     private Long idSamochod;
 
-    @Column
+    @Column(
+            name = "marka",
+            nullable = false
+    )
     private String marka;
 
-    @Column
+    @Column(
+            name = "model",
+            nullable = false
+    )
     private String model;
 
+    @OneToMany(mappedBy = "samochod", fetch = FetchType.LAZY)
+    private Set<Czesc> czesci = new HashSet<>();
 
-    @OneToMany(mappedBy="samochod", fetch = FetchType.EAGER)
-    private List<Czesc> czesci;
-
-    @OneToOne(mappedBy = "samochod", fetch = FetchType.EAGER)
-    private Zlecenie zlecenie;
-
-
-    public Samochod(String marka, String model) {
-        this.marka = marka;
-        this.model = model;
-    }
+    @OneToMany(mappedBy = "samochod", fetch = FetchType.LAZY)
+    private Set<Czesc> zlecenia = new HashSet<>();
 }

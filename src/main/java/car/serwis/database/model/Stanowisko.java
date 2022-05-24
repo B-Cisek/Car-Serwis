@@ -1,38 +1,35 @@
 package car.serwis.database.model;
 
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Stanowisko {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_stanowisko")
+    @Column(
+            name = "id_stanowisko",
+            updatable = false
+    )
     private Long idStanowisko;
 
-    @Column
-    private String nazwa;
+    @Column(
+            name = "nazwa_stanowiska",
+            nullable = false
+    )
+    private String nazwaStanowiska;
 
-    @OneToMany(mappedBy="stanowisko", fetch = FetchType.EAGER)
-    private List<Pracownik> pracownicy;
+    @OneToMany(mappedBy = "stanowisko", fetch = FetchType.LAZY)
+    private Set<Pracownik> pracownicy = new HashSet<>();
 
-
-    public Stanowisko(String nazwa) {
-        this.nazwa = nazwa;
-    }
-
-    @Override
-    public String toString() {
-        return nazwa;
-    }
 }
