@@ -72,7 +72,7 @@ public class AddStanowiskoController implements Initializable {
     private Stanowisko createStanowiskoFromInput() {
         Stanowisko stanowisko = new Stanowisko();
 
-        stanowisko.setNazwa(nazwaTextField.getText());
+        stanowisko.setNazwaStanowiska(nazwaTextField.getText());
 
         return stanowisko;
     }

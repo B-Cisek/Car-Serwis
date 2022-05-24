@@ -89,12 +89,12 @@ public class UstawieniaController implements Initializable {
 
     private void setPracownicyObservableList() {
         pracownicyObservableList.clear();
-        pracownicyObservableList.addAll(pracownikDao.getPracownicy());
+        pracownicyObservableList.addAll(pracownikDao.displayRecords());
     }
 
     private void fillTableStanowiska() {
         idStanowiskoColumn.setCellValueFactory(new PropertyValueFactory<>("idStanowisko"));
-        nazwaStanowiskoColumn.setCellValueFactory(new PropertyValueFactory<>("nazwa"));
+        nazwaStanowiskoColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaStanowiska"));
 
         nazwaStanowiskoColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     }
@@ -151,7 +151,7 @@ public class UstawieniaController implements Initializable {
 
                     String lowerCaseFilter = newValue.toLowerCase();
 
-                    if (stanowisko.getNazwa().toLowerCase().contains(lowerCaseFilter)) {
+                    if (stanowisko.getNazwaStanowiska().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
                     } else {
                         return stanowisko.getIdStanowisko().toString().contains(lowerCaseFilter);
@@ -208,7 +208,7 @@ public class UstawieniaController implements Initializable {
     @FXML
     private void changeNazwaStanowiska(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
         Stanowisko selectedNazwa = stanowiskaTable.getSelectionModel().getSelectedItem();
-        selectedNazwa.setNazwa(editEvent.getNewValue().toString());
+        selectedNazwa.setNazwaStanowiska(editEvent.getNewValue().toString());
         stanowiskoDao.updateStanowisko(selectedNazwa);
     }
 

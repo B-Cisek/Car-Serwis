@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -60,5 +60,5 @@ public class Czesc {
 
     @ManyToMany(mappedBy = "czesci")
     private Set<Zlecenie> zlecenia = new HashSet<>();
-    }
+}
 

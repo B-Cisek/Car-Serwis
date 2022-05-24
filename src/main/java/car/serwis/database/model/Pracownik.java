@@ -1,13 +1,16 @@
 package car.serwis.database.model;
 
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -53,11 +56,20 @@ public class Pracownik {
     )
     private String haslo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_stanowisko", referencedColumnName = "id_stanowisko")
     private Stanowisko stanowisko;
 
-    @OneToMany(mappedBy = "pracownik", fetch = FetchType.LAZY)
-    private Set<Zlecenie> zlecenia = new HashSet<>();
 
+    @OneToMany(mappedBy = "pracownik")
+    private List<Zlecenie> zlecenia = new ArrayList<>();
+
+    public Pracownik(Long idPracownik, String imie, String nazwisko, LocalDate pracujeOd, String login, String haslo) {
+        this.idPracownik = idPracownik;
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.pracujeOd = pracujeOd;
+        this.login = login;
+        this.haslo = haslo;
+    }
 }

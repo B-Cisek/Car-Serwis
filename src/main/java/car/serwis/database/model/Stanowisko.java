@@ -1,13 +1,15 @@
 package car.serwis.database.model;
 
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 @Data
@@ -29,7 +31,12 @@ public class Stanowisko {
     )
     private String nazwaStanowiska;
 
-    @OneToMany(mappedBy = "stanowisko", fetch = FetchType.LAZY)
-    private Set<Pracownik> pracownicy = new HashSet<>();
 
+    @OneToMany(mappedBy = "stanowisko")
+    private List<Pracownik> pracownicy = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return nazwaStanowiska;
+    }
 }

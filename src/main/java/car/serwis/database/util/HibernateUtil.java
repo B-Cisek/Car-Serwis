@@ -19,24 +19,23 @@ public class HibernateUtil {
 
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-                settings.put(Environment.URL, "jdbc:mysql://35.222.225.26/serwis?serverTimezone=UTC");
+                settings.put(Environment.URL, "jdbc:mysql://34.118.42.105/car_serwis?serverTimezone=UTC");
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "root");
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-                settings.put(Environment.HBM2DDL_AUTO, "create-drop");
+                settings.put(Environment.HBM2DDL_AUTO, "update");
 
                 configuration.setProperties(settings);
-                configuration.addAnnotatedClass(Pracownik.class);
                 configuration.addAnnotatedClass(Stanowisko.class);
-                configuration.addAnnotatedClass(Czesc.class);
                 configuration.addAnnotatedClass(Jednostka.class);
                 configuration.addAnnotatedClass(Kategoria.class);
-                configuration.addAnnotatedClass(Kontrahent.class);
                 configuration.addAnnotatedClass(Samochod.class);
+                configuration.addAnnotatedClass(Pracownik.class);
+                configuration.addAnnotatedClass(Kontrahent.class);
+                configuration.addAnnotatedClass(Czesc.class);
                 configuration.addAnnotatedClass(Zlecenie.class);
-
 
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()

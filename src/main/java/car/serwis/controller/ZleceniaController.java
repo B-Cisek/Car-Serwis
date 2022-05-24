@@ -241,7 +241,7 @@ public class ZleceniaController implements Initializable {
 
                     if (zlecenie.getDataPrzyjecia().toString().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (zlecenie.getOpis().toLowerCase().contains(lowerCaseFilter)) {
+                    } else if (zlecenie.getOpisZlecenie().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
                     }  else if (zlecenie.getStatus().toString().contains(lowerCaseFilter)) {
                         return true;

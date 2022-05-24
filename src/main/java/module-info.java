@@ -5,8 +5,7 @@ module car.serwis.carserwis {
     requires java.naming;
     requires lombok;
     requires jakarta.persistence;
-    requires java.persistence;
-
+    
 
     opens car.serwis to javafx.fxml;
     opens car.serwis.database.model;

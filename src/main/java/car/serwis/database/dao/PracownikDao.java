@@ -1,16 +1,14 @@
 package car.serwis.database.dao;
 
 import car.serwis.database.model.Pracownik;
-import car.serwis.database.model.Stanowisko;
 import car.serwis.database.util.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +69,47 @@ public class PracownikDao {
             ex.printStackTrace();
             return new ArrayList<>();
         }
+    }
+
+//    public List get( ){
+//        Session session = HibernateUtil.getSessionFactory().openSession();
+//        Transaction tx = null;
+//
+//        try {
+//            tx = session.beginTransaction();
+//            List employees = session.createQuery("FROM Pracownik").list();
+//            tx.commit();
+//            return employees;
+//        } catch (HibernateException e) {
+//            if (tx!=null) tx.rollback();
+//            e.printStackTrace();
+//        } finally {
+//            session.close();
+//        }
+//    }
+
+    public List displayRecords() {
+        List pracownicyList = new ArrayList();
+        Session session = null;
+        try {
+            // Getting Session Object From SessionFactory
+            session = HibernateUtil.getSessionFactory().openSession();
+            // Getting Transaction Object From Session Object
+            session.beginTransaction();
+
+            pracownicyList = session.createQuery("FROM Pracownik").list();
+
+        } catch (Exception sqlException) {
+            if (null != session.getTransaction()) {
+                session.getTransaction().rollback();
+            }
+            sqlException.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return pracownicyList;
     }
 
     public void deletePracownik(Pracownik pracownik) {

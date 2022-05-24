@@ -2,11 +2,12 @@ package car.serwis.database.model;
 
 
 import car.serwis.helpers.ZlecenieStatus;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
@@ -50,7 +51,7 @@ public class Zlecenie {
             joinColumns = @JoinColumn(name = "id_zlecenie"),
             inverseJoinColumns = @JoinColumn(name = "id_czesc")
     )
-    Set<Czesc> czesci = new HashSet<>();
+    private Set<Czesc> czesci = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "id_samochod", referencedColumnName = "id_samochod")

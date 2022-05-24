@@ -1,7 +1,6 @@
 package car.serwis.controller;
 
 import car.serwis.database.dao.SamochodDao;
-import car.serwis.database.dao.SamochodRepository;
 import car.serwis.database.dao.StanowiskoDao;
 import car.serwis.database.model.Samochod;
 import car.serwis.database.model.Stanowisko;
