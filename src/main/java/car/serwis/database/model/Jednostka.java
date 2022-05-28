@@ -35,4 +35,9 @@ public class Jednostka {
 
     @OneToMany(mappedBy = "jednostka", fetch = FetchType.LAZY)
     private Set<Czesc> czesci = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return nazwaJednostki;
+    }
 }

@@ -13,6 +13,7 @@ public final class UpdateStatus {
     private static boolean isJednostkaAdded;
     private static boolean isKontrahentAdded;
     private static boolean isZlecenieAdded;
+    private static boolean isCzescAdded;
 
     public static boolean isStanowiskoAdded() {
         return isStanowiskoAdded;
@@ -76,6 +77,14 @@ public final class UpdateStatus {
 
     public static void setIsZlecenieAdded(boolean isZlecenieAdded) {
         UpdateStatus.isZlecenieAdded = isZlecenieAdded;
+    }
+
+    public static boolean isCzescAdded() {
+        return isCzescAdded;
+    }
+
+    public static void setIsCzescAdded(boolean isCzescAdded) {
+        UpdateStatus.isCzescAdded = isCzescAdded;
     }
 
 

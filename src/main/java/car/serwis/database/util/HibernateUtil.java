@@ -22,6 +22,8 @@ public class HibernateUtil {
                 settings.put(Environment.URL, "jdbc:mysql://34.118.42.105/car_serwis?serverTimezone=UTC");
                 settings.put(Environment.USER, "root");
                 settings.put(Environment.PASS, "root");
+
+
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
                 settings.put(Environment.SHOW_SQL, "true");
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");

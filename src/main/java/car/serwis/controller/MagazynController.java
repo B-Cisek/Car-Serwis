@@ -1,5 +1,6 @@
 package car.serwis.controller;
 
+import car.serwis.database.dao.CzescDao;
 import car.serwis.database.dao.JednostkaDao;
 import car.serwis.database.dao.KategoriaDao;
 import car.serwis.database.dao.SamochodDao;
@@ -71,6 +72,38 @@ public class MagazynController implements Initializable {
     @FXML
     private TableColumn<Samochod, Long> idSamochodTableColumn;
 
+    @FXML
+    private TableColumn<Czesc, String> producentCzescTableColumn;
+
+    @FXML
+    private TableColumn<Czesc, String> samochodCzescTableColumn;
+
+    @FXML
+    private TableColumn<Czesc, String> opisCzescTableColumn;
+
+    @FXML
+    private TableColumn<Czesc, String> nazwaCzesciTableColumn;
+
+    @FXML
+    private TableColumn<Czesc, String> kategoriaCzescTableColumn;
+
+    @FXML
+    private TableColumn<Czesc, Double> iloscCzescTableColumn;
+
+    @FXML
+    private TableColumn<Czesc, String> jednostkaCzescTableColumn;
+
+
+    @FXML
+    private TableColumn<Czesc, Long> idCzescTableColumn;
+
+
+    @FXML
+    private TableView<Czesc> czescTableView;
+
+    @FXML
+    private TextField searchCzescBar;
+
 
 
     // ################ KATEGORIA ################
@@ -88,28 +121,31 @@ public class MagazynController implements Initializable {
     }
 
     private void setObservableList() {
-        kategoriaObservableList.clear();
-        kategoriaObservableList.addAll(kategoriaDao.getKategorie());
-
-        jednostkaObservableList.clear();
-        jednostkaObservableList.addAll(jednostkaDao.getJednostki());
+//        kategoriaObservableList.clear();
+//        kategoriaObservableList.addAll(kategoriaDao.getKategorie());
+//
+//        jednostkaObservableList.clear();
+//        jednostkaObservableList.addAll(jednostkaDao.getJednostki());
 
         samochodObservableList.clear();
         samochodObservableList.addAll(samochodDao.getSamochody());
+
+        czescObservableList.clear();
+        czescObservableList.addAll(czescDao.displayRecords());
     }
 
     private void fillTables() {
-        idKategoriaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idKategoria"));
-        nazwaKategoriTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaKategori"));
+        //idKategoriaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idKategoria"));
+        //nazwaKategoriTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaKategori"));
 
-        nazwaKategoriTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        idJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idJednostka"));
-        nazwaJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaJednostki"));
-        skrotJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("skrot"));
-
-        nazwaKategoriTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        skrotJednostkaTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        //nazwaKategoriTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+//
+//        idJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idJednostka"));
+//        nazwaJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaJednostki"));
+//        skrotJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("skrot"));
+//
+//        nazwaKategoriTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+//        skrotJednostkaTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
 
         idSamochodTableColumn.setCellValueFactory(new PropertyValueFactory<>("idSamochod"));
@@ -118,20 +154,41 @@ public class MagazynController implements Initializable {
 
         markaSamochodTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         modelSamochodTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+
+        // Czesci Table View
+        idCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("idCzesc"));
+        nazwaCzesciTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaCzesci"));
+        opisCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("opisCzesc"));
+        iloscCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("ilosc"));
+        producentCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("producent"));
+        kategoriaCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("kategoria"));
+        jednostkaCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("jednostka"));
+        samochodCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("samochod"));
+
+        nazwaCzesciTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        opisCzescTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        producentCzescTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+
     }
 
     private void addTableSettings() {
-        kategorieTableView.setEditable(true);
-        kategorieTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        kategorieTableView.setItems(getSortedListKategoria());
-
-        jednostkiTableView.setEditable(true);
-        jednostkiTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        jednostkiTableView.setItems(getSortedListJednostka());
+//        kategorieTableView.setEditable(true);
+//        kategorieTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+//        kategorieTableView.setItems(getSortedListKategoria());
+//
+//        jednostkiTableView.setEditable(true);
+//        jednostkiTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+//        jednostkiTableView.setItems(getSortedListJednostka());
 
         samochodyTableView.setEditable(true);
         samochodyTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         samochodyTableView.setItems(getSortedListSamochod());
+
+        czescTableView.setEditable(true);
+        czescTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        czescTableView.setItems(getFilteredListCzesc());
     }
 
     private SortedList<Kategoria> getSortedListKategoria() {
@@ -280,8 +337,81 @@ public class MagazynController implements Initializable {
         refreshScreen(event);
     }
 
+    @FXML
+    private void changeMarkaSamochod(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
+        Samochod selectedSamochod = samochodyTableView.getSelectionModel().getSelectedItem();
+        selectedSamochod.setMarka(editEvent.getNewValue().toString());
+        samochodDao.updateSamochod(selectedSamochod);
+    }
+
+    @FXML
+    private void changeModelSamochod(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
+        Samochod selectedSamochod = samochodyTableView.getSelectionModel().getSelectedItem();
+        selectedSamochod.setModel(editEvent.getNewValue().toString());
+        samochodDao.updateSamochod(selectedSamochod);
+    }
 
 
+    // ############ CZĘŚC #####################################
+
+    ObservableList<Czesc> czescObservableList = FXCollections.observableArrayList();
+    CzescDao czescDao = new CzescDao();
+
+    @FXML
+    private void addCzescWindow(ActionEvent event) throws IOException {
+        NewWindowController.getNewCzescWindow();
+        if(UpdateStatus.isCzescAdded()) {
+            refreshScreen(event);
+            UpdateStatus.setIsCzescAdded(false);
+        }
+    }
+
+    @FXML
+    void deleteCzesc(ActionEvent event) throws IOException {
+        ObservableList<Czesc> selectedRows = czescTableView.getSelectionModel().getSelectedItems();
+        for (Czesc czesc : selectedRows) {
+            czescDao.deleteCzesc(czesc);
+        }
+        refreshScreen(event);
+    }
+
+    private SortedList<Czesc> getSortedListCzesc() {
+        SortedList<Czesc> sortedList = new SortedList<>(getFilteredListCzesc());
+        sortedList.comparatorProperty().bind(czescTableView.comparatorProperty());
+        return sortedList;
+    }
+
+    private FilteredList<Czesc> getFilteredListCzesc() {
+        FilteredList<Czesc> filteredList = new FilteredList<>(czescObservableList, b -> true);
+        searchCzescBar.textProperty().addListener((observable, oldValue, newValue) ->
+                filteredList.setPredicate(czesc -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCaseFilter = newValue.toLowerCase();
+
+                    if (czesc.getNazwaCzesci().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (czesc.getOpisCzesc().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    }  else if (czesc.getIdCzesc().toString().contains(lowerCaseFilter)){
+                        return true;
+                    } else if (czesc.getIlosc().toString().contains(lowerCaseFilter)){
+                        return true;
+                    } else if (czesc.getProducent().toString().contains(lowerCaseFilter)){
+                        return true;
+                    } else if (czesc.getJednostka().toString().contains(lowerCaseFilter)){
+                        return true;
+                    } else if (czesc.getKategoria().toString().contains(lowerCaseFilter)){
+                        return true;
+                    } else {
+                        return czesc.getSamochod().toString().contains(lowerCaseFilter);
+                    }
+
+                }));
+        return filteredList;
+    }
 
 
 

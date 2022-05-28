@@ -30,4 +30,9 @@ public class Kategoria {
 
     @OneToMany(mappedBy = "kategoria", fetch = FetchType.LAZY)
     private Set<Czesc> czesci = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return nazwaKategori;
+    }
 }

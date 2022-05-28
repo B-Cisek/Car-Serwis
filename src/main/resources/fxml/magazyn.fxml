@@ -2,12 +2,13 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.MagazynController">
+<BorderPane fx:id="magazynBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.MagazynController">
    <top>
       <VBox prefHeight="150.0" prefWidth="1600.0" styleClass="header" BorderPane.alignment="CENTER">
          <children>
@@ -141,73 +142,85 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TabPane layoutX="19.0" layoutY="21.0" prefHeight="716.0" prefWidth="382.0" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab text="Kategorie">
+            <Accordion layoutX="84.0" layoutY="23.0" prefHeight="700.0" prefWidth="400.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0">
+              <panes>
+                <TitledPane fx:id="paneSamochody" text="SAMOCHODY">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: gray;">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0">
                            <children>
-                              <Text layoutX="113.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KATEGORIE" textAlignment="CENTER" wrappingWidth="150.01858520507812">
+                              <Button layoutX="71.0" layoutY="39.0" mnemonicParsing="false" onAction="#addSamochodWindow" prefHeight="35.0" prefWidth="93.0" styleClass="add-button" text="Dodaj">
                                  <font>
-                                    <Font name="System Bold" size="21.0" />
+                                    <Font name="System Bold" size="42.0" />
                                  </font>
-                              </Text>
-                              <TableView fx:id="kategorieTableView" editable="true" fixedCellSize="50.0" layoutX="4.0" layoutY="170.0" prefHeight="511.0" prefWidth="372.0">
+                              </Button>
+                              <Button layoutX="247.0" layoutY="38.0" mnemonicParsing="false" onAction="#deleteSamochod" prefHeight="35.0" prefWidth="87.0" styleClass="delete-button" text="Usuń" />
+                              <TextField fx:id="searchSamochodBar" layoutX="23.0" layoutY="96.0" prefHeight="25.0" prefWidth="368.0" />
+                              <TableView fx:id="samochodyTableView" editable="true" fixedCellSize="50.0" layoutX="2.0" layoutY="134.0" prefHeight="486.0" prefWidth="392.0">
                                 <columns>
-                                  <TableColumn fx:id="idKategoriaTableColumn" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" resizable="false" text="ID" />
-                                  <TableColumn fx:id="nazwaKategoriTableColumn" maxWidth="315.0" minWidth="315.0" prefWidth="315.0" resizable="false" text="NAZWA" />
+                                  <TableColumn fx:id="idSamochodTableColumn" prefWidth="75.0" text="ID" />
+                                  <TableColumn fx:id="markaSamochodTableColumn" onEditCommit="#changeMarkaSamochod" prefWidth="75.0" text="MARKA" />
+                                    <TableColumn fx:id="modelSamochodTableColumn" onEditCommit="#changeModelSamochod" prefWidth="75.0" text="MODEL" />
                                 </columns>
                               </TableView>
-                              <Button layoutX="75.0" layoutY="65.0" mnemonicParsing="false" onAction="#addKategoriaWindow" prefHeight="35.0" prefWidth="75.0" styleClass="add-button" text="Dodaj" />
-                              <Button layoutX="213.0" layoutY="62.0" mnemonicParsing="false" onAction="#deleteKategoria" prefHeight="38.0" prefWidth="80.0" styleClass="delete-button" text="Usuń" />
-                              <TextField fx:id="searchKategoriaBar" layoutX="47.0" layoutY="128.0" prefHeight="25.0" prefWidth="299.0" />
                            </children>
                         </AnchorPane>
                   </content>
-                </Tab>
-                <Tab text="Jednostki">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                </TitledPane>
+                <TitledPane fx:id="paneKategorie" prefHeight="600.0" prefWidth="400.0" text="KATEGORIE">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: gray;">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Text layoutX="111.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="JEDNOSTKI" textAlignment="CENTER" wrappingWidth="150.01858520507812">
-                                 <font>
-                                    <Font name="System Bold" size="21.0" />
-                                 </font>
-                              </Text>
-                              <TableView fx:id="jednostkiTableView" editable="true" fixedCellSize="50.0" layoutX="14.0" layoutY="162.0" prefHeight="511.0" prefWidth="365.0">
+                              <Button layoutX="74.0" layoutY="41.0" mnemonicParsing="false" onAction="#addJednostkaWindow" prefHeight="35.0" prefWidth="79.0" styleClass="add-button" text="Dodaj" />
+                              <Button layoutX="222.0" layoutY="41.0" mnemonicParsing="false" onAction="#deleteJednostka" prefHeight="35.0" prefWidth="81.0" styleClass="delete-button" text="Usuń" />
+                              <TextField fx:id="searchJednostkaBar" layoutX="19.0" layoutY="88.0" prefHeight="25.0" prefWidth="366.0" />
+                              <TableView fx:id="jednostkiTableView" editable="true" fixedCellSize="50.0" layoutX="3.0" layoutY="127.0" prefHeight="494.0" prefWidth="393.0">
                                 <columns>
                                   <TableColumn fx:id="idJednostkaTableColumn" prefWidth="75.0" text="ID" />
                                   <TableColumn fx:id="nazwaJednostkaTableColumn" prefWidth="153.0" text="NAZWA JEDNOSTKI" />
                                     <TableColumn fx:id="skrotJednostkaTableColumn" onEditCommit="#changeSkrotCell" prefWidth="128.0" text="SKRÓT" />
                                 </columns>
                               </TableView>
-                              <Button layoutX="71.0" layoutY="68.0" mnemonicParsing="false" onAction="#addJednostkaWindow" prefHeight="35.0" prefWidth="79.0" styleClass="add-button" text="Dodaj" />
-                              <Button layoutX="234.0" layoutY="62.0" mnemonicParsing="false" onAction="#deleteJednostka" prefHeight="35.0" prefWidth="81.0" styleClass="delete-button" text="Usuń" />
-                              <TextField fx:id="searchJednostkaBar" layoutX="26.0" layoutY="127.0" prefHeight="25.0" prefWidth="316.0" />
-                           </children></AnchorPane>
+                           </children>
+                        </AnchorPane>
                   </content>
-                </Tab>
-                  <Tab text="Samochody">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                     </content>
-                  </Tab>
-              </tabs>
-            </TabPane>
-            <TableView fx:id="samochodyTableView" editable="true" fixedCellSize="50.0" layoutX="666.0" layoutY="238.0" prefHeight="353.0" prefWidth="402.0">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                </TitledPane>
+                <TitledPane fx:id="paneJednostki" text="JEDNOSTKI">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                </TitledPane>
+              </panes>
+            </Accordion>
+            <Text layoutX="471.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Części">
+               <font>
+                  <Font name="System Bold" size="33.0" />
+               </font>
+            </Text>
+            <TableView fx:id="czescTableView" fixedCellSize="50.0" layoutX="465.0" layoutY="112.0" prefHeight="614.0" prefWidth="1115.0">
               <columns>
-                <TableColumn fx:id="idSamochodTableColumn" prefWidth="75.0" text="ID" />
-                <TableColumn fx:id="markaSamochodTableColumn" prefWidth="75.0" text="MARKA" />
-                  <TableColumn fx:id="modelSamochodTableColumn" prefWidth="75.0" text="MODEL" />
+                <TableColumn fx:id="idCzescTableColumn" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="nazwaCzesciTableColumn" prefWidth="105.6666259765625" text="NAZWA CZĘŚCI" />
+                  <TableColumn fx:id="producentCzescTableColumn" prefWidth="105.6666259765625" text="PRODUCENT" />
+                  <TableColumn fx:id="opisCzescTableColumn" prefWidth="142.0" text="OPIS" />
+                  <TableColumn fx:id="iloscCzescTableColumn" prefWidth="142.0" text="ILOŚĆ" />
+                  <TableColumn fx:id="jednostkaCzescTableColumn" prefWidth="142.0" text="JEDNOSTKA" />
+                  <TableColumn fx:id="kategoriaCzescTableColumn" prefWidth="142.0" text="KATEGORIA" />
+                  <TableColumn fx:id="samochodCzescTableColumn" prefWidth="110.0" text="SAMOCHÓD" />
               </columns>
             </TableView>
-            <Button layoutX="748.0" layoutY="144.0" mnemonicParsing="false" onAction="#addSamochodWindow" styleClass="add-button" text="+">
-               <font>
-                  <Font name="System Bold" size="42.0" />
-               </font>
-            </Button>
-            <Button layoutX="841.0" layoutY="144.0" mnemonicParsing="false" onAction="#deleteSamochod" prefHeight="35.0" prefWidth="42.0" styleClass="delete-button" text="-" />
-            <TextField fx:id="searchSamochodBar" layoutX="675.0" layoutY="205.0" prefHeight="25.0" prefWidth="392.0" />
+            <TextField fx:id="searchCzescBar" layoutX="466.0" layoutY="71.0" prefHeight="25.0" prefWidth="354.0" />
+            <ComboBox layoutX="851.0" layoutY="72.0" prefHeight="25.0" prefWidth="159.0" />
+            <Button layoutX="1378.0" layoutY="57.0" mnemonicParsing="false" onAction="#addCzescWindow" prefHeight="35.0" prefWidth="79.0" styleClass="add-button" text="Dodaj" />
+            <Button layoutX="1481.0" layoutY="58.0" mnemonicParsing="false" onAction="#deleteCzesc" prefHeight="35.0" prefWidth="81.0" styleClass="delete-button" text="Usuń" />
          </children>
       </AnchorPane>
    </center>
@@ -215,5 +228,6 @@
       <URL value="@../css/main-style.css" />
       <URL value="@../css/table_style.css" />
       <URL value="@../css/popUpWindows.css" />
+      <URL value="@../css/accordion-style.css" />
    </stylesheets>
 </BorderPane>

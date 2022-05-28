@@ -46,15 +46,15 @@ public class Czesc {
     )
     private String producent;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_kategoria", referencedColumnName = "id_kategoria")
     private Kategoria kategoria;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_jednostka", referencedColumnName = "id_jednostka")
     private Jednostka jednostka;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_samochod", referencedColumnName = "id_samochod")
     private Samochod samochod;
 

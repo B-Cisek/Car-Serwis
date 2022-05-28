@@ -1,24 +1,21 @@
 package car.serwis.database.dao;
 
+import car.serwis.database.model.Czesc;
 import car.serwis.database.model.Pracownik;
-import car.serwis.database.model.Samochod;
-import car.serwis.database.model.Stanowisko;
 import car.serwis.database.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SamochodDao {
-
-    public boolean createSamochod(Samochod samochod) {
+public class CzescDao {
+    public boolean createCzesc(Czesc czesc) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.persist(samochod);
+            session.persist(czesc);
             transaction.commit();
             return transaction.getStatus() == TransactionStatus.COMMITTED;
         } catch (Exception ex) {
@@ -30,11 +27,35 @@ public class SamochodDao {
         return false;
     }
 
-    public void deleteSamochod(Samochod samochod) {
+    public List displayRecords() {
+        List czesciList = new ArrayList();
+        Session session = null;
+        try {
+            // Getting Session Object From SessionFactory
+            session = HibernateUtil.getSessionFactory().openSession();
+            // Getting Transaction Object From Session Object
+            session.beginTransaction();
+
+            czesciList = session.createQuery("FROM Czesc").list();
+
+        } catch (Exception sqlException) {
+            if (null != session.getTransaction()) {
+                session.getTransaction().rollback();
+            }
+            sqlException.printStackTrace();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return czesciList;
+    }
+
+    public void deleteCzesc(Czesc czesc) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.delete(samochod);
+            session.delete(czesc);
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
@@ -44,33 +65,11 @@ public class SamochodDao {
         }
     }
 
-
-
-    public List getSamochody() {
-        Transaction transaction = null;
-        List samochodyList = new ArrayList();
-        try {
-            // Getting Session Object From SessionFactory
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            // Getting Transaction Object From Session Object
-            transaction = session.beginTransaction();
-
-            samochodyList = session.createQuery("FROM Samochod").list();
-        } catch(Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            ex.printStackTrace();
-        }
-
-        return samochodyList;
-    }
-
-    public void updateSamochod(Samochod samochod) {
+    public void updateCzesc(Czesc czesc) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.update(samochod);
+            session.update(czesc);
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {

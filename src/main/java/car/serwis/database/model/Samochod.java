@@ -33,9 +33,14 @@ public class Samochod {
     )
     private String model;
 
-    @OneToMany(mappedBy = "samochod", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "samochod", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Czesc> czesci = new HashSet<>();
 
-    @OneToMany(mappedBy = "samochod", fetch = FetchType.LAZY)
-    private Set<Czesc> zlecenia = new HashSet<>();
+    @OneToMany(mappedBy = "samochod", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Zlecenie> zlecenia = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return marka + " " + model;
+    }
 }

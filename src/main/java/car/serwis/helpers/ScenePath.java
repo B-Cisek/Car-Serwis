@@ -16,7 +16,8 @@ public enum ScenePath {
     ADD_SAMOCHOD("/fxml/addSamochod.fxml"),
     ADD_KATEGORIA("/fxml/addKategoria.fxml"),
     ADD_JEDNOSTKA("/fxml/addJednostka.fxml"),
-    ADD_KONTRAHENT("/fxml/addKontrahent.fxml");
+    ADD_KONTRAHENT("/fxml/addKontrahent.fxml"),
+    ADD_CZESC("/fxml/addCzesc.fxml");
 
     private final String path;
 

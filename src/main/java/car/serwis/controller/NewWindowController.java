@@ -51,5 +51,8 @@ public class NewWindowController {
         getPopUpWindow(ScenePath.ADD_KONTRAHENT.getPath());
     }
 
+    public static void getNewCzescWindow() throws IOException {
+        getPopUpWindow(ScenePath.ADD_CZESC.getPath());
+    }
 
 }
