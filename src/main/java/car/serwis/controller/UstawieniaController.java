@@ -3,7 +3,6 @@ package car.serwis.controller;
 import car.serwis.database.dao.PracownikDao;
 import car.serwis.database.dao.StanowiskoDao;
 import car.serwis.database.model.Pracownik;
-import car.serwis.database.model.Samochod;
 import car.serwis.database.model.Stanowisko;
 import car.serwis.helpers.UpdateStatus;
 import javafx.collections.FXCollections;
@@ -16,10 +15,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class UstawieniaController implements Initializable {
@@ -62,6 +64,16 @@ public class UstawieniaController implements Initializable {
     @FXML
     private TableColumn<Pracownik, String> stanowiskoPracownikColumn;
 
+    @FXML
+    private Button minimalizeButton;
+
+    @FXML
+    private Button exitButton;
+
+    @FXML
+    private BorderPane ustawieniaBorderPane;
+
+
 
     PracownikDao pracownikDao = new PracownikDao();
     StanowiskoDao stanowiskoDao = new StanowiskoDao();
@@ -71,35 +83,33 @@ public class UstawieniaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setStanowiskaObservableList();
-        setPracownicyObservableList();
-        fillTableStanowiska();
-        fillTablePracownicy();
-        addTableSettingsStanowisko();
-        addTableSettingsPracownik();
+        setObservableList();
+        fillTable();
+        addTableSettings();
         pracownicyTable.setPlaceholder(new Label("Brak danych!"));
         stanowiskaTable.setPlaceholder(new Label("Brak danych!"));
+        initializeMinimalizeButton();
+        initializeExitButton();
     }
 
 
-    private void setStanowiskaObservableList() {
+    private void setObservableList() {
         stanowiskaObservableList.clear();
         stanowiskaObservableList.addAll(stanowiskoDao.getStanowiska());
-    }
 
-    private void setPracownicyObservableList() {
         pracownicyObservableList.clear();
         pracownicyObservableList.addAll(pracownikDao.displayRecords());
     }
 
-    private void fillTableStanowiska() {
+
+    private void fillTable() {
+        // STANOWISKO
         idStanowiskoColumn.setCellValueFactory(new PropertyValueFactory<>("idStanowisko"));
         nazwaStanowiskoColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaStanowiska"));
 
         nazwaStanowiskoColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-    }
 
-    private void fillTablePracownicy() {
+        // PRACOWNIK
         idPracownikColumn.setCellValueFactory(new PropertyValueFactory<>("idPracownik"));
         imiePracownikColumn.setCellValueFactory(new PropertyValueFactory<>("imie"));
         nazwiskoPracownikColumn.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
@@ -112,17 +122,14 @@ public class UstawieniaController implements Initializable {
         nazwiskoPracownikColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         loginPracownikColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         hasloPracownikColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-
-
     }
 
-    private void addTableSettingsStanowisko() {
+
+    private void addTableSettings() {
         stanowiskaTable.setEditable(true);
         stanowiskaTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         stanowiskaTable.setItems(getSortedListStanowiska());
-    }
 
-    private void addTableSettingsPracownik() {
         pracownicyTable.setEditable(true);
         pracownicyTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         pracownicyTable.setItems(getSortedListPracownicy());
@@ -174,7 +181,7 @@ public class UstawieniaController implements Initializable {
                         return true;
                     } else if (pracownik.getNazwisko().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    }  else if (pracownik.getLogin().toLowerCase().contains(lowerCaseFilter)) {
+                    } else if (pracownik.getLogin().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
                     } else if (pracownik.getHaslo().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
@@ -204,19 +211,46 @@ public class UstawieniaController implements Initializable {
     }
 
 
-
     @FXML
     private void changeNazwaStanowiska(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
-        Stanowisko selectedNazwa = stanowiskaTable.getSelectionModel().getSelectedItem();
-        selectedNazwa.setNazwaStanowiska(editEvent.getNewValue().toString());
-        stanowiskoDao.updateStanowisko(selectedNazwa);
+        Stanowisko selectedStanowisko = stanowiskaTable.getSelectionModel().getSelectedItem();
+        selectedStanowisko.setNazwaStanowiska(editEvent.getNewValue().toString());
+        stanowiskoDao.updateStanowisko(selectedStanowisko);
+    }
+
+    @FXML
+    private void changeImiePracownik(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
+        Pracownik selectedPracownik = pracownicyTable.getSelectionModel().getSelectedItem();
+        selectedPracownik.setImie(editEvent.getNewValue().toString());
+        pracownikDao.updatePracownik(selectedPracownik);
+    }
+
+    @FXML
+    private void changeNazwiskoPracownik(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
+        Pracownik selectedPracownik = pracownicyTable.getSelectionModel().getSelectedItem();
+        selectedPracownik.setNazwisko(editEvent.getNewValue().toString());
+        pracownikDao.updatePracownik(selectedPracownik);
+    }
+
+    @FXML
+    private void changeLoginPracownik(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
+        Pracownik selectedPracownik = pracownicyTable.getSelectionModel().getSelectedItem();
+        selectedPracownik.setLogin(editEvent.getNewValue().toString());
+        pracownikDao.updatePracownik(selectedPracownik);
+    }
+
+    @FXML
+    private void changeHasloPracownik(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
+        Pracownik selectedPracownik = pracownicyTable.getSelectionModel().getSelectedItem();
+        selectedPracownik.setHaslo(editEvent.getNewValue().toString());
+        pracownikDao.updatePracownik(selectedPracownik);
     }
 
 
     @FXML
     private void addStanowiskoWindow(ActionEvent event) throws IOException {
         NewWindowController.getNewStanowiskoWindow();
-        if(UpdateStatus.isStanowiskoAdded()) {
+        if (UpdateStatus.isStanowiskoAdded()) {
             refreshScreen(event);
             UpdateStatus.setIsStanowiskoAdded(false);
         }
@@ -225,13 +259,40 @@ public class UstawieniaController implements Initializable {
     @FXML
     private void addPracownikWindow(ActionEvent event) throws IOException {
         NewWindowController.getNewPracownikWindow();
-        if(UpdateStatus.isPracownikAdded()) {
+        if (UpdateStatus.isPracownikAdded()) {
             refreshScreen(event);
             UpdateStatus.setIsPracownikAdded(false);
         }
     }
 
 
+    private void initializeExitButton(){
+        exitButton.setOnAction((x) -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Optional<ButtonType> result = alert.showAndWait();
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Look, a Confirmation Dialog");
+            alert.setContentText("Are you ok with this?");
+
+            if (result.get() == ButtonType.OK){
+                getStage().close();
+            } else {
+                // ... user chose CANCEL or closed the dialog
+            }
+        });
+    }
+
+
+    private void initializeMinimalizeButton(){
+        minimalizeButton.setOnAction((x) -> {
+            getStage().setIconified(true);
+
+        });
+    }
+
+    private Stage getStage(){
+        return (Stage) ustawieniaBorderPane.getScene().getWindow();
+    }
 
 
     @FXML

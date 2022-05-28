@@ -1,6 +1,7 @@
 package car.serwis.database.dao;
 
 import car.serwis.database.model.Pracownik;
+import car.serwis.database.model.Stanowisko;
 import car.serwis.database.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -71,22 +72,6 @@ public class PracownikDao {
         }
     }
 
-//    public List get( ){
-//        Session session = HibernateUtil.getSessionFactory().openSession();
-//        Transaction tx = null;
-//
-//        try {
-//            tx = session.beginTransaction();
-//            List employees = session.createQuery("FROM Pracownik").list();
-//            tx.commit();
-//            return employees;
-//        } catch (HibernateException e) {
-//            if (tx!=null) tx.rollback();
-//            e.printStackTrace();
-//        } finally {
-//            session.close();
-//        }
-//    }
 
     public List displayRecords() {
         List pracownicyList = new ArrayList();
@@ -117,6 +102,20 @@ public class PracownikDao {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             session.delete(pracownik);
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        }
+    }
+
+    public void updatePracownik(Pracownik pracownik) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.update(pracownik);
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {

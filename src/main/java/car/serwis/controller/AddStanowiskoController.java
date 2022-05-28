@@ -48,8 +48,8 @@ public class AddStanowiskoController implements Initializable {
         addStanowiskoButton.setOnAction((event) -> {
             if (validateInputs()) {
                 Stanowisko stanowisko = createStanowiskoFromInput();
-                boolean isSaved = new StanowiskoDao().createStanowisko(stanowisko);
-
+                //boolean isSaved = new StanowiskoDao().createStanowisko(stanowisko);
+                boolean isSaved = new StanowiskoDao().saveStanowisko(stanowisko);
                 if (isSaved) {
                     UpdateStatus.setIsStanowiskoAdded(true);
                     errorText.setText("Stanowisko dodane!");

@@ -1,6 +1,7 @@
 package car.serwis.controller;
 
 import car.serwis.helpers.CurrentPracownik;
+import car.serwis.helpers.WindowManagement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -47,8 +48,6 @@ public class PulpitController implements Initializable {
     }
 
 
-
-
     private void initializeMinimalizeButton(){
         minimalizeButton.setOnAction((x) -> {
             getStage().setIconified(true);
@@ -61,6 +60,8 @@ public class PulpitController implements Initializable {
     private Stage getStage(){
         return (Stage) pulpitBorderPane.getScene().getWindow();
     }
+
+
 
 
 
@@ -100,11 +101,12 @@ public class PulpitController implements Initializable {
         SceneController.getPomocScene(event);
     }
 
+    WindowManagement windowManagement;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeExitButton();
         setUserInfo();
         initializeMinimalizeButton();
-
     }
 }

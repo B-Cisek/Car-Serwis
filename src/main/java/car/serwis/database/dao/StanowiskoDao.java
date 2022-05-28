@@ -2,6 +2,7 @@ package car.serwis.database.dao;
 
 import car.serwis.database.model.Stanowisko;
 import car.serwis.database.util.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -25,6 +26,25 @@ public class StanowiskoDao {
                 transaction.rollback();
             }
             ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean saveStanowisko(Stanowisko stanowisko){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+
+            session.save(stanowisko);
+            transaction.commit();
+            System.out.println("Records inserted sucessessfully");
+            return transaction.getStatus() == TransactionStatus.COMMITTED;
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
         }
         return false;
     }
