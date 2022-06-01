@@ -5,7 +5,9 @@ import car.serwis.database.dao.JednostkaDao;
 import car.serwis.database.dao.KategoriaDao;
 import car.serwis.database.dao.SamochodDao;
 import car.serwis.database.model.*;
+import car.serwis.helpers.CurrentPracownik;
 import car.serwis.helpers.UpdateStatus;
+import car.serwis.helpers.WindowManagement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -16,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -28,13 +31,16 @@ public class MagazynController implements Initializable {
     private Button exitButton;
 
     @FXML
-    private TableColumn<Kategoria, Long> idKategoriaTableColumn;
+    private Button minimalizeButton;
 
     @FXML
-    private TableView<Kategoria> kategorieTableView;
+    private TableColumn<Kategoria, Long> idKategoraTableColumn;
 
     @FXML
-    private TableColumn<Kategoria, String> nazwaKategoriTableColumn;
+    private TableView<Kategoria> kategoriaTableView;
+
+    @FXML
+    private TableColumn<Kategoria, String> nazwaKategoraTableColumn;
 
     @FXML
     private Text pracownikInfo;
@@ -97,35 +103,34 @@ public class MagazynController implements Initializable {
     @FXML
     private TableColumn<Czesc, Long> idCzescTableColumn;
 
-
     @FXML
     private TableView<Czesc> czescTableView;
 
     @FXML
     private TextField searchCzescBar;
 
-
-
-    // ################ KATEGORIA ################
-
-    KategoriaDao kategoriaDao = new KategoriaDao();
-    ObservableList<Kategoria> kategoriaObservableList = FXCollections.observableArrayList();
-
     @FXML
-    private void addKategoriaWindow(ActionEvent event) throws IOException {
-        NewWindowController.getNewKategoriaWindow();
-        if(UpdateStatus.isKategoriaAdded()) {
-            refreshScreen(event);
-            UpdateStatus.setIsKategoriaAdded(false);
-        }
+    private BorderPane magazynBorderPane;
+
+    WindowManagement windowManagement = new WindowManagement();
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        windowManagement.initializeMinimalizeButton(minimalizeButton,magazynBorderPane);
+        windowManagement.initializeExitButton(exitButton,magazynBorderPane);
+        CurrentPracownik.setPracownikInfo(pracownikInfo);
+        setObservableList();
+        fillTables();
+        addTableSettings();
     }
 
     private void setObservableList() {
-//        kategoriaObservableList.clear();
-//        kategoriaObservableList.addAll(kategoriaDao.getKategorie());
-//
-//        jednostkaObservableList.clear();
-//        jednostkaObservableList.addAll(jednostkaDao.getJednostki());
+        kategoriaObservableList.clear();
+        kategoriaObservableList.addAll(kategoriaDao.getKategorie());
+
+        jednostkaObservableList.clear();
+        jednostkaObservableList.addAll(jednostkaDao.getJednostki());
 
         samochodObservableList.clear();
         samochodObservableList.addAll(samochodDao.getSamochody());
@@ -135,26 +140,19 @@ public class MagazynController implements Initializable {
     }
 
     private void fillTables() {
-        //idKategoriaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idKategoria"));
-        //nazwaKategoriTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaKategori"));
-
-        //nazwaKategoriTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-//
-//        idJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idJednostka"));
-//        nazwaJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaJednostki"));
-//        skrotJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("skrot"));
-//
-//        nazwaKategoriTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-//        skrotJednostkaTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        // Jednostka Table View
+        idJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idJednostka"));
+        nazwaJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaJednostki"));
+        skrotJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("skrot"));
+        skrotJednostkaTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
 
+        // Samochod Table View
         idSamochodTableColumn.setCellValueFactory(new PropertyValueFactory<>("idSamochod"));
         markaSamochodTableColumn.setCellValueFactory(new PropertyValueFactory<>("marka"));
         modelSamochodTableColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
-
         markaSamochodTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         modelSamochodTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-
 
         // Czesci Table View
         idCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("idCzesc"));
@@ -165,22 +163,26 @@ public class MagazynController implements Initializable {
         kategoriaCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("kategoria"));
         jednostkaCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("jednostka"));
         samochodCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("samochod"));
-
         nazwaCzesciTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         opisCzescTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         producentCzescTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        // Kategoria Table View
+        idKategoraTableColumn.setCellValueFactory(new PropertyValueFactory<>("idKategoria"));
+        nazwaKategoraTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaKategori"));
+        nazwaKategoraTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
 
     }
 
     private void addTableSettings() {
-//        kategorieTableView.setEditable(true);
-//        kategorieTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-//        kategorieTableView.setItems(getSortedListKategoria());
-//
-//        jednostkiTableView.setEditable(true);
-//        jednostkiTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-//        jednostkiTableView.setItems(getSortedListJednostka());
+        kategoriaTableView.setEditable(true);
+        kategoriaTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        kategoriaTableView.setItems(getSortedListKategoria());
+
+        jednostkiTableView.setEditable(true);
+        jednostkiTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        jednostkiTableView.setItems(getSortedListJednostka());
 
         samochodyTableView.setEditable(true);
         samochodyTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -191,9 +193,25 @@ public class MagazynController implements Initializable {
         czescTableView.setItems(getFilteredListCzesc());
     }
 
+
+    // ################ KATEGORIA ################
+    KategoriaDao kategoriaDao = new KategoriaDao();
+
+    ObservableList<Kategoria> kategoriaObservableList = FXCollections.observableArrayList();
+
+
+    @FXML
+    private void addKategoriaWindow(ActionEvent event) throws IOException {
+        NewWindowController.getNewKategoriaWindow();
+        if (UpdateStatus.isKategoriaAdded()) {
+            refreshScreen(event);
+            UpdateStatus.setIsKategoriaAdded(false);
+        }
+    }
+
     private SortedList<Kategoria> getSortedListKategoria() {
         SortedList<Kategoria> sortedList = new SortedList<>(getFilteredListKategoria());
-        sortedList.comparatorProperty().bind(kategorieTableView.comparatorProperty());
+        sortedList.comparatorProperty().bind(kategoriaTableView.comparatorProperty());
         return sortedList;
     }
 
@@ -218,7 +236,7 @@ public class MagazynController implements Initializable {
 
     @FXML
     void deleteKategoria(ActionEvent event) throws IOException {
-        ObservableList<Kategoria> selectedRows = kategorieTableView.getSelectionModel().getSelectedItems();
+        ObservableList<Kategoria> selectedRows = kategoriaTableView.getSelectionModel().getSelectedItems();
         for (Kategoria kategoria : selectedRows) {
             kategoriaDao.deleteKategoria(kategoria);
         }
@@ -227,15 +245,15 @@ public class MagazynController implements Initializable {
 
     // ################ JEDNOSTKA ################
 
-
     ObservableList<Jednostka> jednostkaObservableList = FXCollections.observableArrayList();
+
     JednostkaDao jednostkaDao = new JednostkaDao();
 
 
     @FXML
     private void addJednostkaWindow(ActionEvent event) throws IOException {
         NewWindowController.getNewJednostkaWindow();
-        if(UpdateStatus.isJednostkaAdded()) {
+        if (UpdateStatus.isJednostkaAdded()) {
             refreshScreen(event);
             UpdateStatus.setIsJednostkaAdded(false);
         }
@@ -261,7 +279,7 @@ public class MagazynController implements Initializable {
                         return true;
                     } else if (jednostka.getSkrot().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    }  else {
+                    } else {
                         return jednostka.getIdJednostka().toString().contains(lowerCaseFilter);
                     }
                 }));
@@ -286,15 +304,15 @@ public class MagazynController implements Initializable {
 
 
     // ################ SAMOCHOD ################
-
     ObservableList<Samochod> samochodObservableList = FXCollections.observableArrayList();
+
     SamochodDao samochodDao = new SamochodDao();
 
 
     @FXML
     private void addSamochodWindow(ActionEvent event) throws IOException {
         NewWindowController.getNewSamochodWindow();
-        if(UpdateStatus.isSamochodAdded()) {
+        if (UpdateStatus.isSamochodAdded()) {
             refreshScreen(event);
             UpdateStatus.setIsSamochodAdded(false);
         }
@@ -320,7 +338,7 @@ public class MagazynController implements Initializable {
                         return true;
                     } else if (samochod.getModel().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    }  else {
+                    } else {
                         return samochod.getIdSamochod().toString().contains(lowerCaseFilter);
                     }
                 }));
@@ -353,14 +371,14 @@ public class MagazynController implements Initializable {
 
 
     // ############ CZĘŚC #####################################
-
     ObservableList<Czesc> czescObservableList = FXCollections.observableArrayList();
+
     CzescDao czescDao = new CzescDao();
 
     @FXML
     private void addCzescWindow(ActionEvent event) throws IOException {
         NewWindowController.getNewCzescWindow();
-        if(UpdateStatus.isCzescAdded()) {
+        if (UpdateStatus.isCzescAdded()) {
             refreshScreen(event);
             UpdateStatus.setIsCzescAdded(false);
         }
@@ -395,15 +413,15 @@ public class MagazynController implements Initializable {
                         return true;
                     } else if (czesc.getOpisCzesc().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    }  else if (czesc.getIdCzesc().toString().contains(lowerCaseFilter)){
+                    } else if (czesc.getIdCzesc().toString().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (czesc.getIlosc().toString().contains(lowerCaseFilter)){
+                    } else if (czesc.getIlosc().toString().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (czesc.getProducent().toString().contains(lowerCaseFilter)){
+                    } else if (czesc.getProducent().toString().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (czesc.getJednostka().toString().contains(lowerCaseFilter)){
+                    } else if (czesc.getJednostka().toString().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (czesc.getKategoria().toString().contains(lowerCaseFilter)){
+                    } else if (czesc.getKategoria().toString().contains(lowerCaseFilter)) {
                         return true;
                     } else {
                         return czesc.getSamochod().toString().contains(lowerCaseFilter);
@@ -413,15 +431,6 @@ public class MagazynController implements Initializable {
         return filteredList;
     }
 
-
-
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        setObservableList();
-        fillTables();
-        addTableSettings();
-    }
 
     @FXML
     void showPulpitScreen(ActionEvent event) throws IOException {

@@ -40,4 +40,9 @@ public class Jednostka {
     public String toString() {
         return nazwaJednostki;
     }
+
+    public Jednostka(String nazwaJednostki, String skrot) {
+        this.nazwaJednostki = nazwaJednostki;
+        this.skrot = skrot;
+    }
 }

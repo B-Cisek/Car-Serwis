@@ -3,7 +3,6 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -16,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.ZleceniaController">
+<BorderPane fx:id="zlecenieBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.ZleceniaController">
    <top>
       <VBox prefHeight="150.0" prefWidth="1600.0" styleClass="header" BorderPane.alignment="CENTER">
          <children>
@@ -33,11 +32,12 @@
                         <Font name="System Bold" size="35.0" />
                      </font>
                   </Text>
-                  <Text fx:id="pracownikInfo" fill="WHITE" layoutX="1520.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                  <Text fx:id="pracownikInfo" fill="WHITE" layoutX="1520.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="57.0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
                   </Text>
+                  <Button fx:id="minimalizeButton" layoutX="1523.0" layoutY="13.0" minHeight="41.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="42.0" styleClass="minimalize_button" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="1.0" />
                </children>
             </AnchorPane>
             <HBox prefHeight="78.0" prefWidth="1600.0" styleClass="hbox">
@@ -151,8 +151,7 @@
                 <TableColumn fx:id="dataPrzyjeciaZlecenieTableColumn" prefWidth="124.33332824707031" text="DATA PRZYJĘCIA" />
                   <TableColumn fx:id="opisZlecenieTableColumn" prefWidth="124.33332824707031" text="OPIS" />
                   <TableColumn fx:id="statusZlecenieTableColumn" prefWidth="124.33332824707031" text="STATUS" />
-                  <TableColumn fx:id="markaZlecenieTableColumn" prefWidth="124.33332824707031" text="MARKA " />
-                  <TableColumn fx:id="modelZlecenieTableColumn" prefWidth="124.33332824707031" text="MODEL" />
+                  <TableColumn fx:id="samochodZlecenieTableColumn" prefWidth="124.33332824707031" text="SAMOCHÓD" />
                   <TableColumn fx:id="klientZlecenieTableColumn" prefWidth="115.66668701171875" text="KLIENT" />
                   <TableColumn fx:id="pracownikZlecenieTableColumn" prefWidth="121.33331298828125" text="PRACOWNIK" />
               </columns>
@@ -166,21 +165,17 @@
             </Text>
             <Button fx:id="addKontrahent" layoutX="1193.0" layoutY="19.0" mnemonicParsing="false" onAction="#addKontrahentWindow" prefHeight="35.0" prefWidth="74.0" styleClass="add-button" text="Dodaj" />
             <Button fx:id="deleteKontrahent" layoutX="1300.0" layoutY="19.0" mnemonicParsing="false" onAction="#deleteKontrahent" prefHeight="35.0" prefWidth="79.0" styleClass="delete-button" text="Usuń" />
-            <TextField fx:id="searchKontrahentBar" alignment="CENTER" layoutX="1007.0" layoutY="77.0" prefHeight="25.0" prefWidth="560.0" />
-            <ScrollPane layoutX="1009.0" layoutY="136.0" prefHeight="591.0" prefWidth="565.0">
-               <content>
-                  <TableView fx:id="kontrahentTableView" fixedCellSize="50.0" prefHeight="610.0" prefWidth="572.0">
-                    <columns>
-                      <TableColumn fx:id="idkontrahentTableView" prefWidth="41.6666259765625" text="ID" />
-                        <TableColumn fx:id="imieKontrahentTableColumn" prefWidth="87.0" text="IMIE" />
-                        <TableColumn fx:id="nazwiskoKontrahentTableColumn" prefWidth="110.3333740234375" text="NAZWISKO" />
-                        <TableColumn fx:id="nazwaFirmyKontrahentTableColumn" prefWidth="113.6666259765625" text="NAZWA FIRMY" />
-                        <TableColumn fx:id="nipKontrahentTableColumn" prefWidth="102.3333740234375" text="NIP" />
-                        <TableColumn fx:id="peselKontrahentTableColumn" prefWidth="89.6666259765625" text="PESEL" />
-                    </columns>
-                  </TableView>
-               </content>
-            </ScrollPane>
+            <TextField fx:id="searchKontrahentBar" alignment="TOP_LEFT" layoutX="1007.0" layoutY="77.0" prefHeight="25.0" prefWidth="560.0" />
+            <TableView fx:id="kontrahentTableView" fixedCellSize="50.0" layoutX="1008.0" layoutY="140.0" prefHeight="586.0" prefWidth="557.0">
+              <columns>
+                <TableColumn fx:id="idkontrahentTableView" prefWidth="41.6666259765625" text="ID" />
+                  <TableColumn fx:id="imieKontrahentTableColumn" prefWidth="87.0" text="IMIE" />
+                  <TableColumn fx:id="nazwiskoKontrahentTableColumn" prefWidth="110.3333740234375" text="NAZWISKO" />
+                  <TableColumn fx:id="nazwaFirmyKontrahentTableColumn" prefWidth="113.6666259765625" text="NAZWA FIRMY" />
+                  <TableColumn fx:id="nipKontrahentTableColumn" prefWidth="102.3333740234375" text="NIP" />
+                  <TableColumn fx:id="peselKontrahentTableColumn" prefWidth="89.6666259765625" text="PESEL" />
+              </columns>
+            </TableView>
             <TextField fx:id="searchZlecenieBar" layoutX="43.0" layoutY="77.0" prefHeight="25.0" prefWidth="933.0" />
          </children>
       </AnchorPane>

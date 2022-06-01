@@ -4,7 +4,9 @@ import car.serwis.database.dao.PracownikDao;
 import car.serwis.database.dao.StanowiskoDao;
 import car.serwis.database.model.Pracownik;
 import car.serwis.database.model.Stanowisko;
+import car.serwis.helpers.CurrentPracownik;
 import car.serwis.helpers.UpdateStatus;
+import car.serwis.helpers.WindowManagement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -16,6 +18,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -73,23 +76,28 @@ public class UstawieniaController implements Initializable {
     @FXML
     private BorderPane ustawieniaBorderPane;
 
+    @FXML
+    private Text pracownikInfo;
+
 
 
     PracownikDao pracownikDao = new PracownikDao();
     StanowiskoDao stanowiskoDao = new StanowiskoDao();
     ObservableList<Stanowisko> stanowiskaObservableList = FXCollections.observableArrayList();
     ObservableList<Pracownik> pracownicyObservableList = FXCollections.observableArrayList();
+    WindowManagement windowManagement = new WindowManagement();
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        windowManagement.initializeExitButton(exitButton,ustawieniaBorderPane);
+        windowManagement.initializeMinimalizeButton(minimalizeButton,ustawieniaBorderPane);
+        CurrentPracownik.setPracownikInfo(pracownikInfo);
         setObservableList();
         fillTable();
         addTableSettings();
         pracownicyTable.setPlaceholder(new Label("Brak danych!"));
         stanowiskaTable.setPlaceholder(new Label("Brak danych!"));
-        initializeMinimalizeButton();
-        initializeExitButton();
     }
 
 
@@ -263,35 +271,6 @@ public class UstawieniaController implements Initializable {
             refreshScreen(event);
             UpdateStatus.setIsPracownikAdded(false);
         }
-    }
-
-
-    private void initializeExitButton(){
-        exitButton.setOnAction((x) -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            Optional<ButtonType> result = alert.showAndWait();
-            alert.setTitle("Confirmation Dialog");
-            alert.setHeaderText("Look, a Confirmation Dialog");
-            alert.setContentText("Are you ok with this?");
-
-            if (result.get() == ButtonType.OK){
-                getStage().close();
-            } else {
-                // ... user chose CANCEL or closed the dialog
-            }
-        });
-    }
-
-
-    private void initializeMinimalizeButton(){
-        minimalizeButton.setOnAction((x) -> {
-            getStage().setIconified(true);
-
-        });
-    }
-
-    private Stage getStage(){
-        return (Stage) ustawieniaBorderPane.getScene().getWindow();
     }
 
 

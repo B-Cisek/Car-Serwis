@@ -33,10 +33,10 @@ public class Samochod {
     )
     private String model;
 
-    @OneToMany(mappedBy = "samochod", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "samochod", fetch = FetchType.LAZY)
     private Set<Czesc> czesci = new HashSet<>();
 
-    @OneToMany(mappedBy = "samochod", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "samochod", fetch = FetchType.LAZY)
     private Set<Zlecenie> zlecenia = new HashSet<>();
 
     @Override

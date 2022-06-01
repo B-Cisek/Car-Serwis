@@ -78,4 +78,8 @@ public class Kontrahent {
     @OneToMany(mappedBy = "kontrahent", fetch = FetchType.LAZY)
     private Set<Zlecenie> zlecenia = new HashSet<>();
 
+    @Override
+    public String toString() {
+        return nazwaFirmy;
+    }
 }

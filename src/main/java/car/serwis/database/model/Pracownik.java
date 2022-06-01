@@ -6,12 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 @Data
@@ -71,5 +69,10 @@ public class Pracownik {
         this.pracujeOd = pracujeOd;
         this.login = login;
         this.haslo = haslo;
+    }
+
+    @Override
+    public String toString() {
+        return imie + " " + nazwisko;
     }
 }

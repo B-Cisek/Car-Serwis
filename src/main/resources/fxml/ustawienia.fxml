@@ -32,7 +32,7 @@
                      </font>
                   </Text>
                   <Button fx:id="exitButton" layoutX="1550.0" layoutY="1.0" minHeight="41.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="42.0" styleClass="exit_button" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
-                  <Text fx:id="pracownikInfo" fill="WHITE" layoutX="1515.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                  <Text fx:id="pracownikInfo" fill="WHITE" layoutX="1515.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="15.2314453125" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="57.0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>

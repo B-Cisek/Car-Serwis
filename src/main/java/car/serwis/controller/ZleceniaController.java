@@ -3,9 +3,10 @@ package car.serwis.controller;
 import car.serwis.database.dao.KontrahentDao;
 import car.serwis.database.dao.ZlecenieDao;
 import car.serwis.database.model.Kontrahent;
-import car.serwis.database.model.Stanowisko;
 import car.serwis.database.model.Zlecenie;
+import car.serwis.helpers.CurrentPracownik;
 import car.serwis.helpers.UpdateStatus;
+import car.serwis.helpers.WindowManagement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -16,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -59,10 +61,7 @@ public class ZleceniaController implements Initializable {
     private TableView<Kontrahent> kontrahentTableView;
 
     @FXML
-    private TableColumn<Zlecenie, String> markaZlecenieTableColumn;
-
-    @FXML
-    private TableColumn<Zlecenie, String> modelZlecenieTableColumn;
+    private TableColumn<Zlecenie, String> samochodZlecenieTableColumn;
 
     @FXML
     private TableColumn<Kontrahent, String> nazwaFirmyKontrahentTableColumn;
@@ -97,14 +96,25 @@ public class ZleceniaController implements Initializable {
     @FXML
     private TextField searchZlecenieBar;
 
+    @FXML
+    private BorderPane zlecenieBorderPane;
+
+    @FXML
+    private Button minimalizeButton;
+
+
 
     KontrahentDao kontrahentDao = new KontrahentDao();
     ZlecenieDao zlecenieDao = new ZlecenieDao();
+    WindowManagement windowManagement = new WindowManagement();
     ObservableList<Kontrahent> kontrahentciObservableList = FXCollections.observableArrayList();
     ObservableList<Zlecenie> zlecenieObservableList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        windowManagement.initializeExitButton(exitButton,zlecenieBorderPane);
+        windowManagement.initializeMinimalizeButton(minimalizeButton,zlecenieBorderPane);
+        CurrentPracownik.setPracownikInfo(pracownikInfo);
         setObservableList();
         fillTables();
         addTableSettings();
@@ -121,6 +131,7 @@ public class ZleceniaController implements Initializable {
     }
 
     private void fillTables() {
+        // Kontrahent
         idkontrahentTableView.setCellValueFactory(new PropertyValueFactory<>("idKontrahent"));
         imieKontrahentTableColumn.setCellValueFactory(new PropertyValueFactory<>("imie"));
         nazwiskoKontrahentTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
@@ -134,15 +145,17 @@ public class ZleceniaController implements Initializable {
         nipKontrahentTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         peselKontrahentTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
+        // Zlecenie
+
         idZlecenieTableColumn.setCellValueFactory(new PropertyValueFactory<>("idZlecenie"));
         dataPrzyjeciaZlecenieTableColumn.setCellValueFactory(new PropertyValueFactory<>("dataPrzyjecia"));
-        opisZlecenieTableColumn.setCellValueFactory(new PropertyValueFactory<>("opis"));
-        markaZlecenieTableColumn.setCellValueFactory(new PropertyValueFactory<>("marka"));
-        modelZlecenieTableColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
-        klientZlecenieTableColumn.setCellValueFactory(new PropertyValueFactory<>("imie"));
-        pracownikZlecenieTableColumn.setCellValueFactory(new PropertyValueFactory<>("login"));
+        opisZlecenieTableColumn.setCellValueFactory(new PropertyValueFactory<>("opisZlecenie"));
+        statusZlecenieTableColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        samochodZlecenieTableColumn.setCellValueFactory(new PropertyValueFactory<>("samochod"));
+        klientZlecenieTableColumn.setCellValueFactory(new PropertyValueFactory<>("kontrahent"));
+        pracownikZlecenieTableColumn.setCellValueFactory(new PropertyValueFactory<>("pracownik"));
 
-
+        opisZlecenieTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
     }
 
@@ -158,7 +171,7 @@ public class ZleceniaController implements Initializable {
     }
 
 
-    // ########### KONTRAHENT ####################
+    // #################### KONTRAHENT ####################
 
     @FXML
     private void addKontrahentWindow(ActionEvent event) throws IOException {
@@ -249,10 +262,7 @@ public class ZleceniaController implements Initializable {
                         return true;
                     } else if (zlecenie.getKontrahent().toString().contains(lowerCaseFilter)){
                         return true;
-
-                    }else if(zlecenie.getPracownik().toString().contains(lowerCaseFilter)) {
-                        return true;
-                    }else {
+                    }else{
                         return zlecenie.getIdZlecenie().toString().contains(lowerCaseFilter);
                     }
                 }));

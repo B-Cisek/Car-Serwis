@@ -35,4 +35,9 @@ public class Kategoria {
     public String toString() {
         return nazwaKategori;
     }
+
+    public Kategoria(Long idKategoria, String nazwaKategori) {
+        this.idKategoria = idKategoria;
+        this.nazwaKategori = nazwaKategori;
+    }
 }

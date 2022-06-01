@@ -45,7 +45,7 @@ public class Zlecenie {
     private ZlecenieStatus status;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "zlecenie_czesc",
             joinColumns = @JoinColumn(name = "id_zlecenie"),
@@ -53,15 +53,24 @@ public class Zlecenie {
     )
     private Set<Czesc> czesci = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_samochod", referencedColumnName = "id_samochod")
     private Samochod samochod;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_pracownik", referencedColumnName = "id_pracownik")
     private Pracownik pracownik;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_kontrahent", referencedColumnName = "id_kontrahent")
     private Kontrahent kontrahent;
+
+    public ZlecenieStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ZlecenieStatus status) {
+        this.status = status;
+    }
+
 }

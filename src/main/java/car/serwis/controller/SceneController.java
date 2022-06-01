@@ -2,25 +2,18 @@ package car.serwis.controller;
 
 import car.serwis.helpers.ScenePath;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.Window;
 
 
 import java.io.IOException;
 
-/**
- * Code created by Andrius on 2020-09-29
- */
+
 public class SceneController {
 
     private static double x;
@@ -102,8 +95,8 @@ public class SceneController {
     }
 
     public static void close(ActionEvent actionEvent) {
-        Node  source = (Node)  actionEvent.getSource();
-        Stage stage  = (Stage) source.getScene().getWindow();
+        Node source = (Node) actionEvent.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
 

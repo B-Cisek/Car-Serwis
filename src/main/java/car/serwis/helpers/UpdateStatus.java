@@ -2,7 +2,7 @@ package car.serwis.helpers;
 
 public final class UpdateStatus {
 
-    private UpdateStatus(){
+    private UpdateStatus() {
     }
 
     private static boolean isStanowiskoAdded;
@@ -14,6 +14,7 @@ public final class UpdateStatus {
     private static boolean isKontrahentAdded;
     private static boolean isZlecenieAdded;
     private static boolean isCzescAdded;
+    private static boolean isStatusUpdated;
 
     public static boolean isStanowiskoAdded() {
         return isStanowiskoAdded;
@@ -85,6 +86,14 @@ public final class UpdateStatus {
 
     public static void setIsCzescAdded(boolean isCzescAdded) {
         UpdateStatus.isCzescAdded = isCzescAdded;
+    }
+
+    public static boolean isStatusUpdated() {
+        return isStatusUpdated;
+    }
+
+    public static void setIsStatusUpdated(boolean isStatusUpdated) {
+        UpdateStatus.isStatusUpdated = isStatusUpdated;
     }
 
 

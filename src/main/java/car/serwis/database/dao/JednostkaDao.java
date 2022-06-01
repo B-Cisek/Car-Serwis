@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
-import java.sql.PreparedStatement;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,5 +76,7 @@ public class JednostkaDao {
 
         return kategorieList;
     }
+
+
 
 }

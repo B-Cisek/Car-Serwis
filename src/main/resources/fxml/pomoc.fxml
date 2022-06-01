@@ -2,7 +2,6 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../css/main-style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.PomocController">
+<BorderPane fx:id="pomocBorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1600.0" stylesheets="@../css/main-style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.PomocController">
    <top>
       <VBox prefHeight="150.0" prefWidth="1600.0" styleClass="header" BorderPane.alignment="CENTER">
          <children>
@@ -29,11 +28,12 @@
                      </font>
                   </Text>
                   <Button fx:id="exitButton" layoutX="1551.0" layoutY="6.0" minHeight="41.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="42.0" styleClass="exit_button" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0" />
-                  <Text fx:id="pracownikInfo" fill="WHITE" layoutX="1537.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                  <Text fx:id="pracownikInfo" fill="WHITE" layoutX="1537.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.bottomAnchor="15.2314453125" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="57.0">
                      <font>
                         <Font name="System Bold" size="19.0" />
                      </font>
                   </Text>
+                  <Button fx:id="minimalizeButton" layoutX="1517.0" layoutY="3.0" minHeight="41.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="42.0" styleClass="minimalize_button" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="1.0" />
                </children>
             </AnchorPane>
             <HBox prefHeight="78.0" prefWidth="1600.0" styleClass="hbox">
@@ -136,22 +136,12 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="1600.0" styleClass="main-pulpit" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="578.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pomoc" wrappingWidth="212.97265625">
+            <Text layoutX="741.0" layoutY="387.0" strokeType="OUTSIDE" strokeWidth="0.0" text="POMOC" wrappingWidth="118.97265625">
                <font>
                   <Font size="32.0" />
                </font>
             </Text>
-            <DialogPane layoutX="98.0" layoutY="99.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="480.0" style="-fx-background-color: gray;">
-                <header>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
-                </header>
-                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
-                </content>
-                <expandableContent>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="320.0" />
-                </expandableContent>
-            </DialogPane>
-         </children></AnchorPane>
+         </children>
+      </AnchorPane>
    </center>
 </BorderPane>

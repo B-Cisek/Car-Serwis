@@ -1,23 +1,19 @@
 package car.serwis.controller;
 
+import car.serwis.database.dao.ZlecenieDao;
 import car.serwis.helpers.CurrentPracownik;
 import car.serwis.helpers.WindowManagement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class PulpitController implements Initializable {
-
     @FXML
     private Button exitButton;
 
@@ -30,45 +26,35 @@ public class PulpitController implements Initializable {
     @FXML
     private Button minimalizeButton;
 
+    @FXML
+    private Text noweSprawy;
 
-    private void initializeExitButton(){
-        exitButton.setOnAction((x) -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            Optional<ButtonType> result = alert.showAndWait();
-            alert.setTitle("Confirmation Dialog");
-            alert.setHeaderText("Look, a Confirmation Dialog");
-            alert.setContentText("Are you ok with this?");
+    @FXML
+    private Text gotoweSprawy;
 
-            if (result.get() == ButtonType.OK){
-                getStage().close();
-            } else {
-                // ... user chose CANCEL or closed the dialog
-            }
-        });
+    @FXML
+    private Text oczekujaceSprawy;
+
+    @FXML
+    private Text wTrakcieSprawy;
+
+    WindowManagement windowManagement = new WindowManagement();
+    ZlecenieDao zlecenieDao = new ZlecenieDao();
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        windowManagement.initializeMinimalizeButton(minimalizeButton, pulpitBorderPane);
+        windowManagement.initializeExitButton(exitButton, pulpitBorderPane);
+        CurrentPracownik.setPracownikInfo(pracownikInfo);
+        setZlecenia();
     }
 
-
-    private void initializeMinimalizeButton(){
-        minimalizeButton.setOnAction((x) -> {
-            getStage().setIconified(true);
-
-        });
+    private void setZlecenia() {
+        noweSprawy.setText(String.format("%s", zlecenieDao.getNoweSprawy()));
+        oczekujaceSprawy.setText(String.format("%s", zlecenieDao.getOczekujaceSprawy()));
+        wTrakcieSprawy.setText(String.format("%s", zlecenieDao.getWtrakcieSprawy()));
+        gotoweSprawy.setText(String.format("%s", zlecenieDao.getGotoweSprawy()));
     }
-
-
-
-    private Stage getStage(){
-        return (Stage) pulpitBorderPane.getScene().getWindow();
-    }
-
-
-
-
-
-    private void setUserInfo() {
-        pracownikInfo.setText(String.format("Pracownik: %s", CurrentPracownik.getCurrentPracownik().getLogin()));
-    }
-
 
 
     @FXML
@@ -101,12 +87,4 @@ public class PulpitController implements Initializable {
         SceneController.getPomocScene(event);
     }
 
-    WindowManagement windowManagement;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeExitButton();
-        setUserInfo();
-        initializeMinimalizeButton();
-    }
 }
