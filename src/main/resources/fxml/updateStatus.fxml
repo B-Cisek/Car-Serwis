@@ -6,17 +6,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="updateStatusAnchorePane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.UpdateStatusController">
+<AnchorPane fx:id="updateStatusAnchorePane" prefHeight="400.0" prefWidth="600.0" styleClass="mainAnchorePane" stylesheets="@../css/popUpWindows.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.UpdateStatusController">
    <children>
-      <Text layoutX="227.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zmień status">
+      <Text layoutX="169.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Zmiana statusu zlecenia">
          <font>
             <Font size="26.0" />
          </font>
       </Text>
-      <Button fx:id="updateButton" layoutX="439.0" layoutY="351.0" mnemonicParsing="false" text="Zmień" />
-      <Button fx:id="anulujButton" layoutX="519.0" layoutY="351.0" mnemonicParsing="false" text="Anuluj" />
-      <ComboBox fx:id="nowyStatusComboBox" layoutX="300.0" layoutY="151.0" prefWidth="150.0" promptText="nowy status" />
-      <ComboBox fx:id="idZlecnieComboBox" layoutX="102.0" layoutY="151.0" prefWidth="150.0" promptText="ID zlecenia" />
+      <Button fx:id="updateButton" layoutX="422.0" layoutY="351.0" mnemonicParsing="false" styleClass="add-button" text="Zmień" />
+      <Button fx:id="anulujButton" layoutX="511.0" layoutY="351.0" mnemonicParsing="false" styleClass="cancel-button" text="Anuluj" />
+      <ComboBox fx:id="nowyStatusComboBox" layoutX="327.0" layoutY="164.0" prefWidth="150.0" promptText="nowy status" />
+      <ComboBox fx:id="idZlecnieComboBox" layoutX="115.0" layoutY="164.0" prefWidth="150.0" promptText="ID zlecenia" />
       <Text fx:id="errorText" layoutX="265.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" />
    </children>
 </AnchorPane>

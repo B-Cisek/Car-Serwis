@@ -3,6 +3,7 @@ package car.serwis.helpers;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -27,6 +28,13 @@ public class WindowManagement {
             if (result.get() == ButtonType.OK){
                 stage.close();
             }
+        });
+    }
+
+    public void initializeExitButtonAnchorPane(Button button, AnchorPane anchorPane){
+        button.setOnAction((x) -> {
+            Stage stage = (Stage) anchorPane.getScene().getWindow();
+            stage.close();
         });
     }
 

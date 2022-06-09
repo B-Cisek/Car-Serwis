@@ -5,6 +5,7 @@ import car.serwis.database.dao.StanowiskoDao;
 import car.serwis.database.model.Pracownik;
 import car.serwis.database.model.Stanowisko;
 import car.serwis.helpers.UpdateStatus;
+import car.serwis.helpers.WindowManagement;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,11 +55,12 @@ public class AddPracownikController implements Initializable {
     private AnchorPane addPracownikAnchorePane;
 
     PracownikDao pracownikDao = new PracownikDao();
+    WindowManagement windowManagement = new WindowManagement();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         stanowiskaComboBox.setItems(getStanowiskaObservableList());
-        initializeExitButton();
+        windowManagement.initializeExitButtonAnchorPane(anulujButton,addPracownikAnchorePane);
     }
 
     private ObservableList<Stanowisko> getStanowiskaObservableList() {
@@ -81,7 +83,6 @@ public class AddPracownikController implements Initializable {
 
 
     private boolean validateInputs() {
-
         if (stanowiskaComboBox.getValue() == null) {
             errorText.setText("*Pole stanowisko nie może być puste!");
             return false;
@@ -93,26 +94,25 @@ public class AddPracownikController implements Initializable {
         }
 
 
-        if (imieTextField.getText().equals("")) {
+        if (imieTextField.getText().isBlank()) {
             errorText.setText("*Pole imie nie może być puste!");
             return false;
         }
 
-        if (nazwiskoTextField.getText().equals("")) {
+        if (nazwiskoTextField.getText().isBlank()) {
             errorText.setText("*Pole nazwisko nie może być puste!");
             return false;
         }
 
-        if (loginTextField.getText().equals("")){
+        if (loginTextField.getText().isBlank()){
             errorText.setText("*Pole login nie może być puste!");
             return false;
         }
 
-        if (hasloTextField.getText().equals("")) {
+        if (hasloTextField.getText().isBlank()) {
             errorText.setText("*Pole hasło nie może być puste!");
             return false;
         }
-
         return true;
     }
 
@@ -142,18 +142,4 @@ public class AddPracownikController implements Initializable {
         Stage stage = (Stage) anulujButton.getScene().getWindow();
         stage.close();
     }
-
-
-
-    private void initializeExitButton(){
-        anulujButton.setOnAction((x) -> {
-            getStage().close();
-        });
-    }
-
-    private Stage getStage(){
-        return (Stage) addPracownikAnchorePane.getScene().getWindow();
-    }
-
-
 }

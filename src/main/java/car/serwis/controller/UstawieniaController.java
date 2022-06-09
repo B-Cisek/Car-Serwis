@@ -4,6 +4,7 @@ import car.serwis.database.dao.PracownikDao;
 import car.serwis.database.dao.StanowiskoDao;
 import car.serwis.database.model.Pracownik;
 import car.serwis.database.model.Stanowisko;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.CurrentPracownik;
 import car.serwis.helpers.UpdateStatus;
 import car.serwis.helpers.WindowManagement;
@@ -19,12 +20,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Optional;
+
 import java.util.ResourceBundle;
 
 public class UstawieniaController implements Initializable {
@@ -80,7 +80,6 @@ public class UstawieniaController implements Initializable {
     private Text pracownikInfo;
 
 
-
     PracownikDao pracownikDao = new PracownikDao();
     StanowiskoDao stanowiskoDao = new StanowiskoDao();
     ObservableList<Stanowisko> stanowiskaObservableList = FXCollections.observableArrayList();
@@ -114,7 +113,6 @@ public class UstawieniaController implements Initializable {
         // STANOWISKO
         idStanowiskoColumn.setCellValueFactory(new PropertyValueFactory<>("idStanowisko"));
         nazwaStanowiskoColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaStanowiska"));
-
         nazwaStanowiskoColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
         // PRACOWNIK
@@ -125,13 +123,11 @@ public class UstawieniaController implements Initializable {
         hasloPracownikColumn.setCellValueFactory(new PropertyValueFactory<>("haslo"));
         pracijeOdPracownikColumn.setCellValueFactory(new PropertyValueFactory<>("pracujeOd"));
         stanowiskoPracownikColumn.setCellValueFactory(new PropertyValueFactory<>("stanowisko"));
-
         imiePracownikColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         nazwiskoPracownikColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         loginPracownikColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         hasloPracownikColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     }
-
 
     private void addTableSettings() {
         stanowiskaTable.setEditable(true);
@@ -143,36 +139,11 @@ public class UstawieniaController implements Initializable {
         pracownicyTable.setItems(getSortedListPracownicy());
     }
 
-
-    private SortedList<Stanowisko> getSortedListStanowiska() {
-        SortedList<Stanowisko> sortedList = new SortedList<>(getFilteredListStanowiska());
-        sortedList.comparatorProperty().bind(stanowiskaTable.comparatorProperty());
-        return sortedList;
-    }
-
+    // ############### PRACOWNIK ###############
     private SortedList<Pracownik> getSortedListPracownicy() {
         SortedList<Pracownik> sortedList = new SortedList<>(getFilteredListPracownicy());
         sortedList.comparatorProperty().bind(pracownicyTable.comparatorProperty());
         return sortedList;
-    }
-
-    private FilteredList<Stanowisko> getFilteredListStanowiska() {
-        FilteredList<Stanowisko> filteredList = new FilteredList<>(stanowiskaObservableList, b -> true);
-        searchStanowiskoBar.textProperty().addListener((observable, oldValue, newValue) ->
-                filteredList.setPredicate(stanowisko -> {
-                    if (newValue == null || newValue.isEmpty()) {
-                        return true;
-                    }
-
-                    String lowerCaseFilter = newValue.toLowerCase();
-
-                    if (stanowisko.getNazwaStanowiska().toLowerCase().contains(lowerCaseFilter)) {
-                        return true;
-                    } else {
-                        return stanowisko.getIdStanowisko().toString().contains(lowerCaseFilter);
-                    }
-                }));
-        return filteredList;
     }
 
     private FilteredList<Pracownik> getFilteredListPracownicy() {
@@ -201,12 +172,12 @@ public class UstawieniaController implements Initializable {
     }
 
     @FXML
-    void deleteStanowisko(ActionEvent event) throws IOException {
-        ObservableList<Stanowisko> selectedRows = stanowiskaTable.getSelectionModel().getSelectedItems();
-        for (Stanowisko stanowisko : selectedRows) {
-            stanowiskoDao.deleteStanowisko(stanowisko);
+    private void addPracownikWindow(ActionEvent event) throws IOException {
+        NewWindowController.getNewPracownikWindow();
+        if (UpdateStatus.isPracownikAdded()) {
+            refreshScreen(event);
+            UpdateStatus.setIsPracownikAdded(false);
         }
-        refreshScreen(event);
     }
 
     @FXML
@@ -216,14 +187,7 @@ public class UstawieniaController implements Initializable {
             pracownikDao.deletePracownik(pracownik);
         }
         refreshScreen(event);
-    }
-
-
-    @FXML
-    private void changeNazwaStanowiska(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
-        Stanowisko selectedStanowisko = stanowiskaTable.getSelectionModel().getSelectedItem();
-        selectedStanowisko.setNazwaStanowiska(editEvent.getNewValue().toString());
-        stanowiskoDao.updateStanowisko(selectedStanowisko);
+        AlertPopUp.successAlert("Pracownik usunięty!");
     }
 
     @FXML
@@ -231,6 +195,7 @@ public class UstawieniaController implements Initializable {
         Pracownik selectedPracownik = pracownicyTable.getSelectionModel().getSelectedItem();
         selectedPracownik.setImie(editEvent.getNewValue().toString());
         pracownikDao.updatePracownik(selectedPracownik);
+        AlertPopUp.successAlert("Zmieniono imie pracownika!");
     }
 
     @FXML
@@ -238,6 +203,7 @@ public class UstawieniaController implements Initializable {
         Pracownik selectedPracownik = pracownicyTable.getSelectionModel().getSelectedItem();
         selectedPracownik.setNazwisko(editEvent.getNewValue().toString());
         pracownikDao.updatePracownik(selectedPracownik);
+        AlertPopUp.successAlert("Zmieniono nazwisko pracownika!");
     }
 
     @FXML
@@ -245,6 +211,7 @@ public class UstawieniaController implements Initializable {
         Pracownik selectedPracownik = pracownicyTable.getSelectionModel().getSelectedItem();
         selectedPracownik.setLogin(editEvent.getNewValue().toString());
         pracownikDao.updatePracownik(selectedPracownik);
+        AlertPopUp.successAlert("Zmieniono login pracownika!");
     }
 
     @FXML
@@ -252,8 +219,35 @@ public class UstawieniaController implements Initializable {
         Pracownik selectedPracownik = pracownicyTable.getSelectionModel().getSelectedItem();
         selectedPracownik.setHaslo(editEvent.getNewValue().toString());
         pracownikDao.updatePracownik(selectedPracownik);
+        AlertPopUp.successAlert("Zmieniono hasło pracownika!");
     }
 
+
+    // ################# STANOWISKO ####################
+    private SortedList<Stanowisko> getSortedListStanowiska() {
+        SortedList<Stanowisko> sortedList = new SortedList<>(getFilteredListStanowiska());
+        sortedList.comparatorProperty().bind(stanowiskaTable.comparatorProperty());
+        return sortedList;
+    }
+
+    private FilteredList<Stanowisko> getFilteredListStanowiska() {
+        FilteredList<Stanowisko> filteredList = new FilteredList<>(stanowiskaObservableList, b -> true);
+        searchStanowiskoBar.textProperty().addListener((observable, oldValue, newValue) ->
+                filteredList.setPredicate(stanowisko -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCaseFilter = newValue.toLowerCase();
+
+                    if (stanowisko.getNazwaStanowiska().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else {
+                        return stanowisko.getIdStanowisko().toString().contains(lowerCaseFilter);
+                    }
+                }));
+        return filteredList;
+    }
 
     @FXML
     private void addStanowiskoWindow(ActionEvent event) throws IOException {
@@ -265,13 +259,24 @@ public class UstawieniaController implements Initializable {
     }
 
     @FXML
-    private void addPracownikWindow(ActionEvent event) throws IOException {
-        NewWindowController.getNewPracownikWindow();
-        if (UpdateStatus.isPracownikAdded()) {
-            refreshScreen(event);
-            UpdateStatus.setIsPracownikAdded(false);
+    void deleteStanowisko(ActionEvent event) throws IOException {
+        ObservableList<Stanowisko> selectedRows = stanowiskaTable.getSelectionModel().getSelectedItems();
+        for (Stanowisko stanowisko : selectedRows) {
+            stanowiskoDao.deleteStanowisko(stanowisko);
         }
+        refreshScreen(event);
+        AlertPopUp.successAlert("Stanowisko usunięte!");
     }
+
+    @FXML
+    private void changeNazwaStanowiska(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
+        Stanowisko selectedStanowisko = stanowiskaTable.getSelectionModel().getSelectedItem();
+        selectedStanowisko.setNazwaStanowiska(editEvent.getNewValue().toString());
+        stanowiskoDao.updateStanowisko(selectedStanowisko);
+        AlertPopUp.successAlert("Zmieniono nazwę stanowiska!");
+    }
+
+
 
 
     @FXML

@@ -4,23 +4,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane fx:id="JednostkaAnchorePane" prefHeight="400.0" prefWidth="509.0" stylesheets="@../css/popUpWindows.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.AddJednostkaController">
+<AnchorPane fx:id="JednostkaAnchorePane" prefHeight="357.0" prefWidth="522.0" styleClass="mainAnchorePane" stylesheets="@../css/popUpWindows.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.AddJednostkaController">
    <children>
-      <Text layoutX="182.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dodaj jednostke">
-         <font>
-            <Font name="System Bold" size="23.0" />
-         </font>
-      </Text>
-      <Button fx:id="addJednostkaButton" layoutX="341.0" layoutY="351.0" mnemonicParsing="false" styleClass="add-button" text="Dodaj" />
-      <Button fx:id="anulujButton" layoutX="423.0" layoutY="351.0" mnemonicParsing="false" styleClass="delete-button" text="Anuluj" />
-      <TextField fx:id="nazwaJednostkiTextField" layoutX="180.0" layoutY="139.0" />
-      <TextField fx:id="skrotTextField" layoutX="180.0" layoutY="190.0" />
-      <Label layoutX="180.0" layoutY="116.0" text="Nazwa Jednostki" />
-      <Label layoutX="180.0" layoutY="173.0" text="Skrót" />
-      <Text fx:id="errorText" layoutX="243.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+      <Button fx:id="addJednostkaButton" layoutX="346.0" layoutY="308.0" mnemonicParsing="false" styleClass="add-button" text="Dodaj" />
+      <Button fx:id="anulujButton" layoutX="433.0" layoutY="308.0" mnemonicParsing="false" styleClass="cancel-button" text="Anuluj" />
+      <TextField fx:id="nazwaJednostkiTextField" layoutX="187.0" layoutY="126.0" />
+      <TextField fx:id="skrotTextField" layoutX="187.0" layoutY="177.0" />
+      <Label layoutX="187.0" layoutY="103.0" text="Nazwa Jednostki" />
+      <Label layoutX="187.0" layoutY="160.0" text="Skrót" />
+      <Text layoutX="145.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Dodawanie jednostki" />
+      <Text fx:id="errorText" layoutX="187.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" AnchorPane.leftAnchor="185.0" />
    </children>
 </AnchorPane>

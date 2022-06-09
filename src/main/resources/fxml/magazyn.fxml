@@ -149,18 +149,18 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0">
                            <children>
-                              <Button layoutX="71.0" layoutY="39.0" mnemonicParsing="false" onAction="#addSamochodWindow" prefHeight="35.0" prefWidth="93.0" styleClass="add-button" text="Dodaj">
+                              <Button layoutX="38.0" layoutY="42.0" mnemonicParsing="false" onAction="#addSamochodWindow" prefHeight="35.0" prefWidth="93.0" styleClass="add-button" text="Dodaj" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="20.0">
                                  <font>
                                     <Font name="System Bold" size="42.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="247.0" layoutY="38.0" mnemonicParsing="false" onAction="#deleteSamochod" prefHeight="35.0" prefWidth="87.0" styleClass="delete-button" text="Usuń" />
-                              <TextField fx:id="searchSamochodBar" layoutX="23.0" layoutY="96.0" prefHeight="25.0" prefWidth="368.0" />
-                              <TableView fx:id="samochodyTableView" editable="true" fixedCellSize="50.0" layoutX="2.0" layoutY="134.0" prefHeight="486.0" prefWidth="392.0">
+                              <Button layoutX="224.0" layoutY="41.0" mnemonicParsing="false" onAction="#deleteSamochod" prefHeight="35.0" prefWidth="87.0" styleClass="delete-button" text="Usuń" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0" />
+                              <TextField fx:id="searchSamochodBar" layoutX="31.0" layoutY="125.2" prefHeight="29.0" prefWidth="336.0" promptText="Szukaj" AnchorPane.topAnchor="80.0" />
+                              <TableView fx:id="samochodyTableView" editable="true" fixedCellSize="50.0" layoutX="4.0" layoutY="139.2" prefHeight="468.0" prefWidth="391.0" AnchorPane.topAnchor="125.0">
                                 <columns>
                                   <TableColumn fx:id="idSamochodTableColumn" prefWidth="75.0" text="ID" />
-                                  <TableColumn fx:id="markaSamochodTableColumn" onEditCommit="#changeMarkaSamochod" prefWidth="75.0" text="MARKA" />
-                                    <TableColumn fx:id="modelSamochodTableColumn" onEditCommit="#changeModelSamochod" prefWidth="75.0" text="MODEL" />
+                                  <TableColumn fx:id="markaSamochodTableColumn" onEditCommit="#changeMarkaSamochod" prefWidth="142.0" text="MARKA" />
+                                    <TableColumn fx:id="modelSamochodTableColumn" onEditCommit="#changeModelSamochod" prefWidth="173.0" text="MODEL" />
                                 </columns>
                               </TableView>
                            </children>
@@ -174,13 +174,13 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Button layoutX="74.0" layoutY="41.0" mnemonicParsing="false" onAction="#addKategoriaWindow" prefHeight="35.0" prefWidth="79.0" styleClass="add-button" text="Dodaj" />
-                              <Button layoutX="222.0" layoutY="41.0" mnemonicParsing="false" onAction="#deleteKategoria" prefHeight="35.0" prefWidth="81.0" styleClass="delete-button" text="Usuń" />
-                              <TextField fx:id="searchKategoriaBar" layoutX="19.0" layoutY="88.0" prefHeight="25.0" prefWidth="366.0" />
-                              <TableView fx:id="kategoriaTableView" fixedCellSize="50.0" layoutX="3.0" layoutY="127.0" prefHeight="494.0" prefWidth="393.0">
+                              <Button layoutX="74.0" layoutY="41.0" mnemonicParsing="false" onAction="#addKategoriaWindow" prefHeight="35.0" prefWidth="79.0" styleClass="add-button" text="Dodaj" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="20.0" />
+                              <Button layoutX="222.0" layoutY="41.0" mnemonicParsing="false" onAction="#deleteKategoria" prefHeight="35.0" prefWidth="81.0" styleClass="delete-button" text="Usuń" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0" />
+                              <TextField fx:id="searchKategoriaBar" layoutX="30.0" layoutY="88.0" prefHeight="29.0" prefWidth="340.0" promptText="Szukaj" AnchorPane.topAnchor="80.0" />
+                              <TableView fx:id="kategoriaTableView" fixedCellSize="50.0" layoutX="3.0" layoutY="143.0" prefHeight="433.0" prefWidth="393.0">
                                 <columns>
                                   <TableColumn fx:id="idKategoraTableColumn" prefWidth="75.0" text="ID" />
-                                  <TableColumn fx:id="nazwaKategoraTableColumn" prefWidth="315.6666564941406" text="NAZWA KATEGORI" />
+                                  <TableColumn fx:id="nazwaKategoraTableColumn" onEditCommit="#changeNazwaKategoira" prefWidth="315.6666564941406" text="NAZWA KATEGORI" />
                                 </columns>
                               </TableView>
                            </children>
@@ -194,16 +194,16 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="jednostkiTableView" editable="true" fixedCellSize="50.0" layoutX="10.0" layoutY="114.0" prefHeight="450.0" prefWidth="367.0">
+                              <TableView fx:id="jednostkiTableView" editable="true" fixedCellSize="50.0" layoutX="3.0" layoutY="138.0" prefHeight="439.0" prefWidth="393.0">
                                  <columns>
                                     <TableColumn fx:id="idJednostkaTableColumn" prefWidth="75.0" text="ID" />
                                     <TableColumn fx:id="nazwaJednostkaTableColumn" prefWidth="153.0" text="NAZWA JEDNOSTKI" />
                                     <TableColumn fx:id="skrotJednostkaTableColumn" onEditCommit="#changeSkrotCell" prefWidth="128.0" text="SKRÓT" />
                                  </columns>
                               </TableView>
-                              <Button layoutX="85.0" layoutY="25.0" mnemonicParsing="false" onAction="#addJednostkaWindow" prefHeight="35.0" prefWidth="79.0" styleClass="add-button" text="Dodaj" />
-                              <Button layoutX="207.0" layoutY="24.0" mnemonicParsing="false" onAction="#deleteJednostka" prefHeight="35.0" prefWidth="81.0" styleClass="delete-button" text="Usuń" />
-                              <TextField fx:id="searchJednostkaBar" layoutX="11.0" layoutY="75.0" prefHeight="25.0" prefWidth="366.0" />
+                              <Button layoutX="85.0" layoutY="25.0" mnemonicParsing="false" onAction="#addJednostkaWindow" prefHeight="35.0" prefWidth="79.0" styleClass="add-button" text="Dodaj" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="20.0" />
+                              <Button layoutX="207.0" layoutY="24.0" mnemonicParsing="false" onAction="#deleteJednostka" prefHeight="35.0" prefWidth="81.0" styleClass="delete-button" text="Usuń" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0" />
+                              <TextField fx:id="searchJednostkaBar" layoutX="28.0" layoutY="125.2" prefHeight="29.0" prefWidth="340.0" AnchorPane.topAnchor="80.0" />
                            </children></AnchorPane>
                   </content>
                      <font>
@@ -212,12 +212,12 @@
                 </TitledPane>
               </panes>
             </Accordion>
-            <Text layoutX="471.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Części">
+            <Text layoutX="471.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CZĘŚCI">
                <font>
                   <Font name="System Bold" size="33.0" />
                </font>
             </Text>
-            <TableView fx:id="czescTableView" fixedCellSize="50.0" layoutX="465.0" layoutY="112.0" prefHeight="614.0" prefWidth="1115.0">
+            <TableView fx:id="czescTableView" fixedCellSize="50.0" layoutX="465.0" layoutY="112.0" prefHeight="614.0" prefWidth="1111.0" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0">
               <columns>
                 <TableColumn fx:id="idCzescTableColumn" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="nazwaCzesciTableColumn" prefWidth="105.6666259765625" text="NAZWA CZĘŚCI" />
@@ -229,17 +229,17 @@
                   <TableColumn fx:id="samochodCzescTableColumn" prefWidth="110.0" text="SAMOCHÓD" />
               </columns>
             </TableView>
-            <TextField fx:id="searchCzescBar" layoutX="466.0" layoutY="71.0" prefHeight="25.0" prefWidth="354.0" />
-            <ComboBox layoutX="851.0" layoutY="72.0" prefHeight="25.0" prefWidth="159.0" />
-            <Button layoutX="1378.0" layoutY="57.0" mnemonicParsing="false" onAction="#addCzescWindow" prefHeight="35.0" prefWidth="79.0" styleClass="add-button" text="Dodaj" />
-            <Button layoutX="1481.0" layoutY="58.0" mnemonicParsing="false" onAction="#deleteCzesc" prefHeight="35.0" prefWidth="81.0" styleClass="delete-button" text="Usuń" />
+            <TextField fx:id="searchCzescBar" layoutX="466.0" layoutY="68.0" prefHeight="25.0" prefWidth="359.0" promptText="Szukaj" />
+            <ComboBox layoutX="852.0" layoutY="68.0" prefHeight="25.0" prefWidth="159.0" promptText="kategoria" />
+            <Button layoutX="1236.0" layoutY="59.0" mnemonicParsing="false" onAction="#addCzescWindow" prefHeight="35.0" prefWidth="79.0" styleClass="add-button" text="Dodaj część" AnchorPane.topAnchor="60.0" />
+            <Button layoutX="1426.0" layoutY="58.0" mnemonicParsing="false" onAction="#deleteCzesc" prefHeight="35.0" prefWidth="81.0" styleClass="delete-button" text="Usuń" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="60.0" />
          </children>
       </AnchorPane>
    </center>
    <stylesheets>
-      <URL value="@../css/main-style.css" />
       <URL value="@../css/table_style.css" />
-      <URL value="@../css/popUpWindows.css" />
       <URL value="@../css/accordion-style.css" />
+      <URL value="@../css/main-style.css" />
+      <URL value="@../css/button-style.css" />
    </stylesheets>
 </BorderPane>

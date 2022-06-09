@@ -140,44 +140,43 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="1600.0" styleClass="main-pulpit" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="220.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wszystkie zlecenia">
-               <font>
-                  <Font name="System Bold" size="28.0" />
-               </font>
-            </Text>
-            <TableView fx:id="wszystkieZleceniaTableView" fixedCellSize="50.0" layoutX="42.0" layoutY="145.0" prefHeight="579.0" prefWidth="713.0">
+            <TableView fx:id="mojeZleceniaTableView" fixedCellSize="50.0" layoutX="820.0" layoutY="127.0" prefHeight="607.0" prefWidth="740.0">
               <columns>
-                <TableColumn fx:id="idWszystkieZlecenia" prefWidth="46.0" text="ID" />
-                <TableColumn fx:id="dataPrzyjeciaWszystkieZlecenia" minWidth="0.0" prefWidth="141.0" text="DATA PRZYJĘCIA" />
-                  <TableColumn fx:id="opisWszystkieZlecenia" prefWidth="185.6666717529297" text="OPIS" />
-                  <TableColumn fx:id="samochodWszystkieZlecenia" prefWidth="105.66665649414062" text="SAMOCHÓD" />
-                  <TableColumn fx:id="pracownikWszystkieZlecenia" prefWidth="117.66668701171875" text="PRACOWNIK" />
-                  <TableColumn fx:id="statusWszystkieZlecenia" prefWidth="119.66668701171875" text="STATUS" />
+                <TableColumn fx:id="idMojeZleceniaTableColumn" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="dataPrzyjeciaMojeZleceniaTableColumn" prefWidth="128.3333282470703" text="DATA PRZYJĘCIA" />
+                  <TableColumn fx:id="opisMojeZleceniaTableColumn" maxWidth="254.33331298828125" minWidth="254.33331298828125" prefWidth="254.33331298828125" text="OPIS" />
+                  <TableColumn fx:id="statusMojeZleceniaTableColumn" maxWidth="142.0" minWidth="142.0" prefWidth="142.0" text="STATUS" />
+                  <TableColumn fx:id="samochodMojeZleceniaTableColumn" maxWidth="141.0" minWidth="141.0" prefWidth="141.0" text="SAMOCHÓD" />
               </columns>
             </TableView>
-            <Text layoutX="1066.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Twoje zlecenia">
+            <TextField fx:id="searchMojeZleceniaTableColumn" layoutX="821.0" layoutY="87.0" prefHeight="25.0" prefWidth="734.0" />
+            <Button fx:id="zmienStatusButton" layoutX="1394.0" layoutY="35.0" mnemonicParsing="false" styleClass="add-button" text="Zmień status" />
+            <Text layoutX="832.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TWOJE ZLECENIA">
                <font>
-                  <Font name="System Bold" size="28.0" />
+                  <Font name="System Bold" size="27.0" />
                </font>
             </Text>
-            <Button fx:id="przyjmijZlecenie" layoutX="600.0" layoutY="42.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="131.0" text="Przyjmij zlecenie" />
-            <Button fx:id="zmienStatus" layoutX="1402.0" layoutY="45.0" mnemonicParsing="false" onAction="#updateStatus" prefHeight="37.0" prefWidth="131.0" text="Zmien status" />
-            <TableView fx:id="mechanikZleceniaTableView" fixedCellSize="50.0" layoutX="811.0" layoutY="148.0" prefHeight="578.0" prefWidth="713.0">
-               <columns>
-                  <TableColumn fx:id="idMechanikZlecenia" prefWidth="63.0" text="ID" />
-                  <TableColumn fx:id="dataPrzyjeciaMechanikZlecenia" prefWidth="137.6666717529297" text="DATA PRZYJĘCIA" />
-                  <TableColumn fx:id="opisMechanikZlecenia" prefWidth="106.33332824707031" text="OPIS" />
-                  <TableColumn fx:id="samochodMechanikZlecenia" prefWidth="117.0" text="SAMOCHÓD" />
-                  <TableColumn fx:id="pracownikMechanikZlecenia" prefWidth="121.0" text="PRACOWNIK" />
-                  <TableColumn fx:id="statusMechanikZlecenia" onEditCommit="#changeStatus" prefWidth="156.6666259765625" text="STATUS" />
-               </columns>
+            <TableView fx:id="wszystkieZleceniaTableView" fixedCellSize="50.0" layoutX="54.0" layoutY="128.0" prefHeight="610.0" prefWidth="712.0">
+              <columns>
+                <TableColumn fx:id="idWszystkieZleceniaTableColumn" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="ID" />
+                <TableColumn fx:id="dataPrzyjeciaWszystkieZleceniaTableColumn" maxWidth="140.0" minWidth="140.0" prefWidth="140.0" text="DATA PRZYJĘCIA" />
+                  <TableColumn fx:id="opisWszystkieZleceniaTableColumn" maxWidth="280.0" minWidth="280.0" prefWidth="280.0" text="OPSI" />
+                  <TableColumn fx:id="statusWszystkieZleceniaTableColumn" prefWidth="97.99996948242188" text="STATUS" />
+                  <TableColumn fx:id="samochodWszystkieZleceniaTableColumn" prefWidth="138.33331298828125" text="SAMOCHÓD" />
+              </columns>
             </TableView>
-            <TextField fx:id="searchWszystkieZlecenia" layoutX="50.0" layoutY="103.0" prefHeight="25.0" prefWidth="699.0" />
-            <TextField fx:id="searchMechanikZlecenia" layoutX="816.0" layoutY="114.0" prefHeight="25.0" prefWidth="699.0" />
+            <Text layoutX="64.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DOSTĘPNE ZLECENIA">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+            </Text>
+            <TextField fx:id="searchWszystkieZleceniaTableColumn" layoutX="63.0" layoutY="88.0" prefHeight="25.0" prefWidth="696.0" />
+            <Button fx:id="przyjmijZlecenieButton" layoutX="599.0" layoutY="37.0" mnemonicParsing="false" onAction="#przyjmijZlecenie" prefHeight="34.0" prefWidth="122.0" styleClass="add-button" text="Przyjmij zlecenie" />
          </children></AnchorPane>
    </center>
    <stylesheets>
       <URL value="@../css/main-style.css" />
       <URL value="@../css/table_style.css" />
+      <URL value="@../css/button-style.css" />
    </stylesheets>
 </BorderPane>

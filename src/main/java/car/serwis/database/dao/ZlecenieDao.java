@@ -15,7 +15,11 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ZlecenieDao {
@@ -46,6 +50,27 @@ public class ZlecenieDao {
         }
     }
 
+    public List<Zlecenie> getMechanikZlecenia() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            TypedQuery<Zlecenie> query = session.createQuery("SELECT z FROM Zlecenie z WHERE z.pracownik = :id", Zlecenie.class );
+            query.setParameter("id", CurrentPracownik.getCurrentPracownik());
+            return query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    public List<Zlecenie> getDostepneZlecenia() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            TypedQuery<Zlecenie> query = session.createQuery("SELECT z FROM Zlecenie z WHERE z.pracownik IS NULL", Zlecenie.class );
+            return query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
     public void deleteZlecenie(Zlecenie zlecenie) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -60,16 +85,6 @@ public class ZlecenieDao {
         }
     }
 
-    public List getZleceniaForPracownik() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            TypedQuery<Zlecenie> query = session.createQuery("SELECT z FROM Zlecenie z  WHERE z.pracownik= :id", Zlecenie.class);
-            query.setParameter("id", CurrentPracownik.getCurrentPracownik().getIdPracownik());
-            return query.getResultList();
-        } catch (Exception ex) {
-            System.err.println("Error");
-            return new ArrayList<>();
-        }
-    }
 
     public Long getNoweSprawy() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {

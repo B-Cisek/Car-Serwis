@@ -48,7 +48,6 @@ public class AddStanowiskoController implements Initializable {
         addStanowiskoButton.setOnAction((event) -> {
             if (validateInputs()) {
                 Stanowisko stanowisko = createStanowiskoFromInput();
-                //boolean isSaved = new StanowiskoDao().createStanowisko(stanowisko);
                 boolean isSaved = new StanowiskoDao().saveStanowisko(stanowisko);
                 if (isSaved) {
                     UpdateStatus.setIsStanowiskoAdded(true);
@@ -61,19 +60,16 @@ public class AddStanowiskoController implements Initializable {
     }
 
     private boolean validateInputs() {
-        if (nazwaTextField.getText().equals("")) {
+        if (nazwaTextField.getText().isBlank()) {
             errorText.setText("*Pole nazwa nie może być puste!");
             return false;
         }
-
         return true;
     }
 
     private Stanowisko createStanowiskoFromInput() {
         Stanowisko stanowisko = new Stanowisko();
-
         stanowisko.setNazwaStanowiska(nazwaTextField.getText());
-
         return stanowisko;
     }
 

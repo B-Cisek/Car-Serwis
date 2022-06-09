@@ -19,10 +19,12 @@ public class HibernateUtil {
 
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-                settings.put(Environment.URL, "jdbc:mysql://34.118.42.105/car_serwis?serverTimezone=UTC");
+                settings.put(Environment.URL, "jdbc:mysql://localhost/serwis?serverTimezone=UTC");
                 settings.put(Environment.USER, "root");
-                settings.put(Environment.PASS, "root");
-
+                settings.put(Environment.PASS, "");
+                settings.put(Environment.POOL_SIZE,"200");
+                settings.put(Environment.AUTO_CLOSE_SESSION,"true");
+                //settings.put(Environment.AUTOCOMMIT,"true");
 
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
                 settings.put(Environment.SHOW_SQL, "true");

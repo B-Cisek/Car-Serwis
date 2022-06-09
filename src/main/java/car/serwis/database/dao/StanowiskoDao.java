@@ -12,33 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StanowiskoDao {
-
-
-    public boolean createStanowisko(Stanowisko stanowisko) {
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            transaction = session.beginTransaction();
-            session.persist(stanowisko);
-            transaction.commit();
-            return transaction.getStatus() == TransactionStatus.COMMITTED;
-        } catch (Exception ex) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            ex.printStackTrace();
-        }
-        return false;
-    }
-
     public boolean saveStanowisko(Stanowisko stanowisko){
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = null;
         try {
             transaction = session.beginTransaction();
-
             session.save(stanowisko);
             transaction.commit();
-            System.out.println("Records inserted sucessessfully");
             return transaction.getStatus() == TransactionStatus.COMMITTED;
         } catch (HibernateException e) {
             transaction.rollback();

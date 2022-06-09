@@ -5,6 +5,7 @@ import car.serwis.database.dao.JednostkaDao;
 import car.serwis.database.dao.KategoriaDao;
 import car.serwis.database.dao.SamochodDao;
 import car.serwis.database.model.*;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.CurrentPracownik;
 import car.serwis.helpers.UpdateStatus;
 import car.serwis.helpers.WindowManagement;
@@ -196,7 +197,6 @@ public class MagazynController implements Initializable {
 
     // ################ KATEGORIA ################
     KategoriaDao kategoriaDao = new KategoriaDao();
-
     ObservableList<Kategoria> kategoriaObservableList = FXCollections.observableArrayList();
 
 
@@ -242,6 +242,19 @@ public class MagazynController implements Initializable {
         }
         refreshScreen(event);
     }
+
+    @FXML
+    private void changeNazwaKategoira(TableColumn.CellEditEvent<Kategoria, String> editEvent) {
+        Kategoria selectedKategoira = kategoriaTableView.getSelectionModel().getSelectedItem();
+        selectedKategoira.setNazwaKategori(editEvent.getNewValue().toString());
+        kategoriaDao.updateKategoira(selectedKategoira);
+        AlertPopUp.successAlert("Zmieniono nazwę kategori!");
+    }
+
+
+
+
+
 
     // ################ JEDNOSTKA ################
 

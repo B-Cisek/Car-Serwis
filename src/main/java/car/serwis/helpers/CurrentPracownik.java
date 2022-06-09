@@ -17,7 +17,7 @@ public class CurrentPracownik {
         pracownik = currentPracownik;
     }
 
-    public static   void setPracownikInfo(Text text) {
+    public static void setPracownikInfo(Text text) {
         text.setText(String.format("Pracownik: %s", CurrentPracownik.getCurrentPracownik().getLogin()));
     }
 }

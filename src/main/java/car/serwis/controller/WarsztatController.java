@@ -1,11 +1,12 @@
 package car.serwis.controller;
 
 import car.serwis.database.dao.ZlecenieDao;
-import car.serwis.database.model.*;
+import car.serwis.database.model.Kontrahent;
+import car.serwis.database.model.Pracownik;
+import car.serwis.database.model.Zlecenie;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.CurrentPracownik;
-import car.serwis.helpers.UpdateStatus;
 import car.serwis.helpers.WindowManagement;
-import car.serwis.helpers.ZlecenieStatus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -19,152 +20,169 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
+
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class WarsztatController implements Initializable {
 
-
     @FXML
-    private TableColumn<Zlecenie, String> dataPrzyjeciaMechanikZlecenia;
-
-    @FXML
-    private TableColumn<Zlecenie, String> dataPrzyjeciaWszystkieZlecenia;
+    private TableColumn<Zlecenie, LocalDate> dataPrzyjeciaMojeZleceniaTableColumn;
 
     @FXML
     private Button exitButton;
 
     @FXML
-    private BorderPane warsztatBorderPane;
+    private TableColumn<Zlecenie, Long> idMojeZleceniaTableColumn;
 
     @FXML
     private Button minimalizeButton;
 
     @FXML
-    private TableColumn<Zlecenie, Long> idMechanikZlecenia;
+    private TableView<Zlecenie> mojeZleceniaTableView;
 
     @FXML
-    private TableColumn<Zlecenie, Long> idWszystkieZlecenia;
-
-    @FXML
-    private TableView<Zlecenie> mechanikZleceniaTableView;
-
-    @FXML
-    private TableColumn<Zlecenie, String> opisMechanikZlecenia;
-
-    @FXML
-    private TableColumn<Zlecenie, String> opisWszystkieZlecenia;
+    private TableColumn<Zlecenie, String> opisMojeZleceniaTableColumn;
 
     @FXML
     private Text pracownikInfo;
 
     @FXML
-    private TableColumn<Zlecenie, String> pracownikMechanikZlecenia;
+    private TableColumn<Zlecenie, String> samochodMojeZleceniaTableColumn;
 
     @FXML
-    private TableColumn<Zlecenie, String> pracownikWszystkieZlecenia;
+    private TextField searchMojeZleceniaTableColumn;
 
     @FXML
-    private Button przyjmijZlecenie;
+    private TableColumn<Zlecenie, Enum> statusMojeZleceniaTableColumn;
 
     @FXML
-    private TableColumn<Zlecenie, String> samochodMechanikZlecenia;
+    private BorderPane warsztatBorderPane;
 
     @FXML
-    private TableColumn<Zlecenie, String> samochodWszystkieZlecenia;
+    private TableColumn<Zlecenie, LocalDate> dataPrzyjeciaWszystkieZleceniaTableColumn;
 
     @FXML
-    private TableColumn<Zlecenie, String> statusMechanikZlecenia;
+    private TableColumn<Zlecenie, Long> idWszystkieZleceniaTableColumn;
 
     @FXML
-    private TableColumn<Zlecenie, String> statusWszystkieZlecenia;
+    private TableColumn<Zlecenie, String> opisWszystkieZleceniaTableColumn;
+
+    @FXML
+    private Button przyjmijZlecenieButton;
+
+    @FXML
+    private TableColumn<Zlecenie, String> samochodWszystkieZleceniaTableColumn;
+
+    @FXML
+    private TextField searchWszystkieZleceniaTableColumn;
+
+    @FXML
+    private TableColumn<Zlecenie, Enum> statusWszystkieZleceniaTableColumn;
 
     @FXML
     private TableView<Zlecenie> wszystkieZleceniaTableView;
 
-    @FXML
-    private Button zmienStatus;
-
-    @FXML
-    private TextField searchMechanikZlecenia;
-
-    @FXML
-    private TextField searchWszystkieZlecenia;
-
-    ZlecenieDao zlecenieDao = new ZlecenieDao();
-    ObservableList<Zlecenie> wszystkieZleceniaObservableList = FXCollections.observableArrayList();
-    ObservableList<Zlecenie> mechanikZleceniaObservableList = FXCollections.observableArrayList();
     WindowManagement windowManagement = new WindowManagement();
+    ZlecenieDao zlecenieDao = new ZlecenieDao();
+    ObservableList<Zlecenie> mojeZleceniaObservableList = FXCollections.observableArrayList();
+    ObservableList<Zlecenie> wszystkieZleceniaObservableList = FXCollections.observableArrayList();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        windowManagement.initializeMinimalizeButton(minimalizeButton,warsztatBorderPane);
         windowManagement.initializeExitButton(exitButton,warsztatBorderPane);
+        windowManagement.initializeMinimalizeButton(minimalizeButton,warsztatBorderPane);
         CurrentPracownik.setPracownikInfo(pracownikInfo);
         setObservableList();
         fillTables();
         addTableSettings();
     }
 
-
     private void setObservableList() {
-        wszystkieZleceniaObservableList.clear();
-        wszystkieZleceniaObservableList.addAll(zlecenieDao.getZlecenie());
+        mojeZleceniaObservableList.clear();
+        mojeZleceniaObservableList.addAll(zlecenieDao.getMechanikZlecenia());
 
-        mechanikZleceniaObservableList.clear();
-        mechanikZleceniaObservableList.addAll(zlecenieDao.getZleceniaForPracownik());
+        wszystkieZleceniaObservableList.clear();
+        wszystkieZleceniaObservableList.addAll(zlecenieDao.getDostepneZlecenia());
 
     }
-
 
 
     private void fillTables() {
+        // MOJE ZLECENIA
+        idMojeZleceniaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idZlecenie"));
+        dataPrzyjeciaMojeZleceniaTableColumn.setCellValueFactory(new PropertyValueFactory<>("dataPrzyjecia"));
+        opisMojeZleceniaTableColumn.setCellValueFactory(new PropertyValueFactory<>("opisZlecenie"));
+        statusMojeZleceniaTableColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        samochodMojeZleceniaTableColumn.setCellValueFactory(new PropertyValueFactory<>("samochod"));
+
         // WSZYSTKIE ZLECENIA
-        idWszystkieZlecenia.setCellValueFactory(new PropertyValueFactory<>("idZlecenie"));
-        dataPrzyjeciaWszystkieZlecenia.setCellValueFactory(new PropertyValueFactory<>("dataPrzyjecia"));
-        opisWszystkieZlecenia.setCellValueFactory(new PropertyValueFactory<>("opisZlecenie"));
-        samochodWszystkieZlecenia.setCellValueFactory(new PropertyValueFactory<>("samochod"));
-        pracownikWszystkieZlecenia.setCellValueFactory(new PropertyValueFactory<>("pracownik"));
-        statusWszystkieZlecenia.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-
-
-        // MECHANIK ZLECENIA
-        idMechanikZlecenia.setCellValueFactory(new PropertyValueFactory<>("idZlecenie"));
-        dataPrzyjeciaMechanikZlecenia.setCellValueFactory(new PropertyValueFactory<>("dataPrzyjecia"));
-        opisMechanikZlecenia.setCellValueFactory(new PropertyValueFactory<>("opisZlecenie"));
-        samochodMechanikZlecenia.setCellValueFactory(new PropertyValueFactory<>("samochod"));
-        pracownikMechanikZlecenia.setCellValueFactory(new PropertyValueFactory<>("pracownik"));
-        statusMechanikZlecenia.setCellValueFactory(new PropertyValueFactory<>("status"));
-
-        opisMechanikZlecenia.setCellFactory(TextFieldTableCell.forTableColumn());
-        statusMechanikZlecenia.setCellValueFactory(statusMechanikZlecenia.getCellValueFactory());
-
-
+        idWszystkieZleceniaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idZlecenie"));
+        dataPrzyjeciaWszystkieZleceniaTableColumn.setCellValueFactory(new PropertyValueFactory<>("dataPrzyjecia"));
+        opisWszystkieZleceniaTableColumn.setCellValueFactory(new PropertyValueFactory<>("opisZlecenie"));
+        statusWszystkieZleceniaTableColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        samochodWszystkieZleceniaTableColumn.setCellValueFactory(new PropertyValueFactory<>("samochod"));
 
     }
 
-
     private void addTableSettings() {
-        mechanikZleceniaTableView.setEditable(true);
-        mechanikZleceniaTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        mechanikZleceniaTableView.setItems(getSortedListZleceniaWszystkie());
+        mojeZleceniaTableView.setEditable(true);
+        mojeZleceniaTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        mojeZleceniaTableView.setItems(getSortedListMojeZlecenia());
 
         wszystkieZleceniaTableView.setEditable(true);
         wszystkieZleceniaTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        wszystkieZleceniaTableView.setItems(getSortedListZleceniaMechanik());
+        wszystkieZleceniaTableView.setItems(getSortedListWszystkieZlecenia());
+
     }
 
-    private SortedList<Zlecenie> getSortedListZleceniaWszystkie() {
-        SortedList<Zlecenie> sortedList = new SortedList<>(getFilteredListZleceniaWszystkie());
+    // #################### MOJE ZLECENIA ####################
+
+    private SortedList<Zlecenie> getSortedListMojeZlecenia() {
+        SortedList<Zlecenie> sortedList = new SortedList<>(getFilteredListMojeZlecenia());
+        sortedList.comparatorProperty().bind(mojeZleceniaTableView.comparatorProperty());
+        return sortedList;
+    }
+
+    private FilteredList<Zlecenie> getFilteredListMojeZlecenia() {
+        FilteredList<Zlecenie> filteredList = new FilteredList<>(mojeZleceniaObservableList, b -> true);
+        searchMojeZleceniaTableColumn.textProperty().addListener((observable, oldValue, newValue) ->
+                filteredList.setPredicate(zlecenie -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                        return true;
+                    }
+
+                    String lowerCaseFilter = newValue.toLowerCase();
+
+                    if (zlecenie.getDataPrzyjecia().toString().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (zlecenie.getOpisZlecenie().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    }  else if (zlecenie.getStatus().toString().toLowerCase().contains(lowerCaseFilter)) {
+                        return true;
+                    } else if (zlecenie.getSamochod().toString().contains(lowerCaseFilter)) {
+                        return true;
+                    } else{
+                        return zlecenie.getIdZlecenie().toString().contains(lowerCaseFilter);
+                    }
+                }));
+        return filteredList;
+    }
+
+    // ############ WSZYSTKIE ZLECENIA ##################
+
+    private SortedList<Zlecenie> getSortedListWszystkieZlecenia() {
+        SortedList<Zlecenie> sortedList = new SortedList<>(getFilteredListWszyskieZlecenia());
         sortedList.comparatorProperty().bind(wszystkieZleceniaTableView.comparatorProperty());
         return sortedList;
     }
 
-    private FilteredList<Zlecenie> getFilteredListZleceniaWszystkie() {
+    private FilteredList<Zlecenie> getFilteredListWszyskieZlecenia() {
         FilteredList<Zlecenie> filteredList = new FilteredList<>(wszystkieZleceniaObservableList, b -> true);
-        searchWszystkieZlecenia.textProperty().addListener((observable, oldValue, newValue) ->
+        samochodWszystkieZleceniaTableColumn.textProperty().addListener((observable, oldValue, newValue) ->
                 filteredList.setPredicate(zlecenie -> {
                     if (newValue == null || newValue.isEmpty()) {
                         return true;
@@ -172,50 +190,15 @@ public class WarsztatController implements Initializable {
 
                     String lowerCaseFilter = newValue.toLowerCase();
 
-                    if (zlecenie.getDataPrzyjecia().toString().contains(lowerCaseFilter)) {
+                    if (zlecenie.getDataPrzyjecia().toString().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
                     } else if (zlecenie.getOpisZlecenie().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    }  else if (zlecenie.getStatus().toString().contains(lowerCaseFilter)) {
+                    }  else if (zlecenie.getStatus().toString().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
                     } else if (zlecenie.getSamochod().toString().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (zlecenie.getPracownik().toString().contains(lowerCaseFilter)){
-                        return true;
-                    }else{
-                        return zlecenie.getIdZlecenie().toString().contains(lowerCaseFilter);
-                    }
-                }));
-        return filteredList;
-    }
-
-    private SortedList<Zlecenie> getSortedListZleceniaMechanik() {
-        SortedList<Zlecenie> sortedList = new SortedList<>(getFilteredListZleceniaMechanik());
-        sortedList.comparatorProperty().bind(mechanikZleceniaTableView.comparatorProperty());
-        return sortedList;
-    }
-
-    private FilteredList<Zlecenie> getFilteredListZleceniaMechanik() {
-        FilteredList<Zlecenie> filteredList = new FilteredList<>(mechanikZleceniaObservableList, b -> true);
-        searchMechanikZlecenia.textProperty().addListener((observable, oldValue, newValue) ->
-                filteredList.setPredicate(zlecenie -> {
-                    if (newValue == null || newValue.isEmpty()) {
-                        return true;
-                    }
-
-                    String lowerCaseFilter = newValue.toLowerCase();
-
-                    if (zlecenie.getDataPrzyjecia().toString().contains(lowerCaseFilter)) {
-                        return true;
-                    } else if (zlecenie.getOpisZlecenie().toLowerCase().contains(lowerCaseFilter)) {
-                        return true;
-                    }  else if (zlecenie.getStatus().toString().contains(lowerCaseFilter)) {
-                        return true;
-                    } else if (zlecenie.getSamochod().toString().contains(lowerCaseFilter)) {
-                        return true;
-                    } else if (zlecenie.getPracownik().toString().contains(lowerCaseFilter)){
-                        return true;
-                    }else{
+                    } else{
                         return zlecenie.getIdZlecenie().toString().contains(lowerCaseFilter);
                     }
                 }));
@@ -223,35 +206,15 @@ public class WarsztatController implements Initializable {
     }
 
     @FXML
-    private void changeStatus(TableColumn.CellEditEvent<Zlecenie, ZlecenieStatus> editEvent) {
-        Zlecenie selectedZlecenie = mechanikZleceniaTableView.getSelectionModel().getSelectedItem();
-        selectedZlecenie.setStatus(ZlecenieStatus.valueOf(editEvent.getNewValue().toString()));
-        zlecenieDao.updateZlecenie(selectedZlecenie);
-    }
-
-    @FXML
-    private void addUpdateStatus(ActionEvent event) throws IOException {
-        NewWindowController.getUpdateStatus();
-        if(UpdateStatus.isStatusUpdated()) {
-            refreshScreen(event);
-            UpdateStatus.setIsStatusUpdated(false);
-        }
-    }
-
-    @FXML
-    void updateStatus(ActionEvent event) throws IOException {
-        ObservableList<Zlecenie> selectedRows = mechanikZleceniaTableView.getSelectionModel().getSelectedItems();
-        NewWindowController.getUpdateStatus();
+    public void przyjmijZlecenie(ActionEvent event) throws IOException {
+        ObservableList<Zlecenie> selectedRows = wszystkieZleceniaTableView.getSelectionModel().getSelectedItems();
         for (Zlecenie zlecenie : selectedRows) {
+            zlecenie.setPracownik(CurrentPracownik.getCurrentPracownik());
             zlecenieDao.updateZlecenie(zlecenie);
         }
         refreshScreen(event);
+        AlertPopUp.successAlert("Zlecenie przyjęte!");
     }
-
-
-
-
-
 
 
 

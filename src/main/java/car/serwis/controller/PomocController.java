@@ -26,6 +26,7 @@ public class PomocController implements Initializable {
     @FXML
     private Text pracownikInfo;
 
+
     WindowManagement windowManagement = new WindowManagement();
 
 

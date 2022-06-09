@@ -1,6 +1,7 @@
 package car.serwis.database.dao;
 
 import car.serwis.database.model.Kategoria;
+import car.serwis.database.model.Stanowisko;
 import car.serwis.database.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -30,13 +31,27 @@ public class KategoriaDao {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.remove(kategoria);
+            session.delete(kategoria);
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
                 transaction.rollback();
             }
             ex.printStackTrace();
+        }
+    }
+
+    public void delete(Kategoria kategoria) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            session.remove(kategoria);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) tx.rollback();
+        } finally {
+            session.close();
         }
     }
 
@@ -55,6 +70,20 @@ public class KategoriaDao {
         }
 
         return kategorieList;
+    }
+
+    public void updateKategoira(Kategoria kategoria) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.update(kategoria);
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        }
     }
 
 
