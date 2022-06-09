@@ -54,7 +54,6 @@ public class AddPracownikController implements Initializable {
     @FXML
     private AnchorPane addPracownikAnchorePane;
 
-    PracownikDao pracownikDao = new PracownikDao();
     WindowManagement windowManagement = new WindowManagement();
 
     @Override

@@ -55,8 +55,9 @@ public class NewWindowController {
         getPopUpWindow(ScenePath.ADD_CZESC.getPath());
     }
 
-    public static void getUpdateStatus() throws IOException {
+    public static void getNewStatusWindow() throws IOException {
         getPopUpWindow(ScenePath.UPDATE_STATUS.getPath());
     }
+
 
 }

@@ -1,10 +1,6 @@
 package car.serwis.controller;
 
-import car.serwis.database.dao.KontrahentDao;
-import car.serwis.database.dao.SamochodDao;
 import car.serwis.database.dao.ZlecenieDao;
-import car.serwis.database.model.Kontrahent;
-import car.serwis.database.model.Samochod;
 import car.serwis.database.model.Zlecenie;
 import car.serwis.helpers.UpdateStatus;
 import car.serwis.helpers.ZlecenieStatus;
@@ -45,7 +41,6 @@ public class UpdateStatusController implements Initializable {
     private Text errorText;
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeExitButton();
@@ -64,9 +59,10 @@ public class UpdateStatusController implements Initializable {
         return list;
     }
 
+
     private ObservableList<Zlecenie> getZlecenieObservableList() {
         ObservableList<Zlecenie> list = FXCollections.observableArrayList();
-        list.addAll(new ZlecenieDao().getZlecenie());
+        list.addAll(new ZlecenieDao().getMechanikZlecenia());
         return list;
     }
 
@@ -102,15 +98,10 @@ public class UpdateStatusController implements Initializable {
 
     private Zlecenie updateZlecenieFromInput() {
         Zlecenie zlecenie = new Zlecenie();
-
+        zlecenie = idZlecnieComboBox.getValue();
         zlecenie.setStatus(nowyStatusComboBox.getValue());
-
         return zlecenie;
     }
-
-
-
-
 
 
     private void delayWindowClose(ActionEvent event) {
@@ -121,19 +112,19 @@ public class UpdateStatusController implements Initializable {
 
     @FXML
     private void closeWindow(ActionEvent event) {
-        Node source = (Node)  event.getSource();
-        Stage stage  = (Stage) source.getScene().getWindow();
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
 
 
-    private void initializeExitButton(){
+    private void initializeExitButton() {
         anulujButton.setOnAction((x) -> {
             getStage().close();
         });
     }
 
-    private Stage getStage(){
+    private Stage getStage() {
         return (Stage) updateStatusAnchorePane.getScene().getWindow();
     }
 }

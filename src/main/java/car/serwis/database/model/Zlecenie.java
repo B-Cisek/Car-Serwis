@@ -73,4 +73,9 @@ public class Zlecenie {
         this.status = status;
     }
 
+
+    @Override
+    public String toString() {
+        return "ID Zlecenia: " + idZlecenie;
+    }
 }

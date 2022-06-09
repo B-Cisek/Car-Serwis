@@ -150,7 +150,7 @@
               </columns>
             </TableView>
             <TextField fx:id="searchMojeZleceniaTableColumn" layoutX="821.0" layoutY="87.0" prefHeight="25.0" prefWidth="734.0" />
-            <Button fx:id="zmienStatusButton" layoutX="1394.0" layoutY="35.0" mnemonicParsing="false" styleClass="add-button" text="Zmień status" />
+            <Button fx:id="zmienStatusButton" layoutX="1394.0" layoutY="35.0" mnemonicParsing="false" onAction="#changeStatusWindow" styleClass="add-button" text="Zmień status" />
             <Text layoutX="832.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TWOJE ZLECENIA">
                <font>
                   <Font name="System Bold" size="27.0" />

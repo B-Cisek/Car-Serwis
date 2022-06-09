@@ -1,11 +1,10 @@
 package car.serwis.controller;
 
 import car.serwis.database.dao.ZlecenieDao;
-import car.serwis.database.model.Kontrahent;
-import car.serwis.database.model.Pracownik;
 import car.serwis.database.model.Zlecenie;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.CurrentPracownik;
+import car.serwis.helpers.UpdateStatus;
 import car.serwis.helpers.WindowManagement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
+
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
@@ -85,6 +84,9 @@ public class WarsztatController implements Initializable {
     @FXML
     private TableView<Zlecenie> wszystkieZleceniaTableView;
 
+    @FXML
+    private Button zmienStatusButton;
+
     WindowManagement windowManagement = new WindowManagement();
     ZlecenieDao zlecenieDao = new ZlecenieDao();
     ObservableList<Zlecenie> mojeZleceniaObservableList = FXCollections.observableArrayList();
@@ -93,8 +95,8 @@ public class WarsztatController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        windowManagement.initializeExitButton(exitButton,warsztatBorderPane);
-        windowManagement.initializeMinimalizeButton(minimalizeButton,warsztatBorderPane);
+        windowManagement.initializeExitButton(exitButton, warsztatBorderPane);
+        windowManagement.initializeMinimalizeButton(minimalizeButton, warsztatBorderPane);
         CurrentPracownik.setPracownikInfo(pracownikInfo);
         setObservableList();
         fillTables();
@@ -161,15 +163,24 @@ public class WarsztatController implements Initializable {
                         return true;
                     } else if (zlecenie.getOpisZlecenie().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    }  else if (zlecenie.getStatus().toString().toLowerCase().contains(lowerCaseFilter)) {
+                    } else if (zlecenie.getStatus().toString().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
                     } else if (zlecenie.getSamochod().toString().contains(lowerCaseFilter)) {
                         return true;
-                    } else{
+                    } else {
                         return zlecenie.getIdZlecenie().toString().contains(lowerCaseFilter);
                     }
                 }));
         return filteredList;
+    }
+
+    @FXML
+    private void changeStatusWindow(ActionEvent event) throws IOException {
+        NewWindowController.getNewStatusWindow();
+        if (UpdateStatus.isStatusUpdated()) {
+            refreshScreen(event);
+            UpdateStatus.setIsStatusUpdated(false);
+        }
     }
 
     // ############ WSZYSTKIE ZLECENIA ##################
@@ -194,11 +205,11 @@ public class WarsztatController implements Initializable {
                         return true;
                     } else if (zlecenie.getOpisZlecenie().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    }  else if (zlecenie.getStatus().toString().toLowerCase().contains(lowerCaseFilter)) {
+                    } else if (zlecenie.getStatus().toString().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
                     } else if (zlecenie.getSamochod().toString().contains(lowerCaseFilter)) {
                         return true;
-                    } else{
+                    } else {
                         return zlecenie.getIdZlecenie().toString().contains(lowerCaseFilter);
                     }
                 }));
@@ -215,9 +226,6 @@ public class WarsztatController implements Initializable {
         refreshScreen(event);
         AlertPopUp.successAlert("Zlecenie przyjęte!");
     }
-
-
-
 
 
     @FXML
