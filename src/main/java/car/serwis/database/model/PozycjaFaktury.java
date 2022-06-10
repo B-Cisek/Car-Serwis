@@ -40,4 +40,6 @@ public class PozycjaFaktury {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_faktura", referencedColumnName = "id_faktura")
     private Faktura faktura;
+
+
 }

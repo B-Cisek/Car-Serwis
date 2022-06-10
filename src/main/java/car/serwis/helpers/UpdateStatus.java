@@ -15,6 +15,8 @@ public final class UpdateStatus {
     private static boolean isZlecenieAdded;
     private static boolean isCzescAdded;
     private static boolean isStatusUpdated;
+    private static boolean isFakturaAdded;
+    private static boolean isPozycjaAdded;
 
     public static boolean isStanowiskoAdded() {
         return isStanowiskoAdded;
@@ -94,6 +96,22 @@ public final class UpdateStatus {
 
     public static void setIsStatusUpdated(boolean isStatusUpdated) {
         UpdateStatus.isStatusUpdated = isStatusUpdated;
+    }
+
+    public static boolean isFakturaAdded() {
+        return isFakturaAdded;
+    }
+
+    public static void setIsFakturaAdded(boolean isFakturaAdded) {
+        UpdateStatus.isFakturaAdded = isFakturaAdded;
+    }
+
+    public static boolean isPozycjaAdded() {
+        return isPozycjaAdded;
+    }
+
+    public static void setIsPozycjaAdded(boolean isPozycjaAdded) {
+        UpdateStatus.isPozycjaAdded = isPozycjaAdded;
     }
 
 

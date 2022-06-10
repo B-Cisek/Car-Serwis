@@ -59,5 +59,13 @@ public class NewWindowController {
         getPopUpWindow(ScenePath.UPDATE_STATUS.getPath());
     }
 
+    public static void getNewFakturaWindow() throws IOException {
+        getPopUpWindow(ScenePath.ADD_FAKTURA.getPath());
+    }
+
+    public static void getNewPozycjaWindow() throws IOException {
+        getPopUpWindow(ScenePath.ADD_POZYCJA.getPath());
+    }
+
 
 }
