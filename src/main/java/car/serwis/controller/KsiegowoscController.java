@@ -29,6 +29,7 @@ public class KsiegowoscController implements Initializable {
     WindowManagement windowManagement = new WindowManagement();
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         windowManagement.initializeExitButton(exitButton,ksiegowoscBorderPane);

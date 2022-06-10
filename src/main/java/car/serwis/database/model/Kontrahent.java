@@ -78,6 +78,9 @@ public class Kontrahent {
     @OneToMany(mappedBy = "kontrahent", fetch = FetchType.LAZY)
     private Set<Zlecenie> zlecenia = new HashSet<>();
 
+    @OneToMany(mappedBy = "kontrahent", fetch = FetchType.LAZY)
+    private Set<Faktura> faktury = new HashSet<>();
+
     @Override
     public String toString() {
         return nazwaFirmy;

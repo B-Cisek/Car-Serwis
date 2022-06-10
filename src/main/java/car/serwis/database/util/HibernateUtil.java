@@ -19,9 +19,9 @@ public class HibernateUtil {
 
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-                settings.put(Environment.URL, "jdbc:mysql://localhost/serwis?serverTimezone=UTC");
-                settings.put(Environment.USER, "root");
-                settings.put(Environment.PASS, "");
+                settings.put(Environment.URL, "jdbc:mysql://78.46.91.52/bartlom1_serwis?serverTimezone=UTC");
+                settings.put(Environment.USER, "bartlom1_serwis");
+                settings.put(Environment.PASS, "serwis");
                 settings.put(Environment.POOL_SIZE,"200");
                 settings.put(Environment.AUTO_CLOSE_SESSION,"true");
                 //settings.put(Environment.AUTOCOMMIT,"true");
@@ -40,6 +40,8 @@ public class HibernateUtil {
                 configuration.addAnnotatedClass(Kontrahent.class);
                 configuration.addAnnotatedClass(Czesc.class);
                 configuration.addAnnotatedClass(Zlecenie.class);
+                configuration.addAnnotatedClass(Faktura.class);
+                configuration.addAnnotatedClass(PozycjaFaktury.class);
 
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
