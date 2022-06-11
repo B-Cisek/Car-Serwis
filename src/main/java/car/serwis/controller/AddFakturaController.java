@@ -93,6 +93,7 @@ public class AddFakturaController implements Initializable {
     PozycjaFaktury pozycja = new PozycjaFaktury();
     Set<PozycjaFaktury> listaPozycji = new HashSet<>();
     FakturaDao fakturaDao = new FakturaDao();
+    Faktura faktura = new Faktura();
     PozycjaFakturyDao pozycjaFakturyDao = new PozycjaFakturyDao();
 
     @Override
@@ -145,21 +146,21 @@ public class AddFakturaController implements Initializable {
             if (validateFakturaInputs()){
                 Faktura faktura = createFakturaFromInput();
                 boolean isSaved = new FakturaDao().createFaktura(faktura);
+                for (PozycjaFaktury pozycjaFaktury: pozycjeObservableList) {
+                    pozycja.setOpisPozycji(pozycjaFaktury.getOpisPozycji());
+                    pozycja.setIlosc(pozycjaFaktury.getIlosc());
+                    pozycja.setCena(pozycjaFaktury.getCena());
+                    pozycja.setFaktura(faktura);
+                    pozycjaFakturyDao.createPozycjaFaktury(pozycja);
+                }
+                if (isSaved) {
+                    UpdateStatus.setIsFakturaAdded(true);
+                    errorTextFaktura.setText("Faktura dodana!");
+                    errorTextFaktura.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
+                    delayWindowClose(event);
+                }
             }
-
-            for (PozycjaFaktury pozycjaFaktury: pozycjeObservableList) {
-                pozycja.setOpisPozycji(pozycjaFaktury.getOpisPozycji());
-                pozycja.setIlosc(pozycjaFaktury.getIlosc());
-                pozycja.setCena(pozycjaFaktury.getCena());
-                pozycja.setFaktura(faktura);
-                pozycjaFakturyDao.createPozycjaFaktury(pozycja);
-                //listaPozycji.add(pozycja);
-            }
-
-
-            //System.out.println(listaPozycji.toString());
             pozycjaTableView.setItems(pozycjeObservableList);
-            delayWindowClose(event);
         });
     }
 
@@ -171,8 +172,6 @@ public class AddFakturaController implements Initializable {
 
 
     private Faktura createFakturaFromInput() {
-        Faktura faktura = new Faktura();
-
         faktura.setNumerFaktury(numerFakturyTextField.getText());
         faktura.setDataWystawienia(dataWystawieniaDatePicker.getValue());
         faktura.setMiejsceWystawienia(miejsceWystawieniaTextField.getText());

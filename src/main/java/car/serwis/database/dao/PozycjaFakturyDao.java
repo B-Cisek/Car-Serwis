@@ -1,11 +1,16 @@
 package car.serwis.database.dao;
 
+import car.serwis.database.model.Faktura;
 import car.serwis.database.model.PozycjaFaktury;
 import car.serwis.database.model.Pracownik;
 import car.serwis.database.util.HibernateUtil;
+import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PozycjaFakturyDao {
     public boolean createPozycjaFaktury(PozycjaFaktury pozycjaFaktury) {
@@ -22,5 +27,16 @@ public class PozycjaFakturyDao {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    public List<PozycjaFaktury> getPozycjaFakturyForPdf(Faktura faktura) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            TypedQuery<PozycjaFaktury> query = session.createQuery("SELECT pf FROM PozycjaFaktury pf WHERE pf.faktura = :id", PozycjaFaktury.class);
+            query.setParameter("id", faktura);
+            return query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 }

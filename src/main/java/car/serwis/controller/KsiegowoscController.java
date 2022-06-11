@@ -1,8 +1,11 @@
 package car.serwis.controller;
 
 import car.serwis.database.dao.FakturaDao;
+import car.serwis.database.dao.PozycjaFakturyDao;
 import car.serwis.database.model.Faktura;
-import car.serwis.database.model.Kontrahent;
+import car.serwis.database.model.PozycjaFaktury;
+import car.serwis.database.model.Stanowisko;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.CurrentPracownik;
 import car.serwis.helpers.UpdateStatus;
 import car.serwis.helpers.WindowManagement;
@@ -15,13 +18,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class KsiegowoscController implements Initializable {
@@ -58,18 +61,22 @@ public class KsiegowoscController implements Initializable {
     @FXML
     private TextField searchBarFaktura;
 
+    @FXML
+    private Button generujPdfButton;
+
     ObservableList<Faktura> fakturaObservableList = FXCollections.observableArrayList();
     WindowManagement windowManagement = new WindowManagement();
     FakturaDao fakturaDao = new FakturaDao();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        windowManagement.initializeExitButton(exitButton,ksiegowoscBorderPane);
-        windowManagement.initializeMinimalizeButton(minimalizeButton,ksiegowoscBorderPane);
+        windowManagement.initializeExitButton(exitButton, ksiegowoscBorderPane);
+        windowManagement.initializeMinimalizeButton(minimalizeButton, ksiegowoscBorderPane);
         CurrentPracownik.setPracownikInfo(pracownikInfo);
         setObservableList();
         fillTables();
         addTableSettings();
+        pdfGenerate();
     }
 
     @FXML
@@ -84,27 +91,20 @@ public class KsiegowoscController implements Initializable {
     private void setObservableList() {
         fakturaObservableList.clear();
         fakturaObservableList.addAll(fakturaDao.displayRecords());
-
     }
 
     private void fillTables() {
-        // Faktura
         idFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idFaktura"));
         numerFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("numerFaktury"));
         miejsceFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("miejsceWystawienia"));
         dataFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("dataWystawienia"));
         kontrahentFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("kontrahent"));
-
-
-
     }
 
     private void addTableSettings() {
         fakturaTableView.setEditable(true);
         fakturaTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         fakturaTableView.setItems(getSortedListFaktura());
-
-
     }
 
     private SortedList<Faktura> getSortedListFaktura() {
@@ -127,20 +127,30 @@ public class KsiegowoscController implements Initializable {
                         return true;
                     } else if (faktura.getDataWystawienia().toString().contains(lowerCaseFilter)) {
                         return true;
-                    }  else if (faktura.getMiejsceWystawienia().toLowerCase().contains(lowerCaseFilter)) {
+                    } else if (faktura.getMiejsceWystawienia().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
                     } else if (faktura.getKontrahent().toString().contains(lowerCaseFilter)) {
                         return true;
-                    } else{
+                    } else {
                         return faktura.getIdFaktura().toString().contains(lowerCaseFilter);
                     }
                 }));
         return filteredList;
     }
 
+    // ########### PDF Generator #####################
 
-
-
+    private void pdfGenerate() {
+        generujPdfButton.setOnAction((x) -> {
+            Long selectedRow = fakturaTableView.getSelectionModel().getSelectedItem().getIdFaktura();
+            Faktura faktura = fakturaDao.getFakturaID(selectedRow);
+            System.out.println("###############################");
+            System.out.println(faktura.getKontrahent().getImie());
+            List<PozycjaFaktury> list = new PozycjaFakturyDao().getPozycjaFakturyForPdf(faktura);
+            System.out.println("###############################");
+            System.out.println(list.get(0).);
+        });
+    }
 
 
     @FXML
@@ -176,7 +186,7 @@ public class KsiegowoscController implements Initializable {
 
     @FXML
     void refreshScreen(ActionEvent event) throws IOException {
-        SceneController.getWarsztatScene(event);
+        SceneController.getKsiegowoscScene(event);
     }
 }
 

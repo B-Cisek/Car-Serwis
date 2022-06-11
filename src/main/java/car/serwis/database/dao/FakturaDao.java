@@ -2,7 +2,11 @@ package car.serwis.database.dao;
 
 import car.serwis.database.model.Faktura;
 import car.serwis.database.model.Pracownik;
+import car.serwis.database.model.Stanowisko;
+import car.serwis.database.model.Zlecenie;
 import car.serwis.database.util.HibernateUtil;
+import car.serwis.helpers.CurrentPracownik;
+import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
@@ -50,5 +54,26 @@ public class FakturaDao {
             }
         }
         return fakturaList;
+    }
+
+
+    public List<Faktura> getFakturaForPdf(Long id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            TypedQuery<Faktura> query = session.createQuery("SELECT f FROM Faktura f WHERE f.idFaktura = :id", Faktura.class);
+            query.setParameter("id", id);
+            return query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    public Faktura getFakturaID(Long id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.find(Faktura.class, id);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 }
