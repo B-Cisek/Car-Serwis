@@ -1,9 +1,6 @@
 package car.serwis.controller;
 
-import car.serwis.database.dao.CzescDao;
-import car.serwis.database.dao.JednostkaDao;
-import car.serwis.database.dao.KategoriaDao;
-import car.serwis.database.dao.SamochodDao;
+import car.serwis.database.dao.*;
 import car.serwis.database.model.*;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.CurrentPracownik;
@@ -24,6 +21,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class MagazynController implements Initializable {
@@ -113,6 +111,9 @@ public class MagazynController implements Initializable {
     @FXML
     private BorderPane magazynBorderPane;
 
+    @FXML
+    private ComboBox<Kategoria> kategoriaFilterComboBox;
+
     WindowManagement windowManagement = new WindowManagement();
 
 
@@ -166,6 +167,7 @@ public class MagazynController implements Initializable {
         kategoriaCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("kategoria"));
         jednostkaCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("jednostka"));
         samochodCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("samochod"));
+
         nazwaCzesciTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         opisCzescTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         producentCzescTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -193,7 +195,7 @@ public class MagazynController implements Initializable {
 
         czescTableView.setEditable(true);
         czescTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        czescTableView.setItems(getFilteredListCzesc());
+        czescTableView.setItems(getSortedListCzesc());
     }
 
 
@@ -396,11 +398,11 @@ public class MagazynController implements Initializable {
         samochodDao.updateSamochod(selectedSamochod);
         AlertPopUp.successAlert("Zmieniono model samochodu!");
     }
+    //########################################################################################################
 
 
-    // ############ CZĘŚC #####################################
+    // ############ CZĘŚC ####################################################################################
     ObservableList<Czesc> czescObservableList = FXCollections.observableArrayList();
-
     CzescDao czescDao = new CzescDao();
 
     @FXML
@@ -419,6 +421,7 @@ public class MagazynController implements Initializable {
             czescDao.deleteCzesc(czesc);
         }
         refreshScreen(event);
+        AlertPopUp.successAlert("Część usunięta!");
     }
 
     private SortedList<Czesc> getSortedListCzesc() {
@@ -458,6 +461,56 @@ public class MagazynController implements Initializable {
                 }));
         return filteredList;
     }
+
+    @FXML
+    private void changeNazwaCzesci(TableColumn.CellEditEvent<Kategoria, String> editEvent) {
+        Czesc selectedCzesc = czescTableView.getSelectionModel().getSelectedItem();
+        selectedCzesc.setNazwaCzesci(editEvent.getNewValue().toString());
+        czescDao.updateCzesc(selectedCzesc);
+        AlertPopUp.successAlert("Zmieniono nazwę części!");
+    }
+
+    @FXML
+    private void changeProducentCzesci(TableColumn.CellEditEvent<Kategoria, String> editEvent) {
+        Czesc selectedCzesc = czescTableView.getSelectionModel().getSelectedItem();
+        selectedCzesc.setProducent(editEvent.getNewValue().toString());
+        czescDao.updateCzesc(selectedCzesc);
+        AlertPopUp.successAlert("Zmieniono producenta części!");
+    }
+
+    @FXML
+    private void changeOpisCzesci(TableColumn.CellEditEvent<Kategoria, String> editEvent) {
+        Czesc selectedCzesc = czescTableView.getSelectionModel().getSelectedItem();
+        selectedCzesc.setOpisCzesc(editEvent.getNewValue().toString());
+        czescDao.updateCzesc(selectedCzesc);
+        AlertPopUp.successAlert("Zmieniono opis części!");
+    }
+
+
+    // TODO Filtrowanie
+//    @FXML
+//    private void filterCzesc(ActionEvent event) throws IOException {
+//        Kategoria kategoria;
+//        kategoria = kategoriaFilterComboBox.getValue();
+//        ArrayList<Czesc> list = new ArrayList<>(new CzescDao().getCzescForKategoria(kategoria));
+//
+//        czescObservableList.clear();
+//        czescObservableList.addAll(list);
+//
+//
+//    }
+
+//    private ObservableList<Kategoria> getKategoriaObservableList() {
+//        ObservableList<Kategoria> list = FXCollections.observableArrayList();
+//        list.addAll((Kategoria) new CzescDao().getKategoira());
+//        return list;
+//    }
+
+//    @FXML
+//    private void clearFiltr(ActionEvent event) throws IOException {
+//       refreshScreen(event);
+//       // kategoriaFilterComboBox.getSelectionModel().clearSelection();
+//    }
 
 
     @FXML

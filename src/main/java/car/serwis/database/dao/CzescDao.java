@@ -1,9 +1,9 @@
 package car.serwis.database.dao;
 
-import car.serwis.database.model.Czesc;
-import car.serwis.database.model.Pracownik;
+import car.serwis.database.model.*;
 import car.serwis.database.util.HibernateUtil;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
@@ -79,4 +79,16 @@ public class CzescDao {
             ex.printStackTrace();
         }
     }
+
+    public List<Czesc> getCzescForKategoria(Kategoria kategoria) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            TypedQuery<Czesc> query = session.createQuery("SELECT c FROM Czesc c WHERE c.kategoria = :kategoria", Czesc.class);
+            query.setParameter("kategoria", kategoria);
+            return query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
 }

@@ -2,6 +2,7 @@ package car.serwis.controller;
 
 import car.serwis.database.dao.*;
 import car.serwis.database.model.*;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
@@ -92,30 +93,32 @@ public class AddCzescController implements Initializable {
                 if (isSaved) {
                     UpdateStatus.setIsCzescAdded(true);
                     errorText.setText("Część dodana!");
-                    errorText.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
+                    errorText.setStyle("-fx-fill: #2CC97E; -fx-font-size: 15px;");
                     delayWindowClose(event);
+                    AlertPopUp.successAlert("Część dodana!");
                 }
             }
         });
     }
 
     private boolean validateInputs() {
-        if (nazwaCzescTextField.getText().equals("")) {
+        if (nazwaCzescTextField.getText().isBlank()) {
             errorText.setText("*Pole nazwa nie może być puste!");
             return false;
         }
 
-        if (opisCzescTextArea.getText().equals("")){
+        if (opisCzescTextArea.getText().isBlank()){
             errorText.setText("*Pole opis nie może być puste!");
             return false;
         }
 
-        if (producentCzescTextField.getText().equals("")){
+        if (producentCzescTextField.getText().isBlank()){
             errorText.setText("*Pole producent nie może być puste!");
             return false;
         }
 
-        if (iloscCzescTextField.getText().equals("")){
+        // TODO walidacja double
+        if (iloscCzescTextField.getText().isBlank()){
             errorText.setText("*Pole ilość nie może być puste!");
             return false;
         }

@@ -77,7 +77,6 @@ public class LoginController implements Initializable {
         }
 
         infoLine.setText("Welcome, " + CurrentPracownik.getCurrentPracownik().getLogin() + "!");
-        //infoLine.setText("Redirecting to main dashboard...");
 
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
         delay.setOnFinished( event2 -> {
@@ -91,11 +90,18 @@ public class LoginController implements Initializable {
     }
 
     boolean validFields() {
-        return !loginTextField.getText().isEmpty() && !hasloTextField.getText().isEmpty();
+        return !loginTextField.getText().isBlank() && !hasloTextField.getText().isBlank();
     }
 
     private boolean validateLogin() {
+        // TODO walidacja logowania
         Pracownik pracownik = pracownikDao.getConnectedPracownik(loginTextField.getText(), hasloTextField.getText());
+        if (pracownik.getLogin().equals(loginTextField.getText())){
+            System.out.println("te same");
+        }else {
+            System.out.println("nie");
+        }
+        System.out.println(pracownik.getLogin() + " || " + pracownik.getHaslo());
         if (pracownik == null) {
             return false;
         }
@@ -103,53 +109,6 @@ public class LoginController implements Initializable {
         CurrentPracownik.setCurrentPracownik(pracownik);
         return true;
     }
-
-//    private void initializeExitButton(){
-//        exitButton.setOnAction((x) -> {
-//            getStage().close();
-//        });
-//    }
-
-//    private void initializeLoginButton() {
-//        loginButton.setOnAction((x) -> {
-//            AuthenticationUser();
-//        });
-//    }
-
-//    private Stage getStage(){
-//        return (Stage) loginAnchorPane.getScene().getWindow();
-//    }
-
-
-
-
-//    private void openAppAndCloseLoginStage(){
-//        Stage appStage = new Stage();
-//        Parent appRoot = null;
-//
-//        try {
-//
-//            appRoot = FXMLLoader.load(getClass().getResource(ScenePath.APP.getPath()));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Scene scene = new Scene(appRoot,1600,900);
-//        appStage.setTitle(APP_TITLE);
-//        appStage.setScene(scene);
-//        appStage.show();
-//        getStage().close();
-//    }
-//
-//    private void AuthenticationUser(){
-//        String login = loginTextField.getText();
-//        String haslo = hasloTextField.getText();
-//
-//        if (login.equals("admin") && haslo.equals("admin")){
-//            openAppAndCloseLoginStage();
-//        }else {
-//
-//        }
-//    }
 
 
     private void close() {

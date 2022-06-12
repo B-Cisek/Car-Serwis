@@ -77,7 +77,7 @@ public class SceneController {
         window.setScene(pilpitScene);
         window.setHeight(prevHeight);
         window.setWidth(prevWidth);
-        //window.setMaximized(true);
+        //window.centerOnScreen();
         //TODO zmiana centrowania
         window.show();
     }
