@@ -48,10 +48,11 @@ public class SamochodDao {
 
     public List getSamochody() {
         Transaction transaction = null;
+        Session session = null;
         List samochodyList = new ArrayList();
         try {
             // Getting Session Object From SessionFactory
-            Session session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             // Getting Transaction Object From Session Object
             transaction = session.beginTransaction();
 
@@ -61,6 +62,8 @@ public class SamochodDao {
                 transaction.rollback();
             }
             ex.printStackTrace();
+        }finally {
+            session.close();
         }
 
         return samochodyList;

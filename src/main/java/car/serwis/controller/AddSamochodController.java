@@ -1,12 +1,9 @@
 package car.serwis.controller;
 
 import car.serwis.database.dao.SamochodDao;
-import car.serwis.database.dao.StanowiskoDao;
 import car.serwis.database.model.Samochod;
-import car.serwis.database.model.Stanowisko;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,6 +39,13 @@ public class AddSamochodController implements Initializable {
     @FXML
     private Text errorText;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initializeExitButton();
+        saveNewSamochod();
+
+    }
+
 
     private void saveNewSamochod() {
         addSamochodButton.setOnAction((event) -> {
@@ -53,21 +57,22 @@ public class AddSamochodController implements Initializable {
                 if (isSaved) {
                     UpdateStatus.setIsSamochodAdded(true);
                     errorText.setText("Samochód dodany!");
-                    errorText.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
+                    errorText.setStyle("-fx-fill: #2CC97E; -fx-font-size: 15px;");
                     delayWindowClose(event);
+                    AlertPopUp.successAlert("Samochód dodany!");
                 }
             }
         });
     }
 
     private boolean validateInputs() {
-        if (markaTextField.getText().equals("")) {
-            errorText.setText("*Pole nazwa nie może być puste!");
+        if (markaTextField.getText().isBlank()) {
+            errorText.setText("*Pole marka nie może być puste!");
             return false;
         }
 
-        if (modelTextField.getText().equals("")) {
-            errorText.setText("*Pole nazwa nie może być puste!");
+        if (modelTextField.getText().isBlank()) {
+            errorText.setText("*Pole model nie może być puste!");
             return false;
         }
 
@@ -110,12 +115,5 @@ public class AddSamochodController implements Initializable {
 
     private Stage getStage(){
         return (Stage) addSamochodAnchorePane.getScene().getWindow();
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeExitButton();
-        saveNewSamochod();
-
     }
 }

@@ -324,15 +324,15 @@ public class MagazynController implements Initializable {
         selectedJednostka.setNazwaJednostki(editEvent.getNewValue());
         jednostkaDao.updateJednostka(selectedJednostka);
         AlertPopUp.successAlert("Zmieniono nazwę jednostki!");
-
     }
 
+    //########################################################################################################
 
-    // ################ SAMOCHOD ################
+
+    // ################ SAMOCHOD #############################################################################
+
     ObservableList<Samochod> samochodObservableList = FXCollections.observableArrayList();
-
     SamochodDao samochodDao = new SamochodDao();
-
 
     @FXML
     private void addSamochodWindow(ActionEvent event) throws IOException {
@@ -375,9 +375,10 @@ public class MagazynController implements Initializable {
         ObservableList<Samochod> selectedRows = samochodyTableView.getSelectionModel().getSelectedItems();
         for (Samochod samochod : selectedRows) {
             samochodDao.deleteSamochod(samochod);
-            System.out.println(samochod.getIdSamochod());
+            samochodObservableList.remove(samochod);
         }
-        refreshScreen(event);
+        //refreshScreen(event);
+        AlertPopUp.successAlert("Samochód usunięty!");
     }
 
     @FXML
@@ -385,6 +386,7 @@ public class MagazynController implements Initializable {
         Samochod selectedSamochod = samochodyTableView.getSelectionModel().getSelectedItem();
         selectedSamochod.setMarka(editEvent.getNewValue().toString());
         samochodDao.updateSamochod(selectedSamochod);
+        AlertPopUp.successAlert("Zmieniono markę samochodu!");
     }
 
     @FXML
@@ -392,6 +394,7 @@ public class MagazynController implements Initializable {
         Samochod selectedSamochod = samochodyTableView.getSelectionModel().getSelectedItem();
         selectedSamochod.setModel(editEvent.getNewValue().toString());
         samochodDao.updateSamochod(selectedSamochod);
+        AlertPopUp.successAlert("Zmieniono model samochodu!");
     }
 
 
