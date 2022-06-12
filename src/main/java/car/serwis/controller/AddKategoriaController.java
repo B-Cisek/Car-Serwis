@@ -4,7 +4,6 @@ import car.serwis.database.dao.KategoriaDao;
 import car.serwis.database.model.Kategoria;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
-import car.serwis.helpers.WindowManagement;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

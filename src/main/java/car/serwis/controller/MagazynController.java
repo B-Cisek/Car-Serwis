@@ -145,7 +145,9 @@ public class MagazynController implements Initializable {
         idJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idJednostka"));
         nazwaJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaJednostki"));
         skrotJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("skrot"));
+
         skrotJednostkaTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        nazwaJednostkaTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
 
         // Samochod Table View
@@ -256,15 +258,10 @@ public class MagazynController implements Initializable {
 
 
 
-
-
-
-    // ################ JEDNOSTKA ################
+    // ################ JEDNOSTKA ############################################################################
 
     ObservableList<Jednostka> jednostkaObservableList = FXCollections.observableArrayList();
-
     JednostkaDao jednostkaDao = new JednostkaDao();
-
 
     @FXML
     private void addJednostkaWindow(ActionEvent event) throws IOException {
@@ -307,9 +304,10 @@ public class MagazynController implements Initializable {
         ObservableList<Jednostka> selectedRows = jednostkiTableView.getSelectionModel().getSelectedItems();
         for (Jednostka jednostka : selectedRows) {
             jednostkaDao.deleteJednostka(jednostka);
+            jednostkaObservableList.remove(jednostka);
         }
-        refreshScreen(event);
-        AlertPopUp.successAlert("Usunięto jednostkę!");
+        //refreshScreen(event);
+        AlertPopUp.successAlert("Jednostka ununięta!");
     }
 
     @FXML
@@ -317,6 +315,16 @@ public class MagazynController implements Initializable {
         Jednostka selectedJednostka = jednostkiTableView.getSelectionModel().getSelectedItem();
         selectedJednostka.setSkrot(editEvent.getNewValue());
         jednostkaDao.updateJednostka(selectedJednostka);
+        AlertPopUp.successAlert("Zmieniono skrót jednostki!");
+    }
+
+    @FXML
+    private void changeNazwaJednostkiCell(TableColumn.CellEditEvent<Jednostka, String> editEvent) {
+        Jednostka selectedJednostka = jednostkiTableView.getSelectionModel().getSelectedItem();
+        selectedJednostka.setNazwaJednostki(editEvent.getNewValue());
+        jednostkaDao.updateJednostka(selectedJednostka);
+        AlertPopUp.successAlert("Zmieniono nazwę jednostki!");
+
     }
 
 

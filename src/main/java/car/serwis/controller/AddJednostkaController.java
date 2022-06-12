@@ -1,9 +1,8 @@
 package car.serwis.controller;
 
 import car.serwis.database.dao.JednostkaDao;
-import car.serwis.database.dao.KategoriaDao;
 import car.serwis.database.model.Jednostka;
-import car.serwis.database.model.Kategoria;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -54,20 +53,21 @@ public class AddJednostkaController implements Initializable {
                 if (isSaved) {
                     UpdateStatus.setIsJednostkaAdded(true);
                     errorText.setText("Jednostka dodana!");
-                    errorText.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
+                    errorText.setStyle("-fx-fill: #2CC97E; -fx-font-size: 15px;");
                     delayWindowClose(event);
+                    AlertPopUp.successAlert("Jednostka dodana!");
                 }
             }
         });
     }
 
     private boolean validateInputs() {
-        if (nazwaJednostkiTextField.getText().equals("")) {
+        if (nazwaJednostkiTextField.getText().isBlank()) {
             errorText.setText("*Pole nazwa nie może być puste!");
             return false;
         }
 
-        if (skrotTextField.getText().equals("")){
+        if (skrotTextField.getText().isBlank()){
             errorText.setText("*Pole skrót nie może być puste!");
             return false;
         }

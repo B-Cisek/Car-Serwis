@@ -197,7 +197,7 @@
                               <TableView fx:id="jednostkiTableView" editable="true" fixedCellSize="50.0" layoutX="3.0" layoutY="138.0" prefHeight="439.0" prefWidth="393.0">
                                  <columns>
                                     <TableColumn fx:id="idJednostkaTableColumn" prefWidth="75.0" text="ID" />
-                                    <TableColumn fx:id="nazwaJednostkaTableColumn" prefWidth="153.0" text="NAZWA JEDNOSTKI" />
+                                    <TableColumn fx:id="nazwaJednostkaTableColumn" onEditCommit="#changeNazwaJednostkiCell" prefWidth="153.0" text="NAZWA JEDNOSTKI" />
                                     <TableColumn fx:id="skrotJednostkaTableColumn" onEditCommit="#changeSkrotCell" prefWidth="128.0" text="SKRÓT" />
                                  </columns>
                               </TableView>
