@@ -36,7 +36,7 @@ public class JednostkaDao {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.remove(jednostka);
+            session.delete(jednostka);
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
@@ -63,8 +63,9 @@ public class JednostkaDao {
     public List getJednostki() {
         Transaction transaction = null;
         List kategorieList = new ArrayList();
+        Session session = null;
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             kategorieList = session.createQuery("FROM Jednostka").list();
         } catch(Exception ex) {
@@ -72,6 +73,8 @@ public class JednostkaDao {
                 transaction.rollback();
             }
             ex.printStackTrace();
+        }finally {
+            session.close();
         }
 
         return kategorieList;

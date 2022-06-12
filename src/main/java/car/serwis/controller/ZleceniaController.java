@@ -4,6 +4,7 @@ import car.serwis.database.dao.KontrahentDao;
 import car.serwis.database.dao.ZlecenieDao;
 import car.serwis.database.model.Kontrahent;
 import car.serwis.database.model.Zlecenie;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.CurrentPracownik;
 import car.serwis.helpers.UpdateStatus;
 import car.serwis.helpers.WindowManagement;
@@ -222,6 +223,7 @@ public class ZleceniaController implements Initializable {
             kontrahentDao.deleteKontrahent(kontrahent);
         }
         refreshScreen(event);
+        AlertPopUp.successAlert("Kontrahent usunięty");
     }
 
 
@@ -276,6 +278,7 @@ public class ZleceniaController implements Initializable {
             zlecenieDao.deleteZlecenie(zlecenie);
         }
         refreshScreen(event);
+        AlertPopUp.successAlert("Zlecenie usunięte!");
     }
 
 

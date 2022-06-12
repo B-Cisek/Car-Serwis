@@ -76,4 +76,18 @@ public class FakturaDao {
             return null;
         }
     }
+
+    public void deleteFaktura(Faktura faktura) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            session.delete(faktura);
+            transaction.commit();
+        } catch (Exception ex) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        }
+    }
 }

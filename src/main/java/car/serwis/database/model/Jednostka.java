@@ -33,7 +33,7 @@ public class Jednostka {
     )
     private String skrot;
 
-    @OneToMany(mappedBy = "jednostka", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "jednostka", fetch = FetchType.LAZY, orphanRemoval = true)
     private Set<Czesc> czesci = new HashSet<>();
 
     @Override
@@ -41,8 +41,4 @@ public class Jednostka {
         return nazwaJednostki;
     }
 
-    public Jednostka(String nazwaJednostki, String skrot) {
-        this.nazwaJednostki = nazwaJednostki;
-        this.skrot = skrot;
-    }
 }

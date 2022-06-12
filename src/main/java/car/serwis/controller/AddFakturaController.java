@@ -158,6 +158,7 @@ public class AddFakturaController implements Initializable {
                     errorTextFaktura.setText("Faktura dodana!");
                     errorTextFaktura.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
                     delayWindowClose(event);
+                    AlertPopUp.successAlert("Faktura dodana!");
                 }
             }
             pozycjaTableView.setItems(pozycjeObservableList);

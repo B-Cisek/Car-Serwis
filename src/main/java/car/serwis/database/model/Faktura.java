@@ -44,7 +44,7 @@ public class Faktura {
     @JoinColumn(name = "id_kontrahent", referencedColumnName = "id_kontrahent")
     private Kontrahent kontrahent;
 
-    @OneToMany(mappedBy = "faktura", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "faktura", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<PozycjaFaktury> pozycjeFaktury = new HashSet<>();
 
 }

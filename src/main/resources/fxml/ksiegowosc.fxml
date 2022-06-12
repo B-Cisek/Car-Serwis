@@ -155,8 +155,9 @@
                </font>
             </Text>
             <TextField fx:id="searchBarFaktura" layoutX="38.0" layoutY="70.0" prefHeight="25.0" prefWidth="549.0" />
-            <Button layoutX="1400.0" layoutY="50.0" mnemonicParsing="false" onAction="#addFakturaWindow" styleClass="add-button" text="Dodaj fakture" />
-            <Button fx:id="generujPdfButton" layoutX="1186.0" layoutY="50.0" mnemonicParsing="false" styleClass="add-button" text="Generuj PDF" />
+            <Button layoutX="1400.0" layoutY="50.0" mnemonicParsing="false" onAction="#addFakturaWindow" styleClass="add-button" text="Dodaj fakturę" />
+            <Button fx:id="generujPdfButton" layoutX="1223.0" layoutY="50.0" mnemonicParsing="false" styleClass="add-button" text="Generuj PDF" />
+            <Button layoutX="1044.0" layoutY="50.0" mnemonicParsing="false" onAction="#deleteFaktura" styleClass="delete-button" text="Usuń fakturę" />
          </children></AnchorPane>
    </center>
    <stylesheets>

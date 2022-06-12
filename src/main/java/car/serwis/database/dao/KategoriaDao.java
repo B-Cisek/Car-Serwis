@@ -57,9 +57,10 @@ public class KategoriaDao {
 
     public List getKategorie() {
         Transaction transaction = null;
+        Session session = null;
         List kategorieList = new ArrayList();
         try {
-            Session session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             kategorieList = session.createQuery("FROM Kategoria").list();
         } catch(Exception ex) {
@@ -67,8 +68,9 @@ public class KategoriaDao {
                 transaction.rollback();
             }
             ex.printStackTrace();
+        }finally {
+            session.close();
         }
-
         return kategorieList;
     }
 

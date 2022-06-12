@@ -195,10 +195,9 @@ public class MagazynController implements Initializable {
     }
 
 
-    // ################ KATEGORIA ################
+    // ################ KATEGORIA ##################################################################
     KategoriaDao kategoriaDao = new KategoriaDao();
     ObservableList<Kategoria> kategoriaObservableList = FXCollections.observableArrayList();
-
 
     @FXML
     private void addKategoriaWindow(ActionEvent event) throws IOException {
@@ -239,8 +238,10 @@ public class MagazynController implements Initializable {
         ObservableList<Kategoria> selectedRows = kategoriaTableView.getSelectionModel().getSelectedItems();
         for (Kategoria kategoria : selectedRows) {
             kategoriaDao.deleteKategoria(kategoria);
+            kategoriaObservableList.remove(kategoria);
         }
-        refreshScreen(event);
+        //refreshScreen(event);
+        AlertPopUp.successAlert("Kategoria usunięta");
     }
 
     @FXML
@@ -250,6 +251,8 @@ public class MagazynController implements Initializable {
         kategoriaDao.updateKategoira(selectedKategoira);
         AlertPopUp.successAlert("Zmieniono nazwę kategori!");
     }
+
+    //########################################################################################################
 
 
 
@@ -306,6 +309,7 @@ public class MagazynController implements Initializable {
             jednostkaDao.deleteJednostka(jednostka);
         }
         refreshScreen(event);
+        AlertPopUp.successAlert("Usunięto jednostkę!");
     }
 
     @FXML

@@ -1,10 +1,10 @@
 package car.serwis.controller;
 
 import car.serwis.database.dao.KategoriaDao;
-import car.serwis.database.dao.SamochodDao;
 import car.serwis.database.model.Kategoria;
-import car.serwis.database.model.Samochod;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
+import car.serwis.helpers.WindowManagement;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +27,6 @@ public class AddKategoriaController implements Initializable {
     @FXML
     private Button anulujButton;
 
-
     @FXML
     private AnchorPane kategoriaAnchorePane;
 
@@ -37,13 +36,11 @@ public class AddKategoriaController implements Initializable {
     @FXML
     private TextField nazwaTextField;
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeExitButton();
         saveNewKategoria();
     }
-
 
     private void saveNewKategoria() {
         addKategoriaButton.setOnAction((event) -> {
@@ -54,19 +51,19 @@ public class AddKategoriaController implements Initializable {
                 if (isSaved) {
                     UpdateStatus.setIsKategoriaAdded(true);
                     errorText.setText("Kategoira dodana!");
-                    errorText.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
+                    errorText.setStyle("-fx-fill: #2CC97E; -fx-font-size: 15px;");
                     delayWindowClose(event);
+                    AlertPopUp.successAlert("Kategoira dodana!");
                 }
             }
         });
     }
 
     private boolean validateInputs() {
-        if (nazwaTextField.getText().equals("")) {
+        if (nazwaTextField.getText().isBlank()) {
             errorText.setText("*Pole nazwa nie może być puste!");
             return false;
         }
-
         return true;
     }
 
@@ -77,8 +74,6 @@ public class AddKategoriaController implements Initializable {
 
         return kategoria;
     }
-
-
 
 
     private void delayWindowClose(ActionEvent event) {

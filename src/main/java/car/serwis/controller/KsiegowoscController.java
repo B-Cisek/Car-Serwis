@@ -24,6 +24,7 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -63,6 +64,7 @@ public class KsiegowoscController implements Initializable {
 
     @FXML
     private Button generujPdfButton;
+
 
     ObservableList<Faktura> fakturaObservableList = FXCollections.observableArrayList();
     WindowManagement windowManagement = new WindowManagement();
@@ -148,8 +150,32 @@ public class KsiegowoscController implements Initializable {
             System.out.println(faktura.getKontrahent().getImie());
             List<PozycjaFaktury> list = new PozycjaFakturyDao().getPozycjaFakturyForPdf(faktura);
             System.out.println("###############################");
-            System.out.println(list.get(0).);
+            for (PozycjaFaktury pozycjaFaktury : list) {
+                System.out.println(pozycjaFaktury.getOpisPozycji());
+            }
+
+
         });
+    }
+
+    @FXML
+    void deleteFaktura(ActionEvent event) throws IOException {
+        ObservableList<Faktura> selectedRows = fakturaTableView.getSelectionModel().getSelectedItems();
+        for (Faktura faktura : selectedRows) {
+            fakturaDao.deleteFaktura(faktura);
+        }
+        refreshScreen(event);
+        AlertPopUp.successAlert("Faktura usunięta!");
+    }
+
+    @FXML
+    void showFaktura(ActionEvent event) throws IOException {
+        ObservableList<Faktura> selectedRows = fakturaTableView.getSelectionModel().getSelectedItems();
+        for (Faktura faktura : selectedRows) {
+            fakturaDao.deleteFaktura(faktura);
+        }
+        refreshScreen(event);
+        AlertPopUp.successAlert("Faktura usunięta!");
     }
 
 
