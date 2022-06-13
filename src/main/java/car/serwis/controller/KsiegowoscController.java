@@ -4,7 +4,7 @@ import car.serwis.database.dao.FakturaDao;
 import car.serwis.database.dao.PozycjaFakturyDao;
 import car.serwis.database.model.Faktura;
 import car.serwis.database.model.PozycjaFaktury;
-import car.serwis.database.model.Stanowisko;
+import pdf.generator.GeneratorFaktury;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.CurrentPracownik;
 import car.serwis.helpers.UpdateStatus;
@@ -65,7 +65,10 @@ public class KsiegowoscController implements Initializable {
     @FXML
     private Button generujPdfButton;
 
+    @FXML
+    private Button showFakturaButton;
 
+    GeneratorFaktury generatorFaktury = new GeneratorFaktury();
     ObservableList<Faktura> fakturaObservableList = FXCollections.observableArrayList();
     WindowManagement windowManagement = new WindowManagement();
     FakturaDao fakturaDao = new FakturaDao();
@@ -144,14 +147,36 @@ public class KsiegowoscController implements Initializable {
 
     private void pdfGenerate() {
         generujPdfButton.setOnAction((x) -> {
-            Long selectedRow = fakturaTableView.getSelectionModel().getSelectedItem().getIdFaktura();
-            Faktura faktura = fakturaDao.getFakturaID(selectedRow);
-            System.out.println("###############################");
-            System.out.println(faktura.getKontrahent().getImie());
-            List<PozycjaFaktury> list = new PozycjaFakturyDao().getPozycjaFakturyForPdf(faktura);
-            System.out.println("###############################");
-            for (PozycjaFaktury pozycjaFaktury : list) {
-                System.out.println(pozycjaFaktury.getOpisPozycji());
+            if (fakturaTableView.getSelectionModel().getSelectedItem() == null){
+                AlertPopUp.successAlert("Nie wybrano faktury!");
+            }else {
+                ArrayList<pdf.generator.PozycjaFaktury> pfList = new ArrayList<>();
+                String imageUrl = "C:\\Users\\Bartek\\Desktop\\warsztat\\warsztat-samochodowy\\src\\main\\resources\\css\\img\\wrench.png";
+                Long selectedRow = fakturaTableView.getSelectionModel().getSelectedItem().getIdFaktura();
+                Faktura faktura = fakturaDao.getFakturaID(selectedRow);
+                List<PozycjaFaktury> list = new PozycjaFakturyDao().getPozycjaFakturyForPdf(faktura);
+
+                for (PozycjaFaktury pozycjaFaktury : list) {
+                    pdf.generator.PozycjaFaktury pozycjaFakturyLibrary = new pdf.generator.PozycjaFaktury();
+                    pozycjaFakturyLibrary.setOpisPozycji(pozycjaFaktury.getOpisPozycji());
+                    pozycjaFakturyLibrary.setIlosc(pozycjaFaktury.getIlosc());
+                    pozycjaFakturyLibrary.setCena(pozycjaFaktury.getCena());
+                    pfList.add(pozycjaFakturyLibrary);
+                }
+
+                generatorFaktury.generujFakture(
+                        faktura.getMiejsceWystawienia(),
+                        LocalDate.now(),
+                        faktura.getKontrahent().getNazwaFirmy(),
+                        faktura.getKontrahent().getNip(),
+                        faktura.getKontrahent().getUlica(),
+                        faktura.getKontrahent().getKodPocztowy() + " " + faktura.getKontrahent().getMiejscowosc(),
+                        faktura.getNumerFaktury() + "-" + LocalDate.now().getMonthValue() + "-" + LocalDate.now().getYear(),
+                        pfList,
+                        imageUrl
+
+                );
+                AlertPopUp.successAlertFaktura("Faktura zapisana w domyślnym folderze: Dokumenty");
             }
 
 
@@ -161,22 +186,35 @@ public class KsiegowoscController implements Initializable {
     @FXML
     void deleteFaktura(ActionEvent event) throws IOException {
         ObservableList<Faktura> selectedRows = fakturaTableView.getSelectionModel().getSelectedItems();
-        for (Faktura faktura : selectedRows) {
-            fakturaDao.deleteFaktura(faktura);
+        if (fakturaTableView.getSelectionModel().getSelectedItems().isEmpty()){
+            AlertPopUp.successAlert("Nie wybrano faktury do usunięcia!");
+        }else {
+            for (Faktura faktura : selectedRows) {
+                fakturaDao.deleteFaktura(faktura);
+            }
+            refreshScreen(event);
+            AlertPopUp.successAlert("Faktura usunięta!");
         }
-        refreshScreen(event);
-        AlertPopUp.successAlert("Faktura usunięta!");
     }
 
+
+
     @FXML
-    void showFaktura(ActionEvent event) throws IOException {
-        ObservableList<Faktura> selectedRows = fakturaTableView.getSelectionModel().getSelectedItems();
-        for (Faktura faktura : selectedRows) {
-            fakturaDao.deleteFaktura(faktura);
+    public void showFaktura(ActionEvent event) throws IOException {
+        if (fakturaTableView.getSelectionModel().getSelectedItem() == null){
+            AlertPopUp.successAlert("Nie wybrano faktury!");
+        }else {
+            try {
+                ShowFakturaController showFakturaController = new ShowFakturaController();
+                Faktura faktura = fakturaTableView.getSelectionModel().getSelectedItem();
+                showFakturaController.setDataFaktura(faktura);
+                NewWindowController.getShowFakturaWindow();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        refreshScreen(event);
-        AlertPopUp.successAlert("Faktura usunięta!");
     }
+
 
 
     @FXML

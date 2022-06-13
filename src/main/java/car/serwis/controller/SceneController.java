@@ -3,10 +3,12 @@ package car.serwis.controller;
 import car.serwis.helpers.ScenePath;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -73,12 +75,28 @@ public class SceneController {
         double prevHeight = pilpitScene.getHeight();
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        controlDrag(window);
         window.setScene(pilpitScene);
-        window.setHeight(prevHeight);
-        window.setWidth(prevWidth);
-        //window.centerOnScreen();
+        //window.setHeight(prevHeight);
+        //window.setWidth(prevWidth);
+
+
+        final double CENTER_ON_SCREEN_X_FRACTION = 1.0f / 2;
+        final double CENTER_ON_SCREEN_Y_FRACTION = 1.0f / 3;
+
+        Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+
+        double centerX = bounds.getMinX() + (bounds.getWidth() - window.getWidth())
+                * CENTER_ON_SCREEN_X_FRACTION;
+        double centerY = bounds.getMinY() + (bounds.getHeight() - window.getHeight())
+                * CENTER_ON_SCREEN_Y_FRACTION;
+
+
+        window.setX(centerX);
+        window.setY(centerY);
+
+
         //TODO zmiana centrowania
+        controlDrag(window);
         window.show();
     }
 
@@ -91,6 +109,7 @@ public class SceneController {
         main.setOnMouseDragged(event -> {
             stage.setX(event.getScreenX() + x);
             stage.setY(event.getScreenY() + y);
+
         });
     }
 

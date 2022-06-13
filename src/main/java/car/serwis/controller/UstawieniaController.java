@@ -183,11 +183,16 @@ public class UstawieniaController implements Initializable {
     @FXML
     void deletePracownik(ActionEvent event) throws IOException {
         ObservableList<Pracownik> selectedRows = pracownicyTable.getSelectionModel().getSelectedItems();
-        for (Pracownik pracownik : selectedRows) {
-            pracownikDao.deletePracownik(pracownik);
+
+        if (pracownicyTable.getSelectionModel().getSelectedItems().isEmpty()){
+            AlertPopUp.successAlert("Nie wybrano pracownika do usunięcia!");
+        }else{
+            for (Pracownik pracownik : selectedRows) {
+                pracownikDao.deletePracownik(pracownik);
+            }
+            refreshScreen(event);
+            AlertPopUp.successAlert("Pracownik usunięty!");
         }
-        refreshScreen(event);
-        AlertPopUp.successAlert("Pracownik usunięty!");
     }
 
     @FXML
@@ -261,11 +266,16 @@ public class UstawieniaController implements Initializable {
     @FXML
     void deleteStanowisko(ActionEvent event) throws IOException {
         ObservableList<Stanowisko> selectedRows = stanowiskaTable.getSelectionModel().getSelectedItems();
-        for (Stanowisko stanowisko : selectedRows) {
-            stanowiskoDao.deleteStanowisko(stanowisko);
+
+        if (stanowiskaTable.getSelectionModel().getSelectedItems().isEmpty()){
+            AlertPopUp.successAlert("Nie wybrano stanowiska do usunięcia!");
+        }else {
+            for (Stanowisko stanowisko : selectedRows) {
+                stanowiskoDao.deleteStanowisko(stanowisko);
+            }
+            refreshScreen(event);
+            AlertPopUp.successAlert("Stanowisko usunięte!");
         }
-        refreshScreen(event);
-        AlertPopUp.successAlert("Stanowisko usunięte!");
     }
 
     @FXML

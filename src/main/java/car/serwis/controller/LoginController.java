@@ -66,6 +66,8 @@ public class LoginController implements Initializable {
         String login = loginTextField.getText();
         String haslo = hasloTextField.getText();
 
+
+
         if(!validFields()) {
             infoLine.setText("Login i hasło nie może być puste!");
             return;

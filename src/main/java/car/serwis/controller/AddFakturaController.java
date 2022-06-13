@@ -143,25 +143,29 @@ public class AddFakturaController implements Initializable {
 
     private void addFaktura() {
         addFakturaButton.setOnAction((event) -> {
-            if (validateFakturaInputs()){
-                Faktura faktura = createFakturaFromInput();
-                boolean isSaved = new FakturaDao().createFaktura(faktura);
-                for (PozycjaFaktury pozycjaFaktury: pozycjeObservableList) {
-                    pozycja.setOpisPozycji(pozycjaFaktury.getOpisPozycji());
-                    pozycja.setIlosc(pozycjaFaktury.getIlosc());
-                    pozycja.setCena(pozycjaFaktury.getCena());
-                    pozycja.setFaktura(faktura);
-                    pozycjaFakturyDao.createPozycjaFaktury(pozycja);
+            if (pozycjeObservableList.isEmpty()){
+                AlertPopUp.successAlert("Dodaj pozycje faktury!");
+            }else {
+                if (validateFakturaInputs()){
+                    Faktura faktura = createFakturaFromInput();
+                    boolean isSaved = new FakturaDao().createFaktura(faktura);
+                    for (PozycjaFaktury pozycjaFaktury: pozycjeObservableList) {
+                        pozycja.setOpisPozycji(pozycjaFaktury.getOpisPozycji());
+                        pozycja.setIlosc(pozycjaFaktury.getIlosc());
+                        pozycja.setCena(pozycjaFaktury.getCena());
+                        pozycja.setFaktura(faktura);
+                        pozycjaFakturyDao.createPozycjaFaktury(pozycja);
+                    }
+                    if (isSaved) {
+                        UpdateStatus.setIsFakturaAdded(true);
+                        errorTextFaktura.setText("Faktura dodana!");
+                        errorTextFaktura.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
+                        delayWindowClose(event);
+                        AlertPopUp.successAlert("Faktura dodana!");
+                    }
                 }
-                if (isSaved) {
-                    UpdateStatus.setIsFakturaAdded(true);
-                    errorTextFaktura.setText("Faktura dodana!");
-                    errorTextFaktura.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
-                    delayWindowClose(event);
-                    AlertPopUp.successAlert("Faktura dodana!");
-                }
+                pozycjaTableView.setItems(pozycjeObservableList);
             }
-            pozycjaTableView.setItems(pozycjeObservableList);
         });
     }
 

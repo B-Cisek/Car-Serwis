@@ -9,7 +9,14 @@ public class AlertPopUp {
         alert.setTitle("Informacja");
         alert.setHeaderText(null);
         alert.setContentText(text);
+        alert.showAndWait();
+    }
 
+    public static void successAlertFaktura(String text){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Informacja");
+        alert.setHeaderText("Faktura wygenerowanan!");
+        alert.setContentText(text);
         alert.showAndWait();
     }
 }

@@ -417,11 +417,16 @@ public class MagazynController implements Initializable {
     @FXML
     void deleteCzesc(ActionEvent event) throws IOException {
         ObservableList<Czesc> selectedRows = czescTableView.getSelectionModel().getSelectedItems();
-        for (Czesc czesc : selectedRows) {
-            czescDao.deleteCzesc(czesc);
+
+        if(czescTableView.getSelectionModel().getSelectedItems().isEmpty()){
+            AlertPopUp.successAlert("Nie wybrano części do usunięcia!");
+        }else {
+            for (Czesc czesc : selectedRows) {
+                czescDao.deleteCzesc(czesc);
+            }
+            refreshScreen(event);
+            AlertPopUp.successAlert("Część usunięta!");
         }
-        refreshScreen(event);
-        AlertPopUp.successAlert("Część usunięta!");
     }
 
     private SortedList<Czesc> getSortedListCzesc() {
