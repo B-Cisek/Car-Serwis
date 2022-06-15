@@ -116,7 +116,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button defaultButton="true" graphicTextGap="10.0" layoutX="1053.0" layoutY="10.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="POMOC">
+                  <Button fx:id="pomocButton" defaultButton="true" graphicTextGap="10.0" layoutX="1053.0" layoutY="10.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="212.0" styleClass="buttons" text="POMOC">
                      <font>
                         <Font name="System Bold" size="27.0" />
                      </font>

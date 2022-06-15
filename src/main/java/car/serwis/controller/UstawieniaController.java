@@ -23,6 +23,8 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLClientInfoException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import java.util.ResourceBundle;

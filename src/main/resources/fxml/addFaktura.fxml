@@ -22,12 +22,12 @@
             <TableColumn fx:id="cenaTableColumn" minWidth="0.0" prefWidth="86.0" text="CENA" />
         </columns>
       </TableView>
-      <TextField fx:id="miejsceWystawieniaTextField" layoutX="187.0" layoutY="136.0" prefHeight="25.0" prefWidth="174.0" />
-      <Label layoutX="187.0" layoutY="116.0" text="Miejsce wystawenia " />
-      <DatePicker fx:id="dataWystawieniaDatePicker" layoutX="472.0" layoutY="83.0" />
-      <Label layoutX="472.0" layoutY="63.0" text="Data wystawienia" />
-      <ComboBox fx:id="kontrahentComboBox" layoutX="471.0" layoutY="136.0" prefHeight="25.0" prefWidth="174.0" />
-      <Label layoutX="471.0" layoutY="116.0" text="Kontrahent" />
+      <TextField fx:id="miejsceWystawieniaTextField" layoutX="187.0" layoutY="146.0" prefHeight="25.0" prefWidth="174.0" />
+      <Label layoutX="187.0" layoutY="126.0" text="Miejsce wystawenia " />
+      <DatePicker fx:id="dataWystawieniaDatePicker" layoutX="472.0" layoutY="93.0" />
+      <Label layoutX="472.0" layoutY="73.0" text="Data wystawienia" />
+      <ComboBox fx:id="kontrahentComboBox" layoutX="471.0" layoutY="146.0" prefHeight="25.0" prefWidth="174.0" />
+      <Label layoutX="471.0" layoutY="126.0" text="Kontrahent" />
       <Button fx:id="addPozycjaButton" layoutX="107.0" layoutY="328.0" minWidth="149.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="149.0" styleClass="add-button" text="Dodaj pozycje" />
       <Button fx:id="addFakturaButton" layoutX="652.0" layoutY="606.0" mnemonicParsing="false" styleClass="add-button" text="Dodaj" />
       <Button fx:id="cancelButton" layoutX="743.0" layoutY="606.0" mnemonicParsing="false" styleClass="cancel-button" text="Anuluj" />
@@ -39,10 +39,10 @@
       <TextField fx:id="cenaPozycjaTextField" layoutX="78.0" layoutY="515.0" prefHeight="25.0" prefWidth="207.0" />
       <Label layoutX="78.0" layoutY="496.0" text="Cena" />
       <Button fx:id="deletePozycjaButton" layoutX="107.0" layoutY="272.0" minWidth="149.0" mnemonicParsing="false" prefHeight="96.0" prefWidth="149.0" styleClass="cancel-button" text="Usuń pozycje" />
-      <Text fx:id="errorTextPozycja" layoutX="79.0" layoutY="549.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" AnchorPane.leftAnchor="75.0" />
-      <Text fx:id="errorTextFaktura" layoutX="188.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" AnchorPane.leftAnchor="188.0" />
-      <TextField fx:id="numerFakturyTextField" layoutX="188.0" layoutY="83.0" prefHeight="25.0" prefWidth="174.0" />
-      <Label layoutX="188.0" layoutY="63.0" text="Numer faktury" />
+      <Text fx:id="errorTextPozycja" layoutX="80.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="239.58544921875" AnchorPane.leftAnchor="77.0" />
+      <Text fx:id="errorTextFaktura" layoutX="188.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" AnchorPane.leftAnchor="188.0" />
+      <TextField fx:id="numerFakturyTextField" layoutX="188.0" layoutY="93.0" prefHeight="25.0" prefWidth="174.0" />
+      <Label layoutX="188.0" layoutY="73.0" text="Numer faktury" />
    </children>
    <stylesheets>
       <URL value="@../css/popUpWindows.css" />

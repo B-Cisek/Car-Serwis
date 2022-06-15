@@ -26,6 +26,8 @@ public class PomocController implements Initializable {
     @FXML
     private Text pracownikInfo;
 
+    @FXML
+    private Button pomocButton;
 
     WindowManagement windowManagement = new WindowManagement();
 
@@ -35,6 +37,14 @@ public class PomocController implements Initializable {
         windowManagement.initializeMinimalizeButton(minimalizeButton, pomocBorderPane);
         windowManagement.initializeExitButton(exitButton, pomocBorderPane);
         CurrentPracownik.setPracownikInfo(pracownikInfo);
+    }
+
+    // TODO
+    public void disablePomoc(){
+        if (!CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Admin")){
+            pomocButton.setDisable(true);
+            System.out.println("Wynonane!!!!!!!!!!!!!!!!!!!");
+        }
     }
 
 

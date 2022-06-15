@@ -4,6 +4,7 @@ import car.serwis.database.dao.JednostkaDao;
 import car.serwis.database.model.Jednostka;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
+import car.serwis.helpers.WindowManagement;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,9 +39,11 @@ public class AddJednostkaController implements Initializable {
     @FXML
     private TextField skrotTextField;
 
+    WindowManagement windowManagement = new WindowManagement();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeExitButton();
+        windowManagement.initializeExitButtonAnchorPane(anulujButton,JednostkaAnchorePane);
         saveNewJednostka();
     }
 
@@ -95,16 +98,6 @@ public class AddJednostkaController implements Initializable {
         Node source = (Node)  event.getSource();
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
-    }
-
-    private Stage getStage(){
-        return (Stage) JednostkaAnchorePane.getScene().getWindow();
-    }
-
-    private void initializeExitButton(){
-        anulujButton.setOnAction((x) -> {
-            getStage().close();
-        });
     }
 
 }

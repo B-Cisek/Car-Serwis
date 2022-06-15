@@ -11,14 +11,12 @@
 
 <AnchorPane fx:id="showFakturaAnchorePane" prefHeight="645.0" prefWidth="649.0" styleClass="mainAnchorePane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.ShowFakturaController">
    <children>
-      <Text layoutX="259.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Faktura VAT" />
-      <TableView fx:id="showFakturaTableView" layoutX="50.0" layoutY="249.0" prefHeight="235.0" prefWidth="550.0">
+      <Text layoutX="260.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Faktura VAT" />
+      <TableView fx:id="showPozycjaTableView" fixedCellSize="50.0" layoutX="57.0" layoutY="238.0" prefHeight="246.0" prefWidth="544.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="48.0">
         <columns>
-          <TableColumn fx:id="lpTableColumn" prefWidth="61.0" text="Lp." />
-          <TableColumn fx:id="uslugaTableColumn" prefWidth="206.0" text="Nazwa towaru / Usługi" />
-            <TableColumn fx:id="iloscTableColumn" prefWidth="70.0" text="Ilość" />
-            <TableColumn fx:id="nettoTableColumn" prefWidth="103.0" text="Cena NETTO" />
-            <TableColumn fx:id="bruttoTableColumn" prefWidth="109.0" text="Cena BRUTTO" />
+          <TableColumn fx:id="uslugaTableColumn" prefWidth="292.0" text="Nazwa towaru / Usługi" />
+            <TableColumn fx:id="iloscTableColumn" prefWidth="123.0" text="Ilość" />
+            <TableColumn fx:id="nettoTableColumn" prefWidth="120.0" text="Cena NETTO" />
         </columns>
       </TableView>
       <Text fx:id="numerFakturyText" layoutX="311.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0">
@@ -26,31 +24,45 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Button layoutX="535.0" layoutY="591.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" styleClass="delete-button" text="Zamknij" />
+      <Button fx:id="anulujButton" layoutX="535.0" layoutY="591.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="110.0" styleClass="delete-button" text="Zamknij" />
       <Label layoutX="92.0" layoutY="104.0" />
-      <Text fx:id="numerFakturyText" layoutX="313.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text layoutX="501.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nabywca:" />
-      <Text fx:id="nazwaFirmyText" layoutX="501.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text layoutX="501.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NIP:" />
-      <Text fx:id="nipText" layoutX="524.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Text fx:id="ulicaText" layoutX="501.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="zlota 44" />
-      <Text fx:id="miastoText" layoutX="501.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-      <Text layoutX="50.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sprzedawaca:" />
-      <Text layoutX="50.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Car Serwis" />
-      <Text layoutX="50.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NIP:  231321323" />
-      <Text layoutX="50.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warszawska 11" />
-      <Text layoutX="50.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00-001 Warszawa" />
-      <Text layoutX="338.0" layoutY="515.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suma">
+      <Text fx:id="numerFakturyText" layoutX="304.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Text>
+      <Text fx:id="nazwaFirmyText" layoutX="574.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="48.0" />
+      <Text fx:id="nipText" layoutX="570.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="48.0" />
+      <Text fx:id="ulicaText" layoutX="554.0" layoutY="191.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="48.0" />
+      <Text fx:id="miastoText" layoutX="574.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="48.0" />
+      <Text layoutX="56.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sprzedawaca:" AnchorPane.leftAnchor="48.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Text>
+      <Text layoutX="57.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Car Serwis" AnchorPane.leftAnchor="48.0" />
+      <Text layoutX="53.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NIP:  231321323" AnchorPane.leftAnchor="48.0" />
+      <Text layoutX="54.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warszawska 11" AnchorPane.leftAnchor="48.0" />
+      <Text layoutX="48.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00-001 Warszawa" AnchorPane.leftAnchor="48.0" />
+      <Text layoutX="333.0" layoutY="514.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suma NETTO">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Text fx:id="sumaNettoText" layoutX="428.0" layoutY="514.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="sumaNettoText" layoutX="496.0" layoutY="513.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="100.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Text fx:id="sumaBruttoText" layoutX="532.0" layoutY="514.0" strokeType="OUTSIDE" strokeWidth="0.0">
+      <Text fx:id="sumaBruttoText" layoutX="499.0" layoutY="548.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.rightAnchor="100.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="333.0" layoutY="549.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suma BRUTTO">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="535.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nabywca:" AnchorPane.rightAnchor="48.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -59,5 +71,6 @@
    <stylesheets>
       <URL value="@../css/popUpWindows.css" />
       <URL value="@../css/button-style.css" />
+      <URL value="@../css/table_style.css" />
    </stylesheets>
 </AnchorPane>

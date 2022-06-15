@@ -4,6 +4,7 @@ import car.serwis.database.dao.*;
 import car.serwis.database.model.*;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
+import car.serwis.helpers.WindowManagement;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,9 +58,11 @@ public class AddCzescController implements Initializable {
     @FXML
     private Button addCzescButton;
 
+    WindowManagement windowManagement = new WindowManagement();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeExitButton();
+        windowManagement.initializeExitButtonAnchorPane(anulujButton,czescAnchorePane);
         samochodCzescComboBox.setItems(getSamochodObservableList());
         jednostkaCzescComboBox.setItems(getJednostkaObservableList());
         kategoriaCzescComboBox.setItems(getKategoriaObservableList());
@@ -166,15 +169,5 @@ public class AddCzescController implements Initializable {
         Node source = (Node)  event.getSource();
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
-    }
-
-    private Stage getStage(){
-        return (Stage) czescAnchorePane.getScene().getWindow();
-    }
-
-    private void initializeExitButton(){
-        anulujButton.setOnAction((x) -> {
-            getStage().close();
-        });
     }
 }

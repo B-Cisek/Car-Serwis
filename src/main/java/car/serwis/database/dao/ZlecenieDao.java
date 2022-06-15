@@ -146,4 +146,26 @@ public class ZlecenieDao {
         return false;
     }
 
+    public List<Zlecenie> getRecentNoweZlecenia() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            TypedQuery<Zlecenie> query = session.createQuery("SELECT z.idZlecenie, z.dataPrzyjecia, z.opisZlecenie FROM Zlecenie z WHERE z.status = :status ORDER BY z.idZlecenie DESC", Zlecenie.class );
+            query.setParameter("status", ZlecenieStatus.NOWE);
+            return query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    public List<Zlecenie> getRecentGotoweZlecenia() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            TypedQuery<Zlecenie> query = session.createQuery("SELECT z.idZlecenie, z.dataPrzyjecia, z.opisZlecenie FROM Zlecenie z WHERE z.status = :status ORDER BY z.idZlecenie DESC", Zlecenie.class );
+            query.setParameter("status", ZlecenieStatus.GOTOWE);
+            return query.getResultList();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
 }

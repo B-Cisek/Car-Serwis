@@ -219,11 +219,16 @@ public class ZleceniaController implements Initializable {
     @FXML
     void deleteKontrahent(ActionEvent event) throws IOException {
         ObservableList<Kontrahent> selectedRows = kontrahentTableView.getSelectionModel().getSelectedItems();
-        for (Kontrahent kontrahent : selectedRows) {
-            kontrahentDao.deleteKontrahent(kontrahent);
+        if (kontrahentTableView.getSelectionModel().getSelectedItems().isEmpty()){
+            AlertPopUp.successAlert("Nie wybrano kontrahenta do usunięcia!");
+        }else {
+            for (Kontrahent kontrahent : selectedRows) {
+                kontrahentDao.deleteKontrahent(kontrahent);
+            }
+            refreshScreen(event);
+            AlertPopUp.successAlert("Kontrahent usunięty");
         }
-        refreshScreen(event);
-        AlertPopUp.successAlert("Kontrahent usunięty");
+
     }
 
 
@@ -274,11 +279,15 @@ public class ZleceniaController implements Initializable {
     @FXML
     void deleteZlecenie(ActionEvent event) throws IOException {
         ObservableList<Zlecenie> selectedRows = zleceniaTableView.getSelectionModel().getSelectedItems();
-        for (Zlecenie zlecenie : selectedRows) {
-            zlecenieDao.deleteZlecenie(zlecenie);
+        if (zleceniaTableView.getSelectionModel().getSelectedItems().isEmpty()){
+            AlertPopUp.successAlert("Nie wybrano zlecenia do usunięcia!");
+        }else {
+            for (Zlecenie zlecenie : selectedRows) {
+                zlecenieDao.deleteZlecenie(zlecenie);
+            }
+            refreshScreen(event);
+            AlertPopUp.successAlert("Zlecenie usunięte!");
         }
-        refreshScreen(event);
-        AlertPopUp.successAlert("Zlecenie usunięte!");
     }
 
 

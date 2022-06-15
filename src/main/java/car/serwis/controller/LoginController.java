@@ -52,6 +52,7 @@ public class LoginController implements Initializable {
 
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //initializeExitButton();
@@ -65,7 +66,6 @@ public class LoginController implements Initializable {
     private void loginPracownik(ActionEvent event) throws IOException, InterruptedException {
         String login = loginTextField.getText();
         String haslo = hasloTextField.getText();
-
 
 
         if(!validFields()) {
@@ -84,6 +84,7 @@ public class LoginController implements Initializable {
         delay.setOnFinished( event2 -> {
             try {
                 SceneController.getPulpitScene(event);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

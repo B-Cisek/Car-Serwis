@@ -7,6 +7,7 @@ import car.serwis.database.dao.StanowiskoDao;
 import car.serwis.database.model.*;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
+import car.serwis.helpers.WindowManagement;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -91,14 +92,13 @@ public class AddFakturaController implements Initializable {
 
     ObservableList<PozycjaFaktury> pozycjeObservableList = FXCollections.observableArrayList();
     PozycjaFaktury pozycja = new PozycjaFaktury();
-    Set<PozycjaFaktury> listaPozycji = new HashSet<>();
-    FakturaDao fakturaDao = new FakturaDao();
     Faktura faktura = new Faktura();
     PozycjaFakturyDao pozycjaFakturyDao = new PozycjaFakturyDao();
+    WindowManagement windowManagement = new WindowManagement();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeExitButton();
+       windowManagement.initializeExitButtonAnchorPane(cancelButton,addFakturaAnchorePane);
         kontrahentComboBox.setItems(getKontrahentObservableList());
         addPozycja();
         deletePozycja();
@@ -226,19 +226,6 @@ public class AddFakturaController implements Initializable {
             return false;
         }
         return true;
-    }
-
-
-
-
-    private Stage getStage(){
-        return (Stage) addFakturaAnchorePane.getScene().getWindow();
-    }
-
-    private void initializeExitButton(){
-        cancelButton.setOnAction((x) -> {
-            getStage().close();
-        });
     }
 
     private void delayWindowClose(ActionEvent event) {

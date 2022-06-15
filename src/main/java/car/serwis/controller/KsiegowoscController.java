@@ -4,11 +4,14 @@ import car.serwis.database.dao.FakturaDao;
 import car.serwis.database.dao.PozycjaFakturyDao;
 import car.serwis.database.model.Faktura;
 import car.serwis.database.model.PozycjaFaktury;
+import car.serwis.helpers.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import pdf.generator.GeneratorFaktury;
-import car.serwis.helpers.AlertPopUp;
-import car.serwis.helpers.CurrentPracownik;
-import car.serwis.helpers.UpdateStatus;
-import car.serwis.helpers.WindowManagement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -205,15 +208,21 @@ public class KsiegowoscController implements Initializable {
             AlertPopUp.successAlert("Nie wybrano faktury!");
         }else {
             try {
-                ShowFakturaController showFakturaController = new ShowFakturaController();
-                Faktura faktura = fakturaTableView.getSelectionModel().getSelectedItem();
-                showFakturaController.setDataFaktura(faktura);
-                NewWindowController.getShowFakturaWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(ScenePath.SHOW_FAKTURA.getPath()));
+                Parent parent = loader.load();
+
+                ShowFakturaController showFakturaController = loader.getController();
+                showFakturaController.setText(fakturaTableView.getSelectionModel().getSelectedItem());
+                Stage stage = new Stage(StageStyle.UNDECORATED);
+                stage.setScene(new Scene(parent));
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
 
 
 
