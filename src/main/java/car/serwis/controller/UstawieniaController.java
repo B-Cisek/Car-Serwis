@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.net.URL;
@@ -224,9 +225,13 @@ public class UstawieniaController implements Initializable {
     @FXML
     private void changeHasloPracownik(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
         Pracownik selectedPracownik = pracownicyTable.getSelectionModel().getSelectedItem();
-        selectedPracownik.setHaslo(editEvent.getNewValue().toString());
+        selectedPracownik.setHaslo(hashPassword(editEvent.getNewValue()));
         pracownikDao.updatePracownik(selectedPracownik);
         AlertPopUp.successAlert("Zmieniono hasło pracownika!");
+    }
+
+    private String hashPassword(String haslo){
+        return BCrypt.hashpw(haslo, BCrypt.gensalt(11));
     }
 
 

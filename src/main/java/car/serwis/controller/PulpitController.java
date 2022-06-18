@@ -2,6 +2,7 @@ package car.serwis.controller;
 
 import car.serwis.database.dao.ZlecenieDao;
 import car.serwis.database.model.Zlecenie;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.CurrentPracownik;
 import car.serwis.helpers.WindowManagement;
 import car.serwis.helpers.ZlecenieStatus;
@@ -17,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;

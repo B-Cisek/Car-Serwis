@@ -2,6 +2,7 @@ package car.serwis.controller;
 
 import car.serwis.database.dao.PracownikDao;
 import car.serwis.database.model.Pracownik;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.CurrentPracownik;
 import car.serwis.helpers.ScenePath;
 import javafx.animation.PauseTransition;
@@ -51,25 +52,21 @@ public class LoginController implements Initializable {
 
     PracownikDao pracownikDao = new PracownikDao();
 
+    AlertPopUp alertPopUp = new AlertPopUp();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        close();
+        exitButton.setOnAction(SceneController::close);
     }
 
-
-    private void checkPass(String plainPassword, String hashedPassword) {
-        if (BCrypt.checkpw(plainPassword, hashedPassword))
-            System.out.println("The password matches.");
-        else
-            System.out.println("The password does not match.");
-    }
 
 
     @FXML
     private void loginPracownik(ActionEvent event) {
         String login = loginTextField.getText();
         String haslo = hasloTextField.getText();
+
         Pracownik pracownik = pracownikDao.getConnectedPracownikLogin(login);
 
         if (validFields()) {
@@ -79,11 +76,13 @@ public class LoginController implements Initializable {
                 if (BCrypt.checkpw(haslo, pracownik.getHaslo())) {
                     CurrentPracownik.setCurrentPracownik(pracownik);
                     infoLine.setText("Witaj, " + CurrentPracownik.getCurrentPracownik().getLogin() + "!");
+                    Stage waitnigPopUp = alertPopUp.waitingPopUp("Łączenie z serwerem..");
+                    waitnigPopUp.show();
                     PauseTransition delay = new PauseTransition(Duration.seconds(2));
                     delay.setOnFinished(event2 -> {
                         try {
                             SceneController.getPulpitScene(event);
-
+                            waitnigPopUp.close();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -109,12 +108,6 @@ public class LoginController implements Initializable {
         }
         return true;
     }
-
-
-    private void close() {
-        exitButton.setOnAction(SceneController::close);
-    }
-
 
 }
 
