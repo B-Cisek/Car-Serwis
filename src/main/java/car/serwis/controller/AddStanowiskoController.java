@@ -2,6 +2,7 @@ package car.serwis.controller;
 
 import car.serwis.database.dao.StanowiskoDao;
 import car.serwis.database.model.Stanowisko;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -51,9 +52,8 @@ public class AddStanowiskoController implements Initializable {
                 boolean isSaved = new StanowiskoDao().saveStanowisko(stanowisko);
                 if (isSaved) {
                     UpdateStatus.setIsStanowiskoAdded(true);
-                    errorText.setText("Stanowisko dodane!");
-                    errorText.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
                     delayWindowClose(event);
+                    AlertPopUp.successAlert("Stanowisko dodane!");
                 }
             }
         });

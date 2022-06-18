@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.mindrot.jbcrypt.BCrypt;
 
 
 import java.io.IOException;
@@ -51,65 +52,61 @@ public class LoginController implements Initializable {
     PracownikDao pracownikDao = new PracownikDao();
 
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //initializeExitButton();
         close();
-        //initializeLoginButton();
     }
 
+
+    private void checkPass(String plainPassword, String hashedPassword) {
+        if (BCrypt.checkpw(plainPassword, hashedPassword))
+            System.out.println("The password matches.");
+        else
+            System.out.println("The password does not match.");
+    }
 
 
     @FXML
-    private void loginPracownik(ActionEvent event) throws IOException, InterruptedException {
+    private void loginPracownik(ActionEvent event) {
         String login = loginTextField.getText();
         String haslo = hasloTextField.getText();
+        Pracownik pracownik = pracownikDao.getConnectedPracownikLogin(login);
 
+        if (validFields()) {
+            if (pracownik == null) {
+                infoLine.setText("Nie ma takiego loginu w bazie!");
+            } else {
+                if (BCrypt.checkpw(haslo, pracownik.getHaslo())) {
+                    CurrentPracownik.setCurrentPracownik(pracownik);
+                    infoLine.setText("Witaj, " + CurrentPracownik.getCurrentPracownik().getLogin() + "!");
+                    PauseTransition delay = new PauseTransition(Duration.seconds(2));
+                    delay.setOnFinished(event2 -> {
+                        try {
+                            SceneController.getPulpitScene(event);
 
-        if(!validFields()) {
-            infoLine.setText("Login i hasło nie może być puste!");
-            return;
-        }
-
-        if (!validateLogin()) {
-            infoLine.setText("Błędne dane!");
-            return;
-        }
-
-        infoLine.setText("Welcome, " + CurrentPracownik.getCurrentPracownik().getLogin() + "!");
-
-        PauseTransition delay = new PauseTransition(Duration.seconds(2));
-        delay.setOnFinished( event2 -> {
-            try {
-                SceneController.getPulpitScene(event);
-
-            } catch (IOException e) {
-                e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                    delay.play();
+                } else {
+                    infoLine.setText("Błędne hasło!");
+                }
             }
-        });
-        delay.play();
-    }
-
-    boolean validFields() {
-        return !loginTextField.getText().isBlank() && !hasloTextField.getText().isBlank();
-    }
-
-    private boolean validateLogin() {
-        // TODO walidacja logowania
-        Pracownik pracownik = pracownikDao.getConnectedPracownik(loginTextField.getText(), hasloTextField.getText());
-        if (pracownik.getLogin().equals(loginTextField.getText())){
-            System.out.println("te same");
-        }else {
-            System.out.println("nie");
         }
-        System.out.println(pracownik.getLogin() + " || " + pracownik.getHaslo());
-        if (pracownik == null) {
+    }
+
+
+    public boolean validFields() {
+        if (loginTextField.getText().isBlank()) {
+            infoLine.setText("Pole login nie może być puste!");
             return false;
         }
 
-        CurrentPracownik.setCurrentPracownik(pracownik);
+        if (hasloTextField.getText().isBlank()) {
+            infoLine.setText("Pole hasło nie może być puste!");
+            return false;
+        }
         return true;
     }
 
@@ -117,6 +114,7 @@ public class LoginController implements Initializable {
     private void close() {
         exitButton.setOnAction(SceneController::close);
     }
+
 
 }
 

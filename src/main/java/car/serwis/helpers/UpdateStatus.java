@@ -7,7 +7,6 @@ public final class UpdateStatus {
 
     private static boolean isStanowiskoAdded;
     private static boolean isPracownikAdded;
-    private static boolean isZadanieAdded;
     private static boolean isSamochodAdded;
     private static boolean isKategoriaAdded;
     private static boolean isJednostkaAdded;
@@ -16,7 +15,7 @@ public final class UpdateStatus {
     private static boolean isCzescAdded;
     private static boolean isStatusUpdated;
     private static boolean isFakturaAdded;
-    private static boolean isPozycjaAdded;
+    private static boolean isCzescUpdated;
 
     public static boolean isStanowiskoAdded() {
         return isStanowiskoAdded;
@@ -34,13 +33,6 @@ public final class UpdateStatus {
         UpdateStatus.isPracownikAdded = isPracownikAdded;
     }
 
-    public static boolean isZadanieAdded() {
-        return isZadanieAdded;
-    }
-
-    public static void setIsZadanieAdded(boolean isZadanieAdded) {
-        UpdateStatus.isZadanieAdded = isZadanieAdded;
-    }
 
     public static boolean isSamochodAdded() {
         return isSamochodAdded;
@@ -106,13 +98,14 @@ public final class UpdateStatus {
         UpdateStatus.isFakturaAdded = isFakturaAdded;
     }
 
-    public static boolean isPozycjaAdded() {
-        return isPozycjaAdded;
+    public static boolean isCzescUpdated() {
+        return isCzescUpdated;
     }
 
-    public static void setIsPozycjaAdded(boolean isPozycjaAdded) {
-        UpdateStatus.isPozycjaAdded = isPozycjaAdded;
+    public static void setIsCzescUpdated(boolean isCzescUpdated) {
+        UpdateStatus.isCzescUpdated = isCzescUpdated;
     }
+
 
 
 }

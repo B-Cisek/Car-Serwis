@@ -1,11 +1,10 @@
 package car.serwis.helpers;
 
 public enum ScenePath {
-
     PULPIT("/fxml/pulpit.fxml"),
     ZLECENIA("/fxml/zlecenia.fxml"),
     WARSZTAT("/fxml/warsztat.fxml"),
-    KSIEKOWOSC("/fxml/ksiegowosc.fxml"),
+    KSIEGOWOSC("/fxml/ksiegowosc.fxml"),
     MAGAZYN("/fxml/magazyn.fxml"),
     USTAWIENIA("/fxml/ustawienia.fxml"),
     POMOC("/fxml/pomoc.fxml"),
@@ -17,11 +16,14 @@ public enum ScenePath {
     ADD_KATEGORIA("/fxml/addKategoria.fxml"),
     ADD_JEDNOSTKA("/fxml/addJednostka.fxml"),
     ADD_KONTRAHENT("/fxml/addKontrahent.fxml"),
-    ADD_CZESC("/fxml/addCzesc.fxml"),
+    ADD_NEW_CZESC("/fxml/addNewCzesc.fxml"),
     UPDATE_STATUS("/fxml/updateStatus.fxml"),
     ADD_FAKTURA("/fxml/addFaktura.fxml"),
     ADD_POZYCJA("/fxml/addPozycja.fxml"),
-    SHOW_FAKTURA("/fxml/showFaktura.fxml");
+    SHOW_FAKTURA("/fxml/showFaktura.fxml"),
+    UPDATE_CZESC("/fxml/updateCzesc.fxml"),
+    ADD_CZESC("/fxml/addCzesc.fxml"),
+    SHOW_ZLECENIE("/fxml/showZlecenie.fxml");
 
     private final String path;
 

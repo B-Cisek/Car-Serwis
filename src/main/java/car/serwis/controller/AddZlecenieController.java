@@ -138,8 +138,6 @@ public class AddZlecenieController implements Initializable {
         zlecenie.setSamochod(samochodComboBox.getValue());
 
 
-
-
         return zlecenie;
     }
 

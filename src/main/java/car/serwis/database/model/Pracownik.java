@@ -44,7 +44,8 @@ public class Pracownik {
 
     @Column(
             name = "login",
-            nullable = false
+            nullable = false,
+            unique = true
     )
     private String login;
 

@@ -58,7 +58,9 @@ public class Czesc {
     @JoinColumn(name = "id_samochod", referencedColumnName = "id_samochod")
     private Samochod samochod;
 
-    @ManyToMany(mappedBy = "czesci")
-    private Set<Zlecenie> zlecenia = new HashSet<>();
+    @Override
+    public String toString() {
+        return "Część: ID: " + idCzesc + " nazwa części: " + nazwaCzesci + " porducent: " + producent + " ilość: " + ilosc;
+    }
 }
 

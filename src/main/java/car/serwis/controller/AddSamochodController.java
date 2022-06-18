@@ -4,6 +4,7 @@ import car.serwis.database.dao.SamochodDao;
 import car.serwis.database.model.Samochod;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
+import car.serwis.helpers.WindowManagement;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,11 +40,12 @@ public class AddSamochodController implements Initializable {
     @FXML
     private Text errorText;
 
+
+    WindowManagement windowManagement = new WindowManagement();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeExitButton();
         saveNewSamochod();
-
+        windowManagement.initializeExitButtonAnchorPane(anulujButton,addSamochodAnchorePane);
     }
 
 
@@ -107,13 +109,5 @@ public class AddSamochodController implements Initializable {
     }
 
 
-    private void initializeExitButton(){
-        anulujButton.setOnAction((x) -> {
-            getStage().close();
-        });
-    }
 
-    private Stage getStage(){
-        return (Stage) addSamochodAnchorePane.getScene().getWindow();
-    }
 }

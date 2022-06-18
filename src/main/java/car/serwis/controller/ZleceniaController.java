@@ -4,26 +4,28 @@ import car.serwis.database.dao.KontrahentDao;
 import car.serwis.database.dao.ZlecenieDao;
 import car.serwis.database.model.Kontrahent;
 import car.serwis.database.model.Zlecenie;
-import car.serwis.helpers.AlertPopUp;
-import car.serwis.helpers.CurrentPracownik;
-import car.serwis.helpers.UpdateStatus;
-import car.serwis.helpers.WindowManagement;
+import car.serwis.helpers.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -102,7 +104,6 @@ public class ZleceniaController implements Initializable {
 
     @FXML
     private Button minimalizeButton;
-
 
 
     KontrahentDao kontrahentDao = new KontrahentDao();
@@ -263,11 +264,11 @@ public class ZleceniaController implements Initializable {
                         return true;
                     } else if (zlecenie.getOpisZlecenie().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    }  else if (zlecenie.getStatus().toString().contains(lowerCaseFilter)) {
+                    }  else if (zlecenie.getStatus().toString().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (zlecenie.getSamochod().toString().contains(lowerCaseFilter)) {
+                    } else if (zlecenie.getSamochod().toString().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (zlecenie.getKontrahent().toString().contains(lowerCaseFilter)){
+                    } else if (zlecenie.getKontrahent().toString().toLowerCase().contains(lowerCaseFilter)){
                         return true;
                     }else{
                         return zlecenie.getIdZlecenie().toString().contains(lowerCaseFilter);
@@ -290,7 +291,26 @@ public class ZleceniaController implements Initializable {
         }
     }
 
+    @FXML
+    public void showZlecenie(){
+        if (zleceniaTableView.getSelectionModel().getSelectedItem() == null){
+            AlertPopUp.successAlert("Nie wybrano zlecenia!");
+        }else {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(ScenePath.SHOW_ZLECENIE.getPath()));
+                Parent parent = loader.load();
 
+                ShowZlecenieController showZlecenieController = loader.getController();
+                showZlecenieController.setData(zleceniaTableView.getSelectionModel().getSelectedItem());
+                Stage stage = new Stage(StageStyle.UNDECORATED);
+                stage.setScene(new Scene(parent));
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
     @FXML
@@ -322,7 +342,6 @@ public class ZleceniaController implements Initializable {
     void showPomocScreen(ActionEvent event) throws IOException {
         SceneController.getPomocScene(event);
     }
-
 
     @FXML
     void refreshScreen(ActionEvent event) throws IOException {

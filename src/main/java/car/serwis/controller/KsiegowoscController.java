@@ -203,7 +203,7 @@ public class KsiegowoscController implements Initializable {
 
 
     @FXML
-    public void showFaktura(ActionEvent event) throws IOException {
+    public void showFaktura(){
         if (fakturaTableView.getSelectionModel().getSelectedItem() == null){
             AlertPopUp.successAlert("Nie wybrano faktury!");
         }else {
@@ -212,7 +212,7 @@ public class KsiegowoscController implements Initializable {
                 Parent parent = loader.load();
 
                 ShowFakturaController showFakturaController = loader.getController();
-                showFakturaController.setText(fakturaTableView.getSelectionModel().getSelectedItem());
+                showFakturaController.setData(fakturaTableView.getSelectionModel().getSelectedItem());
                 Stage stage = new Stage(StageStyle.UNDECORATED);
                 stage.setScene(new Scene(parent));
                 stage.initModality(Modality.APPLICATION_MODAL);

@@ -1,7 +1,9 @@
 package car.serwis.controller;
 
 import car.serwis.database.dao.CzescDao;
+import car.serwis.database.dao.KontrahentDao;
 import car.serwis.database.model.Czesc;
+import car.serwis.database.model.Kontrahent;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
 import javafx.animation.PauseTransition;
@@ -11,10 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -23,10 +22,7 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddCzescController implements Initializable {
-    @FXML
-    private AnchorPane addCzescAnchorePane;
-
+public class UpdateCzescController implements Initializable {
     @FXML
     private Button anulujButton;
 
@@ -37,21 +33,27 @@ public class AddCzescController implements Initializable {
     private Text errorText;
 
     @FXML
-    private Spinner<Double> iloscCzesc;
+    private Spinner<Double> iloscPobranejCzesci;
 
     @FXML
     private Button updateButton;
+
+    @FXML
+    private AnchorPane updateCzescAnchorePane;
 
     CzescDao czescDao = new CzescDao();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        iloscCzesc.setEditable(true);
+        iloscPobranejCzesci.setEditable(true);
         SpinnerValueFactory<Double> valueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.0,99.00,0.0,0.1);
-        iloscCzesc.setValueFactory(valueFactory);
+
+        iloscPobranejCzesci.setValueFactory(valueFactory);
+
         anulujButton.setOnAction(SceneController::close);
         czescComboBox.setItems(getCzesciObservableList());
-        addCzesc();
+        show();
+
     }
 
     private ObservableList<Czesc> getCzesciObservableList() {
@@ -60,15 +62,25 @@ public class AddCzescController implements Initializable {
         return list;
     }
 
-    private void addCzesc(){
+
+    private void show(){
         updateButton.setOnAction((event) -> {
             if (validateInputs()){
-               Czesc czesc = czescComboBox.getValue();
-               czesc.setIlosc(czesc.getIlosc() + iloscCzesc.getValue());
-               czescDao.updateCzesc(czesc);
-                delayWindowClose(event);
-                UpdateStatus.setIsCzescUpdated(true);
-                AlertPopUp.successAlert("Doano część!");
+                Czesc czesc = new Czesc();
+                czesc.setIdCzesc(czescComboBox.getValue().getIdCzesc());
+                Czesc czescBaza = czescDao.getCzesc(czesc);
+
+                czesc.setIlosc(iloscPobranejCzesci.getValue());
+
+                if (czescBaza.getIlosc() - czesc.getIlosc() < 0){
+                    AlertPopUp.successAlert("Nie ma wystarczajacej ilości części w magazynie!");
+                }else {
+                    czescBaza.setIlosc(czescBaza.getIlosc() - czesc.getIlosc());
+                    czescDao.updateCzesc(czescBaza);
+                    delayWindowClose(event);
+                    UpdateStatus.setIsCzescUpdated(true);
+                    AlertPopUp.successAlert("Pobrano z magazynu!");
+                }
             }
         });
     }
@@ -78,12 +90,14 @@ public class AddCzescController implements Initializable {
             errorText.setText("*Nie wybrano części");
             return false;
         }
-        if (iloscCzesc.getValue() == 0){
+        if (iloscPobranejCzesci.getValue() == 0){
             errorText.setText("*Niepoprawna wartość pola ilość!");
             return false;
         }
         return true;
     }
+
+
 
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
@@ -97,6 +111,9 @@ public class AddCzescController implements Initializable {
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
+
+
+
 
 
 }

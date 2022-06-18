@@ -52,7 +52,7 @@ public class NewWindowController {
     }
 
     public static void getNewCzescWindow() throws IOException {
-        getPopUpWindow(ScenePath.ADD_CZESC.getPath());
+        getPopUpWindow(ScenePath.ADD_NEW_CZESC.getPath());
     }
 
     public static void getNewStatusWindow() throws IOException {
@@ -63,9 +63,14 @@ public class NewWindowController {
         getPopUpWindow(ScenePath.ADD_FAKTURA.getPath());
     }
 
-    public static void getShowFakturaWindow() throws IOException {
-        getPopUpWindow(ScenePath.SHOW_FAKTURA.getPath());
+    public static void getUpdateCzescWindow() throws IOException {
+        getPopUpWindow(ScenePath.UPDATE_CZESC.getPath());
     }
+
+    public static void getCzescWindow() throws IOException {
+        getPopUpWindow(ScenePath.ADD_CZESC.getPath());
+    }
+
 
 
 

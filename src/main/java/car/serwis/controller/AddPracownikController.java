@@ -4,6 +4,7 @@ import car.serwis.database.dao.PracownikDao;
 import car.serwis.database.dao.StanowiskoDao;
 import car.serwis.database.model.Pracownik;
 import car.serwis.database.model.Stanowisko;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
 import car.serwis.helpers.WindowManagement;
 import javafx.animation.PauseTransition;
@@ -20,13 +21,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.mindrot.jbcrypt.BCrypt;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 import java.util.ResourceBundle;
 
 public class AddPracownikController implements Initializable {
-
-
     @FXML
     private TextField hasloTextField;
 
@@ -68,12 +74,24 @@ public class AddPracownikController implements Initializable {
         return list;
     }
 
-    private Pracownik createPracownikFromInput() {
+
+    private String hashPassword(String haslo){
+        return BCrypt.hashpw(haslo, BCrypt.gensalt(11));
+    }
+
+
+
+    private Pracownik createPracownikFromInput() throws NoSuchAlgorithmException, InvalidKeySpecException {
         Pracownik pracownik = new Pracownik();
+
+
+
+        System.out.println(hashPassword(hasloTextField.getText()));
+
         pracownik.setImie(imieTextField.getText());
         pracownik.setNazwisko(nazwiskoTextField.getText());
         pracownik.setLogin(loginTextField.getText());
-        pracownik.setHaslo(hasloTextField.getText());
+        pracownik.setHaslo(hashPassword(hasloTextField.getText()));
         pracownik.setPracujeOd(pracujeOdDatePicker.getValue());
         pracownik.setStanowisko(stanowiskaComboBox.getValue());
 
@@ -116,15 +134,14 @@ public class AddPracownikController implements Initializable {
     }
 
     @FXML
-    private void createPracownik(ActionEvent event) {
+    private void createPracownik(ActionEvent event) throws NoSuchAlgorithmException, InvalidKeySpecException {
         if(validateInputs()) {
             Pracownik pracownik = createPracownikFromInput();
             boolean isSaved = new PracownikDao().createPracownik(pracownik);
             if (isSaved) {
                 UpdateStatus.setIsPracownikAdded(true);
-                errorText.setText("Dodano pracownika!");
-                errorText.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
                 delayWindowClose(event);
+                AlertPopUp.successAlert("Pracownik dodany!");
             }
         }
     }

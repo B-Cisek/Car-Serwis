@@ -12,7 +12,7 @@
 <AnchorPane fx:id="showFakturaAnchorePane" prefHeight="645.0" prefWidth="649.0" styleClass="mainAnchorePane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="car.serwis.controller.ShowFakturaController">
    <children>
       <Text layoutX="260.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="h1" text="Faktura VAT" />
-      <TableView fx:id="showPozycjaTableView" fixedCellSize="50.0" layoutX="57.0" layoutY="238.0" prefHeight="246.0" prefWidth="544.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="48.0">
+      <TableView fx:id="pozycjaFakturyTableView" fixedCellSize="50.0" layoutX="57.0" layoutY="238.0" prefHeight="246.0" prefWidth="544.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="48.0">
         <columns>
           <TableColumn fx:id="uslugaTableColumn" prefWidth="292.0" text="Nazwa towaru / Usługi" />
             <TableColumn fx:id="iloscTableColumn" prefWidth="123.0" text="Ilość" />

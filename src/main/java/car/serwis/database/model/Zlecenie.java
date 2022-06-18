@@ -7,10 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Data
@@ -44,15 +41,6 @@ public class Zlecenie {
     @Enumerated(EnumType.STRING)
     private ZlecenieStatus status;
 
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "zlecenie_czesc",
-            joinColumns = @JoinColumn(name = "id_zlecenie"),
-            inverseJoinColumns = @JoinColumn(name = "id_czesc")
-    )
-    private Set<Czesc> czesci = new HashSet<>();
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_samochod", referencedColumnName = "id_samochod")
     private Samochod samochod;
@@ -72,7 +60,6 @@ public class Zlecenie {
     public void setStatus(ZlecenieStatus status) {
         this.status = status;
     }
-
 
     @Override
     public String toString() {

@@ -28,6 +28,18 @@ public class PracownikDao {
        }
     }
 
+    public Pracownik getConnectedPracownikLogin(String login) {
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Query<Pracownik> typedQuery = session.createQuery("SELECT u FROM Pracownik u WHERE u.login=:login", Pracownik.class);
+            typedQuery.setParameter("login", login);
+            return typedQuery.getSingleResult();
+        }catch (Exception ex){
+            System.err.println("Pracownik not found");
+            return null;
+        }
+    }
+
     public List<Pracownik> getPracownikStanowisko() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("FROM Pracownik ", Pracownik.class).list();
@@ -42,7 +54,7 @@ public class PracownikDao {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.persist(pracownik);
+            session.save(pracownik);
             transaction.commit();
             return transaction.getStatus() == TransactionStatus.COMMITTED;
         } catch (Exception ex) {

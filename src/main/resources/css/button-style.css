@@ -22,3 +22,15 @@
     -fx-opacity: 0.7;
 }
 
+.update-button{
+    -fx-background-color: #F1AD1D;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-pref-width: 160px;
+    -fx-pref-height: 40px;
+}
+
+.update-button:hover{
+    -fx-opacity: 0.7;
+}
+

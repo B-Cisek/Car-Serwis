@@ -1,6 +1,6 @@
 package car.serwis.controller;
 
-import car.serwis.helpers.ScenePath;
+import car.serwis.helpers.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -20,11 +20,9 @@ public class SceneController {
 
     private static double x;
     private static double y;
-
     private static final String TITLE = "Car Serwis";
     private static final int WIDTH = 600;
     private static final int HEIGHT = 550;
-
     private static Parent main;
 
 
@@ -44,23 +42,48 @@ public class SceneController {
     }
 
     public static void getZleceniaScene(ActionEvent event) throws IOException {
-        changeScreen(event, ScenePath.ZLECENIA.getPath());
+        if (CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Obsługa klienta") ||
+                CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Admin")){
+            changeScreen(event, ScenePath.ZLECENIA.getPath());
+        }else {
+            AlertPopUp.successAlert("Nie masz uprawnień do panelu: ZLECENIA");
+        }
     }
 
     public static void getWarsztatScene(ActionEvent event) throws IOException {
-        changeScreen(event, ScenePath.WARSZTAT.getPath());
+        if (CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Mechanik") ||
+            CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Admin")){
+            changeScreen(event, ScenePath.WARSZTAT.getPath());
+        }else {
+            AlertPopUp.successAlert("Nie masz uprawnień do panelu: WARSZTAT");
+        }
     }
 
     public static void getKsiegowoscScene(ActionEvent event) throws IOException {
-        changeScreen(event, ScenePath.KSIEKOWOSC.getPath());
+        if  (CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Obsługa klienta") ||
+                CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Admin")){
+            changeScreen(event, ScenePath.KSIEGOWOSC.getPath());
+        }else {
+            AlertPopUp.successAlert("Nie masz uprawnień do panelu: KSIĘGOWOŚĆ");
+        }
     }
 
     public static void getMagazynScene(ActionEvent event) throws IOException {
-        changeScreen(event, ScenePath.MAGAZYN.getPath());
+        if (CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Magazynier") ||
+            CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Admin") ||
+            CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Mechanik")){
+            changeScreen(event, ScenePath.MAGAZYN.getPath());
+        }else {
+            AlertPopUp.successAlert("Nie masz uprawnień do panelu: MAGAZYN");
+        }
     }
 
     public static void getUstawieniaScene(ActionEvent event) throws IOException {
-        changeScreen(event, ScenePath.USTAWIENIA.getPath());
+        if (CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Admin")){
+            changeScreen(event, ScenePath.USTAWIENIA.getPath());
+        }else {
+            AlertPopUp.successAlert("Nie masz uprawnień do panelu: USTAWIENIA");
+        }
     }
 
     public static void getPomocScene(ActionEvent event) throws IOException {
@@ -70,15 +93,8 @@ public class SceneController {
     private static void changeScreen(ActionEvent event, String path) throws IOException {
         main = FXMLLoader.load(SceneController.class.getResource(path));
         Scene pilpitScene = new Scene(main);
-
-        double prevWidth = pilpitScene.getWidth();
-        double prevHeight = pilpitScene.getHeight();
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
         window.setScene(pilpitScene);
-        //window.setHeight(prevHeight);
-        //window.setWidth(prevWidth);
-
 
         final double CENTER_ON_SCREEN_X_FRACTION = 1.0f / 2;
         final double CENTER_ON_SCREEN_Y_FRACTION = 1.0f / 3;
@@ -90,10 +106,8 @@ public class SceneController {
         double centerY = bounds.getMinY() + (bounds.getHeight() - window.getHeight())
                 * CENTER_ON_SCREEN_Y_FRACTION;
 
-
         window.setX(centerX);
         window.setY(centerY);
-
 
         //TODO zmiana centrowania
         controlDrag(window);

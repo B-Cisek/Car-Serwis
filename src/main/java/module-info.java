@@ -6,6 +6,7 @@ module car.serwis.carserwis {
     requires lombok;
     requires jakarta.persistence;
     requires pdf.generator;
+    requires jbcrypt;
 
     opens car.serwis to javafx.fxml;
     opens car.serwis.database.model;

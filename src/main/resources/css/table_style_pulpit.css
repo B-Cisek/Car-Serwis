@@ -1,0 +1,40 @@
+.table-view .column-header, .table-view{
+    -fx-text-fill: black;
+    -fx-background-color: #fff;
+}
+
+.table-view .column-header .label{
+    -fx-alignment: CENTER;
+    -fx-text-fill: #253b5f;
+    -fx-padding: 5 0 5 5;
+    -fx-font: 12px 'Inter';
+    -fx-font-weight: bold;
+
+}
+
+.table-view .table-cell{
+    -fx-padding: 15 0 10 10;
+    -fx-table-cell-border-color:transparent;
+    -fx-text-fill: grey;
+}
+
+.table-row-cell{
+    -fx-background-color: #fdfdfd;
+    -fx-border-color:#e9e7ec;
+}
+
+.table-view .table-row-cell:hover{
+    -fx-background-color: #A5E2F1;
+}
+
+.table-view .table-row-cell:selected{
+    -fx-background-color: #A5E2F1;
+}
+
+.table-view .filler {
+    -fx-background-color: #e9e7ec;
+}
+
+.table-view .table-column {
+    -fx-alignment: CENTER;
+}

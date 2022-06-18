@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import java.util.ArrayList;
@@ -88,6 +89,18 @@ public class CzescDao {
         } catch (Exception ex) {
             ex.printStackTrace();
             return new ArrayList<>();
+        }
+    }
+
+    public Czesc getCzesc(Czesc czesc) {
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Query<Czesc> typedQuery = session.createQuery("SELECT cz FROM Czesc cz WHERE cz.idCzesc = :id", Czesc.class);
+            typedQuery.setParameter("id", czesc.getIdCzesc());
+            return typedQuery.getSingleResult();
+        }catch (Exception ex){
+            System.err.println("Czesc not found");
+            return null;
         }
     }
 

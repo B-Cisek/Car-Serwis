@@ -140,49 +140,50 @@
    <right>
       <AnchorPane prefHeight="200.0" prefWidth="1600.0" styleClass="main-pulpit" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="54.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ZLECENIA" wrappingWidth="123.43748092651367" AnchorPane.leftAnchor="35.0">
+            <Text layoutX="54.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ZLECENIA" wrappingWidth="123.43748092651367" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="25.0">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Text>
-            <TableView fx:id="zleceniaTableView" fixedCellSize="50.0" layoutX="38.0" layoutY="134.0" prefHeight="590.0" prefWidth="941.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="130.0">
+            <TableView fx:id="zleceniaTableView" fixedCellSize="50.0" layoutX="38.0" layoutY="117.0" prefHeight="598.0" prefWidth="941.0" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="117.0">
               <columns>
-                <TableColumn fx:id="idZlecenieTableColumn" minWidth="0.0" prefWidth="75.0" text="ID" />
-                <TableColumn fx:id="dataPrzyjeciaZlecenieTableColumn" minWidth="0.0" prefWidth="124.33332824707031" text="DATA PRZYJĘCIA" />
-                  <TableColumn fx:id="opisZlecenieTableColumn" maxWidth="277.0" minWidth="277.0" prefWidth="277.0" text="OPIS" />
-                  <TableColumn fx:id="statusZlecenieTableColumn" minWidth="0.0" prefWidth="108.0" text="STATUS" />
-                  <TableColumn fx:id="samochodZlecenieTableColumn" minWidth="0.0" prefWidth="121.0" text="SAMOCHÓD" />
-                  <TableColumn fx:id="klientZlecenieTableColumn" minWidth="0.0" prefWidth="129.0" text="KLIENT" />
-                  <TableColumn fx:id="pracownikZlecenieTableColumn" minWidth="0.0" prefWidth="103.0" text="PRACOWNIK" />
+                <TableColumn fx:id="idZlecenieTableColumn" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="ID" />
+                <TableColumn fx:id="dataPrzyjeciaZlecenieTableColumn" maxWidth="135.0" minWidth="135.0" prefWidth="135.0" text="DATA PRZYJĘCIA" />
+                  <TableColumn fx:id="opisZlecenieTableColumn" maxWidth="321.3333435058594" minWidth="162.66665649414062" prefWidth="286.6666564941406" text="OPIS" />
+                  <TableColumn fx:id="statusZlecenieTableColumn" maxWidth="217.33334350585938" minWidth="58.666656494140625" prefWidth="93.33334350585938" text="STATUS" />
+                  <TableColumn fx:id="samochodZlecenieTableColumn" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="SAMOCHÓD" />
+                  <TableColumn fx:id="klientZlecenieTableColumn" maxWidth="140.6666259765625" minWidth="49.66668701171875" prefWidth="121.3333740234375" text="KLIENT" />
+                  <TableColumn fx:id="pracownikZlecenieTableColumn" maxWidth="157.33331298828125" minWidth="50.0" prefWidth="98.0" text="PRACOWNIK" />
               </columns>
             </TableView>
-            <Button fx:id="addZlecenie" layoutX="192.0" layoutY="23.0" mnemonicParsing="false" onAction="#addZlecenieWindow" prefHeight="30.0" prefWidth="77.0" styleClass="add-button" text="Dodaj" />
-            <Button fx:id="deleteZlecenie" layoutX="281.0" layoutY="23.0" mnemonicParsing="false" onAction="#deleteZlecenie" prefHeight="35.0" prefWidth="83.0" styleClass="cancel-button" text="Usuń" />
-            <Text layoutX="1008.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KONTRAHENCI" wrappingWidth="220.7708740234375">
+            <Button fx:id="addZlecenie" layoutX="579.0" layoutY="26.0" mnemonicParsing="false" onAction="#addZlecenieWindow" prefHeight="30.0" prefWidth="77.0" styleClass="add-button" text="Dodaj zlecenie" AnchorPane.rightAnchor="800.0" AnchorPane.topAnchor="25.0" />
+            <Button fx:id="deleteZlecenie" layoutX="792.0" layoutY="26.0" mnemonicParsing="false" onAction="#deleteZlecenie" prefHeight="35.0" prefWidth="83.0" styleClass="delete-button" text="Usuń zlecenie" AnchorPane.rightAnchor="625.0" AnchorPane.topAnchor="25.0" />
+            <Text layoutX="1008.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KONTRAHENCI" wrappingWidth="220.7708740234375" AnchorPane.topAnchor="25.0">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Text>
-            <Button fx:id="addKontrahent" layoutX="1223.0" layoutY="21.0" mnemonicParsing="false" onAction="#addKontrahentWindow" prefHeight="35.0" prefWidth="74.0" styleClass="add-button" text="Dodaj" />
-            <Button fx:id="deleteKontrahent" layoutX="1311.0" layoutY="21.0" mnemonicParsing="false" onAction="#deleteKontrahent" prefHeight="35.0" prefWidth="79.0" styleClass="cancel-button" text="Usuń" />
-            <TextField fx:id="searchKontrahentBar" alignment="TOP_LEFT" layoutX="1007.0" layoutY="77.0" prefHeight="25.0" prefWidth="560.0" />
-            <TableView fx:id="kontrahentTableView" fixedCellSize="50.0" layoutX="1008.0" layoutY="140.0" prefHeight="586.0" prefWidth="557.0" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="130.0">
+            <Button fx:id="addKontrahent" layoutX="1223.0" layoutY="21.0" minWidth="165.0" mnemonicParsing="false" onAction="#addKontrahentWindow" prefHeight="35.0" prefWidth="169.0" styleClass="add-button" text="Dodaj kontrahenta" AnchorPane.rightAnchor="210.0" AnchorPane.topAnchor="25.0" />
+            <Button fx:id="deleteKontrahent" layoutX="1311.0" layoutY="21.0" mnemonicParsing="false" onAction="#deleteKontrahent" prefHeight="35.0" prefWidth="79.0" styleClass="delete-button" text="Usuń kontrahenta" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="25.0" />
+            <TextField fx:id="searchKontrahentBar" alignment="TOP_LEFT" layoutX="1007.0" layoutY="77.0" prefHeight="25.0" prefWidth="557.0" promptText="Szukaj" AnchorPane.rightAnchor="35.0" />
+            <TableView fx:id="kontrahentTableView" fixedCellSize="50.0" layoutX="1008.0" layoutY="140.0" prefHeight="586.0" prefWidth="557.0" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="117.0">
               <columns>
-                <TableColumn fx:id="idkontrahentTableView" prefWidth="41.6666259765625" text="ID" />
-                  <TableColumn fx:id="imieKontrahentTableColumn" prefWidth="87.0" text="IMIE" />
-                  <TableColumn fx:id="nazwiskoKontrahentTableColumn" prefWidth="110.3333740234375" text="NAZWISKO" />
-                  <TableColumn fx:id="nazwaFirmyKontrahentTableColumn" prefWidth="113.6666259765625" text="NAZWA FIRMY" />
-                  <TableColumn fx:id="nipKontrahentTableColumn" prefWidth="102.3333740234375" text="NIP" />
-                  <TableColumn fx:id="peselKontrahentTableColumn" prefWidth="89.6666259765625" text="PESEL" />
+                <TableColumn fx:id="idkontrahentTableView" maxWidth="43.0" minWidth="43.0" prefWidth="43.0" text="ID" />
+                  <TableColumn fx:id="imieKontrahentTableColumn" maxWidth="58.0" minWidth="58.0" prefWidth="58.0" text="IMIE" />
+                  <TableColumn fx:id="nazwiskoKontrahentTableColumn" maxWidth="101.0" minWidth="101.0" prefWidth="101.0" text="NAZWISKO" />
+                  <TableColumn fx:id="nazwaFirmyKontrahentTableColumn" maxWidth="133.0" minWidth="133.0" prefWidth="133.0" text="NAZWA FIRMY" />
+                  <TableColumn fx:id="nipKontrahentTableColumn" maxWidth="111.0" minWidth="93.6666259765625" prefWidth="96.333251953125" text="NIP" />
+                  <TableColumn fx:id="peselKontrahentTableColumn" maxWidth="127.3333740234375" minWidth="102.3333740234375" prefWidth="106.3333740234375" text="PESEL" />
               </columns>
             </TableView>
-            <TextField fx:id="searchZlecenieBar" layoutX="43.0" layoutY="77.0" prefHeight="25.0" prefWidth="941.0" AnchorPane.leftAnchor="35.0" />
+            <TextField fx:id="searchZlecenieBar" layoutX="43.0" layoutY="77.0" prefHeight="25.0" prefWidth="941.0" promptText="Szukaj" AnchorPane.leftAnchor="35.0" />
+            <Button fx:id="showZlecenie" layoutX="460.0" layoutY="27.0" mnemonicParsing="false" onAction="#showZlecenie" styleClass="update-button" text="Pokaż szczegóły" />
          </children>
       </AnchorPane>
    </right>
    <stylesheets>
       <URL value="@../css/main-style.css" />
       <URL value="@../css/table_style.css" />
-      <URL value="@../css/popUpWindows.css" />
+      <URL value="@../css/button-style.css" />
    </stylesheets>
 </BorderPane>

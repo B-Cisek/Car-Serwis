@@ -24,7 +24,6 @@ public class HibernateUtil {
                 settings.put(Environment.PASS, "serwis");
                 settings.put(Environment.POOL_SIZE,"200");
                 settings.put(Environment.AUTO_CLOSE_SESSION,"true");
-                //settings.put(Environment.AUTOCOMMIT,"true");
 
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
                 settings.put(Environment.SHOW_SQL, "true");

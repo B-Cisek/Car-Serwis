@@ -125,6 +125,8 @@ public class MagazynController implements Initializable {
         setObservableList();
         fillTables();
         addTableSettings();
+        czescTableView.setPlaceholder(new Label("Brak danych!"));
+        kategoriaFilterComboBox.setItems(getKategoriaObservableList());
     }
 
     private void setObservableList() {
@@ -406,7 +408,7 @@ public class MagazynController implements Initializable {
     CzescDao czescDao = new CzescDao();
 
     @FXML
-    private void addCzescWindow(ActionEvent event) throws IOException {
+    private void addNewCzescWindow(ActionEvent event) throws IOException {
         NewWindowController.getNewCzescWindow();
         if (UpdateStatus.isCzescAdded()) {
             refreshScreen(event);
@@ -453,16 +455,16 @@ public class MagazynController implements Initializable {
                         return true;
                     } else if (czesc.getIlosc().toString().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (czesc.getProducent().toString().contains(lowerCaseFilter)) {
+                    } else if (czesc.getProducent().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
                     } else if (czesc.getJednostka().toString().contains(lowerCaseFilter)) {
                         return true;
                     } else if (czesc.getKategoria().toString().contains(lowerCaseFilter)) {
                         return true;
-                    } else {
-                        return czesc.getSamochod().toString().contains(lowerCaseFilter);
+                    } else if(czesc.getSamochod().toString().toLowerCase().contains(lowerCaseFilter)){
+                        return true;
                     }
-
+                    return false;
                 }));
         return filteredList;
     }
@@ -491,31 +493,48 @@ public class MagazynController implements Initializable {
         AlertPopUp.successAlert("Zmieniono opis części!");
     }
 
+    @FXML
+    private void updateCzescWindow(ActionEvent event) throws IOException {
+        NewWindowController.getUpdateCzescWindow();
+        if (UpdateStatus.isCzescUpdated()) {
+            refreshScreen(event);
+            UpdateStatus.setIsCzescUpdated(false);
+        }
+    }
+
+    @FXML
+    private void addCzescWindow(ActionEvent event) throws IOException {
+        NewWindowController.getCzescWindow();
+        if (UpdateStatus.isCzescUpdated()) {
+            refreshScreen(event);
+            UpdateStatus.setIsCzescUpdated(false);
+        }
+    }
+
+
+
 
     // TODO Filtrowanie
-//    @FXML
-//    private void filterCzesc(ActionEvent event) throws IOException {
-//        Kategoria kategoria;
-//        kategoria = kategoriaFilterComboBox.getValue();
-//        ArrayList<Czesc> list = new ArrayList<>(new CzescDao().getCzescForKategoria(kategoria));
-//
-//        czescObservableList.clear();
-//        czescObservableList.addAll(list);
-//
-//
-//    }
+    @FXML
+    private void filterCzesc(ActionEvent event) throws IOException {
+        Kategoria kategoria = kategoriaFilterComboBox.getValue();
+        ArrayList<Czesc> list = new ArrayList<>(new CzescDao().getCzescForKategoria(kategoria));
+        czescObservableList.clear();
+        czescObservableList.addAll(list);
+    }
 
-//    private ObservableList<Kategoria> getKategoriaObservableList() {
-//        ObservableList<Kategoria> list = FXCollections.observableArrayList();
-//        list.addAll((Kategoria) new CzescDao().getKategoira());
-//        return list;
-//    }
+    private ObservableList<Kategoria> getKategoriaObservableList() {
+        ObservableList<Kategoria> list = FXCollections.observableArrayList();
+        list.addAll(new KategoriaDao().getKategorie());
+        return list;
+    }
 
-//    @FXML
-//    private void clearFiltr(ActionEvent event) throws IOException {
-//       refreshScreen(event);
-//       // kategoriaFilterComboBox.getSelectionModel().clearSelection();
-//    }
+    @FXML
+    private void clearFiltr(ActionEvent event) throws IOException {
+       kategoriaFilterComboBox.getSelectionModel().clearSelection();
+        czescObservableList.clear();
+        czescObservableList.addAll(czescDao.displayRecords());
+    }
 
 
     @FXML

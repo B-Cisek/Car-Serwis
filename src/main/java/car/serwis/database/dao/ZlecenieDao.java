@@ -1,30 +1,19 @@
 package car.serwis.database.dao;
 
-import car.serwis.database.model.Kontrahent;
-import car.serwis.database.model.Pracownik;
-import car.serwis.database.model.Stanowisko;
 import car.serwis.database.model.Zlecenie;
 import car.serwis.database.util.HibernateUtil;
 import car.serwis.helpers.CurrentPracownik;
 import car.serwis.helpers.ZlecenieStatus;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ZlecenieDao {
-
-
     public boolean createZlecenie(Zlecenie zlecenie) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -43,12 +32,14 @@ public class ZlecenieDao {
 
     public List<Zlecenie> getZlecenie() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Zlecenie ", Zlecenie.class).list();
+            return session.createQuery("FROM Zlecenie", Zlecenie.class).list();
         } catch (Exception ex) {
             ex.printStackTrace();
             return new ArrayList<>();
         }
     }
+
+
 
     public List<Zlecenie> getMechanikZlecenia() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -75,7 +66,7 @@ public class ZlecenieDao {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.delete(zlecenie);
+            session.remove(zlecenie);
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
@@ -148,7 +139,8 @@ public class ZlecenieDao {
 
     public List<Zlecenie> getRecentNoweZlecenia() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            TypedQuery<Zlecenie> query = session.createQuery("SELECT z.idZlecenie, z.dataPrzyjecia, z.opisZlecenie FROM Zlecenie z WHERE z.status = :status ORDER BY z.idZlecenie DESC", Zlecenie.class );
+            TypedQuery<Zlecenie> query = session.createQuery("SELECT z FROM Zlecenie z WHERE z.status = :status ORDER BY z.idZlecenie DESC", Zlecenie.class );
+            query.setMaxResults(5);
             query.setParameter("status", ZlecenieStatus.NOWE);
             return query.getResultList();
         } catch (Exception ex) {
@@ -159,7 +151,8 @@ public class ZlecenieDao {
 
     public List<Zlecenie> getRecentGotoweZlecenia() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            TypedQuery<Zlecenie> query = session.createQuery("SELECT z.idZlecenie, z.dataPrzyjecia, z.opisZlecenie FROM Zlecenie z WHERE z.status = :status ORDER BY z.idZlecenie DESC", Zlecenie.class );
+            TypedQuery<Zlecenie> query = session.createQuery("SELECT z FROM Zlecenie z WHERE z.status = :status ORDER BY z.idZlecenie DESC", Zlecenie.class );
+            query.setMaxResults(5);
             query.setParameter("status", ZlecenieStatus.GOTOWE);
             return query.getResultList();
         } catch (Exception ex) {
