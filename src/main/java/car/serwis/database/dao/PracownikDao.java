@@ -3,6 +3,8 @@ package car.serwis.database.dao;
 import car.serwis.database.model.Pracownik;
 import car.serwis.database.model.Stanowisko;
 import car.serwis.database.util.HibernateUtil;
+import car.serwis.helpers.AlertPopUp;
+import javafx.stage.Popup;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -10,6 +12,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,9 +43,9 @@ public class PracownikDao {
         }
     }
 
-    public List<Pracownik> getPracownikStanowisko() {
+    public List<Pracownik> getPracownicy() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Pracownik ", Pracownik.class).list();
+            return session.createQuery("FROM Pracownik", Pracownik.class).list();
         } catch (Exception ex) {
             ex.printStackTrace();
             return new ArrayList<>();
@@ -75,27 +78,15 @@ public class PracownikDao {
         }
     }
 
-    public List<Pracownik> getPracownicy() {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Pracownik ", Pracownik.class).list();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
 
 
-    public List displayRecords() {
+    public List getPracownicysss() {
         List pracownicyList = new ArrayList();
         Session session = null;
         try {
-            // Getting Session Object From SessionFactory
             session = HibernateUtil.getSessionFactory().openSession();
-            // Getting Transaction Object From Session Object
             session.beginTransaction();
-
             pracownicyList = session.createQuery("FROM Pracownik").list();
-
         } catch (Exception sqlException) {
             if (null != session.getTransaction()) {
                 session.getTransaction().rollback();

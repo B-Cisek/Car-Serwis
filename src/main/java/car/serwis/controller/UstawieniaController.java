@@ -24,12 +24,12 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLClientInfoException;
-import java.sql.SQLException;
 import java.time.LocalDate;
-
 import java.util.ResourceBundle;
 
+/**
+ * Kontroler widoku "ustawienia.fxml"
+ */
 public class UstawieniaController implements Initializable {
     @FXML
     private TableColumn<Pracownik, String> hasloPracownikColumn;
@@ -82,17 +82,19 @@ public class UstawieniaController implements Initializable {
     @FXML
     private Text pracownikInfo;
 
-
+    /** Inicjalizacja klas DAO */
     PracownikDao pracownikDao = new PracownikDao();
     StanowiskoDao stanowiskoDao = new StanowiskoDao();
+    /** Inicjalizacja klasy pomocniczej */
+    WindowManagement windowManagement = new WindowManagement();
+    /** Inicjalizacja ObservableList dla stanowisk i pracowników */
     ObservableList<Stanowisko> stanowiskaObservableList = FXCollections.observableArrayList();
     ObservableList<Pracownik> pracownicyObservableList = FXCollections.observableArrayList();
-    WindowManagement windowManagement = new WindowManagement();
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        windowManagement.initializeExitButton(exitButton,ustawieniaBorderPane);
+        exitButton.setOnAction(SceneController::close);
         windowManagement.initializeMinimalizeButton(minimalizeButton,ustawieniaBorderPane);
         CurrentPracownik.setPracownikInfo(pracownikInfo);
         setObservableList();
@@ -102,23 +104,26 @@ public class UstawieniaController implements Initializable {
         stanowiskaTable.setPlaceholder(new Label("Brak danych!"));
     }
 
-
+    /**
+     * Metoda czyszcząca i wypełniająca ObservableList
+     */
     private void setObservableList() {
         stanowiskaObservableList.clear();
         stanowiskaObservableList.addAll(stanowiskoDao.getStanowiska());
-
         pracownicyObservableList.clear();
-        pracownicyObservableList.addAll(pracownikDao.displayRecords());
+        pracownicyObservableList.addAll(pracownikDao.getPracownicy());
     }
 
-
+    /**
+     * Metoda wypełniająca kolumny tabeli
+     */
     private void fillTable() {
-        // STANOWISKO
+        /** Kolumny Stanowisko */
         idStanowiskoColumn.setCellValueFactory(new PropertyValueFactory<>("idStanowisko"));
         nazwaStanowiskoColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaStanowiska"));
         nazwaStanowiskoColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        // PRACOWNIK
+        /** Kolumny Pracownik */
         idPracownikColumn.setCellValueFactory(new PropertyValueFactory<>("idPracownik"));
         imiePracownikColumn.setCellValueFactory(new PropertyValueFactory<>("imie"));
         nazwiskoPracownikColumn.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
@@ -132,23 +137,35 @@ public class UstawieniaController implements Initializable {
         hasloPracownikColumn.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
+    /**
+     * Metoda wypełniająca tabele posortowanymi danymi
+     */
     private void addTableSettings() {
         stanowiskaTable.setEditable(true);
         stanowiskaTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         stanowiskaTable.setItems(getSortedListStanowiska());
-
         pracownicyTable.setEditable(true);
         pracownicyTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         pracownicyTable.setItems(getSortedListPracownicy());
     }
 
-    // ############### PRACOWNIK ###############
+
+    // ################### PRACOWNIK #######################
+
+    /**
+     * Metoda przekazująca przefiltrowanych pracowników do TableView
+     * @return zwraca liste posortowanych pracowników
+     */
     private SortedList<Pracownik> getSortedListPracownicy() {
         SortedList<Pracownik> sortedList = new SortedList<>(getFilteredListPracownicy());
         sortedList.comparatorProperty().bind(pracownicyTable.comparatorProperty());
         return sortedList;
     }
 
+    /**
+     * Metoda nasłuchująca TextField i filtrujaąca pracowników
+     * @return zwraca przefiltrowaną liste pracowników
+     */
     private FilteredList<Pracownik> getFilteredListPracownicy() {
         FilteredList<Pracownik> filteredList = new FilteredList<>(pracownicyObservableList, b -> true);
         searchPracownikBar.textProperty().addListener((observable, oldValue, newValue) ->
@@ -174,6 +191,11 @@ public class UstawieniaController implements Initializable {
         return filteredList;
     }
 
+    /**
+     * Metoda wywołująca widok "addPracownik.fxml"
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void addPracownikWindow(ActionEvent event) throws IOException {
         NewWindowController.getNewPracownikWindow();
@@ -183,10 +205,14 @@ public class UstawieniaController implements Initializable {
         }
     }
 
+    /**
+     * Metoda usuwająca pracownika
+     * @param event
+     * @throws IOException
+     */
     @FXML
-    void deletePracownik(ActionEvent event) throws IOException {
+    private void deletePracownik(ActionEvent event) throws IOException {
         ObservableList<Pracownik> selectedRows = pracownicyTable.getSelectionModel().getSelectedItems();
-
         if (pracownicyTable.getSelectionModel().getSelectedItems().isEmpty()){
             AlertPopUp.successAlert("Nie wybrano pracownika do usunięcia!");
         }else{
@@ -198,6 +224,10 @@ public class UstawieniaController implements Initializable {
         }
     }
 
+    /**
+     * Metoda zmieniająca imie pracownika
+     * @param editEvent
+     */
     @FXML
     private void changeImiePracownik(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
         Pracownik selectedPracownik = pracownicyTable.getSelectionModel().getSelectedItem();
@@ -206,6 +236,10 @@ public class UstawieniaController implements Initializable {
         AlertPopUp.successAlert("Zmieniono imie pracownika!");
     }
 
+    /**
+     * Metoda zmieniająca nazwisko pracownika
+     * @param editEvent
+     */
     @FXML
     private void changeNazwiskoPracownik(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
         Pracownik selectedPracownik = pracownicyTable.getSelectionModel().getSelectedItem();
@@ -214,6 +248,10 @@ public class UstawieniaController implements Initializable {
         AlertPopUp.successAlert("Zmieniono nazwisko pracownika!");
     }
 
+    /**
+     * Metoda zmieniająca login pracownika
+     * @param editEvent
+     */
     @FXML
     private void changeLoginPracownik(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
         Pracownik selectedPracownik = pracownicyTable.getSelectionModel().getSelectedItem();
@@ -222,6 +260,10 @@ public class UstawieniaController implements Initializable {
         AlertPopUp.successAlert("Zmieniono login pracownika!");
     }
 
+    /**
+     * Metoda zmieniająca hasło pracownika
+     * @param editEvent
+     */
     @FXML
     private void changeHasloPracownik(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
         Pracownik selectedPracownik = pracownicyTable.getSelectionModel().getSelectedItem();
@@ -230,18 +272,33 @@ public class UstawieniaController implements Initializable {
         AlertPopUp.successAlert("Zmieniono hasło pracownika!");
     }
 
+
+    /**
+     * Metoda haszujaca zmieniane hasło
+     * @param haslo hasło w formie plaintext
+     * @return zwraca zahaszowane hasło
+     */
     private String hashPassword(String haslo){
         return BCrypt.hashpw(haslo, BCrypt.gensalt(11));
     }
 
 
-    // ################# STANOWISKO ####################
+    // #################### STANOWISKO ####################
+
+    /**
+     * Metoda przekazująca przefiltrowane stanowiska do TableView
+     * @return zwraca liste posortowanych stanowisk
+     */
     private SortedList<Stanowisko> getSortedListStanowiska() {
         SortedList<Stanowisko> sortedList = new SortedList<>(getFilteredListStanowiska());
         sortedList.comparatorProperty().bind(stanowiskaTable.comparatorProperty());
         return sortedList;
     }
 
+    /**
+     * Metoda nasłuchująca TextField i filtrujaąca stanowiska
+     * @return zwraca przefiltrowaną liste stanowisk
+     */
     private FilteredList<Stanowisko> getFilteredListStanowiska() {
         FilteredList<Stanowisko> filteredList = new FilteredList<>(stanowiskaObservableList, b -> true);
         searchStanowiskoBar.textProperty().addListener((observable, oldValue, newValue) ->
@@ -261,6 +318,11 @@ public class UstawieniaController implements Initializable {
         return filteredList;
     }
 
+    /**
+     * Metoda wywołująca widok "addStanowisko.fxml"
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void addStanowiskoWindow(ActionEvent event) throws IOException {
         NewWindowController.getNewStanowiskoWindow();
@@ -270,14 +332,19 @@ public class UstawieniaController implements Initializable {
         }
     }
 
+    /**
+     * Metoda usuwająca stanowisko
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void deleteStanowisko(ActionEvent event) throws IOException {
         ObservableList<Stanowisko> selectedRows = stanowiskaTable.getSelectionModel().getSelectedItems();
-
         if (stanowiskaTable.getSelectionModel().getSelectedItems().isEmpty()){
             AlertPopUp.successAlert("Nie wybrano stanowiska do usunięcia!");
         }else {
             for (Stanowisko stanowisko : selectedRows) {
+                //TODO czy stanowisko przypisane do pracownika
                 stanowiskoDao.deleteStanowisko(stanowisko);
             }
             refreshScreen(event);
@@ -285,6 +352,10 @@ public class UstawieniaController implements Initializable {
         }
     }
 
+    /**
+     * Metoda zmieniająca nazwe stanowiska
+     * @param editEvent
+     */
     @FXML
     private void changeNazwaStanowiska(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
         Stanowisko selectedStanowisko = stanowiskaTable.getSelectionModel().getSelectedItem();
@@ -292,9 +363,6 @@ public class UstawieniaController implements Initializable {
         stanowiskoDao.updateStanowisko(selectedStanowisko);
         AlertPopUp.successAlert("Zmieniono nazwę stanowiska!");
     }
-
-
-
 
     @FXML
     void showPulpitScreen(ActionEvent event) throws IOException {

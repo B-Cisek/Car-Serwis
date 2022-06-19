@@ -1,11 +1,12 @@
 package car.serwis.database.model;
 
 
+import car.serwis.helpers.UsersPermissions;
+import car.serwis.helpers.ZlecenieStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,13 @@ public class Stanowisko {
             nullable = false
     )
     private String nazwaStanowiska;
+
+    @Column(
+            name = "uprawnienia",
+            nullable = false
+    )
+    @Enumerated(EnumType.STRING)
+    private UsersPermissions uprawnienia;
 
 
     @OneToMany(mappedBy = "stanowisko")

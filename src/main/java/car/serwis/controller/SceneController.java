@@ -42,8 +42,8 @@ public class SceneController {
     }
 
     public static void getZleceniaScene(ActionEvent event) throws IOException {
-        if (CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Obsługa klienta") ||
-                CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Admin")){
+        if (CurrentPracownik.getCurrentPracownik().getStanowisko().getUprawnienia().equals(UsersPermissions.OBSLUGA_KLIENTA) ||
+                CurrentPracownik.getCurrentPracownik().getStanowisko().getUprawnienia().equals(UsersPermissions.ADMIN)){
             changeScreen(event, ScenePath.ZLECENIA.getPath());
         }else {
             AlertPopUp.successAlert("Nie masz uprawnień do panelu: ZLECENIA");
@@ -51,8 +51,8 @@ public class SceneController {
     }
 
     public static void getWarsztatScene(ActionEvent event) throws IOException {
-        if (CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Mechanik") ||
-            CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Admin")){
+        if (CurrentPracownik.getCurrentPracownik().getStanowisko().getUprawnienia().equals(UsersPermissions.MECHANIK) ||
+            CurrentPracownik.getCurrentPracownik().getStanowisko().getUprawnienia().equals(UsersPermissions.ADMIN)){
             changeScreen(event, ScenePath.WARSZTAT.getPath());
         }else {
             AlertPopUp.successAlert("Nie masz uprawnień do panelu: WARSZTAT");
@@ -60,8 +60,8 @@ public class SceneController {
     }
 
     public static void getKsiegowoscScene(ActionEvent event) throws IOException {
-        if  (CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Obsługa klienta") ||
-                CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Admin")){
+        if  (CurrentPracownik.getCurrentPracownik().getStanowisko().getUprawnienia().equals(UsersPermissions.OBSLUGA_KLIENTA) ||
+                CurrentPracownik.getCurrentPracownik().getStanowisko().getUprawnienia().equals(UsersPermissions.ADMIN)){
             changeScreen(event, ScenePath.KSIEGOWOSC.getPath());
         }else {
             AlertPopUp.successAlert("Nie masz uprawnień do panelu: KSIĘGOWOŚĆ");
@@ -69,9 +69,9 @@ public class SceneController {
     }
 
     public static void getMagazynScene(ActionEvent event) throws IOException {
-        if (CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Magazynier") ||
-            CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Admin") ||
-            CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Mechanik")){
+        if (CurrentPracownik.getCurrentPracownik().getStanowisko().getUprawnienia().equals(UsersPermissions.MAGAZYNIER) ||
+            CurrentPracownik.getCurrentPracownik().getStanowisko().getUprawnienia().equals(UsersPermissions.ADMIN) ||
+            CurrentPracownik.getCurrentPracownik().getStanowisko().getUprawnienia().equals(UsersPermissions.MECHANIK)){
             changeScreen(event, ScenePath.MAGAZYN.getPath());
         }else {
             AlertPopUp.successAlert("Nie masz uprawnień do panelu: MAGAZYN");
@@ -79,7 +79,7 @@ public class SceneController {
     }
 
     public static void getUstawieniaScene(ActionEvent event) throws IOException {
-        if (CurrentPracownik.getCurrentPracownik().getStanowisko().getNazwaStanowiska().equals("Admin")){
+        if (CurrentPracownik.getCurrentPracownik().getStanowisko().getUprawnienia().equals(UsersPermissions.ADMIN)){
             changeScreen(event, ScenePath.USTAWIENIA.getPath());
         }else {
             AlertPopUp.successAlert("Nie masz uprawnień do panelu: USTAWIENIA");

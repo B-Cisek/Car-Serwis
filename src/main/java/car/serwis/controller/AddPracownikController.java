@@ -6,7 +6,6 @@ import car.serwis.database.model.Pracownik;
 import car.serwis.database.model.Stanowisko;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
-import car.serwis.helpers.WindowManagement;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,21 +16,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.mindrot.jbcrypt.BCrypt;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.KeySpec;
 import java.util.ResourceBundle;
 
+/**
+ * Kontroler widoku "addPracownik.fxml"
+ */
 public class AddPracownikController implements Initializable {
     @FXML
     private TextField hasloTextField;
@@ -57,37 +52,40 @@ public class AddPracownikController implements Initializable {
     @FXML
     private Button anulujButton;
 
-    @FXML
-    private AnchorPane addPracownikAnchorePane;
-
-    WindowManagement windowManagement = new WindowManagement();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         stanowiskaComboBox.setItems(getStanowiskaObservableList());
-        windowManagement.initializeExitButtonAnchorPane(anulujButton,addPracownikAnchorePane);
+        anulujButton.setOnAction(SceneController::close);
     }
 
+    /**
+     * Metoda pobierająca pracowników z bazy i dodająca ich ObservableList
+     * @return zwraca ObservableList stanowisk z bazy
+     */
     private ObservableList<Stanowisko> getStanowiskaObservableList() {
         ObservableList<Stanowisko> list = FXCollections.observableArrayList();
         list.addAll(new StanowiskoDao().getStanowiska());
         return list;
     }
 
-
+    /**
+     * Metoda haszujaca hasło
+     * @param haslo hasło w formie plaintext
+     * @return zwraca zahaszowane hasło
+     */
     private String hashPassword(String haslo){
         return BCrypt.hashpw(haslo, BCrypt.gensalt(11));
     }
 
 
-
-    private Pracownik createPracownikFromInput() throws NoSuchAlgorithmException, InvalidKeySpecException {
+    /**
+     * Metoda tworząca obiekt pracownika na podstawie pobranych pól z widoku "addPracownik.fxml"
+     * @return zwraca obiekt Pracownik
+     */
+    private Pracownik createPracownikFromInput(){
         Pracownik pracownik = new Pracownik();
-
-
-
         System.out.println(hashPassword(hasloTextField.getText()));
-
         pracownik.setImie(imieTextField.getText());
         pracownik.setNazwisko(nazwiskoTextField.getText());
         pracownik.setLogin(loginTextField.getText());
@@ -98,7 +96,10 @@ public class AddPracownikController implements Initializable {
         return pracownik;
     }
 
-
+    /**
+     * Metoda walidująca pola pracownika
+     * @return zwraca true jeżeli walidacja przeszła pomyślnie
+     */
     private boolean validateInputs() {
         if (stanowiskaComboBox.getValue() == null) {
             errorText.setText("*Pole stanowisko nie może być puste!");
@@ -125,6 +126,10 @@ public class AddPracownikController implements Initializable {
             errorText.setText("*Pole login nie może być puste!");
             return false;
         }
+        if (!(new PracownikDao().getConnectedPracownikLogin(loginTextField.getText()) == null)){
+            errorText.setText("*Ten login jest już w bazie!");
+            return false;
+        }
 
         if (hasloTextField.getText().isBlank()) {
             errorText.setText("*Pole hasło nie może być puste!");
@@ -133,11 +138,15 @@ public class AddPracownikController implements Initializable {
         return true;
     }
 
+    /**
+     * Metoda nasluchujaca button i dodająca pracownika
+     * @param event
+     */
     @FXML
-    private void createPracownik(ActionEvent event) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    private void createPracownik(ActionEvent event) {
         if(validateInputs()) {
             Pracownik pracownik = createPracownikFromInput();
-            boolean isSaved = new PracownikDao().createPracownik(pracownik);
+                boolean isSaved = new PracownikDao().createPracownik(pracownik);
             if (isSaved) {
                 UpdateStatus.setIsPracownikAdded(true);
                 delayWindowClose(event);
@@ -146,13 +155,20 @@ public class AddPracownikController implements Initializable {
         }
     }
 
-
+    /**
+     * Metoda zamykająca okno z opóźnieniem po dodaniu pracownika
+     * @param event
+     */
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
         delay.setOnFinished(event2 -> closeWindow(event));
         delay.play();
     }
 
+    /**
+     * Metoda zamykająca okno "addPracownik.fxml"
+     * @param event
+     */
     @FXML
     private void closeWindow(ActionEvent event) {
         Stage stage = (Stage) anulujButton.getScene().getWindow();

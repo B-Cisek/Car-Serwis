@@ -154,6 +154,7 @@ public class KsiegowoscController implements Initializable {
                 AlertPopUp.successAlert("Nie wybrano faktury!");
             }else {
                 ArrayList<pdf.generator.PozycjaFaktury> pfList = new ArrayList<>();
+                // TODO path
                 String imageUrl = "C:\\Users\\Bartek\\Desktop\\warsztat\\warsztat-samochodowy\\src\\main\\resources\\css\\img\\wrench.png";
                 Long selectedRow = fakturaTableView.getSelectionModel().getSelectedItem().getIdFaktura();
                 Faktura faktura = fakturaDao.getFakturaID(selectedRow);
