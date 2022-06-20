@@ -34,19 +34,7 @@ import java.util.ResourceBundle;
  */
 public class ZleceniaController implements Initializable {
     @FXML
-    private Button addKontrahent;
-
-    @FXML
-    private Button addZlecenie;
-
-    @FXML
     private TableColumn<Zlecenie, LocalDate> dataPrzyjeciaZlecenieTableColumn;
-
-    @FXML
-    private Button deleteKontrahent;
-
-    @FXML
-    private Button deleteZlecenie;
 
     @FXML
     private Button exitButton;

@@ -150,7 +150,7 @@
               </columns>
             </TableView>
             <TextField fx:id="searchMojeZleceniaTableColumn" layoutX="802.0" layoutY="87.0" prefHeight="25.0" prefWidth="764.0" promptText="Szukaj" AnchorPane.topAnchor="88.0" />
-            <Button fx:id="zmienStatusButton" layoutX="1394.0" layoutY="35.0" mnemonicParsing="false" onAction="#changeStatusWindow" styleClass="add-button" text="Zmień status" AnchorPane.topAnchor="30.0" />
+            <Button fx:id="zmienStatusButton" layoutX="1394.0" layoutY="35.0" mnemonicParsing="false" onAction="#changeStatusWindow" styleClass="add-button" text="Zmień status" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="30.0" />
             <Text layoutX="801.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TWOJE ZLECENIA" AnchorPane.topAnchor="30.0">
                <font>
                   <Font name="System Bold" size="27.0" />
@@ -171,7 +171,8 @@
                </font>
             </Text>
             <TextField fx:id="searchWszystkieZleceniaTableColumn" layoutX="35.0" layoutY="88.0" prefHeight="25.0" prefWidth="720.0" promptText="Szukaj" AnchorPane.topAnchor="88.0" />
-            <Button fx:id="przyjmijZlecenieButton" layoutX="599.0" layoutY="37.0" mnemonicParsing="false" onAction="#przyjmijZlecenie" prefHeight="34.0" prefWidth="122.0" styleClass="add-button" text="Przyjmij zlecenie" AnchorPane.topAnchor="30.0" />
+            <Button fx:id="przyjmijZlecenieButton" layoutX="591.0" layoutY="28.0" mnemonicParsing="false" onAction="#przyjmijZlecenie" prefHeight="34.0" prefWidth="122.0" styleClass="add-button" text="Przyjmij zlecenie" AnchorPane.rightAnchor="845.0" AnchorPane.topAnchor="30.0" />
+            <Button layoutX="1217.0" layoutY="30.0" mnemonicParsing="false" onAction="#showMojeZlecenie" styleClass="update-button" text="Pokaż szczegóły" AnchorPane.rightAnchor="210.0" AnchorPane.topAnchor="30.0" />
          </children></AnchorPane>
    </center>
    <stylesheets>

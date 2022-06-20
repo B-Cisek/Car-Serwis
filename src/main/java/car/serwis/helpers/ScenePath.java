@@ -24,7 +24,8 @@ public enum ScenePath {
     UPDATE_CZESC("/fxml/updateCzesc.fxml"),
     ADD_CZESC("/fxml/addCzesc.fxml"),
     SHOW_ZLECENIE("/fxml/showZlecenie.fxml"),
-    SHOW_KONTRAHENT("/fxml/showKontrahent.fxml");
+    SHOW_KONTRAHENT("/fxml/showKontrahent.fxml"),
+    SHOW_ZLECENIE_FOR_MECHANIK("/fxml/showZlecenieForMechanik.fxml");
 
     private final String path;
 
