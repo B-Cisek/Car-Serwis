@@ -4,6 +4,7 @@ import car.serwis.database.dao.KategoriaDao;
 import car.serwis.database.model.Kategoria;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
+import car.serwis.helpers.ValidatorFields;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -27,9 +27,6 @@ public class AddKategoriaController implements Initializable {
     private Button anulujButton;
 
     @FXML
-    private AnchorPane kategoriaAnchorePane;
-
-    @FXML
     private Text errorText;
 
     @FXML
@@ -37,10 +34,13 @@ public class AddKategoriaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeExitButton();
+        anulujButton.setOnAction(SceneController::close);
         saveNewKategoria();
     }
 
+    /**
+     * Metoda nasluchujaca button i dodająca kategorie od bazy
+     */
     private void saveNewKategoria() {
         addKategoriaButton.setOnAction((event) -> {
             if (validateInputs()) {
@@ -49,8 +49,6 @@ public class AddKategoriaController implements Initializable {
 
                 if (isSaved) {
                     UpdateStatus.setIsKategoriaAdded(true);
-                    errorText.setText("Kategoira dodana!");
-                    errorText.setStyle("-fx-fill: #2CC97E; -fx-font-size: 15px;");
                     delayWindowClose(event);
                     AlertPopUp.successAlert("Kategoira dodana!");
                 }
@@ -58,23 +56,35 @@ public class AddKategoriaController implements Initializable {
         });
     }
 
+    /**
+     * Metoda walidująca pola kategoria
+     * @return zwraca true jeżeli walidacja przeszła pomyślnie
+     */
     private boolean validateInputs() {
-        if (nazwaTextField.getText().isBlank()) {
-            errorText.setText("*Pole nazwa nie może być puste!");
+        /** Walidacja pola nazwa */
+        if (ValidatorFields.isBlank(nazwaTextField.getText())) {
+            errorText.setText("Pole nazwa nie może być puste!");
             return false;
         }
         return true;
     }
 
+
+    /**
+     * Metoda tworząca obiekt kategoria na podstawie pobranych pól z widoku "addKategoria.fxml"
+     * @return zwraca obiekt Kategoria
+     */
     private Kategoria createKategoriaFromInput() {
         Kategoria kategoria = new Kategoria();
-
         kategoria.setNazwaKategori(nazwaTextField.getText());
-
         return kategoria;
     }
 
 
+    /**
+     * Metoda zamykająca okno z opóźnieniem po dodaniu kategori
+     * @param event
+     */
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
         delay.setOnFinished(event2 -> closeWindow(event));
@@ -82,21 +92,14 @@ public class AddKategoriaController implements Initializable {
     }
 
 
+    /**
+     * Metoda zamykająca okno "addKategoria.fxml"
+     * @param event
+     */
     @FXML
     private void closeWindow(ActionEvent event) {
         Node source = (Node)  event.getSource();
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
-    }
-
-
-    private void initializeExitButton(){
-        anulujButton.setOnAction((x) -> {
-            getStage().close();
-        });
-    }
-
-    private Stage getStage(){
-        return (Stage) kategoriaAnchorePane.getScene().getWindow();
     }
 }

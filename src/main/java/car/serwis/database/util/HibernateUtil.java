@@ -16,12 +16,13 @@ public class HibernateUtil {
         if (sessionFactory == null) {
             try {
                 Configuration configuration = new Configuration();
+                DataBaseCredentials dataBaseCredentials = new DataBaseCredentials();
 
                 Properties settings = new Properties();
                 settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-                settings.put(Environment.URL, "jdbc:mysql://78.46.91.52/bartlom1_serwis?serverTimezone=UTC");
-                settings.put(Environment.USER, "bartlom1_serwis");
-                settings.put(Environment.PASS, "serwis");
+                settings.put(Environment.URL, "jdbc:mysql://" + dataBaseCredentials.getHost() + "/" + dataBaseCredentials.getDatabase() + "?serverTimezone=UTC");
+                settings.put(Environment.USER, dataBaseCredentials.getUser());
+                settings.put(Environment.PASS, dataBaseCredentials.getPassword());
                 settings.put(Environment.POOL_SIZE,"200");
                 settings.put(Environment.AUTO_CLOSE_SESSION,"true");
 

@@ -28,7 +28,7 @@ public class Kategoria {
     )
     private String nazwaKategori;
 
-    @OneToMany(mappedBy = "kategoria", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "kategoria", fetch = FetchType.LAZY, targetEntity = Czesc.class)
     private Set<Czesc> czesci = new HashSet<>();
 
     @Override

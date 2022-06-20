@@ -146,7 +146,7 @@
          <children>
             <Accordion layoutX="84.0" layoutY="23.0" prefHeight="700.0" prefWidth="400.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0">
               <panes>
-                <TitledPane fx:id="paneSamochody" text="SAMOCHODY">
+                <TitledPane fx:id="paneSamochody" onMouseClicked="#setSamochod" text="SAMOCHODY">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="400.0">
                            <children>
@@ -171,7 +171,7 @@
                         <Font size="19.0" />
                      </font>
                 </TitledPane>
-                <TitledPane fx:id="paneKategorie" prefHeight="600.0" prefWidth="400.0" text="KATEGORIE">
+                <TitledPane fx:id="paneKategorie" onMouseClicked="#setKategoria" prefHeight="600.0" prefWidth="400.0" text="KATEGORIE">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -191,7 +191,7 @@
                         <Font size="19.0" />
                      </font>
                 </TitledPane>
-                <TitledPane fx:id="paneJednostki" text="JEDNOSTKI">
+                <TitledPane fx:id="paneJednostki" onMouseClicked="#setJednostka" text="JEDNOSTKI">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -213,7 +213,7 @@
                 </TitledPane>
               </panes>
             </Accordion>
-            <Text layoutX="471.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CZĘŚCI">
+            <Text layoutX="464.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CZĘŚCI" wrappingWidth="122.40005493164062" AnchorPane.topAnchor="6.0">
                <font>
                   <Font name="System Bold" size="33.0" />
                </font>
@@ -233,11 +233,14 @@
                   <Tooltip fx:id="tooltippedTableCell" text="Empty Tooltip" />
                </tooltip>
             </TableView>
-            <TextField fx:id="searchCzescBar" layoutX="465.0" layoutY="70.0" prefHeight="25.0" prefWidth="220.0" promptText="Szukaj" />
-            <ComboBox fx:id="kategoriaFilterComboBox" layoutX="689.0" layoutY="69.0" onAction="#filterCzesc" prefHeight="25.0" prefWidth="99.0" promptText="kategoria" />
+            <TextField fx:id="searchCzescBar" layoutX="465.0" layoutY="58.0" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="215.0" promptText="Szukaj" AnchorPane.topAnchor="60.0" />
+            <ComboBox fx:id="kategoriaFilterComboBox" layoutX="689.0" layoutY="60.0" maxHeight="40.0" minHeight="40.0" onAction="#filterCzesc" prefHeight="40.0" prefWidth="116.0" promptText="kategoria" AnchorPane.topAnchor="60.0" />
             <Button layoutX="1236.0" layoutY="59.0" mnemonicParsing="false" onAction="#addNewCzescWindow" prefHeight="35.0" prefWidth="79.0" styleClass="add-button" text="Nowa część" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="60.0" />
             <Button layoutX="1426.0" layoutY="58.0" mnemonicParsing="false" onAction="#deleteCzesc" prefHeight="35.0" prefWidth="81.0" styleClass="delete-button" text="Usuń" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="60.0" />
-            <Button layoutX="801.0" layoutY="69.0" mnemonicParsing="false" onAction="#clearFiltr" prefHeight="25.0" prefWidth="83.0" text="Wyczyść filtr" />
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="817.0" layoutY="60.0" maxHeight="40.0" maxWidth="90.0" minHeight="40.0" minWidth="62.0" mnemonicParsing="false" onAction="#clearFiltr" prefHeight="40.0" prefWidth="62.0" style="-fx-background-color: #e63946;" text="Wyczyść filtr" textAlignment="CENTER" wrapText="true" AnchorPane.topAnchor="60.0">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font></Button>
             <Button layoutX="1051.0" layoutY="61.0" mnemonicParsing="false" onAction="#updateCzescWindow" styleClass="update-button" text="Pobierz część" AnchorPane.rightAnchor="375.0" AnchorPane.topAnchor="60.0" />
             <Button layoutX="876.0" layoutY="60.0" mnemonicParsing="false" onAction="#addCzescWindow" styleClass="update-button" text="Dodaj część" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="60.0" />
          </children>

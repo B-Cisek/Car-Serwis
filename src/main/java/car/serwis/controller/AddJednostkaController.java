@@ -4,6 +4,7 @@ import car.serwis.database.dao.JednostkaDao;
 import car.serwis.database.model.Jednostka;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
+import car.serwis.helpers.ValidatorFields;
 import car.serwis.helpers.WindowManagement;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
@@ -20,10 +21,11 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Kontroler widoku "addJednostka.fxml"
+ * klasa odpowiedzialna za dodanie jednostki do bazy
+ */
 public class AddJednostkaController implements Initializable {
-    @FXML
-    private AnchorPane JednostkaAnchorePane;
-
     @FXML
     private Button addJednostkaButton;
 
@@ -39,14 +41,16 @@ public class AddJednostkaController implements Initializable {
     @FXML
     private TextField skrotTextField;
 
-    WindowManagement windowManagement = new WindowManagement();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        windowManagement.initializeExitButtonAnchorPane(anulujButton,JednostkaAnchorePane);
+        anulujButton.setOnAction(SceneController::close);
         saveNewJednostka();
     }
 
+    /**
+     * Metoda nasluchujaca button i dodająca jednstke od bazy
+     */
     private void saveNewJednostka() {
         addJednostkaButton.setOnAction((event) -> {
             if (validateInputs()) {
@@ -55,8 +59,6 @@ public class AddJednostkaController implements Initializable {
 
                 if (isSaved) {
                     UpdateStatus.setIsJednostkaAdded(true);
-                    errorText.setText("Jednostka dodana!");
-                    errorText.setStyle("-fx-fill: #2CC97E; -fx-font-size: 15px;");
                     delayWindowClose(event);
                     AlertPopUp.successAlert("Jednostka dodana!");
                 }
@@ -64,35 +66,52 @@ public class AddJednostkaController implements Initializable {
         });
     }
 
+    /**
+     * Metoda walidująca pola jednostki
+     * @return zwraca true jeżeli walidacja przeszła pomyślnie
+     */
     private boolean validateInputs() {
-        if (nazwaJednostkiTextField.getText().isBlank()) {
-            errorText.setText("*Pole nazwa nie może być puste!");
+        /** Walidacja pola nazwa jednostki */
+        if (ValidatorFields.isBlank(nazwaJednostkiTextField.getText())) {
+            errorText.setText("Pole nazwa nie może być puste!");
             return false;
         }
 
-        if (skrotTextField.getText().isBlank()){
-            errorText.setText("*Pole skrót nie może być puste!");
+        /** Walidacja pola skrót */
+        if (ValidatorFields.isBlank(skrotTextField.getText())){
+            errorText.setText("Pole skrót nie może być puste!");
             return false;
         }
 
         return true;
     }
 
+    /**
+     * Metoda tworząca obiekt jednostka na podstawie pobranych pól z widoku "addJednostka.fxml"
+     * @return zwraca obiekt Jednostka
+     */
     private Jednostka createJednostkaFromInput() {
         Jednostka jednostka = new Jednostka();
-
         jednostka.setNazwaJednostki(nazwaJednostkiTextField.getText());
         jednostka.setSkrot(skrotTextField.getText());
-
         return jednostka;
     }
 
+
+    /**
+     * Metoda zamykająca okno z opóźnieniem po dodaniu jednostki
+     * @param event
+     */
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
         delay.setOnFinished(event2 -> closeWindow(event));
         delay.play();
     }
 
+    /**
+     * Metoda zamykająca okno "addJednostka.fxml"
+     * @param event
+     */
     @FXML
     private void closeWindow(ActionEvent event) {
         Node source = (Node)  event.getSource();

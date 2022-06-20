@@ -2,7 +2,6 @@ package car.serwis.database.dao;
 
 import car.serwis.database.model.*;
 import car.serwis.database.util.HibernateUtil;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -53,6 +52,15 @@ public class CzescDao {
         return czesciList;
     }
 
+    public List<Czesc> getCzesci() {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            return session.createQuery("FROM Czesc", Czesc.class).list();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
     public void deleteCzesc(Czesc czesc) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -91,6 +99,7 @@ public class CzescDao {
             return new ArrayList<>();
         }
     }
+
 
     public Czesc getCzesc(Czesc czesc) {
         try {

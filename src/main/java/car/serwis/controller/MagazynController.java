@@ -24,6 +24,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Kontroler widoku "magazyn.fxml"
+ */
 public class MagazynController implements Initializable {
 
     @FXML
@@ -129,25 +132,20 @@ public class MagazynController implements Initializable {
         fillTables();
         addTableSettings();
         czescTableView.setPlaceholder(new Label("Brak danych!"));
+        kategoriaTableView.setPlaceholder(new Label("Brak danych!"));
+        jednostkiTableView.setPlaceholder(new Label("Brak danych!"));
+        samochodyTableView.setPlaceholder(new Label("Brak danych!"));
         kategoriaFilterComboBox.setItems(getKategoriaObservableList());
     }
 
-    private void setObservableList() {
-        kategoriaObservableList.clear();
-        kategoriaObservableList.addAll(kategoriaDao.getKategorie());
-
+    /**
+     * Metoda pobierajaca jednoski z bazy i wyświetlająca je w tableView
+     */
+    @FXML
+    private void setJednostka(){
         jednostkaObservableList.clear();
         jednostkaObservableList.addAll(jednostkaDao.getJednostki());
 
-        samochodObservableList.clear();
-        samochodObservableList.addAll(samochodDao.getSamochody());
-
-        czescObservableList.clear();
-        czescObservableList.addAll(czescDao.displayRecords());
-    }
-
-    private void fillTables() {
-        // Jednostka Table View
         idJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idJednostka"));
         nazwaJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaJednostki"));
         skrotJednostkaTableColumn.setCellValueFactory(new PropertyValueFactory<>("skrot"));
@@ -155,13 +153,60 @@ public class MagazynController implements Initializable {
         skrotJednostkaTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         nazwaJednostkaTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
+        jednostkiTableView.setEditable(true);
+        jednostkiTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        jednostkiTableView.setItems(getSortedListJednostka());
+    }
 
-        // Samochod Table View
+    /**
+     * Metoda pobierajaca kategorie z bazy i wyświetlająca je w tableView
+     */
+    @FXML
+    private void setKategoria(){
+        kategoriaObservableList.clear();
+        kategoriaObservableList.addAll(kategoriaDao.getKategorie());
+
+        idKategoraTableColumn.setCellValueFactory(new PropertyValueFactory<>("idKategoria"));
+        nazwaKategoraTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaKategori"));
+        nazwaKategoraTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+
+        kategoriaTableView.setEditable(true);
+        kategoriaTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        kategoriaTableView.setItems(getSortedListKategoria());
+    }
+
+    /**
+     * Metoda pobierajaca samochody z bazy i wyświetlająca je w tableView
+     */
+    @FXML
+    private void setSamochod(){
+        samochodObservableList.clear();
+        samochodObservableList.addAll(samochodDao.getSamochody());
+
         idSamochodTableColumn.setCellValueFactory(new PropertyValueFactory<>("idSamochod"));
         markaSamochodTableColumn.setCellValueFactory(new PropertyValueFactory<>("marka"));
         modelSamochodTableColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         markaSamochodTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         modelSamochodTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        samochodyTableView.setEditable(true);
+        samochodyTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        samochodyTableView.setItems(getSortedListSamochod());
+    }
+
+    /**
+     * Metoda czyszcząca i wypełniająca ObservableList części
+     */
+    private void setObservableList() {
+        czescObservableList.clear();
+        czescObservableList.addAll(czescDao.displayRecords());
+    }
+
+    /**
+     * Metoda wypełniająca kolumny tabeli części
+     */
+    private void fillTables() {
 
         // Czesci Table View
         idCzescTableColumn.setCellValueFactory(new PropertyValueFactory<>("idCzesc"));
@@ -177,37 +222,27 @@ public class MagazynController implements Initializable {
         opisCzescTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         producentCzescTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        // Kategoria Table View
-        idKategoraTableColumn.setCellValueFactory(new PropertyValueFactory<>("idKategoria"));
-        nazwaKategoraTableColumn.setCellValueFactory(new PropertyValueFactory<>("nazwaKategori"));
-        nazwaKategoraTableColumn.setCellFactory(TextFieldTableCell.forTableColumn());
-
-
     }
 
+    /**
+     * Metoda wypełniająca tabele posortowanymi częściami
+     */
     private void addTableSettings() {
-        kategoriaTableView.setEditable(true);
-        kategoriaTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        kategoriaTableView.setItems(getSortedListKategoria());
-
-        jednostkiTableView.setEditable(true);
-        jednostkiTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        jednostkiTableView.setItems(getSortedListJednostka());
-
-        samochodyTableView.setEditable(true);
-        samochodyTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        samochodyTableView.setItems(getSortedListSamochod());
-
         czescTableView.setEditable(true);
         czescTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         czescTableView.setItems(getSortedListCzesc());
     }
 
 
-    // ################ KATEGORIA ##################################################################
+    // ################### KATEGORIA ################################
     KategoriaDao kategoriaDao = new KategoriaDao();
     ObservableList<Kategoria> kategoriaObservableList = FXCollections.observableArrayList();
 
+    /**
+     * Metoda wywołująca widok "addKategoria.fxml"
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void addKategoriaWindow(ActionEvent event) throws IOException {
         NewWindowController.getNewKategoriaWindow();
@@ -217,12 +252,20 @@ public class MagazynController implements Initializable {
         }
     }
 
+    /**
+     * Metoda przekazująca przefiltrowane kategoie do TableView
+     * @return zwraca liste posortowanych kategorii
+     */
     private SortedList<Kategoria> getSortedListKategoria() {
         SortedList<Kategoria> sortedList = new SortedList<>(getFilteredListKategoria());
         sortedList.comparatorProperty().bind(kategoriaTableView.comparatorProperty());
         return sortedList;
     }
 
+    /**
+     * Metoda nasłuchująca TextField i filtrujaąca kategorie
+     * @return zwraca przefiltrowaną liste kategorii
+     */
     private FilteredList<Kategoria> getFilteredListKategoria() {
         FilteredList<Kategoria> filteredList = new FilteredList<>(kategoriaObservableList, b -> true);
         searchKategoriaBar.textProperty().addListener((observable, oldValue, newValue) ->
@@ -242,6 +285,11 @@ public class MagazynController implements Initializable {
         return filteredList;
     }
 
+    /**
+     * Metoda usuwająca kategorie
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void deleteKategoria(ActionEvent event) throws IOException {
         ObservableList<Kategoria> selectedRows = kategoriaTableView.getSelectionModel().getSelectedItems();
@@ -250,9 +298,13 @@ public class MagazynController implements Initializable {
             kategoriaObservableList.remove(kategoria);
         }
         //refreshScreen(event);
-        AlertPopUp.successAlert("Kategoria usunięta");
+        AlertPopUp.successAlert("Kategoria usunięta!");
     }
 
+    /**
+     * Metoda zmieniająca nazwę kategori
+     * @param editEvent
+     */
     @FXML
     private void changeNazwaKategoira(TableColumn.CellEditEvent<Kategoria, String> editEvent) {
         Kategoria selectedKategoira = kategoriaTableView.getSelectionModel().getSelectedItem();
@@ -261,15 +313,16 @@ public class MagazynController implements Initializable {
         AlertPopUp.successAlert("Zmieniono nazwę kategori!");
     }
 
-    //########################################################################################################
 
-
-
-    // ################ JEDNOSTKA ############################################################################
-
+    // ################ JEDNOSTKA #####################################
     ObservableList<Jednostka> jednostkaObservableList = FXCollections.observableArrayList();
     JednostkaDao jednostkaDao = new JednostkaDao();
 
+    /**
+     * Metoda wywołująca widok "addJednostka.fxml"
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void addJednostkaWindow(ActionEvent event) throws IOException {
         NewWindowController.getNewJednostkaWindow();
@@ -279,12 +332,20 @@ public class MagazynController implements Initializable {
         }
     }
 
+    /**
+     * Metoda przekazująca przefiltrowane jednostki do TableView
+     * @return zwraca liste posortowanych jednostek
+     */
     private SortedList<Jednostka> getSortedListJednostka() {
         SortedList<Jednostka> sortedList = new SortedList<>(getFilteredListJednostka());
         sortedList.comparatorProperty().bind(jednostkiTableView.comparatorProperty());
         return sortedList;
     }
 
+    /**
+     * Metoda nasłuchująca TextField i filtrujaąca jednostki
+     * @return zwraca przefiltrowaną liste jednostek
+     */
     private FilteredList<Jednostka> getFilteredListJednostka() {
         FilteredList<Jednostka> filteredList = new FilteredList<>(jednostkaObservableList, b -> true);
         searchJednostkaBar.textProperty().addListener((observable, oldValue, newValue) ->
@@ -306,6 +367,11 @@ public class MagazynController implements Initializable {
         return filteredList;
     }
 
+    /**
+     * Metoda usuwająca jednostke
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void deleteJednostka(ActionEvent event) throws IOException {
         ObservableList<Jednostka> selectedRows = jednostkiTableView.getSelectionModel().getSelectedItems();
@@ -317,6 +383,10 @@ public class MagazynController implements Initializable {
         AlertPopUp.successAlert("Jednostka ununięta!");
     }
 
+    /**
+     * Metoda zmieniająca skrót jednostki
+     * @param editEvent
+     */
     @FXML
     private void changeSkrotCell(TableColumn.CellEditEvent<Jednostka, String> editEvent) {
         Jednostka selectedJednostka = jednostkiTableView.getSelectionModel().getSelectedItem();
@@ -325,6 +395,10 @@ public class MagazynController implements Initializable {
         AlertPopUp.successAlert("Zmieniono skrót jednostki!");
     }
 
+    /**
+     * Metoda zmieniająca nazwe jednostki
+     * @param editEvent
+     */
     @FXML
     private void changeNazwaJednostkiCell(TableColumn.CellEditEvent<Jednostka, String> editEvent) {
         Jednostka selectedJednostka = jednostkiTableView.getSelectionModel().getSelectedItem();
@@ -333,14 +407,17 @@ public class MagazynController implements Initializable {
         AlertPopUp.successAlert("Zmieniono nazwę jednostki!");
     }
 
-    //########################################################################################################
 
-
-    // ################ SAMOCHOD #############################################################################
+    // ################ SAMOCHOD ##########################################
 
     ObservableList<Samochod> samochodObservableList = FXCollections.observableArrayList();
     SamochodDao samochodDao = new SamochodDao();
 
+    /**
+     * Metoda wywołująca widok "addSamochod.fxml"
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void addSamochodWindow(ActionEvent event) throws IOException {
         NewWindowController.getNewSamochodWindow();
@@ -350,12 +427,20 @@ public class MagazynController implements Initializable {
         }
     }
 
+    /**
+     * Metoda przekazująca przefiltrowane samochody do TableView
+     * @return zwraca liste posortowanych samochodów
+     */
     private SortedList<Samochod> getSortedListSamochod() {
         SortedList<Samochod> sortedList = new SortedList<>(getFilteredListSamochod());
         sortedList.comparatorProperty().bind(samochodyTableView.comparatorProperty());
         return sortedList;
     }
 
+    /**
+     * Metoda nasłuchująca TextField i filtrujaąca samochody
+     * @return zwraca przefiltrowaną liste samochodów
+     */
     private FilteredList<Samochod> getFilteredListSamochod() {
         FilteredList<Samochod> filteredList = new FilteredList<>(samochodObservableList, b -> true);
         searchSamochodBar.textProperty().addListener((observable, oldValue, newValue) ->
@@ -377,6 +462,11 @@ public class MagazynController implements Initializable {
         return filteredList;
     }
 
+    /**
+     * Metoda usuwająca samochód
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void deleteSamochod(ActionEvent event) throws IOException {
         ObservableList<Samochod> selectedRows = samochodyTableView.getSelectionModel().getSelectedItems();
@@ -388,6 +478,11 @@ public class MagazynController implements Initializable {
         AlertPopUp.successAlert("Samochód usunięty!");
     }
 
+
+    /**
+     * Metoda zmieniająca marke samochodu
+     * @param editEvent
+     */
     @FXML
     private void changeMarkaSamochod(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
         Samochod selectedSamochod = samochodyTableView.getSelectionModel().getSelectedItem();
@@ -396,6 +491,11 @@ public class MagazynController implements Initializable {
         AlertPopUp.successAlert("Zmieniono markę samochodu!");
     }
 
+
+    /**
+     * Metoda zmieniająca model samochodu
+     * @param editEvent
+     */
     @FXML
     private void changeModelSamochod(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
         Samochod selectedSamochod = samochodyTableView.getSelectionModel().getSelectedItem();
@@ -403,13 +503,18 @@ public class MagazynController implements Initializable {
         samochodDao.updateSamochod(selectedSamochod);
         AlertPopUp.successAlert("Zmieniono model samochodu!");
     }
-    //########################################################################################################
 
 
-    // ############ CZĘŚC ####################################################################################
+    // ######################## CZĘŚĆ #####################################
     ObservableList<Czesc> czescObservableList = FXCollections.observableArrayList();
     CzescDao czescDao = new CzescDao();
 
+
+    /**
+     * Metoda wywołująca widok "addCzesc.fxml"
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void addNewCzescWindow(ActionEvent event) throws IOException {
         NewWindowController.getNewCzescWindow();
@@ -419,6 +524,12 @@ public class MagazynController implements Initializable {
         }
     }
 
+
+    /**
+     * Metoda usuwająca część
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void deleteCzesc(ActionEvent event) throws IOException {
         ObservableList<Czesc> selectedRows = czescTableView.getSelectionModel().getSelectedItems();
@@ -434,12 +545,22 @@ public class MagazynController implements Initializable {
         }
     }
 
+
+    /**
+     * Metoda przekazująca przefiltrowane części do TableView
+     * @return zwraca liste posortowanych części
+     */
     private SortedList<Czesc> getSortedListCzesc() {
         SortedList<Czesc> sortedList = new SortedList<>(getFilteredListCzesc());
         sortedList.comparatorProperty().bind(czescTableView.comparatorProperty());
         return sortedList;
     }
 
+
+    /**
+     * Metoda nasłuchująca TextField i filtrujaąca części
+     * @return zwraca przefiltrowaną liste części
+     */
     private FilteredList<Czesc> getFilteredListCzesc() {
         FilteredList<Czesc> filteredList = new FilteredList<>(czescObservableList, b -> true);
         searchCzescBar.textProperty().addListener((observable, oldValue, newValue) ->
@@ -460,9 +581,9 @@ public class MagazynController implements Initializable {
                         return true;
                     } else if (czesc.getProducent().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (czesc.getJednostka().toString().contains(lowerCaseFilter)) {
+                    } else if (czesc.getJednostka().toString().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (czesc.getKategoria().toString().contains(lowerCaseFilter)) {
+                    } else if (czesc.getKategoria().toString().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
                     } else if(czesc.getSamochod().toString().toLowerCase().contains(lowerCaseFilter)){
                         return true;
@@ -472,6 +593,10 @@ public class MagazynController implements Initializable {
         return filteredList;
     }
 
+    /**
+     * Metoda zmieniająca nazwę części
+     * @param editEvent
+     */
     @FXML
     private void changeNazwaCzesci(TableColumn.CellEditEvent<Kategoria, String> editEvent) {
         Czesc selectedCzesc = czescTableView.getSelectionModel().getSelectedItem();
@@ -480,6 +605,10 @@ public class MagazynController implements Initializable {
         AlertPopUp.successAlert("Zmieniono nazwę części!");
     }
 
+    /**
+     * Metoda zmieniająca producenta części
+     * @param editEvent
+     */
     @FXML
     private void changeProducentCzesci(TableColumn.CellEditEvent<Kategoria, String> editEvent) {
         Czesc selectedCzesc = czescTableView.getSelectionModel().getSelectedItem();
@@ -488,6 +617,10 @@ public class MagazynController implements Initializable {
         AlertPopUp.successAlert("Zmieniono producenta części!");
     }
 
+    /**
+     * Metoda zmieniająca opis części
+     * @param editEvent
+     */
     @FXML
     private void changeOpisCzesci(TableColumn.CellEditEvent<Kategoria, String> editEvent) {
         Czesc selectedCzesc = czescTableView.getSelectionModel().getSelectedItem();
@@ -496,6 +629,11 @@ public class MagazynController implements Initializable {
         AlertPopUp.successAlert("Zmieniono opis części!");
     }
 
+    /**
+     * Metoda wywołująca widok "updateCzesc.fxml"
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void updateCzescWindow(ActionEvent event) throws IOException {
         NewWindowController.getUpdateCzescWindow();
@@ -505,6 +643,11 @@ public class MagazynController implements Initializable {
         }
     }
 
+    /**
+     * Metoda wywołująca widok "addCzesc.fxml"
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void addCzescWindow(ActionEvent event) throws IOException {
         NewWindowController.getCzescWindow();
@@ -515,9 +658,11 @@ public class MagazynController implements Initializable {
     }
 
 
-
-
-    // TODO Filtrowanie
+    /**
+     * Metoda filtrująca części na podstawie kategori
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void filterCzesc(ActionEvent event) throws IOException {
         Kategoria kategoria = kategoriaFilterComboBox.getValue();
@@ -526,52 +671,61 @@ public class MagazynController implements Initializable {
         czescObservableList.addAll(list);
     }
 
+    /**
+     * Metoda pobierająca z bazy obiekty kategoria i dodjąca je do ObservableList
+     * @return zwraca ObservableList kategori
+     */
     private ObservableList<Kategoria> getKategoriaObservableList() {
         ObservableList<Kategoria> list = FXCollections.observableArrayList();
         list.addAll(new KategoriaDao().getKategorie());
         return list;
     }
 
+    /**
+     * Metoda czyszcząca filtr kategorii
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void clearFiltr(ActionEvent event) throws IOException {
-       kategoriaFilterComboBox.getSelectionModel().clearSelection();
+        kategoriaFilterComboBox.getSelectionModel().clearSelection();
         czescObservableList.clear();
-        czescObservableList.addAll(czescDao.displayRecords());
+        czescObservableList.addAll(czescDao.getCzesci());
     }
 
 
     @FXML
-    void showPulpitScreen(ActionEvent event) throws IOException {
+    public void showPulpitScreen(ActionEvent event) throws IOException {
         SceneController.getPulpitScene(event);
     }
 
     @FXML
-    void showZleceniaScreen(ActionEvent event) throws IOException {
+    public void showZleceniaScreen(ActionEvent event) throws IOException {
         SceneController.getZleceniaScene(event);
     }
 
     @FXML
-    void showWarsztatScreen(ActionEvent event) throws IOException {
+    public void showWarsztatScreen(ActionEvent event) throws IOException {
         SceneController.getWarsztatScene(event);
     }
 
     @FXML
-    void showKsiegowoscScreen(ActionEvent event) throws IOException {
+    public void showKsiegowoscScreen(ActionEvent event) throws IOException {
         SceneController.getKsiegowoscScene(event);
     }
 
     @FXML
-    void showUstawieniaScreen(ActionEvent event) throws IOException {
+    public void showUstawieniaScreen(ActionEvent event) throws IOException {
         SceneController.getUstawieniaScene(event);
     }
 
     @FXML
-    void showPomocScreen(ActionEvent event) throws IOException {
+    public void showPomocScreen(ActionEvent event) throws IOException {
         SceneController.getPomocScene(event);
     }
 
     @FXML
-    void refreshScreen(ActionEvent event) throws IOException {
+    public void refreshScreen(ActionEvent event) throws IOException {
         SceneController.getMagazynScene(event);
     }
 }

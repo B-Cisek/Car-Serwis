@@ -13,7 +13,7 @@
       <TextField fx:id="markaTextField" layoutX="193.0" layoutY="116.0" prefHeight="25.0" prefWidth="169.0" />
       <Button fx:id="addSamochodButton" layoutX="382.0" layoutY="282.0" mnemonicParsing="false" styleClass="add-button" text="Dodaj" />
       <Button fx:id="anulujButton" layoutX="466.0" layoutY="282.0" mnemonicParsing="false" styleClass="cancel-button" text="Anuluj" />
-      <Text fx:id="errorText" layoutX="193.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="157.13671875" AnchorPane.leftAnchor="193.0" />
+      <Text fx:id="errorText" layoutX="193.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="259.2529296875" AnchorPane.leftAnchor="193.0" />
       <Label layoutX="193.0" layoutY="99.0" text="Marka" />
       <Label layoutX="193.0" layoutY="158.0" text="Model" />
    </children>
