@@ -140,7 +140,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="1600.0" styleClass="main-pulpit" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="fakturaTableView" fixedCellSize="50.0" layoutX="32.0" layoutY="113.0" prefHeight="614.0" prefWidth="1538.0">
+            <TableView fx:id="fakturaTableView" fixedCellSize="50.0" layoutX="32.0" layoutY="113.0" prefHeight="614.0" prefWidth="1525.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="41.0">
               <columns>
                 <TableColumn fx:id="idFakturaTableColumn" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="numerFakturaTableColumn" prefWidth="129.6666717529297" text="NUMER FAKTURY" />
@@ -149,12 +149,12 @@
                   <TableColumn fx:id="kontrahentFakturaTableColumn" prefWidth="137.0" text="KONTRAHENT" />
               </columns>
             </TableView>
-            <Text layoutX="49.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FAKTURY" wrappingWidth="131.48501586914062">
+            <Text layoutX="47.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FAKTURY" wrappingWidth="131.48501586914062" AnchorPane.leftAnchor="34.0" AnchorPane.topAnchor="19.8642578125">
                <font>
                   <Font name="System Bold" size="27.0" />
                </font>
             </Text>
-            <TextField fx:id="searchBarFaktura" layoutX="38.0" layoutY="70.0" prefHeight="25.0" prefWidth="549.0" />
+            <TextField fx:id="searchBarFaktura" layoutX="38.0" layoutY="70.0" prefHeight="25.0" prefWidth="612.0" promptText="Szukaj" AnchorPane.leftAnchor="34.0" />
             <Button layoutX="1400.0" layoutY="50.0" mnemonicParsing="false" onAction="#addFakturaWindow" styleClass="add-button" text="Dodaj fakturę" />
             <Button fx:id="generujPdfButton" layoutX="1223.0" layoutY="50.0" mnemonicParsing="false" styleClass="add-button" text="Generuj PDF" />
             <Button layoutX="876.0" layoutY="50.0" mnemonicParsing="false" onAction="#deleteFaktura" styleClass="delete-button" text="Usuń fakturę" />

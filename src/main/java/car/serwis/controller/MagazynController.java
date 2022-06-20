@@ -112,6 +112,9 @@ public class MagazynController implements Initializable {
     private BorderPane magazynBorderPane;
 
     @FXML
+    private Tooltip tooltippedTableCell;
+
+    @FXML
     private ComboBox<Kategoria> kategoriaFilterComboBox;
 
     WindowManagement windowManagement = new WindowManagement();

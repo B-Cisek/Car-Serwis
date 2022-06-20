@@ -24,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -155,7 +156,9 @@ public class KsiegowoscController implements Initializable {
             }else {
                 ArrayList<pdf.generator.PozycjaFaktury> pfList = new ArrayList<>();
                 // TODO path
-                String imageUrl = "C:\\Users\\Bartek\\Desktop\\warsztat\\warsztat-samochodowy\\src\\main\\resources\\css\\img\\wrench.png";
+                File file = new File("src/main/resources/css/img/wrench.png");
+                String absolutePath = file.getAbsolutePath();
+                String imageUrl = absolutePath;
                 Long selectedRow = fakturaTableView.getSelectionModel().getSelectedItem().getIdFaktura();
                 Faktura faktura = fakturaDao.getFakturaID(selectedRow);
                 List<PozycjaFaktury> list = new PozycjaFakturyDao().getPozycjaFakturyForPdf(faktura);

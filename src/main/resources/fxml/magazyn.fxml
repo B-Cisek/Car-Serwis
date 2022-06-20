@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -180,7 +181,7 @@
                               <TableView fx:id="kategoriaTableView" fixedCellSize="50.0" layoutX="3.0" layoutY="143.0" prefHeight="433.0" prefWidth="393.0">
                                 <columns>
                                   <TableColumn fx:id="idKategoraTableColumn" prefWidth="75.0" text="ID" />
-                                  <TableColumn fx:id="nazwaKategoraTableColumn" onEditCommit="#changeNazwaKategoira" prefWidth="315.6666564941406" text="NAZWA KATEGORI" />
+                                  <TableColumn fx:id="nazwaKategoraTableColumn" onEditCommit="#changeNazwaKategoira" prefWidth="292.0" text="NAZWA KATEGORI" />
                                 </columns>
                               </TableView>
                            </children>
@@ -226,8 +227,11 @@
                   <TableColumn fx:id="iloscCzescTableColumn" prefWidth="93.3333740234375" text="ILOŚĆ" />
                   <TableColumn fx:id="jednostkaCzescTableColumn" prefWidth="92.6666259765625" text="JEDNOSTKA" />
                   <TableColumn fx:id="kategoriaCzescTableColumn" prefWidth="128.0" text="KATEGORIA" />
-                  <TableColumn fx:id="samochodCzescTableColumn" prefWidth="140.3333740234375" text="SAMOCHÓD" />
+                  <TableColumn fx:id="samochodCzescTableColumn" prefWidth="113.0" text="SAMOCHÓD" />
               </columns>
+               <tooltip>
+                  <Tooltip fx:id="tooltippedTableCell" text="Empty Tooltip" />
+               </tooltip>
             </TableView>
             <TextField fx:id="searchCzescBar" layoutX="465.0" layoutY="70.0" prefHeight="25.0" prefWidth="220.0" promptText="Szukaj" />
             <ComboBox fx:id="kategoriaFilterComboBox" layoutX="689.0" layoutY="69.0" onAction="#filterCzesc" prefHeight="25.0" prefWidth="99.0" promptText="kategoria" />

@@ -219,12 +219,16 @@ public class WarsztatController implements Initializable {
     @FXML
     public void przyjmijZlecenie(ActionEvent event) throws IOException {
         ObservableList<Zlecenie> selectedRows = wszystkieZleceniaTableView.getSelectionModel().getSelectedItems();
-        for (Zlecenie zlecenie : selectedRows) {
-            zlecenie.setPracownik(CurrentPracownik.getCurrentPracownik());
-            zlecenieDao.updateZlecenie(zlecenie);
+        if (wszystkieZleceniaTableView.getSelectionModel().getSelectedItems().isEmpty()){
+            AlertPopUp.successAlert("Nie wybrano zlecenia!");
+        }else {
+            for (Zlecenie zlecenie : selectedRows) {
+                zlecenie.setPracownik(CurrentPracownik.getCurrentPracownik());
+                zlecenieDao.updateZlecenie(zlecenie);
+            }
+            refreshScreen(event);
+            AlertPopUp.successAlert("Zlecenie przyjęte!");
         }
-        refreshScreen(event);
-        AlertPopUp.successAlert("Zlecenie przyjęte!");
     }
 
 

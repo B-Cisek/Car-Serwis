@@ -10,6 +10,9 @@ import javafx.scene.text.Text;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ *  Kontroler widoku "showZlecenie.fxml"
+ */
 public class ShowZlecenieController implements Initializable {
     @FXML
     private Button anulujButton;
@@ -44,14 +47,15 @@ public class ShowZlecenieController implements Initializable {
     @FXML
     private Text ulica;
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         anulujButton.setOnAction(SceneController::close);
     }
 
-
+    /**
+     * Metoda ustwaiająca dane zlecenia
+     * @param zlecenie obiek zlecenie przekazany z klasy ZlecenieController
+     */
     public void setData(Zlecenie zlecenie){
         data.setText(zlecenie.getDataPrzyjecia().toString());
         idZlecenie.setText(zlecenie.getIdZlecenie().toString());

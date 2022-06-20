@@ -2,7 +2,6 @@ package car.serwis.controller;
 
 import car.serwis.database.dao.ZlecenieDao;
 import car.serwis.database.model.Zlecenie;
-import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.CurrentPracownik;
 import car.serwis.helpers.WindowManagement;
 import car.serwis.helpers.ZlecenieStatus;
@@ -18,7 +17,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,9 +25,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 /**
- * Klasa odpowiedzialna za scene PULPIT
+ * Kontroler widoku "pulpit.fxml"
  */
-public class PulpitController implements Initializable{
+public class PulpitController implements Initializable {
     @FXML
     private TableColumn<Zlecenie, String> samochodOstatnioPrzyjeteTableCell;
 
@@ -84,6 +82,18 @@ public class PulpitController implements Initializable{
     @FXML
     private Text wTrakcieSprawy;
 
+    @FXML
+    private Text sumaZlecen1;
+
+    @FXML
+    private Text sumaZlecen2;
+
+    @FXML
+    private Text sumaZlecen3;
+
+    @FXML
+    private Text sumaZlecen4;
+
     WindowManagement windowManagement = new WindowManagement();
     ZlecenieDao zlecenieDao = new ZlecenieDao();
     ObservableList<Zlecenie> ostatnioPrzyjeteObservableList = FXCollections.observableArrayList();
@@ -101,28 +111,37 @@ public class PulpitController implements Initializable{
         addTableSettings();
     }
 
+    /**
+     * Metoda czyszcząca i wypełniająca ObservableList
+     */
     private void setObservableList() {
+        /** ObservableList - ostatnio przyjęte zlecenia */
         ostatnioPrzyjeteObservableList.clear();
         ostatnioPrzyjeteObservableList.addAll(zlecenieDao.getRecentNoweZlecenia());
 
+        /** ObservableList - ostatnio zakończone zlecenia */
         ostatnioWydaneObservableList.clear();
         ostatnioWydaneObservableList.addAll(zlecenieDao.getRecentGotoweZlecenia());
     }
 
-    public void setZlecenia(){
+    /**
+     * Metoda licząca i wyświetlająca ilość zleceń dla każdego statusu
+     */
+    public void setZlecenia() {
         int noweSprawyCount = 0;
         int oczekujaceSprawyCount = 0;
         int wTrakcieSprawyCount = 0;
         int gotoweSprawyCount = 0;
 
+
         for (Zlecenie zlecenie : listaZlecen) {
-            if (zlecenie.getStatus().equals(ZlecenieStatus.NOWE)){
+            if (zlecenie.getStatus().equals(ZlecenieStatus.NOWE)) {
                 noweSprawyCount++;
-            }else if (zlecenie.getStatus().equals(ZlecenieStatus.OCZEKUJACE)){
+            } else if (zlecenie.getStatus().equals(ZlecenieStatus.OCZEKUJACE)) {
                 oczekujaceSprawyCount++;
-            }else if (zlecenie.getStatus().equals(ZlecenieStatus.W_TRAKCIE)){
+            } else if (zlecenie.getStatus().equals(ZlecenieStatus.W_TRAKCIE)) {
                 wTrakcieSprawyCount++;
-            }else if (zlecenie.getStatus().equals(ZlecenieStatus.GOTOWE)){
+            } else if (zlecenie.getStatus().equals(ZlecenieStatus.GOTOWE)) {
                 gotoweSprawyCount++;
             }
         }
@@ -130,27 +149,39 @@ public class PulpitController implements Initializable{
         oczekujaceSprawy.setText(String.valueOf(oczekujaceSprawyCount));
         wTrakcieSprawy.setText(String.valueOf(wTrakcieSprawyCount));
         gotoweSprawy.setText(String.valueOf(gotoweSprawyCount));
+        sumaZlecen1.setText("Łącznie: " + listaZlecen.size());
+        sumaZlecen2.setText("Łącznie: " + listaZlecen.size());
+        sumaZlecen3.setText("Łącznie: " + listaZlecen.size());
+        sumaZlecen4.setText("Łącznie: " + listaZlecen.size());
     }
 
+    /**
+     * Metoda wypełniająca kolumny tabeli
+     */
     private void fillTables() {
-        // OSTATNIO PRZYJETE
+        /** Kolumny Tabeli - Ostatnio przyjęte zlecenia */
         dataOstatnioPrzyjeteTableCell.setCellValueFactory(new PropertyValueFactory<>("dataPrzyjecia"));
         samochodOstatnioPrzyjeteTableCell.setCellValueFactory(new PropertyValueFactory<>("samochod"));
         statusOstatnioPrzyjeteTableCell.setCellValueFactory(new PropertyValueFactory<>("status"));
         kontrahentOstatnioPrzyjeteTableCell.setCellValueFactory(new PropertyValueFactory<>("kontrahent"));
 
-        // OSTATNIO WYDANE
+        /** Kolumny Tabeli - Ostatnio zakończone zlecenia */
         dataOstatnioWydaneTableCell.setCellValueFactory(new PropertyValueFactory<>("dataPrzyjecia"));
         samochodOstatnioWydaneTableCell.setCellValueFactory(new PropertyValueFactory<>("samochod"));
         statusOstatnioWydaneTableCell.setCellValueFactory(new PropertyValueFactory<>("status"));
         kontrahentOstatnioWydaneTableCell.setCellValueFactory(new PropertyValueFactory<>("kontrahent"));
     }
 
+    /**
+     * Metoda wypełniająca tabele posortowanymi danymi
+     */
     private void addTableSettings() {
+        /** TableView - ostatnio przyjęte zlecenia */
         ostatnioPrzyjeteZlecenia.setEditable(true);
         ostatnioPrzyjeteZlecenia.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ostatnioPrzyjeteZlecenia.setItems(ostatnioPrzyjeteObservableList);
 
+        /** TableView - ostatnio zakończone zlecenia */
         ostatnioWydaneZlecenia.setEditable(true);
         ostatnioWydaneZlecenia.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         ostatnioWydaneZlecenia.setItems(ostatnioWydaneObservableList);

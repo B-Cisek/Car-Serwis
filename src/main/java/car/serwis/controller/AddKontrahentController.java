@@ -2,14 +2,15 @@ package car.serwis.controller;
 
 import car.serwis.database.dao.KontrahentDao;
 import car.serwis.database.model.Kontrahent;
+import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
+import car.serwis.helpers.ValidatorFields;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -17,11 +18,11 @@ import javafx.util.Duration;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Kontroler widoku "addKontrahent.fxml"
+ * klasa odpowiedzialna za dodanie kontrahenta do bazy
+ */
 public class AddKontrahentController implements Initializable {
-
-    @FXML
-    private AnchorPane addKontrahentAnchorePane;
-
     @FXML
     private Button anulujButton;
 
@@ -55,15 +56,15 @@ public class AddKontrahentController implements Initializable {
     @FXML
     private TextField ulicaTextField;
 
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeExitButton();
-
+        anulujButton.setOnAction(SceneController::close);
     }
 
+    /**
+     * Metoda tworząca obiekt kontrahenta na podstawie pobranych pól z widoku "addKontrahent.fxml"
+     * @return zwraca obiekt Kontrahent
+     */
     private Kontrahent createKontrahentFromInput() {
         Kontrahent kontrahent = new Kontrahent();
         kontrahent.setImie(imieTextField.getText());
@@ -79,94 +80,123 @@ public class AddKontrahentController implements Initializable {
         return kontrahent;
     }
 
-    private boolean validateInputs() {
-
-        if (imieTextField.getText().equals("")) {
-            errorText.setText("*Pole imie nie może być puste!");
+    /**
+     * Metoda walidująca pola kontrahent
+     * @return zwraca true jeżeli walidacja przeszła pomyślnie
+     */
+    private boolean validatekKontrahentInputs() {
+        /** Walidacja pola imie */
+        if (ValidatorFields.isBlank(imieTextField.getText())){
+            errorText.setText("Pole imie nie może być puste!");
+            return false;
+        }else if (!ValidatorFields.isText(imieTextField.getText())){
+            errorText.setText("Nieprawidłowa wartość pola imie!");
             return false;
         }
 
-        if(nazwiskoTextField.getText().equals("")) {
-            errorText.setText("*Pole nazwisko nie może być puste!");
+        /** Walidacja pola nazwisko */
+        if (ValidatorFields.isBlank(nazwiskoTextField.getText())){
+            errorText.setText("Pole nazwisko nie może być puste!");
+            return false;
+        }else if (!ValidatorFields.isText(nazwiskoTextField.getText())){
+            errorText.setText("Nieprawidłowa wartość pola nazwisko!");
             return false;
         }
 
-
-        if (telefonTextField.getText().equals("")) {
-            errorText.setText("*Pole telefon nie może być puste!");
+        /** Walidacja pola telefon */
+        if (ValidatorFields.isBlank(telefonTextField.getText())){
+            errorText.setText("Pole telefon nie może być puste!");
+            return false;
+        }else if (!ValidatorFields.isNumeric(telefonTextField.getText())){
+            errorText.setText("Nieprawidłowa wartość pola telefon!");
             return false;
         }
 
-        if (peselTextField.getText().equals("")) {
-            errorText.setText("*Pole pesel nie może być puste!");
+        /** Walidacja pola miejscowośc */
+        if (ValidatorFields.isBlank(miejscowoscTextField.getText())){
+            errorText.setText("Pole miejscowość nie może być puste!");
+            return false;
+        }else if (!ValidatorFields.isText(miejscowoscTextField.getText())){
+            errorText.setText("Nieprawidłowa wartość pola miejscowość!");
             return false;
         }
 
-        if (nipTextField.getText().equals("")){
-            errorText.setText("*Pole nip nie może być puste!");
+        /** Walidacja pola nazwa firmy */
+        if (ValidatorFields.isBlank(nazwaFirmyTextField.getText())){
+            errorText.setText("Pole nazwa firmy nie może być puste!");
             return false;
         }
 
-        if (kodPocztowyTextField.getText().equals("")) {
-            errorText.setText("*Pole kod pocztowy nie może być puste!");
+        /** Walidacja pola NIP */
+        if (ValidatorFields.isBlank(nipTextField.getText())){
+            errorText.setText("Pole NIP nie może być puste!");
+            return false;
+        }else if (!ValidatorFields.isNip(nipTextField.getText())){
+            errorText.setText("Nieprawidłowa wartość pola NIP!");
             return false;
         }
 
-        if (nazwaFirmyTextField.getText().equals("")) {
-            errorText.setText("*Pole nazwa firmy nie może być puste!");
+        /** Walidacja pola PESEL */
+        if (ValidatorFields.isBlank(peselTextField.getText())){
+            errorText.setText("Pole PESEL nie może być puste!");
+            return false;
+        }else if (!ValidatorFields.isPesel(peselTextField.getText())){
+            errorText.setText("Nieprawidłowa wartość pola PESEL!");
             return false;
         }
 
-        if (miejscowoscTextField.getText().equals("")) {
-            errorText.setText("*Pole miejscowość nie może być puste!");
+        /** Walidacja pola kod pocztowy */
+        if (ValidatorFields.isBlank(kodPocztowyTextField.getText())){
+            errorText.setText("Pole kod pocztowy nie może być puste!");
+            return false;
+        }else if (!ValidatorFields.isKodPocztowy(kodPocztowyTextField.getText())){
+            errorText.setText("Nieprawidłowa wartość pola kod pocztowy!");
             return false;
         }
 
-        if (ulicaTextField.getText().equals("")) {
-            errorText.setText("*Pole ulica nie może być puste!");
+        /** Walidacja pola ulica */
+        if (ValidatorFields.isBlank(ulicaTextField.getText())){
+            errorText.setText("Pole ulica nie może być puste!");
             return false;
         }
-
         return true;
     }
 
+    /**
+     * Metoda nasluchujaca button i dodająca kontrahenta do bazy
+     * @param event
+     */
     @FXML
     private void createKontrahent(ActionEvent event) {
-        if(validateInputs()) {
+        if(validatekKontrahentInputs()) {
             Kontrahent kontrahent = createKontrahentFromInput();
             boolean isSaved = new KontrahentDao().createKontrahent(kontrahent);
             if (isSaved) {
                 UpdateStatus.setIsKontrahentAdded(true);
-                errorText.setText("Dodano kontrahenta!");
-                errorText.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
                 delayWindowClose(event);
+                AlertPopUp.successAlert("Kontrahent dodany!");
             }
         }
     }
 
+    /**
+     * Metoda zamykająca okno z opóźnieniem po dodaniu kontrahenta
+     * @param event
+     */
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
         delay.setOnFinished(event2 -> closeWindow(event));
         delay.play();
     }
 
+    /**
+     * Metoda zamykająca okno "addKontrahent.fxml"
+     * @param event
+     */
     @FXML
     private void closeWindow(ActionEvent event) {
         Stage stage = (Stage) anulujButton.getScene().getWindow();
         stage.close();
     }
-
-
-    private void initializeExitButton(){
-        anulujButton.setOnAction((x) -> {
-            getStage().close();
-        });
-    }
-
-    private Stage getStage(){
-        return (Stage) addKontrahentAnchorePane.getScene().getWindow();
-    }
-
-
 }
 

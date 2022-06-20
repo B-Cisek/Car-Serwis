@@ -151,7 +151,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Text>
-                              <Text fill="#dddddd" layoutX="137.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Łącznie 90">
+                              <Text fx:id="sumaZlecen1" fill="#dddddd" layoutX="137.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Łącznie 90">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -182,7 +182,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Text>
-                              <Text fill="#dddddd" layoutX="141.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Łącznie 90">
+                              <Text fx:id="sumaZlecen2" fill="#dddddd" layoutX="141.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Łącznie 90">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -213,7 +213,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Text>
-                              <Text fill="#dddddd" layoutX="141.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Łącznie 90">
+                              <Text fx:id="sumaZlecen3" fill="#dddddd" layoutX="141.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Łącznie 90">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -244,7 +244,7 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Text>
-                              <Text fill="#dddddd" layoutX="141.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Łącznie 90">
+                              <Text fx:id="sumaZlecen4" fill="#dddddd" layoutX="141.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Łącznie 90">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

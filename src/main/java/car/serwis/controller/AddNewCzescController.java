@@ -95,8 +95,6 @@ public class AddNewCzescController implements Initializable {
 
                 if (isSaved) {
                     UpdateStatus.setIsCzescAdded(true);
-                    errorText.setText("Część dodana!");
-                    errorText.setStyle("-fx-fill: #2CC97E; -fx-font-size: 15px;");
                     delayWindowClose(event);
                     AlertPopUp.successAlert("Część dodana!");
                 }

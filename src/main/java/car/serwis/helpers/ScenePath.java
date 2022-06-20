@@ -23,7 +23,8 @@ public enum ScenePath {
     SHOW_FAKTURA("/fxml/showFaktura.fxml"),
     UPDATE_CZESC("/fxml/updateCzesc.fxml"),
     ADD_CZESC("/fxml/addCzesc.fxml"),
-    SHOW_ZLECENIE("/fxml/showZlecenie.fxml");
+    SHOW_ZLECENIE("/fxml/showZlecenie.fxml"),
+    SHOW_KONTRAHENT("/fxml/showKontrahent.fxml");
 
     private final String path;
 

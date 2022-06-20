@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -140,7 +141,7 @@
    <right>
       <AnchorPane prefHeight="200.0" prefWidth="1600.0" styleClass="main-pulpit" BorderPane.alignment="CENTER">
          <children>
-            <Text layoutX="54.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ZLECENIA" wrappingWidth="123.43748092651367" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="25.0">
+            <Text layoutX="54.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ZLECENIA" wrappingWidth="123.43748092651367" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="30.0">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
@@ -156,16 +157,22 @@
                   <TableColumn fx:id="pracownikZlecenieTableColumn" maxWidth="157.33331298828125" minWidth="50.0" prefWidth="98.0" text="PRACOWNIK" />
               </columns>
             </TableView>
-            <Button fx:id="addZlecenie" layoutX="579.0" layoutY="26.0" mnemonicParsing="false" onAction="#addZlecenieWindow" prefHeight="30.0" prefWidth="77.0" styleClass="add-button" text="Dodaj zlecenie" AnchorPane.rightAnchor="800.0" AnchorPane.topAnchor="25.0" />
-            <Button fx:id="deleteZlecenie" layoutX="792.0" layoutY="26.0" mnemonicParsing="false" onAction="#deleteZlecenie" prefHeight="35.0" prefWidth="83.0" styleClass="delete-button" text="Usuń zlecenie" AnchorPane.rightAnchor="625.0" AnchorPane.topAnchor="25.0" />
-            <Text layoutX="1008.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KONTRAHENCI" wrappingWidth="220.7708740234375" AnchorPane.topAnchor="25.0">
+            <Button fx:id="addZlecenie" layoutX="579.0" layoutY="26.0" mnemonicParsing="false" onAction="#addZlecenieWindow" prefHeight="30.0" prefWidth="77.0" styleClass="add-button" text="Dodaj zlecenie" AnchorPane.rightAnchor="800.0" AnchorPane.topAnchor="30.0" />
+            <Button fx:id="deleteZlecenie" layoutX="792.0" layoutY="26.0" mnemonicParsing="false" onAction="#deleteZlecenie" prefHeight="35.0" prefWidth="83.0" styleClass="delete-button" text="Usuń zlecenie" AnchorPane.rightAnchor="625.0" AnchorPane.topAnchor="30.0" />
+            <Text layoutX="1008.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="KONTRAHENCI" wrappingWidth="220.7708740234375" AnchorPane.topAnchor="30.0">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
             </Text>
-            <Button fx:id="addKontrahent" layoutX="1223.0" layoutY="21.0" minWidth="165.0" mnemonicParsing="false" onAction="#addKontrahentWindow" prefHeight="35.0" prefWidth="169.0" styleClass="add-button" text="Dodaj kontrahenta" AnchorPane.rightAnchor="210.0" AnchorPane.topAnchor="25.0" />
-            <Button fx:id="deleteKontrahent" layoutX="1311.0" layoutY="21.0" mnemonicParsing="false" onAction="#deleteKontrahent" prefHeight="35.0" prefWidth="79.0" styleClass="delete-button" text="Usuń kontrahenta" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="25.0" />
-            <TextField fx:id="searchKontrahentBar" alignment="TOP_LEFT" layoutX="1007.0" layoutY="77.0" prefHeight="25.0" prefWidth="557.0" promptText="Szukaj" AnchorPane.rightAnchor="35.0" />
+            <Button fx:id="addKontrahent" layoutX="1350.0" layoutY="25.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#addKontrahentWindow" prefHeight="35.0" prefWidth="100.0" styleClass="add-button" text="Dodaj " AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="30.0">
+               <tooltip>
+                  <Tooltip text="Dodaj kontrahenta" />
+               </tooltip></Button>
+            <Button fx:id="deleteKontrahent" layoutX="1311.0" layoutY="21.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#deleteKontrahent" prefHeight="35.0" prefWidth="100.0" styleClass="delete-button" text="Usuń" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="30.0">
+               <tooltip>
+                  <Tooltip text="Usuń kontrahenta" />
+               </tooltip></Button>
+            <TextField fx:id="searchKontrahentBar" alignment="TOP_LEFT" layoutX="1007.0" layoutY="77.0" prefHeight="25.0" prefWidth="557.0" promptText="Szukaj" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="80.0" />
             <TableView fx:id="kontrahentTableView" fixedCellSize="50.0" layoutX="1008.0" layoutY="140.0" prefHeight="586.0" prefWidth="557.0" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="117.0">
               <columns>
                 <TableColumn fx:id="idkontrahentTableView" maxWidth="43.0" minWidth="43.0" prefWidth="43.0" text="ID" />
@@ -176,8 +183,13 @@
                   <TableColumn fx:id="peselKontrahentTableColumn" maxWidth="127.3333740234375" minWidth="102.3333740234375" prefWidth="106.3333740234375" text="PESEL" />
               </columns>
             </TableView>
-            <TextField fx:id="searchZlecenieBar" layoutX="43.0" layoutY="77.0" prefHeight="25.0" prefWidth="941.0" promptText="Szukaj" AnchorPane.leftAnchor="35.0" />
-            <Button fx:id="showZlecenie" layoutX="460.0" layoutY="27.0" mnemonicParsing="false" onAction="#showZlecenie" styleClass="update-button" text="Pokaż szczegóły" />
+            <TextField fx:id="searchZlecenieBar" layoutX="43.0" layoutY="77.0" prefHeight="25.0" prefWidth="941.0" promptText="Szukaj" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="80.0" />
+            <Button fx:id="showZlecenie" layoutX="460.0" layoutY="27.0" mnemonicParsing="false" onAction="#showZlecenie" styleClass="update-button" text="Pokaż szczegóły" AnchorPane.rightAnchor="975.0" AnchorPane.topAnchor="30.0" />
+            <Button fx:id="showKontrahent" layoutX="1237.0" layoutY="26.0" maxWidth="100.0" minWidth="100.0" mnemonicParsing="false" onAction="#showKontrahent" prefWidth="100.0" styleClass="update-button" text="Pokaż" AnchorPane.topAnchor="30.0">
+               <tooltip>
+                  <Tooltip text="Pokaż szczegóły kontrahenta" />
+               </tooltip>
+            </Button>
          </children>
       </AnchorPane>
    </right>

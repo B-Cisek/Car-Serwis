@@ -30,7 +30,9 @@ public class Czesc {
 
     @Column(
             name = "opis_czesc",
-            nullable = false
+            nullable = false,
+            columnDefinition = "TEXT"
+
     )
     private String opisCzesc;
 

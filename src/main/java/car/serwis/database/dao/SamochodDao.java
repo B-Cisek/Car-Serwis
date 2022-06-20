@@ -51,11 +51,8 @@ public class SamochodDao {
         Session session = null;
         List samochodyList = new ArrayList();
         try {
-            // Getting Session Object From SessionFactory
             session = HibernateUtil.getSessionFactory().openSession();
-            // Getting Transaction Object From Session Object
             transaction = session.beginTransaction();
-
             samochodyList = session.createQuery("FROM Samochod").list();
         } catch(Exception ex) {
             if (transaction != null) {
@@ -65,9 +62,9 @@ public class SamochodDao {
         }finally {
             session.close();
         }
-
         return samochodyList;
     }
+
 
     public void updateSamochod(Samochod samochod) {
         Transaction transaction = null;
