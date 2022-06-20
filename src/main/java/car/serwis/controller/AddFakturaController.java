@@ -3,11 +3,12 @@ package car.serwis.controller;
 import car.serwis.database.dao.FakturaDao;
 import car.serwis.database.dao.KontrahentDao;
 import car.serwis.database.dao.PozycjaFakturyDao;
-import car.serwis.database.dao.StanowiskoDao;
-import car.serwis.database.model.*;
+import car.serwis.database.model.Faktura;
+import car.serwis.database.model.Kontrahent;
+import car.serwis.database.model.PozycjaFaktury;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
-import car.serwis.helpers.WindowManagement;
+import car.serwis.helpers.ValidatorFields;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,23 +18,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.Set;
 
+/**
+ * Kontroler widoku "addFaktura.fxml"
+ * klasa odpowiedzialna za dodanie faktury do bazy
+ */
 public class AddFakturaController implements Initializable {
-    @FXML
-    private AnchorPane addFakturaAnchorePane;
-
     @FXML
     private TableColumn<PozycjaFaktury, Double> cenaTableColumn;
 
@@ -87,32 +83,26 @@ public class AddFakturaController implements Initializable {
     private TextField numerFakturyTextField;
 
 
-
-
-
     ObservableList<PozycjaFaktury> pozycjeObservableList = FXCollections.observableArrayList();
     PozycjaFaktury pozycja = new PozycjaFaktury();
     Faktura faktura = new Faktura();
     PozycjaFakturyDao pozycjaFakturyDao = new PozycjaFakturyDao();
-    WindowManagement windowManagement = new WindowManagement();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-       windowManagement.initializeExitButtonAnchorPane(cancelButton,addFakturaAnchorePane);
+        cancelButton.setOnAction(SceneController::close);
         kontrahentComboBox.setItems(getKontrahentObservableList());
         addPozycja();
         deletePozycja();
         addFaktura();
     }
 
-
-
-
-
-
+    /**
+     * Metoda dodająca pozycje na fakturze
+     */
     private void addPozycja() {
         addPozycjaButton.setOnAction((event) -> {
-            if(validatePozycjaInputs()){
+            if (validatePozycjaInputs()) {
                 PozycjaFaktury pozycjaFaktury = new PozycjaFaktury();
                 pozycjaFaktury.setOpisPozycji(opisPozycjaTextField.getText());
                 pozycjaFaktury.setIlosc(Integer.valueOf(iloscPozycjaTextField.getText()));
@@ -131,6 +121,9 @@ public class AddFakturaController implements Initializable {
         });
     }
 
+    /**
+     * Metoda usuwająca pozycje z faktury
+     */
     private void deletePozycja() {
         deletePozycjaButton.setOnAction((event) -> {
             ObservableList<PozycjaFaktury> selectedRows = pozycjaTableView.getSelectionModel().getSelectedItems();
@@ -141,15 +134,18 @@ public class AddFakturaController implements Initializable {
         });
     }
 
+    /**
+     * Metoda dodająca fakturę do bazy
+     */
     private void addFaktura() {
         addFakturaButton.setOnAction((event) -> {
-            if (pozycjeObservableList.isEmpty()){
+            if (pozycjeObservableList.isEmpty()) {
                 AlertPopUp.successAlert("Dodaj pozycje faktury!");
-            }else {
-                if (validateFakturaInputs()){
+            } else {
+                if (validateFakturaInputs()) {
                     Faktura faktura = createFakturaFromInput();
                     boolean isSaved = new FakturaDao().createFaktura(faktura);
-                    for (PozycjaFaktury pozycjaFaktury: pozycjeObservableList) {
+                    for (PozycjaFaktury pozycjaFaktury : pozycjeObservableList) {
                         pozycja.setOpisPozycji(pozycjaFaktury.getOpisPozycji());
                         pozycja.setIlosc(pozycjaFaktury.getIlosc());
                         pozycja.setCena(pozycjaFaktury.getCena());
@@ -158,8 +154,6 @@ public class AddFakturaController implements Initializable {
                     }
                     if (isSaved) {
                         UpdateStatus.setIsFakturaAdded(true);
-                        errorTextFaktura.setText("Faktura dodana!");
-                        errorTextFaktura.setStyle("-fx-text-fill: #2CC97E; -fx-font-size: 15px;");
                         delayWindowClose(event);
                         AlertPopUp.successAlert("Faktura dodana!");
                     }
@@ -169,13 +163,20 @@ public class AddFakturaController implements Initializable {
         });
     }
 
+    /**
+     * Metoda pobierająca z bazy obiekty kontrahent i dodjąca je do ObservableList
+     * @return zwraca ObservableList kontrahentów
+     */
     private ObservableList<Kontrahent> getKontrahentObservableList() {
         ObservableList<Kontrahent> list = FXCollections.observableArrayList();
         list.addAll(new KontrahentDao().getKontrahent());
         return list;
     }
 
-
+    /**
+     * Metoda tworząca obiekt faktura na podstawie pobranych pól z widoku "addFaktura.fxml"
+     * @return zwraca obiekt Faktura
+     */
     private Faktura createFakturaFromInput() {
         faktura.setNumerFaktury(numerFakturyTextField.getText());
         faktura.setDataWystawienia(dataWystawieniaDatePicker.getValue());
@@ -185,59 +186,94 @@ public class AddFakturaController implements Initializable {
         return faktura;
     }
 
+    /**
+     * Metoda walidująca pola pozycje faktury
+     * @return zwraca true jeżeli walidacja przeszła pomyślnie
+     */
     private boolean validatePozycjaInputs() {
-        if (opisPozycjaTextField.getText().isBlank()) {
-            errorTextPozycja.setText("*Pole opis nie może być puste!");
+        /** Walidacja pola opis */
+        if (ValidatorFields.isBlank(opisPozycjaTextField.getText())){
+            errorTextPozycja.setText("Pole opis nie może być puste!");
             return false;
         }
 
-        if(iloscPozycjaTextField.getText().isBlank()) {
-            errorTextPozycja.setText("*Pole ilość nie może być puste!");
+        /** Walidacja pola ilość */
+        if (ValidatorFields.isBlank(iloscPozycjaTextField.getText())){
+            errorTextPozycja.setText("Pole ilość nie może być puste!");
+            return false;
+        }else if (!ValidatorFields.isNumeric(iloscPozycjaTextField.getText())){
+            errorTextPozycja.setText("Nieprawidłowa wartość pola ilość!");
             return false;
         }
 
-        if (cenaPozycjaTextField.getText().isBlank()) {
-            errorTextPozycja.setText("*Pole cena nie może być puste!");
+        /** Walidacja pola cena */
+        if (ValidatorFields.isBlank(cenaPozycjaTextField.getText())){
+            errorTextPozycja.setText("Pole cena nie może być puste!");
+            return false;
+        }else if (!ValidatorFields.isDecimal(cenaPozycjaTextField.getText())){
+            errorTextPozycja.setText("Nieprawidłowa wartość pola cena!");
             return false;
         }
+
         return true;
     }
 
 
-
+    /**
+     * Metoda walidująca pola faktury
+     * @return zwraca true jeżeli walidacja przeszła pomyślnie
+     */
     private boolean validateFakturaInputs() {
-        if (miejsceWystawieniaTextField.getText().isBlank()) {
-            errorTextFaktura.setText("*Pole miejsce nie może być puste!");
+        /** Walidacja pola miejsce */
+        if (ValidatorFields.isBlank(miejsceWystawieniaTextField.getText())){
+            errorTextFaktura.setText("Pole miejsce nie może być puste!");
+            return false;
+        }else if (!ValidatorFields.isText(miejsceWystawieniaTextField.getText())){
+            errorTextFaktura.setText("Nieprawidłowa wartość pola miejsce!");
             return false;
         }
 
-        if(dataWystawieniaDatePicker.getValue() == null) {
-            errorTextFaktura.setText("*Pole data nie może być puste!");
+        /** Walidacja pola data */
+        if (dataWystawieniaDatePicker.getValue() == null) {
+            errorTextFaktura.setText("Pole data nie może być puste!");
             return false;
         }
 
+        /** Walidacja pola kontrahent */
         if (kontrahentComboBox.getValue() == null) {
-            errorTextFaktura.setText("*Pole kontrahent nie może być puste!");
+            errorTextFaktura.setText("Pole kontrahent nie może być puste!");
             return false;
         }
 
-        if (numerFakturyTextField.getText().isBlank()) {
-            errorTextFaktura.setText("*Pole numer nie może być puste!");
+        /** Walidacja pola numer */
+        if (ValidatorFields.isBlank(numerFakturyTextField.getText())){
+            errorTextFaktura.setText("Pole numer nie może być puste!");
+            return false;
+        }else if (!ValidatorFields.isNumerFaktury(numerFakturyTextField.getText())){
+            errorTextFaktura.setText("Nieprawidłowa wartość pola numer!");
             return false;
         }
         return true;
     }
 
+    /**
+     * Metoda zamykająca okno z opóźnieniem po dodaniu faktury
+     * @param event
+     */
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
         delay.setOnFinished(event2 -> closeWindow(event));
         delay.play();
     }
 
+    /**
+     * Metoda zamykająca okno "addFaktura.fxml"
+     * @param event
+     */
     @FXML
     private void closeWindow(ActionEvent event) {
-        Node source = (Node)  event.getSource();
-        Stage stage  = (Stage) source.getScene().getWindow();
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
 

@@ -32,6 +32,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Kontroler widoku "ksiegowosc.fxml"
+ */
 public class KsiegowoscController implements Initializable {
     @FXML
     private TableColumn<Faktura, LocalDate> dataFakturaTableColumn;
@@ -69,9 +72,6 @@ public class KsiegowoscController implements Initializable {
     @FXML
     private Button generujPdfButton;
 
-    @FXML
-    private Button showFakturaButton;
-
     GeneratorFaktury generatorFaktury = new GeneratorFaktury();
     ObservableList<Faktura> fakturaObservableList = FXCollections.observableArrayList();
     WindowManagement windowManagement = new WindowManagement();
@@ -88,6 +88,41 @@ public class KsiegowoscController implements Initializable {
         pdfGenerate();
     }
 
+    /**
+     * Metoda czyszcząca i wypełniająca ObservableList
+     */
+    private void setObservableList() {
+        /** ObservableList - faktury */
+        fakturaObservableList.clear();
+        fakturaObservableList.addAll(fakturaDao.displayRecords());
+    }
+
+    /**
+     * Metoda wypełniająca kolumny tabeli
+     */
+    private void fillTables() {
+        /** Kolumny Tabeli - faktura */
+        idFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idFaktura"));
+        numerFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("numerFaktury"));
+        miejsceFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("miejsceWystawienia"));
+        dataFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("dataWystawienia"));
+        kontrahentFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("kontrahent"));
+    }
+
+    /**
+     * Metoda wypełniająca tabele posortowanymi danymi
+     */
+    private void addTableSettings() {
+        fakturaTableView.setEditable(true);
+        fakturaTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        fakturaTableView.setItems(getSortedListFaktura());
+    }
+
+    /**
+     * Metoda wywołująca widok "addFaktura.fxml"
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void addFakturaWindow(ActionEvent event) throws IOException {
         NewWindowController.getNewFakturaWindow();
@@ -97,31 +132,20 @@ public class KsiegowoscController implements Initializable {
         }
     }
 
-    private void setObservableList() {
-        fakturaObservableList.clear();
-        fakturaObservableList.addAll(fakturaDao.displayRecords());
-    }
-
-    private void fillTables() {
-        idFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("idFaktura"));
-        numerFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("numerFaktury"));
-        miejsceFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("miejsceWystawienia"));
-        dataFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("dataWystawienia"));
-        kontrahentFakturaTableColumn.setCellValueFactory(new PropertyValueFactory<>("kontrahent"));
-    }
-
-    private void addTableSettings() {
-        fakturaTableView.setEditable(true);
-        fakturaTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        fakturaTableView.setItems(getSortedListFaktura());
-    }
-
+    /**
+     * Metoda przekazująca przefiltrowanych faktury do TableView
+     * @return zwraca liste posortowanych faktur
+     */
     private SortedList<Faktura> getSortedListFaktura() {
         SortedList<Faktura> sortedList = new SortedList<>(getFilteredListFaktura());
         sortedList.comparatorProperty().bind(fakturaTableView.comparatorProperty());
         return sortedList;
     }
 
+    /**
+     * Metoda nasłuchująca TextField i filtrująca faktur
+     * @return zwraca przefiltrowaną liste faktur
+     */
     private FilteredList<Faktura> getFilteredListFaktura() {
         FilteredList<Faktura> filteredList = new FilteredList<>(fakturaObservableList, b -> true);
         searchBarFaktura.textProperty().addListener((observable, oldValue, newValue) ->
@@ -138,7 +162,7 @@ public class KsiegowoscController implements Initializable {
                         return true;
                     } else if (faktura.getMiejsceWystawienia().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
-                    } else if (faktura.getKontrahent().toString().contains(lowerCaseFilter)) {
+                    } else if (faktura.getKontrahent().toString().toLowerCase().contains(lowerCaseFilter)) {
                         return true;
                     } else {
                         return faktura.getIdFaktura().toString().contains(lowerCaseFilter);
@@ -147,8 +171,11 @@ public class KsiegowoscController implements Initializable {
         return filteredList;
     }
 
-    // ########### PDF Generator #####################
 
+    /**
+     * Metoda generujaca PDF faktury
+     * metoda korzysta z biblioteki pdf_generator
+     */
     private void pdfGenerate() {
         generujPdfButton.setOnAction((x) -> {
             if (fakturaTableView.getSelectionModel().getSelectedItem() == null){
@@ -157,8 +184,7 @@ public class KsiegowoscController implements Initializable {
                 ArrayList<pdf.generator.PozycjaFaktury> pfList = new ArrayList<>();
                 // TODO path
                 File file = new File("src/main/resources/css/img/wrench.png");
-                String absolutePath = file.getAbsolutePath();
-                String imageUrl = absolutePath;
+                String imageUrl = file.getAbsolutePath();
                 Long selectedRow = fakturaTableView.getSelectionModel().getSelectedItem().getIdFaktura();
                 Faktura faktura = fakturaDao.getFakturaID(selectedRow);
                 List<PozycjaFaktury> list = new PozycjaFakturyDao().getPozycjaFakturyForPdf(faktura);
@@ -185,11 +211,14 @@ public class KsiegowoscController implements Initializable {
                 );
                 AlertPopUp.successAlertFaktura("Faktura zapisana w domyślnym folderze: Dokumenty");
             }
-
-
         });
     }
 
+    /**
+     * Metoda usuwająca fakture
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void deleteFaktura(ActionEvent event) throws IOException {
         ObservableList<Faktura> selectedRows = fakturaTableView.getSelectionModel().getSelectedItems();
@@ -206,6 +235,9 @@ public class KsiegowoscController implements Initializable {
 
 
 
+    /**
+     * Metoda wywołująca widok "showFaktura.fxml"
+     */
     @FXML
     public void showFaktura(){
         if (fakturaTableView.getSelectionModel().getSelectedItem() == null){
@@ -228,41 +260,39 @@ public class KsiegowoscController implements Initializable {
     }
 
 
-
-
     @FXML
-    void showPulpitScreen(ActionEvent event) throws IOException {
+    public void showPulpitScreen(ActionEvent event) throws IOException {
         SceneController.getPulpitScene(event);
     }
 
     @FXML
-    void showZleceniaScreen(ActionEvent event) throws IOException {
+    public void showZleceniaScreen(ActionEvent event) throws IOException {
         SceneController.getZleceniaScene(event);
     }
 
     @FXML
-    void showWarsztatScreen(ActionEvent event) throws IOException {
+    public void showWarsztatScreen(ActionEvent event) throws IOException {
         SceneController.getWarsztatScene(event);
     }
 
 
     @FXML
-    void showMagazynScreen(ActionEvent event) throws IOException {
+    public void showMagazynScreen(ActionEvent event) throws IOException {
         SceneController.getMagazynScene(event);
     }
 
     @FXML
-    void showUstawieniaScreen(ActionEvent event) throws IOException {
+    public void showUstawieniaScreen(ActionEvent event) throws IOException {
         SceneController.getUstawieniaScene(event);
     }
 
     @FXML
-    void showPomocScreen(ActionEvent event) throws IOException {
+    public void showPomocScreen(ActionEvent event) throws IOException {
         SceneController.getPomocScene(event);
     }
 
     @FXML
-    void refreshScreen(ActionEvent event) throws IOException {
+    public void refreshScreen(ActionEvent event) throws IOException {
         SceneController.getKsiegowoscScene(event);
     }
 }

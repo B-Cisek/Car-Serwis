@@ -50,4 +50,18 @@ public abstract class ValidatorFields {
         }
         return false;
     }
+
+    public static boolean isDecimal(String textField){
+        if (textField.matches("^\\d+\\.?\\d*?$")){
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isNumerFaktury(String textField){
+        if (textField.matches("\\d{3}$")){
+            return true;
+        }
+        return false;
+    }
 }
