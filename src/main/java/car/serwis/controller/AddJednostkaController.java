@@ -5,7 +5,6 @@ import car.serwis.database.model.Jednostka;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
 import car.serwis.helpers.ValidatorFields;
-import car.serwis.helpers.WindowManagement;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -68,6 +66,7 @@ public class AddJednostkaController implements Initializable {
 
     /**
      * Metoda walidująca pola jednostki
+     *
      * @return zwraca true jeżeli walidacja przeszła pomyślnie
      */
     private boolean validateInputs() {
@@ -78,7 +77,7 @@ public class AddJednostkaController implements Initializable {
         }
 
         /** Walidacja pola skrót */
-        if (ValidatorFields.isBlank(skrotTextField.getText())){
+        if (ValidatorFields.isBlank(skrotTextField.getText())) {
             errorText.setText("Pole skrót nie może być puste!");
             return false;
         }
@@ -88,6 +87,7 @@ public class AddJednostkaController implements Initializable {
 
     /**
      * Metoda tworząca obiekt jednostka na podstawie pobranych pól z widoku "addJednostka.fxml"
+     *
      * @return zwraca obiekt Jednostka
      */
     private Jednostka createJednostkaFromInput() {
@@ -100,6 +100,7 @@ public class AddJednostkaController implements Initializable {
 
     /**
      * Metoda zamykająca okno z opóźnieniem po dodaniu jednostki
+     *
      * @param event
      */
     private void delayWindowClose(ActionEvent event) {
@@ -110,12 +111,13 @@ public class AddJednostkaController implements Initializable {
 
     /**
      * Metoda zamykająca okno "addJednostka.fxml"
+     *
      * @param event
      */
     @FXML
     private void closeWindow(ActionEvent event) {
-        Node source = (Node)  event.getSource();
-        Stage stage  = (Stage) source.getScene().getWindow();
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
     }
 

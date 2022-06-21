@@ -109,7 +109,6 @@ public class AddCzescController implements Initializable {
 
     /**
      * Metoda zamykająca okno z opóźnieniem po aktualizacji części
-     * @param event
      */
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
@@ -119,7 +118,6 @@ public class AddCzescController implements Initializable {
 
     /**
      * Metoda zamykająca okno "updateCzesc.fxml"
-     * @param event
      */
     @FXML
     private void closeWindow(ActionEvent event) {

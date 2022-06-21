@@ -11,6 +11,9 @@ import org.hibernate.resource.transaction.spi.TransactionStatus;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa Data Access Object dla Stanowiska
+ */
 public class StanowiskoDao {
     public boolean saveStanowisko(Stanowisko stanowisko){
         Session session = HibernateUtil.getSessionFactory().openSession();

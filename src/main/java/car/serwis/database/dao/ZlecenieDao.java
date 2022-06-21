@@ -13,6 +13,9 @@ import org.hibernate.resource.transaction.spi.TransactionStatus;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa Data Access Object dla Zlecenia
+ */
 public class ZlecenieDao {
     public boolean createZlecenie(Zlecenie zlecenie) {
         Transaction transaction = null;

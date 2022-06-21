@@ -5,24 +5,24 @@ import car.serwis.database.dao.PozycjaFakturyDao;
 import car.serwis.database.model.Faktura;
 import car.serwis.database.model.PozycjaFaktury;
 import car.serwis.helpers.*;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import pdf.generator.GeneratorFaktury;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import pdf.generator.GeneratorFaktury;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +30,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -121,8 +120,7 @@ public class KsiegowoscController implements Initializable {
 
     /**
      * Metoda wywołująca widok "addFaktura.fxml"
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     private void addFakturaWindow(ActionEvent event) throws IOException {
@@ -183,15 +181,16 @@ public class KsiegowoscController implements Initializable {
                 AlertPopUp.successAlert("Nie wybrano faktury!");
             }else {
                 ArrayList<pdf.generator.PozycjaFaktury> pfList = new ArrayList<>();
-                // TODO path
-                File file = new File("src/main/resources/css/img/wrench.png");
-                File test = new File(Objects.requireNonNull(getClass().getResource("/css/img/wrench.png")).toString());;
 
-                System.out.println(test);
-                System.out.println(test.getPath());
-                System.out.println(test.getAbsolutePath());
+                File file = new File("wrench.png");
+                String img = file.getAbsolutePath();
 
-                String imageUrl = test.getPath();
+                // TYLKO W IntelliJ ###################################################################
+//                Path resourceDirectory = Paths.get("src","main","resources","css","img","wrench.png");
+//                String absolutePath = resourceDirectory.toFile().getAbsolutePath();
+                // ###################################################################
+
+
                 Long selectedRow = fakturaTableView.getSelectionModel().getSelectedItem().getIdFaktura();
                 Faktura faktura = fakturaDao.getFakturaID(selectedRow);
                 List<PozycjaFaktury> list = new PozycjaFakturyDao().getPozycjaFakturyForPdf(faktura);
@@ -213,7 +212,7 @@ public class KsiegowoscController implements Initializable {
                         faktura.getKontrahent().getKodPocztowy() + " " + faktura.getKontrahent().getMiejscowosc(),
                         faktura.getNumerFaktury() + "-" + LocalDate.now().getMonthValue() + "-" + LocalDate.now().getYear(),
                         pfList,
-                        imageUrl
+                        img
 
                 );
                 AlertPopUp.successAlertFaktura("Faktura zapisana w domyślnym folderze: Dokumenty");
@@ -223,8 +222,7 @@ public class KsiegowoscController implements Initializable {
 
     /**
      * Metoda usuwająca fakture
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
     @FXML
     void deleteFaktura(ActionEvent event) throws IOException {
@@ -239,8 +237,6 @@ public class KsiegowoscController implements Initializable {
             AlertPopUp.successAlert("Faktura usunięta!");
         }
     }
-
-
 
     /**
      * Metoda wywołująca widok "showFaktura.fxml"

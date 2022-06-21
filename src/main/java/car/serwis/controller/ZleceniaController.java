@@ -3,6 +3,8 @@ package car.serwis.controller;
 import car.serwis.database.dao.KontrahentDao;
 import car.serwis.database.dao.ZlecenieDao;
 import car.serwis.database.model.Kontrahent;
+import car.serwis.database.model.Pracownik;
+import car.serwis.database.model.Stanowisko;
 import car.serwis.database.model.Zlecenie;
 import car.serwis.helpers.*;
 import javafx.collections.FXCollections;
@@ -175,8 +177,7 @@ public class ZleceniaController implements Initializable {
     // #################### KONTRAHENT ####################
     /**
      * Metoda wywołująca widok "addKontrahent.fxml"
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     private void addKontrahentWindow(ActionEvent event) throws IOException {
@@ -230,8 +231,7 @@ public class ZleceniaController implements Initializable {
 
     /**
      * Metoda usuwająca kontrahenta
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     void deleteKontrahent(ActionEvent event) throws IOException {
@@ -273,14 +273,11 @@ public class ZleceniaController implements Initializable {
     }
 
 
-
     // ################### ZLECENIE ####################
-
 
     /**
      * Metoda wywołująca widok "addZlecenie.fxml"
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
     @FXML
     private void addZlecenieWindow(ActionEvent event) throws IOException {
@@ -334,8 +331,7 @@ public class ZleceniaController implements Initializable {
 
     /**
      * Metoda usuwająca zlecenie
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
     @FXML
     void deleteZlecenie(ActionEvent event) throws IOException {
@@ -375,39 +371,50 @@ public class ZleceniaController implements Initializable {
         }
     }
 
+    /**
+     * Metoda zmieniająca opis zlecenia
+     */
+    @FXML
+    private void changeOpisZlecenia(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
+        Zlecenie selectedZlecenie= zleceniaTableView.getSelectionModel().getSelectedItem();
+        selectedZlecenie.setOpisZlecenie(editEvent.getNewValue());
+        zlecenieDao.updateZlecenie(selectedZlecenie);
+        AlertPopUp.successAlert("Zmieniono opis zlecenia!");
+    }
+
 
     @FXML
-    void showPulpitScreen(ActionEvent event) throws IOException {
+    public void showPulpitScreen(ActionEvent event) throws IOException {
         SceneController.getPulpitScene(event);
     }
 
     @FXML
-    void showWarsztatScreen(ActionEvent event) throws IOException {
+    public void showWarsztatScreen(ActionEvent event) throws IOException {
         SceneController.getWarsztatScene(event);
     }
 
     @FXML
-    void showKsiegowoscScreen(ActionEvent event) throws IOException {
+    public void showKsiegowoscScreen(ActionEvent event) throws IOException {
         SceneController.getKsiegowoscScene(event);
     }
 
     @FXML
-    void showMagazynScreen(ActionEvent event) throws IOException {
+    public void showMagazynScreen(ActionEvent event) throws IOException {
         SceneController.getMagazynScene(event);
     }
 
     @FXML
-    void showUstawieniaScreen(ActionEvent event) throws IOException {
+    public void showUstawieniaScreen(ActionEvent event) throws IOException {
         SceneController.getUstawieniaScene(event);
     }
 
     @FXML
-    void showPomocScreen(ActionEvent event) throws IOException {
+    public void showPomocScreen(ActionEvent event) throws IOException {
         SceneController.getPomocScene(event);
     }
 
     @FXML
-    void refreshScreen(ActionEvent event) throws IOException {
+    public void refreshScreen(ActionEvent event) throws IOException {
         SceneController.getZleceniaScene(event);
     }
 }

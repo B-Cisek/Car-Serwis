@@ -1,8 +1,9 @@
 package car.serwis.controller;
 
-import car.serwis.database.dao.PracownikDao;
-import car.serwis.database.model.Pracownik;
-import car.serwis.helpers.*;
+import car.serwis.helpers.AlertPopUp;
+import car.serwis.helpers.CurrentPracownik;
+import car.serwis.helpers.ScenePath;
+import car.serwis.helpers.UsersPermissions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -14,10 +15,11 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-
 import java.io.IOException;
 
-
+/**
+ * Kontroler scen aplikacji
+ */
 public class SceneController {
 
     private static double x;
@@ -28,6 +30,11 @@ public class SceneController {
     private static Parent main;
 
 
+    /**
+     * Metoda wywołująća widok logowania
+     * @param stage  przyjmuje Obiekt Stage
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
+     */
     public static void getInitialScene(Stage stage) throws IOException {
         main = FXMLLoader.load((SceneController.class.getResource(ScenePath.LOGIN.getPath())));
         Scene scene = new Scene(main, WIDTH, HEIGHT);
@@ -92,6 +99,11 @@ public class SceneController {
         changeScreen(event, ScenePath.POMOC.getPath());
     }
 
+    /**
+     * Metoda zmieniająca sceny
+     * @param path scieżka widoku fxml
+     * @throws IOException ignals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
+     */
     private static void changeScreen(ActionEvent event, String path) throws IOException {
         main = FXMLLoader.load(SceneController.class.getResource(path));
         Scene pilpitScene = new Scene(main);
@@ -115,7 +127,10 @@ public class SceneController {
         window.show();
     }
 
-
+    /**
+     * Metoda pozwalająca na przesuwanie okna za pomocą myszki
+     * @param stage przyjmuje aktualny Stage okna
+     */
     public static void controlDrag(Stage stage) {
         main.setOnMousePressed(event -> {
             x = stage.getX() - event.getScreenX();
@@ -128,6 +143,9 @@ public class SceneController {
         });
     }
 
+    /**
+     * Metoda zamykająca aktualne okno
+     */
     public static void close(ActionEvent actionEvent) {
         Node source = (Node) actionEvent.getSource();
         Stage stage = (Stage) source.getScene().getWindow();

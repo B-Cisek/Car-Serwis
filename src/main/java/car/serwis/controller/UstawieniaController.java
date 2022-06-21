@@ -193,8 +193,7 @@ public class UstawieniaController implements Initializable {
 
     /**
      * Metoda wywołująca widok "addPracownik.fxml"
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     private void addPracownikWindow(ActionEvent event) throws IOException {
@@ -207,8 +206,7 @@ public class UstawieniaController implements Initializable {
 
     /**
      * Metoda usuwająca pracownika
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     private void deletePracownik(ActionEvent event) throws IOException {
@@ -226,7 +224,6 @@ public class UstawieniaController implements Initializable {
 
     /**
      * Metoda zmieniająca imie pracownika
-     * @param editEvent
      */
     @FXML
     private void changeImiePracownik(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
@@ -238,7 +235,6 @@ public class UstawieniaController implements Initializable {
 
     /**
      * Metoda zmieniająca nazwisko pracownika
-     * @param editEvent
      */
     @FXML
     private void changeNazwiskoPracownik(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
@@ -250,7 +246,6 @@ public class UstawieniaController implements Initializable {
 
     /**
      * Metoda zmieniająca login pracownika
-     * @param editEvent
      */
     @FXML
     private void changeLoginPracownik(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
@@ -262,7 +257,6 @@ public class UstawieniaController implements Initializable {
 
     /**
      * Metoda zmieniająca hasło pracownika
-     * @param editEvent
      */
     @FXML
     private void changeHasloPracownik(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
@@ -320,8 +314,7 @@ public class UstawieniaController implements Initializable {
 
     /**
      * Metoda wywołująca widok "addStanowisko.fxml"
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     private void addStanowiskoWindow(ActionEvent event) throws IOException {
@@ -334,8 +327,7 @@ public class UstawieniaController implements Initializable {
 
     /**
      * Metoda usuwająca stanowisko
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     void deleteStanowisko(ActionEvent event) throws IOException {
@@ -354,7 +346,6 @@ public class UstawieniaController implements Initializable {
 
     /**
      * Metoda zmieniająca nazwe stanowiska
-     * @param editEvent
      */
     @FXML
     private void changeNazwaStanowiska(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
@@ -365,37 +356,37 @@ public class UstawieniaController implements Initializable {
     }
 
     @FXML
-    void showPulpitScreen(ActionEvent event) throws IOException {
+    public void showPulpitScreen(ActionEvent event) throws IOException {
         SceneController.getPulpitScene(event);
     }
 
     @FXML
-    void showZleceniaScreen(ActionEvent event) throws IOException {
+    public void showZleceniaScreen(ActionEvent event) throws IOException {
         SceneController.getZleceniaScene(event);
     }
 
     @FXML
-    void showWarsztatScreen(ActionEvent event) throws IOException {
+    public void showWarsztatScreen(ActionEvent event) throws IOException {
         SceneController.getWarsztatScene(event);
     }
 
     @FXML
-    void showKsiegowoscScreen(ActionEvent event) throws IOException {
+    public void showKsiegowoscScreen(ActionEvent event) throws IOException {
         SceneController.getKsiegowoscScene(event);
     }
 
     @FXML
-    void showMagazynScreen(ActionEvent event) throws IOException {
+    public void showMagazynScreen(ActionEvent event) throws IOException {
         SceneController.getMagazynScene(event);
     }
 
     @FXML
-    void showPomocScreen(ActionEvent event) throws IOException {
+    public void showPomocScreen(ActionEvent event) throws IOException {
         SceneController.getPomocScene(event);
     }
 
     @FXML
-    void refreshScreen(ActionEvent event) throws IOException {
+    public void refreshScreen(ActionEvent event) throws IOException {
         SceneController.getUstawieniaScene(event);
     }
 }

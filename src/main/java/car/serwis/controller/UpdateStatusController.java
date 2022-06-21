@@ -124,7 +124,6 @@ public class UpdateStatusController implements Initializable {
 
     /**
      * Metoda zamykająca okno z opóźnieniem po dodaniu zlecenia
-     * @param event
      */
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
@@ -134,7 +133,6 @@ public class UpdateStatusController implements Initializable {
 
     /**
      * Metoda zamykająca okno "updateStatus.fxml"
-     * @param event
      */
     @FXML
     private void closeWindow(ActionEvent event) {

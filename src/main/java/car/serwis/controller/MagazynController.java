@@ -240,8 +240,7 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda wywołująca widok "addKategoria.fxml"
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     private void addKategoriaWindow(ActionEvent event) throws IOException {
@@ -287,8 +286,7 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda usuwająca kategorie
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     void deleteKategoria(ActionEvent event) throws IOException {
@@ -303,7 +301,6 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda zmieniająca nazwę kategori
-     * @param editEvent
      */
     @FXML
     private void changeNazwaKategoira(TableColumn.CellEditEvent<Kategoria, String> editEvent) {
@@ -320,8 +317,7 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda wywołująca widok "addJednostka.fxml"
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     private void addJednostkaWindow(ActionEvent event) throws IOException {
@@ -369,8 +365,7 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda usuwająca jednostke
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     void deleteJednostka(ActionEvent event) throws IOException {
@@ -385,7 +380,6 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda zmieniająca skrót jednostki
-     * @param editEvent
      */
     @FXML
     private void changeSkrotCell(TableColumn.CellEditEvent<Jednostka, String> editEvent) {
@@ -397,7 +391,6 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda zmieniająca nazwe jednostki
-     * @param editEvent
      */
     @FXML
     private void changeNazwaJednostkiCell(TableColumn.CellEditEvent<Jednostka, String> editEvent) {
@@ -415,8 +408,7 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda wywołująca widok "addSamochod.fxml"
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     private void addSamochodWindow(ActionEvent event) throws IOException {
@@ -464,8 +456,7 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda usuwająca samochód
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     void deleteSamochod(ActionEvent event) throws IOException {
@@ -481,7 +472,6 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda zmieniająca marke samochodu
-     * @param editEvent
      */
     @FXML
     private void changeMarkaSamochod(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
@@ -494,7 +484,6 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda zmieniająca model samochodu
-     * @param editEvent
      */
     @FXML
     private void changeModelSamochod(TableColumn.CellEditEvent<Stanowisko, String> editEvent) {
@@ -512,8 +501,7 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda wywołująca widok "addCzesc.fxml"
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     private void addNewCzescWindow(ActionEvent event) throws IOException {
@@ -527,8 +515,7 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda usuwająca część
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
      */
     @FXML
     void deleteCzesc(ActionEvent event) throws IOException {
@@ -595,7 +582,6 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda zmieniająca nazwę części
-     * @param editEvent
      */
     @FXML
     private void changeNazwaCzesci(TableColumn.CellEditEvent<Kategoria, String> editEvent) {
@@ -607,7 +593,6 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda zmieniająca producenta części
-     * @param editEvent
      */
     @FXML
     private void changeProducentCzesci(TableColumn.CellEditEvent<Kategoria, String> editEvent) {
@@ -619,7 +604,6 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda zmieniająca opis części
-     * @param editEvent
      */
     @FXML
     private void changeOpisCzesci(TableColumn.CellEditEvent<Kategoria, String> editEvent) {
@@ -631,8 +615,7 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda wywołująca widok "updateCzesc.fxml"
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
     @FXML
     private void updateCzescWindow(ActionEvent event) throws IOException {
@@ -645,8 +628,7 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda wywołująca widok "addCzesc.fxml"
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
     @FXML
     private void addCzescWindow(ActionEvent event) throws IOException {
@@ -660,8 +642,7 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda filtrująca części na podstawie kategori
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
     @FXML
     private void filterCzesc(ActionEvent event) throws IOException {
@@ -683,8 +664,7 @@ public class MagazynController implements Initializable {
 
     /**
      * Metoda czyszcząca filtr kategorii
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
     @FXML
     private void clearFiltr(ActionEvent event) throws IOException {

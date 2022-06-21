@@ -190,32 +190,32 @@ public class PulpitController implements Initializable {
 
 
     @FXML
-    void showZleceniaScreen(ActionEvent event) throws IOException {
+    public void showZleceniaScreen(ActionEvent event) throws IOException {
         SceneController.getZleceniaScene(event);
     }
 
     @FXML
-    void showWarsztatScreen(ActionEvent event) throws IOException {
+    public void showWarsztatScreen(ActionEvent event) throws IOException {
         SceneController.getWarsztatScene(event);
     }
 
     @FXML
-    void showKsiegowoscScreen(ActionEvent event) throws IOException {
+    public void showKsiegowoscScreen(ActionEvent event) throws IOException {
         SceneController.getKsiegowoscScene(event);
     }
 
     @FXML
-    void showMagazynScreen(ActionEvent event) throws IOException {
+    public void showMagazynScreen(ActionEvent event) throws IOException {
         SceneController.getMagazynScene(event);
     }
 
     @FXML
-    void showUstawieniaScreen(ActionEvent event) throws IOException {
+    public void showUstawieniaScreen(ActionEvent event) throws IOException {
         SceneController.getUstawieniaScene(event);
     }
 
     @FXML
-    void showPomocScreen(ActionEvent event) throws IOException {
+    public void showPomocScreen(ActionEvent event) throws IOException {
         SceneController.getPomocScene(event);
     }
 

@@ -10,8 +10,16 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
+/**
+ * Klasa zarządzająca oknami aplikacji
+ */
 public class NewWindowController {
 
+    /**
+     * Metoda tworząca nowe okno
+     * @param path scieżka do widoku fxml
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations
+     */
     public static void getPopUpWindow(String path) throws IOException {
         Stage stage = new Stage();
         Pane main = FXMLLoader.load(NewWindowController.class.getResource(path));

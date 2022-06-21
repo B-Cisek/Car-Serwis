@@ -193,8 +193,7 @@ public class WarsztatController implements Initializable {
 
     /**
      * Metoda wywołująca widok "updateStatus.fxml"
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
     @FXML
     private void changeStatusWindow(ActionEvent event) throws IOException {
@@ -248,8 +247,7 @@ public class WarsztatController implements Initializable {
 
     /**
      * Metoda przypisująca zlecenie do mechanika
-     * @param event
-     * @throws IOException
+     * @throws IOException Signals that an I/O exception of some sort has occurred. This class is the general class of exceptions produced by failed or interrupted I/O operations.
      */
     @FXML
     public void przyjmijZlecenie(ActionEvent event) throws IOException {

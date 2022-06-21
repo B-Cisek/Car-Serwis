@@ -1,7 +1,13 @@
 package car.serwis.controller;
 
-import car.serwis.database.dao.*;
-import car.serwis.database.model.*;
+import car.serwis.database.dao.CzescDao;
+import car.serwis.database.dao.JednostkaDao;
+import car.serwis.database.dao.KategoriaDao;
+import car.serwis.database.dao.SamochodDao;
+import car.serwis.database.model.Czesc;
+import car.serwis.database.model.Jednostka;
+import car.serwis.database.model.Kategoria;
+import car.serwis.database.model.Samochod;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
 import car.serwis.helpers.ValidatorFields;
@@ -16,7 +22,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -190,7 +195,6 @@ public class AddNewCzescController implements Initializable {
 
     /**
      * Metoda zamykająca okno z opóźnieniem po dodaniu części
-     * @param event
      */
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
@@ -200,7 +204,6 @@ public class AddNewCzescController implements Initializable {
 
     /**
      * Metoda zamykająca okno "addNewCzesc.fxml"
-     * @param event
      */
     @FXML
     private void closeWindow(ActionEvent event) {

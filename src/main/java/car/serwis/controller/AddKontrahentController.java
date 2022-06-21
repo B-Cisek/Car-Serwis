@@ -164,7 +164,6 @@ public class AddKontrahentController implements Initializable {
 
     /**
      * Metoda nasluchujaca button i dodająca kontrahenta do bazy
-     * @param event
      */
     @FXML
     private void createKontrahent(ActionEvent event) {
@@ -181,7 +180,6 @@ public class AddKontrahentController implements Initializable {
 
     /**
      * Metoda zamykająca okno z opóźnieniem po dodaniu kontrahenta
-     * @param event
      */
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
@@ -191,7 +189,6 @@ public class AddKontrahentController implements Initializable {
 
     /**
      * Metoda zamykająca okno "addKontrahent.fxml"
-     * @param event
      */
     @FXML
     private void closeWindow(ActionEvent event) {

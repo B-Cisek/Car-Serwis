@@ -83,7 +83,6 @@ public class AddKategoriaController implements Initializable {
 
     /**
      * Metoda zamykająca okno z opóźnieniem po dodaniu kategori
-     * @param event
      */
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
@@ -94,7 +93,6 @@ public class AddKategoriaController implements Initializable {
 
     /**
      * Metoda zamykająca okno "addKategoria.fxml"
-     * @param event
      */
     @FXML
     private void closeWindow(ActionEvent event) {

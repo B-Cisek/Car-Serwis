@@ -1,11 +1,7 @@
 package car.serwis.database.dao;
 
 import car.serwis.database.model.Faktura;
-import car.serwis.database.model.Pracownik;
-import car.serwis.database.model.Stanowisko;
-import car.serwis.database.model.Zlecenie;
 import car.serwis.database.util.HibernateUtil;
-import car.serwis.helpers.CurrentPracownik;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -14,8 +10,16 @@ import org.hibernate.resource.transaction.spi.TransactionStatus;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa Data Access Object dla Faktury
+ */
 public class FakturaDao {
 
+    /**
+     * Metoda dodająca fakture do bazy
+     * @param faktura przyjmuje obiekt faktura
+     * @return zwraca true jeżeli się powiodło
+     */
     public boolean createFaktura(Faktura faktura) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -32,17 +36,17 @@ public class FakturaDao {
         return false;
     }
 
+    /**
+     * Metoda pobierająca wszystkie faktury
+     * @return zwraca liste faktur
+     */
     public List displayRecords() {
         List fakturaList = new ArrayList();
         Session session = null;
         try {
-            // Getting Session Object From SessionFactory
             session = HibernateUtil.getSessionFactory().openSession();
-            // Getting Transaction Object From Session Object
             session.beginTransaction();
-
             fakturaList = session.createQuery("FROM Faktura").list();
-
         } catch (Exception sqlException) {
             if (null != session.getTransaction()) {
                 session.getTransaction().rollback();
@@ -56,18 +60,11 @@ public class FakturaDao {
         return fakturaList;
     }
 
-
-    public List<Faktura> getFakturaForPdf(Long id) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            TypedQuery<Faktura> query = session.createQuery("SELECT f FROM Faktura f WHERE f.idFaktura = :id", Faktura.class);
-            query.setParameter("id", id);
-            return query.getResultList();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
-
+    /**
+     * Metoda pobiera fakture o danym id
+     * @param id przyjmuje id faktury
+     * @return zwraca obiekt faktura
+     */
     public Faktura getFakturaID(Long id) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.find(Faktura.class, id);
@@ -77,6 +74,10 @@ public class FakturaDao {
         }
     }
 
+    /**
+     * Metoda usuwająca fakture
+     * @param faktura przyjmuje obiekt faktura
+     */
     public void deleteFaktura(Faktura faktura) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {

@@ -150,7 +150,7 @@
               <columns>
                 <TableColumn fx:id="idZlecenieTableColumn" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" text="ID" />
                 <TableColumn fx:id="dataPrzyjeciaZlecenieTableColumn" maxWidth="135.0" minWidth="135.0" prefWidth="135.0" text="DATA PRZYJĘCIA" />
-                  <TableColumn fx:id="opisZlecenieTableColumn" maxWidth="321.3333435058594" minWidth="162.66665649414062" prefWidth="286.6666564941406" text="OPIS" />
+                  <TableColumn fx:id="opisZlecenieTableColumn" maxWidth="321.3333435058594" minWidth="162.66665649414062" onEditCommit="#changeOpisZlecenia" prefWidth="286.6666564941406" text="OPIS" />
                   <TableColumn fx:id="statusZlecenieTableColumn" maxWidth="217.33334350585938" minWidth="58.666656494140625" prefWidth="93.33334350585938" text="STATUS" />
                   <TableColumn fx:id="samochodZlecenieTableColumn" maxWidth="125.0" minWidth="125.0" prefWidth="125.0" text="SAMOCHÓD" />
                   <TableColumn fx:id="klientZlecenieTableColumn" maxWidth="140.6666259765625" minWidth="49.66668701171875" prefWidth="121.3333740234375" text="KLIENT" />

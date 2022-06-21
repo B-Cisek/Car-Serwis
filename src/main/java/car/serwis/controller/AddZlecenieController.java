@@ -29,8 +29,6 @@ import java.util.ResourceBundle;
  * klasa odpowiedzialna za dodanie zlecenia do bazy
  */
 public class AddZlecenieController implements Initializable {
-    @FXML
-    private AnchorPane addZlecenieAnchorePane;
 
     @FXML
     private Button addZlecenieButton;
@@ -171,7 +169,6 @@ public class AddZlecenieController implements Initializable {
 
     /**
      * Metoda zamykająca okno z opóźnieniem po dodaniu zlecenia
-     * @param event
      */
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
@@ -181,7 +178,6 @@ public class AddZlecenieController implements Initializable {
 
     /**
      * Metoda zamykająca okno "addZlecenie.fxml"
-     * @param event
      */
     @FXML
     private void closeWindow(ActionEvent event) {

@@ -2,7 +2,6 @@ package car.serwis.database.dao;
 
 import car.serwis.database.model.Faktura;
 import car.serwis.database.model.PozycjaFaktury;
-import car.serwis.database.model.Pracownik;
 import car.serwis.database.util.HibernateUtil;
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
@@ -12,6 +11,9 @@ import org.hibernate.resource.transaction.spi.TransactionStatus;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa Data Access Object dla Pozycji Faktury
+ */
 public class PozycjaFakturyDao {
     public boolean createPozycjaFaktury(PozycjaFaktury pozycjaFaktury) {
         Transaction transaction = null;

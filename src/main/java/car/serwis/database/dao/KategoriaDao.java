@@ -1,7 +1,6 @@
 package car.serwis.database.dao;
 
 import car.serwis.database.model.Kategoria;
-import car.serwis.database.model.Stanowisko;
 import car.serwis.database.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -10,6 +9,9 @@ import org.hibernate.resource.transaction.spi.TransactionStatus;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa Data Access Object dla Kategori
+ */
 public class KategoriaDao {
     public boolean createKategoria(Kategoria kategoria) {
         Transaction transaction = null;

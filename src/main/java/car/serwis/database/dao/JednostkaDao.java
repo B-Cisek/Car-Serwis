@@ -10,16 +10,21 @@ import org.hibernate.resource.transaction.spi.TransactionStatus;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa Data Access Object dla Jednostka
+ */
 public class JednostkaDao {
 
+    /**
+     * Metoda dodająca jednostke
+     * @param jednostka przyjmuje obiekt jednostka
+     * @return zwraca true jeżeli udane
+     */
     public boolean createJednostka(Jednostka jednostka) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // start a transaction
             transaction = session.beginTransaction();
-            // save the student objects
             session.persist(jednostka);
-            // commit transaction
             transaction.commit();
             return transaction.getStatus() == TransactionStatus.COMMITTED;
         } catch (Exception e) {
@@ -31,7 +36,10 @@ public class JednostkaDao {
         return false;
     }
 
-
+    /**
+     * Metoda usuwająca jednostke
+     * @param jednostka przyjmuje obiekt jednostka
+     */
     public void deleteJednostka(Jednostka jednostka) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -46,6 +54,10 @@ public class JednostkaDao {
         }
     }
 
+    /**
+     * Metoda aktualizująca jednostke
+     * @param jednostka przyjmuje obiekt jednostka
+     */
     public void updateJednostka(Jednostka jednostka) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -60,6 +72,10 @@ public class JednostkaDao {
         }
     }
 
+    /**
+     * Metoda pobierająca wszystkie jednostki
+     * @return zwraca liste jednostek
+     */
     public List getJednostki() {
         Transaction transaction = null;
         List kategorieList = new ArrayList();
@@ -76,10 +92,6 @@ public class JednostkaDao {
         }finally {
             session.close();
         }
-
         return kategorieList;
     }
-
-
-
 }

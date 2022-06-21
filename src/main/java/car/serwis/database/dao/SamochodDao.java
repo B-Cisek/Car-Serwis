@@ -1,17 +1,17 @@
 package car.serwis.database.dao;
 
-import car.serwis.database.model.Pracownik;
 import car.serwis.database.model.Samochod;
-import car.serwis.database.model.Stanowisko;
 import car.serwis.database.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa Data Access Object dla Samochód
+ */
 public class SamochodDao {
 
     public boolean createSamochod(Samochod samochod) {

@@ -63,7 +63,7 @@ public abstract class ValidatorFields {
      * @return zwraca true gdy walidacja poprawna
      */
     public static boolean isNip(String textField){
-        if (textField.matches("^\\d{9}$")){
+        if (textField.matches("^\\d{10}$")){
             return true;
         }
         return false;

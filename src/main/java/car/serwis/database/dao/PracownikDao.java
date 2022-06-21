@@ -1,21 +1,18 @@
 package car.serwis.database.dao;
 
 import car.serwis.database.model.Pracownik;
-import car.serwis.database.model.Stanowisko;
 import car.serwis.database.util.HibernateUtil;
-import car.serwis.helpers.AlertPopUp;
-import javafx.stage.Popup;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa Data Access Object dla Pracownika
+ */
 public class PracownikDao {
 
     public Pracownik getConnectedPracownik(String login, String haslo) {

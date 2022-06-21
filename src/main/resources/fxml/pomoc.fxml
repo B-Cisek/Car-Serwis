@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -146,18 +147,124 @@
                   <content>
                     <AnchorPane maxHeight="518.0" minHeight="500.0" minWidth="0.0" prefHeight="518.0" prefWidth="1548.0">
                            <children>
-                              <Text layoutX="597.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pomoc dla panelu ZLECENIA">
-                                 <font>
-                                    <Font name="System Bold" size="26.0" />
-                                 </font>
-                              </Text>
-                              <ScrollPane layoutX="25.8" layoutY="51.0" prefHeight="459.0" prefWidth="1522.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0">
+                              <ScrollPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <content>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="423.0" prefWidth="1493.0">
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="482.0" prefWidth="1521.0">
                                        <children>
-                                          <Text layoutX="676.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                                          <Text layoutX="584.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pomoc dla panelu ZLECENIA">
                                              <font>
-                                                <Font size="22.0" />
+                                                <Font name="System Bold" size="26.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="53.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak dodoać kontrahenta?" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="75.0">
+                                             <font>
+                                                <Font name="System Bold" size="24.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="37.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Klikamy zielony przycisk dodaj" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="110.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="44.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- W oknie dodawanie kontrahenta wypełniamy pola i klikmay dodaj" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="150.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="68.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak usunąć kontrahenta?" AnchorPane.leftAnchor="40.0">
+                                             <font>
+                                                <Font name="System Bold" size="24.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="40.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Zaznaczmy w tabeli kontrahenta którego chcemy usunąć i klikamy przycisk usuń" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="225.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="43.0" layoutY="302.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak wyświetlić więcej szczegółów kontrahenta?" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="260.0">
+                                             <font>
+                                                <Font name="System Bold" size="24.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="125.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Zaznaczmy w tabeli kontrahenta którego chcemy zobaczyć i klikamy przycisk pokaż" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="300.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="45.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak edytować imie, nazwisko, nazwe firmy, nip i pesel kontrahenta??" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="340.0">
+                                             <font>
+                                                <Font name="System Bold" size="24.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="45.0" layoutY="413.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Klikamy dwukrotnie na wartośc którą chcemy zmienić" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="380.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="45.0" layoutY="448.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Wpisujemy nową wartość i klikamy enter" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="415.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="928.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak dodać nowe zlecenie?" AnchorPane.leftAnchor="928.0">
+                                             <font>
+                                                <Font name="System Bold" size="24.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="961.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Klikamy zielony przycisk dodaj zlecenie" AnchorPane.leftAnchor="928.0" AnchorPane.topAnchor="110.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="940.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- W oknie dodawanie zlecenia wypełniamy pola i klikmay dodaj" wrappingWidth="582.032470703125" AnchorPane.leftAnchor="928.0" AnchorPane.topAnchor="140.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Separator layoutX="864.0" layoutY="58.0" orientation="VERTICAL" prefHeight="422.0" prefWidth="5.0" />
+                                          <Text layoutX="949.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak usunąć kontrahenta?" AnchorPane.leftAnchor="928.0">
+                                             <font>
+                                                <Font name="System Bold" size="24.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="949.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Zaznaczmy w tabeli zlecenie które chcemy usunąć " AnchorPane.leftAnchor="928.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="933.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="i klikamy przycisk usuń zlecenie" AnchorPane.topAnchor="255.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="944.0" layoutY="328.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak wyświetlić więcej szczegółów zlecenia?" AnchorPane.leftAnchor="928.0" AnchorPane.topAnchor="290.0">
+                                             <font>
+                                                <Font name="System Bold" size="24.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="944.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Zaznaczmy w tabeli zlecenie które chcemy zobaczyć i" AnchorPane.leftAnchor="928.0" AnchorPane.topAnchor="320.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="941.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="klikamy przycisk pokaż" AnchorPane.leftAnchor="940.0" AnchorPane.topAnchor="345.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="983.0" layoutY="425.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak edytować opis zlecenia?" AnchorPane.leftAnchor="928.0" AnchorPane.topAnchor="370.0">
+                                             <font>
+                                                <Font name="System Bold" size="24.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="951.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Klikamy dwukrotnie na wartośc którą chcemy zmienić" AnchorPane.leftAnchor="928.0">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="951.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Wpisujemy nową wartość i klikamy enter" AnchorPane.leftAnchor="928.0">
+                                             <font>
+                                                <Font size="20.0" />
                                              </font>
                                           </Text>
                                        </children>
@@ -177,9 +284,59 @@
                      <content>
                         <AnchorPane maxHeight="518.0" minHeight="500.0" minWidth="0.0" prefHeight="518.0" prefWidth="1548.0">
                            <children>
-                              <Text layoutX="597.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pomoc dla panelu WARSZTAT">
+                              <Text layoutX="588.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pomoc dla panelu WARSZTAT">
                                  <font>
                                     <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="83.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak przyjąć zlecenie?" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="93.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Zaznaczamy w tabeli dostępne zlecenia zlecenie które chcemy przyjąć " AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="90.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="63.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Klikamy przycisk przyjmij zlecenie" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="120.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="78.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak zmienić status zlecenia?" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="84.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Klikamy przycisk zmień status " AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="205.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="82.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. W oknie zmiana statusu wybieramy id zlecania i nowy status" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="235.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="63.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. Klikamy przycisk zmień" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="265.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="96.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak wyświetlić więcej szczegółów zlecenia?" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="300.0">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="84.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- Zaznaczmy w tabeli zlecenie które chcemy zobaczyć i" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="340.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="102.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="klikamy przycisk pokaż szczegóły" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="370.0">
+                                 <font>
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
                            </children>
@@ -193,9 +350,69 @@
                      <content>
                         <AnchorPane maxHeight="518.0" minHeight="500.0" minWidth="0.0" prefHeight="518.0" prefWidth="1548.0">
                            <children>
-                              <Text layoutX="597.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pomoc dla panelu KSIĘGOWOŚĆ">
+                              <Text layoutX="572.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pomoc dla panelu KSIĘGOWOŚĆ">
                                  <font>
                                     <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="81.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak dodać nową fakturę?" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="44.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Klikamy przycisk dodaj fakture " AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="80.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="46.0" layoutY="164.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. W oknie dodawanie faktury wypełniamy pola i klikamy przycisk dodaj" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="111.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="128.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak wyświetlić więcej szczegółów faktury?" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="160.0">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="56.0" layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Zaznaczamy fakture w tabeli" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="56.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Klikamy przycisk pokaż szczegóły " AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="95.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak wygenerować PDF faktury?" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="86.0" layoutY="340.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Zaznaczamy fakture w tabeli" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="73.0" layoutY="372.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Klikamy przycisk generuj PDF" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="108.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak usunąć fakture?" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="108.0" layoutY="450.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Zaznaczamy fakture w tabeli" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="108.0" layoutY="481.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Klikamy przycisk usuń fakture " AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
                            </children>
@@ -214,6 +431,41 @@
                                     <Font name="System Bold" size="26.0" />
                                  </font>
                               </Text>
+                              <Text layoutX="52.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak pobrać część z magazynu?" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="52.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. W oknie wybieramy część oraz ilość" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="184.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="52.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Klikamy przycisk pobierz część" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="71.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. Klikamy przycisk pobierz" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="52.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak dodać nową część?" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="52.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Klikamy przycisk nowa część" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="52.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. W oknie dodawanie części wypełniamy pola i klikamy dodaji" AnchorPane.leftAnchor="40.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
                            </children>
                         </AnchorPane>
                      </content>
@@ -228,6 +480,51 @@
                               <Text layoutX="597.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pomoc dla panelu USTAWIENIA">
                                  <font>
                                     <Font name="System Bold" size="26.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="55.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak dodać nowe stanowisko?" AnchorPane.leftAnchor="55.0">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="55.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Klikamy przycisk dodaj stanowisko" AnchorPane.leftAnchor="55.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="55.0" layoutY="185.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. W oknie dodawanie stanowiska wypełniamy pola i klikamy przycisk dodaj" AnchorPane.leftAnchor="55.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="55.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak dodać nowego pracownika?" AnchorPane.leftAnchor="55.0">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="55.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Klikamy przycisk dodaj pracownika" AnchorPane.leftAnchor="55.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="55.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. W oknie dodawanie pracownika wypełniamy pola i klikamy przycisk dodaj" AnchorPane.leftAnchor="55.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="55.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jak usunąć pracownika albo stanowisko?" AnchorPane.leftAnchor="55.0">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="55.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. Wybieramy w tabeli odpowiedni rekord" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="371.0">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Text>
+                              <Text layoutX="55.0" layoutY="428.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. Klikamy przycisk usuń" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="406.0">
+                                 <font>
+                                    <Font size="20.0" />
                                  </font>
                               </Text>
                            </children>
