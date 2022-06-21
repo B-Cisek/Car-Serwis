@@ -1,5 +1,7 @@
 package car.serwis.controller;
 
+import car.serwis.database.dao.PracownikDao;
+import car.serwis.database.model.Pracownik;
 import car.serwis.helpers.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -108,7 +110,6 @@ public class SceneController {
 
         window.setX(centerX);
         window.setY(centerY);
-
         //TODO zmiana centrowania
         controlDrag(window);
         window.show();

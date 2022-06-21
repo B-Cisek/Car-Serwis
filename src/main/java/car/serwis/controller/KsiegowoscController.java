@@ -30,6 +30,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 /**
@@ -184,7 +185,13 @@ public class KsiegowoscController implements Initializable {
                 ArrayList<pdf.generator.PozycjaFaktury> pfList = new ArrayList<>();
                 // TODO path
                 File file = new File("src/main/resources/css/img/wrench.png");
-                String imageUrl = file.getAbsolutePath();
+                File test = new File(Objects.requireNonNull(getClass().getResource("/css/img/wrench.png")).toString());;
+
+                System.out.println(test);
+                System.out.println(test.getPath());
+                System.out.println(test.getAbsolutePath());
+
+                String imageUrl = test.getPath();
                 Long selectedRow = fakturaTableView.getSelectionModel().getSelectedItem().getIdFaktura();
                 Faktura faktura = fakturaDao.getFakturaID(selectedRow);
                 List<PozycjaFaktury> list = new PozycjaFakturyDao().getPozycjaFakturyForPdf(faktura);

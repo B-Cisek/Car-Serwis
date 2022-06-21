@@ -24,7 +24,7 @@
       <ComboBox fx:id="stanowiskaComboBox" layoutX="338.0" layoutY="202.0" prefWidth="150.0" promptText="stanowisko" />
       <Button fx:id="addPracownikButton" layoutX="421.0" layoutY="301.0" mnemonicParsing="false" onAction="#createPracownik" prefHeight="25.0" prefWidth="75.0" styleClass="add-button" text="Dodaj" />
       <Button fx:id="anulujButton" layoutX="510.0" layoutY="301.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" styleClass="cancel-button" text="Anuluj" />
-      <Text fx:id="errorText" layoutX="149.0" layoutY="259.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" AnchorPane.leftAnchor="145.0" />
+      <Text fx:id="errorText" layoutX="149.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="errorText" wrappingWidth="342.2021484375" AnchorPane.leftAnchor="149.0" />
       <Label layoutX="149.0" layoutY="80.0" text="Imie" AnchorPane.topAnchor="75.0" />
       <Label layoutX="338.0" layoutY="80.0" text="Login" AnchorPane.topAnchor="75.0" />
       <Label layoutX="149.0" layoutY="138.0" text="Nazwisko" AnchorPane.topAnchor="131.0" />

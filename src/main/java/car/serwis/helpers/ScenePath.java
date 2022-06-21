@@ -1,5 +1,8 @@
 package car.serwis.helpers;
 
+/**
+ * Typ wyliczeniowy ścieżek do plików FXML
+ */
 public enum ScenePath {
     PULPIT("/fxml/pulpit.fxml"),
     ZLECENIA("/fxml/zlecenia.fxml"),

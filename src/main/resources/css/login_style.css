@@ -1,14 +1,3 @@
-/*@font-face {*/
-/*    font-family: Inter;*/
-/*    src: url('font/Inter-Regular.ttf');*/
-/*}*/
-
-/*@font-face {*/
-/*    font-family: Inter_Bold;*/
-/*    src: url('font/Inter-Bold.ttf');*/
-/*}*/
-
-
 .anchor_pane{
     -fx-background-color: -fx-primary-blue;
     -fx-pref-width: 600;
@@ -17,7 +6,6 @@
     -fx-pref-height: 550;
     -fx-min-height: 550;
     -fx-max-height: 550;
-    /*-fx-font-family: 'Inter', Arial, sans-serif;*/
     -fx-background-radius: 5;
 }
 

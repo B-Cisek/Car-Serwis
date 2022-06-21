@@ -9,7 +9,15 @@ import javafx.stage.Stage;
 
 import java.util.Optional;
 
+/**
+ * Klasa zarządzająca oknem
+ */
 public class WindowManagement {
+    /**
+     * Metoda minimalizująca okno po naciśnieciu na przycisk
+     * @param button przycisk wykonujący metode
+     * @param borderPane borderPane minimalizowanego okna
+     */
     public void initializeMinimalizeButton(Button button, BorderPane borderPane) {
         button.setOnAction((x) -> {
             Stage stage = (Stage) borderPane.getScene().getWindow();
@@ -17,6 +25,11 @@ public class WindowManagement {
         });
     }
 
+    /**
+     * Metoda zamykająca okno po naciśnieciu na przycisk
+     * @param button przycisk wykonujący metode
+     * @param borderPane borderPane zamykanego okna
+     */
     public void initializeExitButton(Button button, BorderPane borderPane) {
         button.setOnAction((x) -> {
             Stage stage = (Stage) borderPane.getScene().getWindow();
@@ -30,6 +43,11 @@ public class WindowManagement {
         });
     }
 
+    /**
+     * Metoda zamykająca okno po naciśnieciu na przycisk
+     * @param button przycisk wykonujący metode
+     * @param anchorPane anchorPane zamykanego okna
+     */
     public void initializeExitButtonAnchorPane(Button button, AnchorPane anchorPane) {
         button.setOnAction((x) -> {
             Stage stage = (Stage) anchorPane.getScene().getWindow();

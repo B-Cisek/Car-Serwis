@@ -6,6 +6,7 @@ import car.serwis.database.model.Pracownik;
 import car.serwis.database.model.Stanowisko;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.UpdateStatus;
+import car.serwis.helpers.ValidatorFields;
 import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,27 +29,36 @@ import java.util.ResourceBundle;
  * Kontroler widoku "addPracownik.fxml"
  */
 public class AddPracownikController implements Initializable {
+
+    /** TextField hasło */
     @FXML
     private TextField hasloTextField;
 
+    /** TextField imie */
     @FXML
     private TextField imieTextField;
 
+    /** TextField login */
     @FXML
     private TextField loginTextField;
 
+    /** Text wyświetlający błędy */
     @FXML
     private Text errorText;
 
+    /** TextField nazwisko */
     @FXML
     private TextField nazwiskoTextField;
 
+    /** DatePicker data rozpoczęcia pracy */
     @FXML
     private DatePicker pracujeOdDatePicker;
 
+    /** ComboBox dostępnych stanowisk */
     @FXML
     private ComboBox<Stanowisko> stanowiskaComboBox;
 
+    /** Button zamykający okno */
     @FXML
     private Button anulujButton;
 
@@ -101,38 +111,52 @@ public class AddPracownikController implements Initializable {
      * @return zwraca true jeżeli walidacja przeszła pomyślnie
      */
     private boolean validateInputs() {
+        /** Walidacja pola stanowisko */
         if (stanowiskaComboBox.getValue() == null) {
-            errorText.setText("*Pole stanowisko nie może być puste!");
+            errorText.setText("Pole stanowisko nie może być puste!");
             return false;
         }
 
+        /** Walidacja pola data */
         if(pracujeOdDatePicker.getValue() == null) {
-            errorText.setText("*Pole data nie może być puste!");
+            errorText.setText("Pole data nie może być puste!");
             return false;
         }
 
 
+        /** Walidacja pola imie */
         if (imieTextField.getText().isBlank()) {
-            errorText.setText("*Pole imie nie może być puste!");
+            errorText.setText("Pole imie nie może być puste!");
             return false;
         }
 
+        /** Walidacja pola nazwisko */
         if (nazwiskoTextField.getText().isBlank()) {
-            errorText.setText("*Pole nazwisko nie może być puste!");
+            errorText.setText("Pole nazwisko nie może być puste!");
             return false;
         }
 
+        /** Walidacja pola login */
         if (loginTextField.getText().isBlank()){
-            errorText.setText("*Pole login nie może być puste!");
-            return false;
-        }
-        if (!(new PracownikDao().getConnectedPracownikLogin(loginTextField.getText()) == null)){
-            errorText.setText("*Ten login jest już w bazie!");
+            errorText.setText("Pole login nie może być puste!");
             return false;
         }
 
+
+        if (!(new PracownikDao().getConnectedPracownikLogin(loginTextField.getText()) == null)){
+            errorText.setText("Ten login jest już w bazie!");
+            return false;
+        }
+
+
+        /** Walidacja pola hasło */
         if (hasloTextField.getText().isBlank()) {
-            errorText.setText("*Pole hasło nie może być puste!");
+            errorText.setText("Pole hasło nie może być puste!");
+            return false;
+        }
+
+        if (!ValidatorFields.isCorrectPassword(hasloTextField.getText())){
+            errorText.setText("Hasło powinno być dłuższe niż 4 znaki, nie powinno zawierać spacji!");
             return false;
         }
         return true;
@@ -140,7 +164,6 @@ public class AddPracownikController implements Initializable {
 
     /**
      * Metoda nasluchujaca button i dodająca pracownika
-     * @param event
      */
     @FXML
     private void createPracownik(ActionEvent event) {
@@ -157,7 +180,6 @@ public class AddPracownikController implements Initializable {
 
     /**
      * Metoda zamykająca okno z opóźnieniem po dodaniu pracownika
-     * @param event
      */
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
@@ -167,7 +189,6 @@ public class AddPracownikController implements Initializable {
 
     /**
      * Metoda zamykająca okno "addPracownik.fxml"
-     * @param event
      */
     @FXML
     private void closeWindow(ActionEvent event) {

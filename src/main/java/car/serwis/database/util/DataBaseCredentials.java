@@ -1,5 +1,9 @@
 package car.serwis.database.util;
 
+/**
+ * Klasa przechowująca dane uwierzytelniające do bazy danych
+ * @hidden
+ */
 public class DataBaseCredentials {
     private String host = "car-serwis.cpoce5owftvv.eu-central-1.rds.amazonaws.com";
     private String database = "serwis";

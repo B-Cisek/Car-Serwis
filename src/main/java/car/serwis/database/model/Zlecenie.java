@@ -22,6 +22,7 @@ public class Zlecenie {
     )
     private Long idZlecenie;
 
+
     @Column(
             name = "data_przyjecia",
             nullable = false

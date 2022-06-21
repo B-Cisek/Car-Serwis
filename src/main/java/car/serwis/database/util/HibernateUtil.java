@@ -9,8 +9,13 @@ import org.hibernate.service.ServiceRegistry;
 
 import java.util.Properties;
 
+/**
+ * Klasa zarządzająca sesją
+ * @hidden
+ */
 public class HibernateUtil {
     public static SessionFactory sessionFactory;
+
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {

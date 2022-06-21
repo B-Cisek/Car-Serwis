@@ -31,11 +31,36 @@ public class PracownikDao {
        }
     }
 
+    // TODO login status
     public Pracownik getConnectedPracownikLogin(String login) {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             Query<Pracownik> typedQuery = session.createQuery("SELECT u FROM Pracownik u WHERE u.login=:login", Pracownik.class);
             typedQuery.setParameter("login", login);
+            return typedQuery.getSingleResult();
+        }catch (Exception ex){
+            System.err.println("Pracownik not found");
+            return null;
+        }
+    }
+
+    public Pracownik getLoginStatus(Long id) {
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Query<Pracownik> typedQuery = session.createQuery("SELECT p  FROM Pracownik p WHERE p.idPracownik = :id", Pracownik.class);
+            typedQuery.setParameter("id", id);
+            return typedQuery.getSingleResult();
+        }catch (Exception ex){
+            System.err.println("Pracownik not found");
+            return null;
+        }
+    }
+
+    public Pracownik updateStatus(Long id) {
+        try {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            Query<Pracownik> typedQuery = session.createQuery("UPDATE Pracownik SET isLoggedIn = true WHERE idPracownik = :id", Pracownik.class);
+            typedQuery.setParameter("id", id);
             return typedQuery.getSingleResult();
         }catch (Exception ex){
             System.err.println("Pracownik not found");

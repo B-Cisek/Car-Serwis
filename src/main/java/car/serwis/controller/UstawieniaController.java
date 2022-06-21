@@ -94,7 +94,7 @@ public class UstawieniaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        exitButton.setOnAction(SceneController::close);
+        windowManagement.initializeExitButton(exitButton,ustawieniaBorderPane);
         windowManagement.initializeMinimalizeButton(minimalizeButton,ustawieniaBorderPane);
         CurrentPracownik.setPracownikInfo(pracownikInfo);
         setObservableList();

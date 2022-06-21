@@ -26,21 +26,26 @@ import java.util.ResourceBundle;
  * Kontroler widoku "addStanowisko.fxml"
  */
 public class AddStanowiskoController implements Initializable {
+
+    /** Button wywołujący metode saveNewStanowisko */
     @FXML
     private Button addStanowiskoButton;
 
+    /** Text wyświetlający błędy */
     @FXML
     private Text errorText;
 
+    /** TextField nazwa stanowiska */
     @FXML
     private TextField nazwaTextField;
 
+    /** Button zamykający okno */
     @FXML
     private Button anulujButton;
 
+    /** ComboBox z uprawnieniami użytkownika */
     @FXML
     private ComboBox<UsersPermissions> uprawnieniaComboBox;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -73,11 +78,11 @@ public class AddStanowiskoController implements Initializable {
      */
     private boolean validateInputs() {
         if (nazwaTextField.getText().isBlank()) {
-            errorText.setText("*Pole nazwa nie może być puste!");
+            errorText.setText("Pole nazwa nie może być puste!");
             return false;
         }
         if (uprawnieniaComboBox.getValue() == null){
-            errorText.setText("*Pole uprawnienia nie może być puste!");
+            errorText.setText("Pole uprawnienia nie może być puste!");
             return false;
         }
         return true;
@@ -110,7 +115,6 @@ public class AddStanowiskoController implements Initializable {
 
     /**
      * Metoda zamykająca okno z opóźnieniem po dodaniu stanowiska
-     * @param event
      */
     private void delayWindowClose(ActionEvent event) {
         PauseTransition delay = new PauseTransition(Duration.seconds(1));
@@ -120,7 +124,6 @@ public class AddStanowiskoController implements Initializable {
 
     /**
      * Metoda zamykająca okno "addStanowisko.fxml"
-     * @param event
      */
     @FXML
     private void closeWindow(ActionEvent event) {

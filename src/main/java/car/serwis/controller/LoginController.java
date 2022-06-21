@@ -4,54 +4,46 @@ import car.serwis.database.dao.PracownikDao;
 import car.serwis.database.model.Pracownik;
 import car.serwis.helpers.AlertPopUp;
 import car.serwis.helpers.CurrentPracownik;
-import car.serwis.helpers.ScenePath;
 import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.mindrot.jbcrypt.BCrypt;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Kontroler widoku "login.fxml", klasa obsługuje logowanie do systemu
+ */
 public class LoginController implements Initializable {
-
-    private static final String APP_TITLE = "Car Serwis";
-
-
+    /** Przycisk zamykający okno logowania */
     @FXML
     private Button exitButton;
 
+    /** Pole formularza - hasło */
     @FXML
     private PasswordField hasloTextField;
 
-    @FXML
-    private AnchorPane loginAnchorPane;
-
-    @FXML
-    private Button loginButton;
-
+    /** Pole formularza - login */
     @FXML
     private TextField loginTextField;
 
+    /** Text wyświtlający błedy */
     @FXML
     private Text infoLine;
 
-
+    /** Inicjalizacja obiektu Pracownik Data Access Object */
     PracownikDao pracownikDao = new PracownikDao();
 
+    /** Inicjalizacja obiektu AlertPopUp */
     AlertPopUp alertPopUp = new AlertPopUp();
 
 
@@ -60,8 +52,9 @@ public class LoginController implements Initializable {
         exitButton.setOnAction(SceneController::close);
     }
 
-
-
+    /**
+     * Metoda sprawdzająca poprawność daych użytkownika i logująca go do systemu
+     */
     @FXML
     private void loginPracownik(ActionEvent event) {
         String login = loginTextField.getText();
@@ -70,11 +63,12 @@ public class LoginController implements Initializable {
         Pracownik pracownik = pracownikDao.getConnectedPracownikLogin(login);
 
         if (validFields()) {
-            if (pracownik == null) {
+            if (pracownik == null || !login.equals(pracownik.getLogin())) {
                 infoLine.setText("Nie ma takiego loginu w bazie!");
             } else {
                 if (BCrypt.checkpw(haslo, pracownik.getHaslo())) {
                     CurrentPracownik.setCurrentPracownik(pracownik);
+                    infoLine.setStyle("-fx-fill: #2CC97E");
                     infoLine.setText("Witaj, " + CurrentPracownik.getCurrentPracownik().getLogin() + "!");
                     Stage waitnigPopUp = alertPopUp.waitingPopUp("Łączenie z serwerem..");
                     waitnigPopUp.show();
@@ -96,6 +90,10 @@ public class LoginController implements Initializable {
     }
 
 
+    /**
+     * Metoda walidująca login i hasło
+     * @return zwraca true jeżeli pola nie są puste
+     */
     public boolean validFields() {
         if (loginTextField.getText().isBlank()) {
             infoLine.setText("Pole login nie może być puste!");

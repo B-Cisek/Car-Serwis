@@ -2,7 +2,6 @@ package car.serwis.database.model;
 
 
 import car.serwis.helpers.UsersPermissions;
-import car.serwis.helpers.ZlecenieStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

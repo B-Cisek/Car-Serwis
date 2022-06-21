@@ -1,20 +1,47 @@
 package car.serwis.helpers;
 
+/**
+ * Klasa przechowująca statusy operacji na modelach
+ */
 public final class UpdateStatus {
 
+    /**
+     * Konstruktor bezparametrowy
+     */
     private UpdateStatus() {
     }
 
+    /** Pole boolean czy stanowisko dodane?  */
     private static boolean isStanowiskoAdded;
+
+    /** Pole boolean czy pracownik dodane?  */
     private static boolean isPracownikAdded;
+
+    /** Pole boolean czy samochód dodany?  */
     private static boolean isSamochodAdded;
+
+    /** Pole boolean czy kategoria dodana?  */
     private static boolean isKategoriaAdded;
+
+    /** Pole boolean czy jednostka dodana?  */
     private static boolean isJednostkaAdded;
+
+    /** Pole boolean czy kontrahent dodany?  */
     private static boolean isKontrahentAdded;
+
+    /** Pole boolean czy zlecenie dodane?  */
     private static boolean isZlecenieAdded;
+
+    /** Pole boolean czy nowa część dodanea?  */
     private static boolean isCzescAdded;
+
+    /** Pole boolean czy status zlecenia zmieniony dodane?  */
     private static boolean isStatusUpdated;
+
+    /** Pole boolean czy faktura dodana?  */
     private static boolean isFakturaAdded;
+
+    /** Pole boolean czy część dodana?  */
     private static boolean isCzescUpdated;
 
     public static boolean isStanowiskoAdded() {
