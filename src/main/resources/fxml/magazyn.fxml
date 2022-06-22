@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -229,9 +228,6 @@
                   <TableColumn fx:id="kategoriaCzescTableColumn" prefWidth="128.0" text="KATEGORIA" />
                   <TableColumn fx:id="samochodCzescTableColumn" prefWidth="113.0" text="SAMOCHÓD" />
               </columns>
-               <tooltip>
-                  <Tooltip fx:id="tooltippedTableCell" text="Empty Tooltip" />
-               </tooltip>
             </TableView>
             <TextField fx:id="searchCzescBar" layoutX="465.0" layoutY="58.0" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" prefWidth="215.0" promptText="Szukaj" AnchorPane.topAnchor="60.0" />
             <ComboBox fx:id="kategoriaFilterComboBox" layoutX="689.0" layoutY="60.0" maxHeight="40.0" minHeight="40.0" onAction="#filterCzesc" prefHeight="40.0" prefWidth="116.0" promptText="kategoria" AnchorPane.topAnchor="60.0" />
