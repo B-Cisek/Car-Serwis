@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * Główna klasa aplikacji
- * @author Bartłomiej Cisek, Kacper Czernicki, Bartosz Guzek, Marcin Stefński
+ * @author Bartłomiej Cisek
  * @version 1.0.0
  */
 public class Main extends Application {

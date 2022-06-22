@@ -1,7 +1,0 @@
-module:car.serwis.carserwis
-car.serwis
-car.serwis.controller
-car.serwis.database.dao
-car.serwis.database.model
-car.serwis.database.util
-car.serwis.helpers
